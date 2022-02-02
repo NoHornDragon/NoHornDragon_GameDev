@@ -8,7 +8,7 @@ public class YeouijuReflect : MonoBehaviour
     Yeouiju yeouiju;
     Transform playerPos;
     Rigidbody2D rigid;
-    CircleCollider2D collider;
+    CircleCollider2D coll;
     Vector3 lastVelocity;
     public int collisionCount = 0;
     public event Action<Vector2> CollisionEvent;
@@ -16,7 +16,7 @@ public class YeouijuReflect : MonoBehaviour
     private void Awake() 
     {
         rigid = GetComponent<Rigidbody2D>();
-        collider = GetComponent<CircleCollider2D>();
+        coll = GetComponent<CircleCollider2D>();
         playerPos = GameObject.FindGameObjectWithTag("Player").transform;
         yeouiju = FindObjectOfType<Yeouiju>();
     }
@@ -50,12 +50,12 @@ public class YeouijuReflect : MonoBehaviour
         {   
             rigid.velocity = new Vector3(0, 0, 0);
             collisionCount = 0;
-            collider.enabled = false;
+            coll.enabled = false;
             transform.position = Vector3.MoveTowards(transform.position, playerPos.position, yeouiju.yeouijuSpeed * 1.5f * Time.deltaTime);
         }
         else
         {
-            collider.enabled = true;
+            coll.enabled = true;
         }
     }
 

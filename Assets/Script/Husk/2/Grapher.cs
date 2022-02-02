@@ -1,14 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using System;
 
 
 public class Grapher : MonoBehaviour
 {
-    public event Action<Vector2> GrapEvent;
 
-    public Camera mainCam;
     public LineRenderer lineRenderer;
     public DistanceJoint2D distanceJoint2D;
     bool is_joint_now;
@@ -16,6 +13,7 @@ public class Grapher : MonoBehaviour
     float vertical_input;
     void Start()
     {
+        distanceJoint2D = GetComponent<DistanceJoint2D>();
         distanceJoint2D.enabled = false;
 
         FindObjectOfType<YeouijuReflect>().CollisionEvent += MakeJoint;

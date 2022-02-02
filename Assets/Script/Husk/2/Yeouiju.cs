@@ -30,7 +30,6 @@ public class Yeouiju : MonoBehaviour
             if(!isYeouijuOn)
             {
                 isYeouijuOn = true;
-                yeouiju.SetActive(true);
                 yeouiju.transform.position = this.transform.position;
                 yeouiju.transform.rotation = Quaternion.Euler(0, 0, z);
 
