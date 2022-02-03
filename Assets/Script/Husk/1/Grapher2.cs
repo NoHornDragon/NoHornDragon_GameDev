@@ -6,10 +6,10 @@ public class Grapher2 : MonoBehaviour
 {
     public LineRenderer lineRenderer;
     public DistanceJoint2D distanceJoint2D;
-    bool isJointNow;
-    Vector2 jointPoint;
-    float verticalInput;
-    void Start()
+    private bool isJointNow;
+    private Vector2 jointPoint;
+    private float verticalInput;
+    private void Start()
     {
         lineRenderer = GetComponent<LineRenderer>();
         distanceJoint2D = GetComponent<DistanceJoint2D>();
@@ -19,7 +19,7 @@ public class Grapher2 : MonoBehaviour
         FindObjectOfType<YeouijuParabola>().DeleteJoint2D += DeleteJoint;
     }
 
-    void Update()
+    private void Update()
     {
         if(isJointNow)
         {

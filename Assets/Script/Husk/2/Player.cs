@@ -18,16 +18,6 @@ public class Player : MonoBehaviour
     private void Update() 
     {
         horizontal_speed = Input.GetAxis("Horizontal");
-
-        if(Input.GetKeyDown(KeyCode.Space))
-            test_jump = true;
-        
-
-        if(test_jump)
-        {   
-            rigid.AddForce(Vector2.up * 5, ForceMode2D.Impulse);
-            test_jump = false;
-        }
     }
 
     private void FixedUpdate() 

@@ -8,12 +8,13 @@ public class Yeouiju : MonoBehaviour
     public event Action DisjointAction;
     [SerializeField] private GameObject yeouiju;
     [SerializeField] Rigidbody2D yeouijuRigid;
-    public Transform launchPoint;
     public float yeouijuSpeed;
     public bool isYeouijuOn;
     Vector2 len;
     private void Start() 
     {
+        yeouiju = GameObject.Find("Yeouiju");
+        yeouijuRigid = yeouiju.GetComponent<Rigidbody2D>();
 
     }
 
@@ -33,13 +34,10 @@ public class Yeouiju : MonoBehaviour
                 yeouiju.transform.position = this.transform.position;
                 yeouiju.transform.rotation = Quaternion.Euler(0, 0, z);
 
-                yeouijuRigid.velocity = launchPoint.right * yeouijuSpeed;
-
-                //StartCoroutine(ReturnYeouiju(5f));
+                yeouijuRigid.velocity = yeouiju.transform.right * yeouijuSpeed;
             }
             else 
             {
-                // StartCoroutine(ReturnYeouiju(0));
                 isYeouijuOn = false;
 
                 if(DisjointAction != null)
@@ -48,14 +46,5 @@ public class Yeouiju : MonoBehaviour
         }
 
 
-    }
-
-    IEnumerator ReturnYeouiju(float time)
-    {   
-        //TODO : 발사 -> 취소 -> 발사 시에도 돌아오는 경우 해결
-        yield return new WaitForSeconds(time);
-        
-
-        isYeouijuOn = false;
     }
 }

@@ -5,11 +5,11 @@ using System;
 
 public class YeouijuMoving : MonoBehaviour
 {
-    YeouijuParabola yeouiju;
+    private YeouijuParabola yeouiju;
     public event Action<Vector2> MakeJoint2D;
-    Rigidbody2D rigid;
-    Transform playerPos;
-    CircleCollider2D coll;
+    private Rigidbody2D rigid;
+    private Transform playerPos;
+    private CircleCollider2D coll;
     const int origin_gravity = 1;
 
     private void Start()
@@ -37,7 +37,6 @@ public class YeouijuMoving : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D other)
     {
-        // Stop Moving
         StopYeouiju();
 
         if(MakeJoint2D != null)

@@ -4,11 +4,9 @@ using UnityEngine;
 
 public class Player2 : MonoBehaviour
 {
-
     Rigidbody2D rigid;
     private float horizontal_speed;
     public float power;
-    public bool test_jump;
     void Start()
     {
         rigid = GetComponent<Rigidbody2D>();
@@ -17,16 +15,6 @@ public class Player2 : MonoBehaviour
     private void Update() 
     {
         horizontal_speed = Input.GetAxis("Horizontal");
-
-        if(Input.GetKeyDown(KeyCode.Space))
-            // test_jump = true;
-        
-
-        if(test_jump)
-        {   
-            rigid.AddForce(Vector2.up * 5, ForceMode2D.Impulse);
-            test_jump = false;
-        }
     }
 
     private void FixedUpdate() 

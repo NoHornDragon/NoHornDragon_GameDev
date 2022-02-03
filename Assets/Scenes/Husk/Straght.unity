@@ -188,8 +188,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -1906447943
+  m_SortingLayer: 2
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 48b917ceee32caf4f9b1332c670e2325, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -381,7 +381,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   yeouiju: {fileID: 678659803}
   yeouijuRigid: {fileID: 678659804}
-  launchPoint: {fileID: 678659807}
   yeouijuSpeed: 4
   isYeouijuOn: 0
 --- !u!1 &821102155
@@ -850,7 +849,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e7ebf30277a3ee4b9b82906b0f82df6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mainCam: {fileID: 2113049479}
   lineRenderer: {fileID: 1729029555}
   distanceJoint2D: {fileID: 1729029556}
 --- !u!120 &1729029555

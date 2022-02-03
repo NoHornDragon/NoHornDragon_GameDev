@@ -1,16 +1,15 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 
 public class Grapher : MonoBehaviour
 {
-
     public LineRenderer lineRenderer;
     public DistanceJoint2D distanceJoint2D;
-    bool is_joint_now;
-    Vector2 joint_point;
-    float vertical_input;
+    bool nowJoint;
+    Vector2 jointPoint;
+    float verticalInput;
     void Start()
     {
         distanceJoint2D = GetComponent<DistanceJoint2D>();
@@ -22,15 +21,15 @@ public class Grapher : MonoBehaviour
 
     void Update()
     {
-        if(is_joint_now)
+        if(nowJoint)
         {
-            vertical_input = Input.GetAxis("Vertical") * -0.2f;
+            verticalInput = Input.GetAxis("Vertical") * -0.2f;
 
-            lineRenderer.SetPosition(0, joint_point);
+            lineRenderer.SetPosition(0, jointPoint);
             lineRenderer.SetPosition(1, transform.position);
 
-            distanceJoint2D.connectedAnchor = joint_point;
-            distanceJoint2D.distance += vertical_input;
+            distanceJoint2D.connectedAnchor = jointPoint;
+            distanceJoint2D.distance += verticalInput;
 
             distanceJoint2D.enabled = true;
             lineRenderer.enabled = true;
@@ -49,13 +48,13 @@ public class Grapher : MonoBehaviour
 
     public void MakeJoint(Vector2 point)
     {
-        is_joint_now = true;
-        joint_point = point;
+        nowJoint = true;
+        jointPoint = point;
     }
 
     public void DeleteJoint()
     {
-        is_joint_now = false;
+        nowJoint = false;
     }
 
 }

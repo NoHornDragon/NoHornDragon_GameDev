@@ -7,7 +7,7 @@ public class YeouijuParabola : MonoBehaviour
 {
     public event Action DeleteJoint2D;
     [SerializeField] YeouijuMoving yeouiju;
-    Vector2 len;
+    private Vector2 len;
     public float launchPower = 0;
     public float maxPower;
     public bool launching;
@@ -43,7 +43,6 @@ public class YeouijuParabola : MonoBehaviour
             launchPower = 0f;
         }
 
-        
 
     }
 
