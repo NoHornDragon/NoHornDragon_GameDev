@@ -12,6 +12,7 @@ public class YeouijuReflect : MonoBehaviour
     Vector3 lastVelocity;
     public int collisionCount = 0;
     public event Action<Vector2> CollisionEvent;
+    public int maxCollisionCount;
 
     private void Awake() 
     {
@@ -25,7 +26,7 @@ public class YeouijuReflect : MonoBehaviour
     {
         if(!coll.transform.CompareTag("Player"))
         {
-            if(collisionCount < 2)
+            if(collisionCount < maxCollisionCount)
             {
                 collisionCount++;
                 var speed = lastVelocity.magnitude;

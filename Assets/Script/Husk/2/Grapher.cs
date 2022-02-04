@@ -10,6 +10,7 @@ public class Grapher : MonoBehaviour
     bool nowJoint;
     Vector2 jointPoint;
     float verticalInput;
+    public float minDistance = 0.1f;
     void Start()
     {
         distanceJoint2D = GetComponent<DistanceJoint2D>();
@@ -21,6 +22,9 @@ public class Grapher : MonoBehaviour
 
     void Update()
     {
+        if(distanceJoint2D.distance < minDistance)
+            nowJoint = false;
+            
         if(nowJoint)
         {
             verticalInput = Input.GetAxis("Vertical") * -0.2f;
@@ -33,6 +37,8 @@ public class Grapher : MonoBehaviour
 
             distanceJoint2D.enabled = true;
             lineRenderer.enabled = true;
+
+
         }
         else
         {
