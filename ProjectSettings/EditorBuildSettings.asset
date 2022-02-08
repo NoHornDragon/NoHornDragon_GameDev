@@ -4,5 +4,8 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/Husk/Straght.unity
+    guid: b90c906704ffc534a8964d70359e3bc4
   m_configObjects: {}

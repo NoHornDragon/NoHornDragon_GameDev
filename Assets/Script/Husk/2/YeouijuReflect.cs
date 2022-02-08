@@ -38,7 +38,8 @@ public class YeouijuReflect : MonoBehaviour
             {
                 if(CollisionEvent != null)
                     CollisionEvent(this.transform.position);
-                    
+                else 
+                    Debug.Log("z");
                 rigid.velocity = new Vector3(0, 0, 0);
             }
         }

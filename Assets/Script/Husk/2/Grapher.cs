@@ -7,7 +7,7 @@ public class Grapher : MonoBehaviour
 {
     public LineRenderer lineRenderer;
     public DistanceJoint2D distanceJoint2D;
-    bool nowJoint;
+    public bool nowJoint;
     Vector2 jointPoint;
     float verticalInput;
     public float minDistance = 0.1f;
@@ -22,8 +22,8 @@ public class Grapher : MonoBehaviour
 
     void Update()
     {
-        if(distanceJoint2D.distance < minDistance)
-            nowJoint = false;
+        // if(distanceJoint2D.distance < minDistance)
+        //     nowJoint = false;
             
         if(nowJoint)
         {
@@ -54,6 +54,7 @@ public class Grapher : MonoBehaviour
 
     public void MakeJoint(Vector2 point)
     {
+        Debug.Log("zzz");
         nowJoint = true;
         jointPoint = point;
     }
