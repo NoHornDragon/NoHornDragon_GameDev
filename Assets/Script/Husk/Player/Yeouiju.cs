@@ -15,7 +15,6 @@ public class Yeouiju : MonoBehaviour
     {
         yeouiju = GameObject.Find("Yeouiju");
         yeouijuRigid = yeouiju.GetComponent<Rigidbody2D>();
-
     }
 
     void Update()
@@ -25,7 +24,7 @@ public class Yeouiju : MonoBehaviour
         float z = Mathf.Atan2(len.y, len.x) * Mathf.Rad2Deg;
         transform.rotation = Quaternion.Euler(0, 0, z);
 
-        if(Input.GetMouseButtonDown(1))
+        if(Input.GetMouseButtonUp(0))
         {
             // 발사 강도 정하기
             if(!isYeouijuOn)
@@ -38,13 +37,15 @@ public class Yeouiju : MonoBehaviour
             }
             else 
             {
-                isYeouijuOn = false;
-
-                if(DisjointAction != null)
-                    DisjointAction();
+                Disjoint();
             }
         }
+    }
 
-
+    public void Disjoint()
+    {
+        isYeouijuOn = false;
+        if(DisjointAction != null)
+            DisjointAction();
     }
 }

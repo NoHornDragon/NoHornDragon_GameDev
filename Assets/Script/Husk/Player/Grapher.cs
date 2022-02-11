@@ -5,14 +5,16 @@ using UnityEngine;
 
 public class Grapher : MonoBehaviour
 {
-    public LineRenderer lineRenderer;
-    public DistanceJoint2D distanceJoint2D;
-    public bool nowJoint;
-    Vector2 jointPoint;
-    float verticalInput;
-    public float minDistance = 0.1f;
+    private LineRenderer lineRenderer;
+    private DistanceJoint2D distanceJoint2D;
+    [Header("여의주 상태 변수")]
+    [SerializeField] private bool nowJoint;
+    [SerializeField] private Vector2 jointPoint;
+    private float verticalInput;
+    
     void Start()
     {
+        lineRenderer = GetComponent<LineRenderer>();
         distanceJoint2D = GetComponent<DistanceJoint2D>();
         distanceJoint2D.enabled = false;
 
@@ -49,7 +51,6 @@ public class Grapher : MonoBehaviour
 
     public void MakeJoint(Vector2 point)
     {
-        // Debug.Log("zzz");
         nowJoint = true;
         jointPoint = point;
     }

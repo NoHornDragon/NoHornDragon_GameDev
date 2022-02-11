@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class PlayerEnterConfiner : MonoBehaviour
 {
-    PolygonCollider2D collider;
+    private PolygonCollider2D collider;
     [SerializeField] private float lensSize;
-    void Start()
+    private void Start()
     {
         collider = GetComponent<PolygonCollider2D>();
     }
