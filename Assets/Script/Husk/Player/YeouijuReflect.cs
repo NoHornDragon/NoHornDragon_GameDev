@@ -32,20 +32,22 @@ public class YeouijuReflect : MonoBehaviour
             var dir = Vector2.Reflect(lastVelocity.normalized, coll.contacts[0].normal);
 
             rigid.velocity = dir * Mathf.Max(speed, 0f);
+
+            return;
         }
-        else
+        
+        if(Vector2.Distance(playerPos.position, this.transform.position) > maxJointDistance)
         {
-            // TODO : optimize
-            if(Vector2.Distance(GameObject.FindGameObjectWithTag("Player").transform.position, this.gameObject.transform.position) > maxJointDistance)
-            {
-                collisionCount = 0;
-                yeouiju.Disjoint();
-                return;
-            }
-            if(CollisionEvent != null)
-                CollisionEvent(this.transform.position);
-            rigid.velocity = new Vector3(0, 0, 0);
+            collisionCount = 0;
+            yeouiju.Disjoint();
+            return;
         }
+
+        if(CollisionEvent != null)
+            CollisionEvent(this.transform.position);
+            
+        rigid.velocity = new Vector3(0, 0, 0);
+        
     }
 
     private void FixedUpdate() 

@@ -5,10 +5,10 @@ using Cinemachine;
 
 public class CameraManager : MonoBehaviour
 {
-    [SerializeField] CinemachineVirtualCamera camera1;
-    [SerializeField] CinemachineVirtualCamera camera2;
-    CinemachineConfiner camera1Confiner;
-    CinemachineConfiner camera2Confiner;
+    [SerializeField] private CinemachineVirtualCamera camera1;
+    [SerializeField] private CinemachineVirtualCamera camera2;
+    private CinemachineConfiner camera1Confiner;
+    private CinemachineConfiner camera2Confiner;
     private bool isCam1;
 
     void Start()
@@ -27,23 +27,24 @@ public class CameraManager : MonoBehaviour
     {
         if(isCam1)
         {
-            camera2Confiner.m_BoundingShape2D = border;
-            camera2.m_Lens.OrthographicSize = lensSize;
-
-            camera1.gameObject.SetActive(false);
-            camera2.gameObject.SetActive(true);
-            isCam1 = false;
-
+            DoChangeCamera(camera2, camera2Confiner, border, lensSize);
+            return;
         }
-        else 
-        {
-            camera1Confiner.m_BoundingShape2D = border;
-            camera1.m_Lens.OrthographicSize = lensSize;
+        
+        DoChangeCamera(camera1, camera1Confiner, border, lensSize);
+    }
 
-            camera2.gameObject.SetActive(false);
-            camera1.gameObject.SetActive(true);
-            isCam1 = true;
-        }
+    private void DoChangeCamera(CinemachineVirtualCamera cam, CinemachineConfiner confiner, PolygonCollider2D border, float lensSize)
+    {
+        confiner.m_BoundingShape2D = border;
+        cam.m_Lens.OrthographicSize = lensSize;
+
+        // if camera1 is active(isCam1 is true) -> camera1(false), camera2(true)
+        // if cmaera2 is active(isCam1 is false) -> camera1(true), cmaera2(false)
+        camera1.gameObject.SetActive(!isCam1);
+        camera2.gameObject.SetActive(isCam1);
+
+        isCam1 = !(isCam1);
     }
 
     private void SetCameraFollow(CinemachineVirtualCamera camera, Transform target)
