@@ -29,6 +29,7 @@ public class Player : MonoBehaviour
 
     private void FixedUpdate() 
     {
+        // 플레이어가 줄이 연결된게 아니라면 return
         if(!jointNow)
             return;
 

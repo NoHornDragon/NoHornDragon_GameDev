@@ -24,21 +24,21 @@ public class Yeouiju : MonoBehaviour
         float z = Mathf.Atan2(len.y, len.x) * Mathf.Rad2Deg;
         transform.rotation = Quaternion.Euler(0, 0, z);
 
-        if(Input.GetMouseButtonUp(0))
+        if(!Input.GetMouseButtonUp(0))
+            return;
+        
+        // 발사 강도 정하기
+        if(!isYeouijuOn)
         {
-            // 발사 강도 정하기
-            if(!isYeouijuOn)
-            {
-                isYeouijuOn = true;
-                yeouiju.transform.position = this.transform.position;
-                yeouiju.transform.rotation = Quaternion.Euler(0, 0, z);
+            isYeouijuOn = true;
+            yeouiju.transform.position = this.transform.position;
+            yeouiju.transform.rotation = Quaternion.Euler(0, 0, z);
 
-                yeouijuRigid.velocity = yeouiju.transform.right * yeouijuSpeed;
-            }
-            else 
-            {
-                Disjoint();
-            }
+            yeouijuRigid.velocity = yeouiju.transform.right * yeouijuSpeed;
+        }
+        else 
+        {
+            Disjoint();
         }
     }
 
