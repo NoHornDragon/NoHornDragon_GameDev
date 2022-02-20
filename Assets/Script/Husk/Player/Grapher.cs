@@ -24,35 +24,31 @@ public class Grapher : MonoBehaviour
 
     void Update()
     {
-        if(nowJoint)
-        {
-            verticalInput = Input.GetAxis("Vertical") * -0.2f;
-
-            lineRenderer.SetPosition(0, jointPoint);
-            lineRenderer.SetPosition(1, transform.position);
-
-            distanceJoint2D.connectedAnchor = jointPoint;
-            distanceJoint2D.distance += verticalInput;
-
-            distanceJoint2D.enabled = true;
-            lineRenderer.enabled = true;
-        }
-        else
+        if(!nowJoint)
         {
             distanceJoint2D.enabled = false;
             lineRenderer.enabled = false;
+            return;
         }
+        
+        verticalInput = Input.GetAxis("Vertical") * -0.2f;
 
-        if(distanceJoint2D.enabled)
-        {
-            lineRenderer.SetPosition(1, transform.position);
-        }
+        lineRenderer.SetPosition(0, jointPoint);
+        lineRenderer.SetPosition(1, transform.position);
+
+        distanceJoint2D.connectedAnchor = jointPoint;
+        distanceJoint2D.distance += verticalInput;
+
+        distanceJoint2D.enabled = true;
+        lineRenderer.enabled = true;
+
+        lineRenderer.SetPosition(1, transform.position);
     }
 
     public void MakeJoint(Vector2 point)
     {
-        nowJoint = true;
         jointPoint = point;
+        nowJoint = true;
     }
 
     public void DeleteJoint()
