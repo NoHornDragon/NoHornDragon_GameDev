@@ -8,4 +8,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Husk/Straght.unity
     guid: b90c906704ffc534a8964d70359e3bc4
+  - enabled: 1
+    path: Assets/Scenes/SoinDosa/GameScene_Dummy.unity
+    guid: 9a520be32ee599741ad3379d20dea342
+  - enabled: 1
+    path: Assets/Scenes/SoinDosa/LobbyScene.unity
+    guid: bad6ad6caa72f7d4782e198174c7be85
   m_configObjects: {}

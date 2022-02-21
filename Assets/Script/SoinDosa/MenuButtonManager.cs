@@ -1,35 +1,24 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
-public class LobbyButtonManager : MonoBehaviour
+public class MenuButtonManager : MonoBehaviour
 {
-    public string gameSceneName;
-
-    [SerializeField]
-    private GameObject historyPanel;
     [SerializeField]
     private GameObject settingsPanel;
     [SerializeField]
     private GameObject exitPanel;
-
+    [SerializeField]
+    private GameObject goToLobbyPanel;
     private bool isOnePanelOpen = false;
-
 
     public void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape) && isOnePanelOpen)
             AllPanelClose();
         else if (Input.GetKeyDown(KeyCode.Escape) && !isOnePanelOpen)
-            ExitPanelOpen();
-    }
-    public void historyPanelOpen()
-    {
-        if (!isOnePanelOpen)
-        {
-            isOnePanelOpen = true;
-            historyPanel.SetActive(true);
-        }
+            GoToLobbyPanelOpen();
     }
 
     public void settingsPanelOpen()
@@ -50,13 +39,22 @@ public class LobbyButtonManager : MonoBehaviour
         }
     }
 
+    public void GoToLobbyPanelOpen()
+    {
+        if (!isOnePanelOpen)
+        {
+            isOnePanelOpen = true;
+            goToLobbyPanel.SetActive(true);
+        }
+    }
     public void AllPanelClose()
     {
         isOnePanelOpen = false;
 
-        historyPanel.SetActive(false);
+        
         settingsPanel.SetActive(false);
         exitPanel.SetActive(false);
+        goToLobbyPanel.SetActive(false);
     }
 
     public void GameQuit()
@@ -67,10 +65,8 @@ public class LobbyButtonManager : MonoBehaviour
         Application.Quit();
 #endif
     }
-
-    public void StartGame()
+    public void GoToLobbyYes()
     {
-        SceneChanger.instance.ChangeScene(gameSceneName);
+        SceneChanger.instance.ChangeScene("LobbyScene");
     }
-
 }
