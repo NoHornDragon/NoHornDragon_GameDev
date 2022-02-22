@@ -1,16 +1,19 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class PlayerEnterConfiner : MonoBehaviour
 {
+    public event Action<uint> ActiveRoomEvent;
     private PolygonCollider2D polygonCollider2D;
     [SerializeField] private float lensSize;
     [SerializeField] private uint roomNo;
-    [SerializeField] private GameObject room;
     private void Start()
     {
         polygonCollider2D = GetComponent<PolygonCollider2D>();
+
+        ActiveRoomEvent += FindObjectOfType<RoomManager>().EnterRoom;
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -18,8 +21,9 @@ public class PlayerEnterConfiner : MonoBehaviour
         if(other.CompareTag("Player"))
         {
             FindObjectOfType<CameraManager>().ChangeCamera(polygonCollider2D, lensSize);
-            //TODO : 이거 실제 방으로 오브젝트 변경
-            FindObjectOfType<RoomManager>().EnterRoom(this.gameObject, roomNo);
+
+            if(ActiveRoomEvent != null)
+                ActiveRoomEvent(roomNo);
         }
     }
 }
