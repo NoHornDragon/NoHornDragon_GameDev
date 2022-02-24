@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Enemy
   - Confiner
+  - Room
   layers:
   - Default
   - TransparentFX
