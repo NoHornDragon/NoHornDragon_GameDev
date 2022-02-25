@@ -6,19 +6,36 @@ using UnityEngine.SceneManagement;
 public class MenuButtonManager : MonoBehaviour
 {
     [SerializeField]
+    private GameObject pausePanel;
+    [SerializeField]
     private GameObject settingsPanel;
     [SerializeField]
     private GameObject exitPanel;
     [SerializeField]
     private GameObject goToLobbyPanel;
     private bool isOnePanelOpen = false;
+    private bool isPausePanelOpen = false;
 
     public void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape) && isOnePanelOpen)
+        if (Input.GetKeyDown(KeyCode.Escape) && isOnePanelOpen && isPausePanelOpen)
             AllPanelClose();
-        else if (Input.GetKeyDown(KeyCode.Escape) && !isOnePanelOpen)
-            GoToLobbyPanelOpen();
+        else if(Input.GetKeyDown(KeyCode.Escape) && !isOnePanelOpen && isPausePanelOpen)
+            PausePanelClose();
+        else if (Input.GetKeyDown(KeyCode.Escape) && !isOnePanelOpen && !isPausePanelOpen)
+            PausePanelOpen();
+    }
+
+    public void PausePanelOpen()
+    {
+        isPausePanelOpen = true;
+        pausePanel.SetActive(true);
+    }
+
+    public void PausePanelClose()
+    {
+        isPausePanelOpen = false;
+        pausePanel.SetActive(false);
     }
 
     public void settingsPanelOpen()
