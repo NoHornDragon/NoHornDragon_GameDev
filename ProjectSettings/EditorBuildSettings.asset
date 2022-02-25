@@ -6,7 +6,7 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/Husk/Straght.unity
+    path: Assets/Scenes/Husk/Test.unity
     guid: b90c906704ffc534a8964d70359e3bc4
   - enabled: 1
     path: Assets/Scenes/SoinDosa/GameScene_Dummy.unity
