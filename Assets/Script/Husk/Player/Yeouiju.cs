@@ -15,6 +15,8 @@ public class Yeouiju : MonoBehaviour
     {
         yeouiju = GameObject.Find("Yeouiju");
         yeouijuRigid = yeouiju.GetComponent<Rigidbody2D>();
+
+        GameStateManager.Instance.onGameStateChanged += OnGameStateChanged;
     }
 
     void Update()
@@ -48,4 +50,17 @@ public class Yeouiju : MonoBehaviour
         if(DisjointAction != null)
             DisjointAction();
     }
+
+    #region GameState
+    private void OnGameStateChanged(GameState newGameState)
+    {
+        enabled = newGameState == GameState.Gameplay;
+    }
+
+    private void OnDestroy()
+    {
+        GameStateManager.Instance.onGameStateChanged -= OnGameStateChanged;
+    }
+
+    #endregion
 }
