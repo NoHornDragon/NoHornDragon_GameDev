@@ -67,7 +67,7 @@ public class HistoryManager : MonoBehaviour
         isDescriptionMoving = true;
         float destPosY;
         if (!_panelSet)
-            destPosY = -800;
+            destPosY = -850;
         else
             destPosY = 0;
 
