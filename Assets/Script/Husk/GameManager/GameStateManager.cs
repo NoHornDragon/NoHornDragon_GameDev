@@ -1,4 +1,8 @@
-﻿public class GameStateManager 
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class GameStateManager : MonoBehaviour
 {
     private static GameStateManager instance;
 
@@ -31,14 +35,3 @@
         onGameStateChanged?.Invoke(newGameState);
     }
 }
-
-/*
-{
-    GameState currentState = GameState.Instance.CurrentState;
-    GameState newState = currentGameState == GameState.Gameplay
-        ? GameState.Paused
-        : GameState.GamePlay;
-}
-
-
-*/

@@ -17,8 +17,6 @@ public class Player : MonoBehaviour
 
         FindObjectOfType<YeouijuReflect>().CollisionEvent += PlayerCanSwing;
         FindObjectOfType<Yeouiju>().DisjointAction += PlayerCannotSwing;
-
-        GameStateManager.Instance.onGameStateChanged += OnGameStateChanged;
     }
 
     private void Update() 
@@ -56,17 +54,4 @@ public class Player : MonoBehaviour
         */
         this.gameObject.transform.position = spwanPoint;
     }
-
-    #region GameState
-    private void OnGameStateChanged(GameState newGameState)
-    {
-        enabled = newGameState == GameState.Gameplay;
-    }
-
-    private void OnDestroy()
-    {
-        GameStateManager.Instance.onGameStateChanged -= OnGameStateChanged;
-    }
-
-    #endregion
 }
