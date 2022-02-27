@@ -40,5 +40,6 @@
 ## 업데이트 내역
 
 * 0.0.1 : 메인, 인게임 UI 제작 및 플레이어 기초 움직임 제작
+  *  [WebBuild in itch.io](https://husk321.itch.io/nohorndragon-001v-test)
 
 ## 정보
