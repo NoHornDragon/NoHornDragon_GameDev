@@ -18,9 +18,9 @@ public class LobbyButtonManager : MonoBehaviour
 
     public void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape) && isOnePanelOpen && !HistoryManager.isDescriptionOpen)
+        if (Input.GetKeyDown(KeyCode.Escape) && isOnePanelOpen && !HistoryManager.isDescriptionOpen && !HistoryManager.isDescriptionMoving)
             AllPanelClose();
-        else if (Input.GetKeyDown(KeyCode.Escape) && !isOnePanelOpen && !HistoryManager.isDescriptionOpen)
+        else if (Input.GetKeyDown(KeyCode.Escape) && !isOnePanelOpen && !HistoryManager.isDescriptionOpen && !HistoryManager.isDescriptionMoving)
             ExitPanelOpen();
     }
     public void historyPanelOpen()

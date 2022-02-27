@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 public class HistoryManager : MonoBehaviour
 {
+    public static bool isDescriptionMoving = false;
     public static bool isDescriptionOpen = false;
 
     [SerializeField]
@@ -30,7 +31,7 @@ public class HistoryManager : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape) && isDescriptionOpen)
+        if (Input.GetKeyDown(KeyCode.Escape) && isDescriptionOpen && !isDescriptionMoving)
             DescriptionPanelClose();
     }
     public void ActiveNodes()
@@ -43,26 +44,39 @@ public class HistoryManager : MonoBehaviour
     }
     public void DescriptionPanelOpen(int _val)
     {
-        isDescriptionOpen = true;
-        DescriptionPanel.SetActive(true);
-        nodeName.text = nodes[_val].title;
-        nodeImage.sprite = nodes[_val].image;
-        nodeDescription.text = nodes[_val].description;
-        StartCoroutine(DescriptionPanelCoroutine(0f));
+        if (!isDescriptionOpen && !isDescriptionMoving)
+        {
+            DescriptionPanel.SetActive(true);
+            nodeName.text = nodes[_val].title;
+            nodeImage.sprite = nodes[_val].image;
+            nodeDescription.text = nodes[_val].description;
+            StartCoroutine(DescriptionPanelCoroutine(true)); // -> isDescriptionOpen = true
+        }
     }
 
     public void DescriptionPanelClose()
     {
-        isDescriptionOpen = false;
-        StartCoroutine(DescriptionPanelCoroutine(-1000f));
-        DescriptionPanel.SetActive(false);
-    }
-    IEnumerator DescriptionPanelCoroutine(float _destPosY)
-    {
-        for (int i = 0; i < 100; i++)
+        if (isDescriptionOpen && !isDescriptionMoving)
         {
-            descriptionBox.localPosition = new Vector2(descriptionBox.localPosition.x, Mathf.Lerp(descriptionBox.localPosition.y, _destPosY, 0.1f));
+            StartCoroutine(DescriptionPanelCoroutine(false)); // -> isDescriptionOpen = false
+            DescriptionPanel.SetActive(false);
+        }
+    }
+    IEnumerator DescriptionPanelCoroutine(bool _panelSet)
+    {
+        isDescriptionMoving = true;
+        float destPosY;
+        if (!_panelSet)
+            destPosY = -800;
+        else
+            destPosY = 0;
+
+        for (int i = 0; i < 50; i++)
+        {
+            descriptionBox.localPosition = new Vector2(descriptionBox.localPosition.x, Mathf.Lerp(descriptionBox.localPosition.y, destPosY, 0.2f));
             yield return null;
         }
+        isDescriptionOpen = !isDescriptionOpen;
+        isDescriptionMoving = false;
     }
 }
