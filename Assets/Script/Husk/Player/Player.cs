@@ -9,6 +9,7 @@ public class Player : MonoBehaviour
     private Rigidbody2D rigid;
     private float horizontal_speed;
     private Vector2 spwanPoint;
+    [Header("플레이어 능력치 변수")]
     [SerializeField] private float swingPower;
     [SerializeField] private bool jointNow;
     private PlayerAnimation anim;
@@ -17,6 +18,7 @@ public class Player : MonoBehaviour
     public bool prepareLaunch;
     public bool throwYeouiju;
     public bool nowSwing;
+    [Space]
     public bool onGround;
     [SerializeField] private Vector2 bottomOffset;
     [SerializeField] private float collisionRadius;
@@ -37,32 +39,27 @@ public class Player : MonoBehaviour
         horizontal_speed = Input.GetAxis("Horizontal");
 
         // animation flip
-        if (rigid.velocity.x > 0)
+        if (rigid.velocity.x > 0)   
             anim.FlipX(true);
-        else
+        else                        
             anim.FlipX(false); 
 
         // yeouiju launch
-        if(Input.GetMouseButtonDown(0)) prepareLaunch = true;
-        if(Input.GetMouseButtonUp(0) && prepareLaunch) throwYeouiju = true;
+        if(Input.GetMouseButtonDown(0)) 
+            prepareLaunch = true;
+        if(Input.GetMouseButtonUp(0) && prepareLaunch) 
+            throwYeouiju = true;
 
         if(Input.GetKeyDown(KeyCode.R))
             PlayerReset();
     }
 
-    // TODO : 디버그용임
-    void OnDrawGizmos()
-    {
-        Gizmos.color = Color.red;
 
-        Gizmos.DrawWireSphere((Vector2)transform.position + bottomOffset, collisionRadius);
-    }
 
     private void FixedUpdate() 
     {
         // 플레이어가 줄이 연결된게 아니라면 return
-        if(!jointNow)
-            return;
+        if(!jointNow)   return;
 
         rigid.AddForce(Vector2.right * horizontal_speed * swingPower);
     }
@@ -92,5 +89,13 @@ public class Player : MonoBehaviour
         아님 실수로 누르셨다면... 그건 좀 안타깝군요.
         */
         this.gameObject.transform.position = spwanPoint;
+    }
+
+    // TODO : 디버그용임
+    void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+
+        Gizmos.DrawWireSphere((Vector2)transform.position + bottomOffset, collisionRadius);
     }
 }

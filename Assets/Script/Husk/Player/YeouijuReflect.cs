@@ -10,8 +10,9 @@ public class YeouijuReflect : MonoBehaviour
     private Rigidbody2D rigid;
     private CircleCollider2D coll;
     private Vector3 lastVelocity;
-    [SerializeField] private  int collisionCount = 0;
     public event Action<Vector2> CollisionEvent;
+    [Header("여의주 상태 변수")]
+    [SerializeField] private int collisionCount = 0;
     [SerializeField] private int maxCollisionCount;
     [SerializeField] private float maxJointDistance;
 

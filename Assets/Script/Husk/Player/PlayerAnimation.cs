@@ -11,6 +11,7 @@ public class PlayerAnimation : MonoBehaviour
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
         player = GetComponentInParent<Player>();
+        // anim = GetComponent<Animator>();
     }
     /*
     플레이어 애니메이션
