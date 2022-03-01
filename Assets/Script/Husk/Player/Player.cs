@@ -11,9 +11,21 @@ public class Player : MonoBehaviour
     private Vector2 spwanPoint;
     [SerializeField] private float swingPower;
     [SerializeField] private bool jointNow;
+    private PlayerAnimation anim;
+
+    [Header("플레이어 상태 변수")]
+    public bool prepareLaunch;
+    public bool throwYeouiju;
+    public bool nowSwing;
+    public bool onGround;
+    [SerializeField] private Vector2 bottomOffset;
+    [SerializeField] private float collisionRadius;
+    [SerializeField] private LayerMask groundLayer;
+
     private void Start()
     {
         rigid = GetComponent<Rigidbody2D>();
+        anim = GetComponentInChildren<PlayerAnimation>();
 
         FindObjectOfType<YeouijuReflect>().CollisionEvent += PlayerCanSwing;
         FindObjectOfType<Yeouiju>().DisjointAction += PlayerCannotSwing;
@@ -21,10 +33,29 @@ public class Player : MonoBehaviour
 
     private void Update() 
     {
+        onGround = Physics2D.OverlapCircle((Vector2)transform.position + bottomOffset, collisionRadius, groundLayer);
         horizontal_speed = Input.GetAxis("Horizontal");
+
+        // animation flip
+        if (rigid.velocity.x > 0)
+            anim.FlipX(true);
+        else
+            anim.FlipX(false); 
+
+        // yeouiju launch
+        if(Input.GetMouseButtonDown(0)) prepareLaunch = true;
+        if(Input.GetMouseButtonUp(0) && prepareLaunch) throwYeouiju = true;
 
         if(Input.GetKeyDown(KeyCode.R))
             PlayerReset();
+    }
+
+    // TODO : 디버그용임
+    void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+
+        Gizmos.DrawWireSphere((Vector2)transform.position + bottomOffset, collisionRadius);
     }
 
     private void FixedUpdate() 
@@ -39,10 +70,18 @@ public class Player : MonoBehaviour
     private void PlayerCanSwing(Vector2 dummyInput)
     {
         jointNow = true;
+        nowSwing = true;
+
+        prepareLaunch = false;
+        throwYeouiju = false;
     }
     private void PlayerCannotSwing()
     {
         jointNow = false;
+        nowSwing = false;
+
+        prepareLaunch = false;
+        throwYeouiju = false;
     }
 
     private void PlayerReset()

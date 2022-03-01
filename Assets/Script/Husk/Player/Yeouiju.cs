@@ -10,7 +10,6 @@ public class Yeouiju : MonoBehaviour
     [SerializeField] Rigidbody2D yeouijuRigid;
     public float yeouijuSpeed;
     public bool isYeouijuOn;
-    Vector2 len;
     private void Start() 
     {
         yeouiju = GameObject.Find("Yeouiju");
@@ -20,7 +19,7 @@ public class Yeouiju : MonoBehaviour
     void Update()
     {   
         // 마우스 방향에 따라 오브젝트의 회전각 결정
-        len = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
+        Vector2 len = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
         float z = Mathf.Atan2(len.y, len.x) * Mathf.Rad2Deg;
         transform.rotation = Quaternion.Euler(0, 0, z);
 
