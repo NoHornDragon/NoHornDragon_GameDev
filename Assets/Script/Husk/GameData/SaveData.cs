@@ -47,8 +47,6 @@ public class SaveData : MonoBehaviour
             NewGame();
             return;
         }
-
-
         string DataFromJson = File.ReadAllText(path);
 
         // byte[] bytes = System.Convert.FromBase64String(DataFromJson);

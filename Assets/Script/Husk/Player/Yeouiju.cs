@@ -43,6 +43,7 @@ public class Yeouiju : MonoBehaviour
     public void Disjoint()
     {
         isYeouijuOn = false;
+        
         if(DisjointAction != null)
             DisjointAction();
     }

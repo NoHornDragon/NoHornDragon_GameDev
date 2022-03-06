@@ -39,10 +39,7 @@ public class Player : MonoBehaviour
         horizontal_speed = Input.GetAxis("Horizontal");
 
         // animation flip
-        if (rigid.velocity.x > 0)   
-            anim.FlipX(true);
-        else                        
-            anim.FlipX(false); 
+        anim.FlipX(rigid.velocity.x > 0);
 
         // yeouiju launch
         if(Input.GetMouseButtonDown(0)) 

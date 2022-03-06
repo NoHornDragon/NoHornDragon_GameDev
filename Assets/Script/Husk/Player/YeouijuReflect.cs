@@ -11,6 +11,7 @@ public class YeouijuReflect : MonoBehaviour
     private CircleCollider2D coll;
     private Vector3 lastVelocity;
     public event Action<Vector2> CollisionEvent;
+
     [Header("여의주 상태 변수")]
     [SerializeField] private int collisionCount = 0;
     [SerializeField] private int maxCollisionCount;
@@ -54,17 +55,19 @@ public class YeouijuReflect : MonoBehaviour
     private void FixedUpdate() 
     {
         lastVelocity = rigid.velocity;
-        if(!yeouiju.isYeouijuOn)
-        {   
-            rigid.velocity = new Vector3(0, 0, 0);
-            collisionCount = 0;
-            coll.enabled = false;
-            transform.position = Vector3.MoveTowards(transform.position, playerPos.position, yeouiju.yeouijuSpeed * 1.5f * Time.deltaTime);
-        }
-        else
+
+        if(yeouiju.isYeouijuOn)
         {
-            coll.enabled = true;
-        }
+            coll.enabled = false;
+            return;
+        } 
+
+        // if Yeouiju Active
+        rigid.velocity = new Vector3(0, 0, 0);
+        collisionCount = 0;
+        coll.enabled = false;
+        transform.position = Vector3.MoveTowards(transform.position, playerPos.position, yeouiju.yeouijuSpeed * 1.5f * Time.deltaTime);
+        
     }
 
 }
