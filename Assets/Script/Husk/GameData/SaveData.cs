@@ -18,6 +18,7 @@ public class SaveData : MonoBehaviour
         SaveGame();
     }
 
+
     [ContextMenu("Save Game")]
     public void SaveGame()
     {
@@ -67,6 +68,7 @@ public class UserData{
     public float effectSoundVolume;
     public uint clearCount;
     public uint resetCount;
+    public uint stunedCount;
     public bool[] paperList;
 
     public UserData(){

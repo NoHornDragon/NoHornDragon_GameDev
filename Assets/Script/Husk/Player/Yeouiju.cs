@@ -10,10 +10,14 @@ public class Yeouiju : MonoBehaviour
     [SerializeField] Rigidbody2D yeouijuRigid;
     public float yeouijuSpeed;
     public bool isYeouijuOn;
+    [SerializeField] private bool canLaunch;
     private void Start() 
     {
+        canLaunch = true;
         yeouiju = GameObject.Find("Yeouiju");
         yeouijuRigid = yeouiju.GetComponent<Rigidbody2D>();
+
+        FindObjectOfType<PlayerCollision>().ControlEvent += SetLaunch;
     }
 
     void Update()
@@ -24,6 +28,8 @@ public class Yeouiju : MonoBehaviour
         transform.rotation = Quaternion.Euler(0, 0, z);
 
         if(!Input.GetMouseButtonUp(0)) return;
+
+        if(!canLaunch)  return;
         
         // 발사 강도 정하기
         if(!isYeouijuOn)
@@ -46,5 +52,10 @@ public class Yeouiju : MonoBehaviour
         
         if(DisjointAction != null)
             DisjointAction();
+    }
+
+    public void SetLaunch(bool input)
+    {
+        canLaunch = input;
     }
 }

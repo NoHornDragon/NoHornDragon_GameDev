@@ -18,6 +18,7 @@ public class Player : MonoBehaviour
     public bool prepareLaunch;
     public bool throwYeouiju;
     public bool nowSwing;
+    [SerializeField] private bool CanMove;
     [Space]
     public bool onGround;
     [SerializeField] private Vector2 bottomOffset;
@@ -26,11 +27,13 @@ public class Player : MonoBehaviour
 
     private void Start()
     {
+        CanMove = true;
         rigid = GetComponent<Rigidbody2D>();
         anim = GetComponentInChildren<PlayerAnimation>();
 
         FindObjectOfType<YeouijuReflect>().CollisionEvent += PlayerCanSwing;
         FindObjectOfType<Yeouiju>().DisjointAction += PlayerCannotSwing;
+        FindObjectOfType<PlayerCollision>().ControlEvent += SetplayerMove;
     }
 
     private void Update() 
@@ -41,14 +44,18 @@ public class Player : MonoBehaviour
         // animation flip
         anim.FlipX(rigid.velocity.x > 0);
 
+        if(Input.GetKeyDown(KeyCode.R))
+            PlayerReset();
+
+        if(!CanMove)    return;
+
         // yeouiju launch
         if(Input.GetMouseButtonDown(0)) 
             prepareLaunch = true;
         if(Input.GetMouseButtonUp(0) && prepareLaunch) 
             throwYeouiju = true;
 
-        if(Input.GetKeyDown(KeyCode.R))
-            PlayerReset();
+
     }
 
 
@@ -76,6 +83,11 @@ public class Player : MonoBehaviour
 
         prepareLaunch = false;
         throwYeouiju = false;
+    }
+
+    public void SetplayerMove(bool input)
+    {
+        CanMove = input;
     }
 
     private void PlayerReset()

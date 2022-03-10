@@ -7,6 +7,7 @@ TagManager:
   - Enemy
   - Confiner
   - Room
+  - AnotherMovement
   layers:
   - Default
   - TransparentFX

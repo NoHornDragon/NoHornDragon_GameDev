@@ -46,7 +46,11 @@ public class YeouijuReflect : MonoBehaviour
         }
 
         if(CollisionEvent != null)
+        {
+
             CollisionEvent(this.transform.position);
+            rigid.freezeRotation = true;
+        }
             
         rigid.velocity = new Vector3(0, 0, 0);
         
@@ -58,11 +62,12 @@ public class YeouijuReflect : MonoBehaviour
 
         if(yeouiju.isYeouijuOn)
         {
-            coll.enabled = false;
+            coll.enabled = true;
             return;
         } 
 
-        // if Yeouiju Active
+        // if Yeouiju Returned
+        rigid.freezeRotation = false;
         rigid.velocity = new Vector3(0, 0, 0);
         collisionCount = 0;
         coll.enabled = false;
