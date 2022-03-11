@@ -45,7 +45,7 @@ public class SaveData : MonoBehaviour
         // byte[] bytes = System.Text.Encoding.UTF8.GetBytes(dataToJson);
         // string code = System.Convert.ToBase64String(bytes);
 
-        string path = Path.Combine(Application.dataPath, "UserDate.json");
+        string path = Path.Combine(Application.dataPath, "UserData.json");
         // File.WriteAllText(path, code);
 
         // 암호화시 아래 삭제
@@ -56,7 +56,7 @@ public class SaveData : MonoBehaviour
     public void LoadGame()
     {
         // Debug.Log("Load Game");
-        string path = Path.Combine(Application.dataPath, "UserDate.json");
+        string path = Path.Combine(Application.dataPath, "UserData.json");
 
         if(!File.Exists(path))
         {

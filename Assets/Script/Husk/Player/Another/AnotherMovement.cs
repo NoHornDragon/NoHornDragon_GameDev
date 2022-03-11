@@ -5,10 +5,9 @@ using System;
 public class AnotherMovement : MonoBehaviour
 {
     
-    [SerializeField] Vector3 originPos;
-    bool isActive;
-    public event Action BecomeToOriginEvent;
-    Rigidbody2D rigid;
+    [SerializeField] private Vector3 originPos;
+    private bool isActive;
+    private Rigidbody2D rigid;
 
     private void Start()
     {
@@ -52,9 +51,7 @@ public class AnotherMovement : MonoBehaviour
 
         // player position to here
 
-        gameObject.transform.localPosition = new Vector3(0, 0, 0);
-        
-        if(BecomeToOriginEvent != null)
-            BecomeToOriginEvent();
+        gameObject.transform.position = originPos;
+ 
     }
 }
