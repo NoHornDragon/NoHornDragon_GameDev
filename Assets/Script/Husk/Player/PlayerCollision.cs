@@ -5,6 +5,7 @@ using System;
 
 public class PlayerCollision : MonoBehaviour
 {
+    // connected with player move(origin), Yeouiju can launch
     public event Action<bool> ControlEvent;
     Player originMovement;
     Grapher grapher;
@@ -18,10 +19,6 @@ public class PlayerCollision : MonoBehaviour
 
         originSprite = transform.FindChild("Visual").gameObject;
 
-        AnotherMovement[] anothers = FindObjectsOfType<AnotherMovement>();
-        for(int i = 0; i < anothers.GetLength(0); i++)
-            anothers[i].BecomeToOriginEvent += ChangeToOriginMovement;
-
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -33,7 +30,7 @@ public class PlayerCollision : MonoBehaviour
         }
         if(other.CompareTag("Enemy"))
         {
-
+            originMovement.playerStuned();
         }
     }
 
@@ -41,14 +38,17 @@ public class PlayerCollision : MonoBehaviour
     {
         newMovement = other.gameObject.GetComponent<AnotherMovement>();
 
+        // Disconnect Yeouiju
+        // FindObjectOfType<Yeouiju>().Disjoint();
+        // FindObjectOfType<Grapher>().DeleteJoint();
+
         if(ControlEvent != null)
             ControlEvent(false);
 
         originSprite.SetActive(false);
         originMovement.enabled = false;
-        grapher.enabled = false;
     }
-
+    [ContextMenu("Player Change to Origin")]
     public void ChangeToOriginMovement()
     {
         newMovement.BackToOrigin();

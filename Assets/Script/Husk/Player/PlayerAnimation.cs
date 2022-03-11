@@ -21,6 +21,7 @@ public class PlayerAnimation : MonoBehaviour
         // anim.SetBool("nowSwing", player.nowSwing);
         // anim.SetBool("prepareThrow", player.prepareLaunch);
         // anim.SetBool("throw", player.throwYeouiju);
+        // anim.SetBool("stuned", player.stuned);
     }
 
     public void FlipX(bool isRight)

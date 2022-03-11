@@ -19,6 +19,7 @@ public class Player : MonoBehaviour
     public bool throwYeouiju;
     public bool nowSwing;
     [SerializeField] private bool CanMove;
+    public bool stuned;
     [Space]
     public bool onGround;
     [SerializeField] private Vector2 bottomOffset;
@@ -54,8 +55,6 @@ public class Player : MonoBehaviour
             prepareLaunch = true;
         if(Input.GetMouseButtonUp(0) && prepareLaunch) 
             throwYeouiju = true;
-
-
     }
 
 
@@ -88,6 +87,30 @@ public class Player : MonoBehaviour
     public void SetplayerMove(bool input)
     {
         CanMove = input;
+    }
+
+    public void playerStuned()
+    {
+        CanMove = false;
+        // anim
+        stuned = true;
+        StartCoroutine(CheckOnGround());
+    }
+
+    IEnumerator CheckOnGround()
+    {
+        yield return new WaitForSeconds(1f);
+
+        if(onGround)
+            PlayerRevive();
+        else
+            StartCoroutine(CheckOnGround());
+    }
+
+    private void PlayerRevive()
+    {
+        CanMove = true;
+        stuned = false;
     }
 
     private void PlayerReset()

@@ -5,7 +5,7 @@ using System;
 public class AnotherMovement : MonoBehaviour
 {
     
-    Vector3 originPos;
+    [SerializeField] Vector3 originPos;
     bool isActive;
     public event Action BecomeToOriginEvent;
     Rigidbody2D rigid;
@@ -47,9 +47,12 @@ public class AnotherMovement : MonoBehaviour
 
     public void BackToOrigin()
     {
+        // no input
         isActive = false;
 
-        gameObject.transform.position = originPos;
+        // player position to here
+
+        gameObject.transform.localPosition = new Vector3(0, 0, 0);
         
         if(BecomeToOriginEvent != null)
             BecomeToOriginEvent();
