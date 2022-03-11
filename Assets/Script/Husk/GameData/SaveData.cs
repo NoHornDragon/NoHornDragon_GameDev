@@ -5,6 +5,22 @@ using System.IO;
 
 public class SaveData : MonoBehaviour
 {
+    public static SaveData instance;
+
+    private void Awake()
+    {
+        if(instance == null)
+        {
+            instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
+
+    
     [Header("저장데이터")]
     public UserData userData;
 
