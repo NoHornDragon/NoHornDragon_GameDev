@@ -49,9 +49,9 @@ public class AnotherMovement : MonoBehaviour
         // no input
         isActive = false;
 
-        // player position to here
-
         gameObject.transform.position = originPos;
+
+        // TODO : player position to here
  
     }
 }
