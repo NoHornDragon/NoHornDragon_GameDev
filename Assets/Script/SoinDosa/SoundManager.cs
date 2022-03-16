@@ -14,9 +14,11 @@ public class SoundManager : MonoBehaviour
 {
     public static SoundManager instance;
 
+    [Header("재생가능한 오디오 소스")]
     public AudioSource audioSourceBGM;
     public AudioSource[] audioSourceEffects;
 
+    [Header("게임에 사용되는 사운드")]
     public Sound[] bgmSounds;
     public Sound[] effectSounds;
 
