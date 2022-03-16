@@ -123,4 +123,31 @@ public class SoundManager : MonoBehaviour
         audioSourceBGM.Stop();
         audioSourceBGM.volume = SettingsManager.instance.effectSlider.value;
     }
+
+    public void PlaySE(string _name)
+    {
+        foreach(var effectSound in effectSounds)
+        {
+            if(_name == effectSound.name)
+            {
+                for(int i = 0; i < audioSourceEffects.Length; i++)
+                {
+                    if(!audioSourceEffects[i].isPlaying)
+                    {
+                        audioSourceEffects[i].clip = effectSound.clip;
+                        audioSourceEffects[i].Play();
+                        return;
+                    }
+                }
+            }
+        }
+    }
+
+    public void StopAllSE()
+    {
+        foreach(var audioSourceEffect in audioSourceEffects)
+        {
+            audioSourceEffect.Stop();
+        }
+    }
 }
