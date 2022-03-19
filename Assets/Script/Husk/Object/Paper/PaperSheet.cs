@@ -6,13 +6,23 @@ using DG.Tweening;
 public class PaperSheet : MonoBehaviour
 {
     [Tooltip("종이조각의 번호이며 0번부터 시작합니다")]
-    int paperIndex;
+    [SerializeField] private int paperIndex;
+    private Sequence paperSequence;
+    private Vector3 originPos;
+    [SerializeField] private Ease ease;
+
     void Start()
     {
         if(SaveData.instance.userData.paperList[paperIndex])
         {
             Destroy(this.gameObject);
         }
+
+        originPos = this.transform.position;
+
+        paperSequence = DOTween.Sequence()
+        .Append(transform.DOMoveY(originPos.y + 5f, 2, false).SetEase(ease))
+        .SetLoops(-1, LoopType.Yoyo);
     }
 
     private void OnTriggerEnter2D(Collider2D other)
