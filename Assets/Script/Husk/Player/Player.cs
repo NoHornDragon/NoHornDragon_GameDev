@@ -14,13 +14,14 @@ public class Player : MonoBehaviour
     [SerializeField] private bool jointNow;
     private PlayerAnimation anim;
 
+    [Space(20f)]
     [Header("플레이어 상태 변수")]
     public bool prepareLaunch;
     public bool throwYeouiju;
     public bool nowSwing;
     [SerializeField] private bool CanMove;
     public bool stuned;
-    [Space]
+    [Space(20f)]
     public bool onGround;
     [SerializeField] private Vector2 bottomOffset;
     [SerializeField] private float collisionRadius;
@@ -35,6 +36,12 @@ public class Player : MonoBehaviour
         FindObjectOfType<YeouijuReflect>().CollisionEvent += PlayerCanSwing;
         FindObjectOfType<Yeouiju>().DisjointAction += PlayerCannotSwing;
         FindObjectOfType<PlayerCollision>().ControlEvent += SetplayerMove;
+
+        if(SaveData.instance.userData.useSave)
+        {
+            this.transform.position = SaveData.instance.userData.PlayerPos;
+            StartCoroutine(SavePlayerPosition());
+        }
     }
 
     private void Update() 
@@ -121,6 +128,7 @@ public class Player : MonoBehaviour
         아님 실수로 누르셨다면... 그건 좀 안타깝군요.
         */
         this.gameObject.transform.position = spwanPoint;
+        SaveData.instance.userData.resetCount++;
     }
 
     // TODO : 디버그용임
@@ -129,5 +137,16 @@ public class Player : MonoBehaviour
         Gizmos.color = Color.red;
 
         Gizmos.DrawWireSphere((Vector2)transform.position + bottomOffset, collisionRadius);
+    }
+
+    WaitForSeconds saveCycle = new WaitForSeconds(10f);
+    IEnumerator SavePlayerPosition()
+    {
+        yield return saveCycle;
+
+        SaveData.instance.userData.PlayerPos = this.transform.position;
+        SaveData.instance.SaveGame();
+
+        StartCoroutine(SavePlayerPosition());
     }
 }
