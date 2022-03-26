@@ -37,7 +37,7 @@ public class Player : MonoBehaviour
         FindObjectOfType<Yeouiju>().DisjointAction += PlayerCannotSwing;
         FindObjectOfType<PlayerCollision>().ControlEvent += SetplayerMove;
 
-        if(SaveData.instance.userData.useSave)
+        if(SaveData.instance.userData.nowUseSave())
         {
             this.transform.position = SaveData.instance.userData.PlayerPos;
             StartCoroutine(SavePlayerPosition());
