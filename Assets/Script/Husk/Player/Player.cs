@@ -99,6 +99,10 @@ public class Player : MonoBehaviour
     public void playerStuned()
     {
         CanMove = false;
+
+        // delete joint
+
+        
         // anim
         stuned = true;
         StartCoroutine(CheckOnGround());
