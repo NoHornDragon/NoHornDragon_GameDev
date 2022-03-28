@@ -9,6 +9,7 @@ public class YeouijuReflection : MonoBehaviour
     private Rigidbody2D rigid;
     private CircleCollider2D coll;
     private Transform player;
+    private SpriteRenderer sprite;
     [SerializeField] private float yeouijuSpeed;
     private bool yeouijuOn;
     private Vector3 prevVelocity;
@@ -25,6 +26,7 @@ public class YeouijuReflection : MonoBehaviour
         coll = GetComponent<CircleCollider2D>();
 
         FindObjectOfType<YeouijuLaunch>().DisJointEvent += YeouijuFollowPlayer;
+        FindObjectOfType<PlayerCollider>().playerChangeEvent += SetYeouijuSprite;
     }
 
     private void FixedUpdate()
@@ -88,5 +90,10 @@ public class YeouijuReflection : MonoBehaviour
         
         rigid.velocity = new Vector3(0, 0, 0);
         rigid.freezeRotation = true;
+    }
+
+    public void SetYeouijuSprite(bool isActive)
+    {
+        sprite.enabled = isActive;
     }
 }
