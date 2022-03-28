@@ -3305,6 +3305,8 @@ MonoBehaviour:
     clearCount: 0
     resetCount: 0
     stunedCount: 0
+    useSave: 0
+    PlayerPos: {x: 0, y: 0, z: 0}
     paperList: 
 --- !u!4 &1500971434
 Transform:

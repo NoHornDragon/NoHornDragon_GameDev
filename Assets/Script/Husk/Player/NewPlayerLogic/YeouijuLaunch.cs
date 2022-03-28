@@ -9,15 +9,19 @@ public class YeouijuLaunch : MonoBehaviour
     private YeouijuReflection yeouiju;
     private bool canLaunch;
     public bool isYeouijuOn;
+    private bool isActive;
     
     private void Start()
     {
         canLaunch = true;
         yeouiju = FindObjectOfType<YeouijuReflection>();
+
+        FindObjectOfType<PlayerCollider>().playerChangeEvent += SetLaunchStatus;
     }
 
     private void Update()
     {
+        if(!isActive)                   return;
         if(!Input.GetMouseButtonUp(0))  return;
     
         if(!isYeouijuOn)
@@ -42,5 +46,9 @@ public class YeouijuLaunch : MonoBehaviour
         }
     }
 
+    public void SetLaunchStatus(bool isActive)
+    {
+        this.isActive = isActive;
+    }
     
 }
