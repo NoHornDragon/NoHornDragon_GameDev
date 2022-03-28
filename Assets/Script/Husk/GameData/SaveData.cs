@@ -91,7 +91,7 @@ public class UserData{
     public uint stunedCount;                // 플레이어가 스턴을 당한 횟수
 
     [Header("플레이어 자동저장 여부")]
-    public bool useSave;                    // 플레이어의 저장 기능
+    [SerializeField] private bool useSave;                    // 플레이어의 저장 기능
     public Vector3 PlayerPos;               // 저장을 했을 때 플레이어 위치
 
     [Header("종이조각 흭득 여부")]
@@ -110,5 +110,20 @@ public class UserData{
         PlayerPos = Vector3.zero;
 
         paperList = new bool[20];
+    }
+
+    public bool nowUseSave()
+    {
+        return useSave;
+    }
+
+    public void SetUseSave(bool use)
+    {
+        useSave = use;
+
+        if(!useSave)
+        {
+            PlayerPos = Vector3.zero;
+        }
     }
 };
