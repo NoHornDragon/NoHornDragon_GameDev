@@ -4,15 +4,17 @@ using UnityEngine;
 
 public class PlayerAnimation : MonoBehaviour
 {
-    private SpriteRenderer spriteRenderer;
+    private SpriteRenderer sprite;
     private Animator anim;
     private Player player;
     
     private void Start()
     {
-        spriteRenderer = GetComponent<SpriteRenderer>();
+        sprite = GetComponent<SpriteRenderer>();
         player = GetComponentInParent<Player>();
         // anim = GetComponent<Animator>();
+
+        FindObjectOfType<PlayerCollider>().playerChangeEvent += SetPlayerSprite;
     }
 
     private void Update()
@@ -26,6 +28,11 @@ public class PlayerAnimation : MonoBehaviour
 
     public void FlipX(bool isRight)
     {
-        spriteRenderer.flipX = isRight;
+        sprite.flipX = isRight;
+    }
+
+    public void SetPlayerSprite(bool isActive)
+    {
+        sprite.enabled = isActive;
     }
 }
