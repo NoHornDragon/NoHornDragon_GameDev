@@ -12,7 +12,7 @@ public class RoomManager : MonoBehaviour
         roomList = GameObject.FindGameObjectsWithTag("Room");
     }
 
-    public void EnterRoom(uint inputRoomNo)
+    public void EnterRoom(uint inputRoomNo, PolygonCollider2D roomConfiner, float lensSize)
     {
         //! warn : real room unmber start with 1
         roomList[inputRoomNo-1].SetActive(true);
@@ -25,6 +25,6 @@ public class RoomManager : MonoBehaviour
         if(inputRoomNo > roomList.Length + 2)
             roomList[inputRoomNo+1].SetActive(false);
 
-            
+        FindObjectOfType<CameraManager>().ChangeCamera(roomConfiner, lensSize);
     }
 }
