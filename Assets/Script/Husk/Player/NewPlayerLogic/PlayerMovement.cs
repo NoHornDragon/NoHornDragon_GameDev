@@ -37,6 +37,7 @@ public class PlayerMovement : MonoBehaviour
         launch = GetComponent<YeouijuLaunch>();
 
         FindObjectOfType<YeouijuReflection>().CollisionEvent += MakeJoint;
+        FindObjectOfType<YeouijuReflection>().YeouijuReturnEvent += DeleteJoint;
         FindObjectOfType<YeouijuLaunch>().DisJointEvent += DeleteJoint;
         FindObjectOfType<PlayerCollider>().playerStunEvent += PlayerStuned;
 

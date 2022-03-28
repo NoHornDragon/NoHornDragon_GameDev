@@ -5,6 +5,7 @@ using System;
 public class YeouijuReflection : MonoBehaviour
 {
     public event Action<Vector2> CollisionEvent;
+    public event Action YeouijuReturnEvent;
     private Rigidbody2D rigid;
     private CircleCollider2D coll;
     private Transform player;
@@ -34,7 +35,7 @@ public class YeouijuReflection : MonoBehaviour
             return;
         }
 
-        transform.position = Vector3.MoveTowards(transform.position, player.position, yeouijuSpeed * 1.5f * Time.deltaTime);
+        transform.position = Vector3.MoveTowards(transform.position, player.position, yeouijuSpeed * 3f * Time.deltaTime);
     }
 
     public void Launched(Vector3 position, float rotation)
@@ -73,6 +74,11 @@ public class YeouijuReflection : MonoBehaviour
         if(Vector2.Distance(player.position, this.transform.position) > maxDistance)
         {
             reflectCount = 0;
+            
+            if(YeouijuReturnEvent != null)
+                YeouijuReturnEvent();
+
+            YeouijuFollowPlayer();
             return;
         }
         
