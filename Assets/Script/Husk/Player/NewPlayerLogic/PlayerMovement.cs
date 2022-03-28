@@ -40,6 +40,7 @@ public class PlayerMovement : MonoBehaviour
         FindObjectOfType<YeouijuReflection>().YeouijuReturnEvent += DeleteJoint;
         FindObjectOfType<YeouijuLaunch>().DisJointEvent += DeleteJoint;
         FindObjectOfType<PlayerCollider>().playerStunEvent += PlayerStuned;
+        FindObjectOfType<PlayerCollider>().playerChangeEvent += PlayerBecomeOrigin;
 
         if(SaveData.instance.userData.nowUseSave())
         {
@@ -53,13 +54,12 @@ public class PlayerMovement : MonoBehaviour
         // Restart Game
         if(Input.GetKeyDown(KeyCode.R))
         {
+            // TODO : 다른 오브젝트일 때 R을 누른다면?
             PlayerReset();
             return;
         }
 
         onGround = Physics2D.OverlapCircle((Vector2)transform.position + bottomOffset, collisionRadius, groundLayer);
-
-        // animation flip
 
         // can't move => just return
         if(!canMove)    return;
@@ -129,8 +129,19 @@ public class PlayerMovement : MonoBehaviour
     }
 
     // TODO 플레이어 스턴 함수
-    private void PlayerStuned()
+    public void PlayerStuned()
     {
         Debug.Log("플레이어 스턴 당함");
+    }
+
+    public void PlayerChanged()
+    {
+        Debug.Log("새 플레이어 이동 로직으로 변경");
+    }
+
+    public void PlayerBecomeOrigin(bool isOrigin)
+    {
+        canMove = isOrigin;
+
     }
 }
