@@ -14,6 +14,8 @@ public class YeouijuLaunch : MonoBehaviour
     private void Start()
     {
         canLaunch = true;
+        isActive = true;
+        
         yeouiju = FindObjectOfType<YeouijuReflection>();
 
         FindObjectOfType<PlayerCollider>().playerChangeEvent += SetLaunchStatus;
