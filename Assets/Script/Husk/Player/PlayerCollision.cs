@@ -7,10 +7,10 @@ public class PlayerCollision : MonoBehaviour
 {
     // connected with player move(origin), Yeouiju can launch
     public event Action<bool> ControlEvent;
-    Player originMovement;
-    Grapher grapher;
-    GameObject originSprite;
-    AnotherMovement newMovement;
+    private Player originMovement;
+    private Grapher grapher;
+    private GameObject originSprite;
+    private AnotherMovement newMovement;
 
     private void Start()
     {
@@ -18,7 +18,6 @@ public class PlayerCollision : MonoBehaviour
         grapher = GetComponent<Grapher>();
 
         originSprite = transform.FindChild("Visual").gameObject;
-
     }
 
     private void OnTriggerEnter2D(Collider2D other)
