@@ -14,7 +14,7 @@ public class PlayerAnimation : MonoBehaviour
         player = GetComponentInParent<Player>();
         // anim = GetComponent<Animator>();
 
-        FindObjectOfType<PlayerCollider>().playerChangeEvent += SetPlayerSprite;
+        
     }
 
     private void Update()
@@ -31,8 +31,5 @@ public class PlayerAnimation : MonoBehaviour
         sprite.flipX = isRight;
     }
 
-    public void SetPlayerSprite(bool isActive)
-    {
-        sprite.enabled = isActive;
-    }
+
 }

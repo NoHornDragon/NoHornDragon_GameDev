@@ -27,7 +27,7 @@ public class PlayerCollider : MonoBehaviour
         if(other.CompareTag("AnotherMovement"))
         {
             // 플레이어 조작, 비주얼 변경
-            PlayerChanged(false, other.gameObject.GetComponent<AnotherMovement>());
+            PlayerChanged(!isOrigin, other.gameObject.GetComponent<AnotherMovement>());
         }
     }
 

@@ -24,6 +24,7 @@ public class YeouijuReflection : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player").transform;
         rigid = GetComponent<Rigidbody2D>();
         coll = GetComponent<CircleCollider2D>();
+        sprite = GetComponent<SpriteRenderer>();
 
         FindObjectOfType<YeouijuLaunch>().DisJointEvent += YeouijuFollowPlayer;
         FindObjectOfType<PlayerCollider>().playerChangeEvent += SetYeouijuSprite;

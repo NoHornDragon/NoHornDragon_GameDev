@@ -31,7 +31,8 @@ public class PlayerGrapher : MonoBehaviour
             return;
         }
 
-        JointUpdateFunction();
+        joint.distance += Input.GetAxis("Vertical") * lineModifySpeed;
+        lineRenderer.SetPosition(1, transform.position);
     }
 
     public bool NowJoint()
@@ -52,12 +53,6 @@ public class PlayerGrapher : MonoBehaviour
         lineRenderer.SetPosition(1, transform.position);
 
         SetLine(true);
-    }
-
-    private void JointUpdateFunction()
-    {
-        joint.distance += Input.GetAxis("Vertical") * lineModifySpeed;
-        lineRenderer.SetPosition(1, transform.position);
     }
 
     public void DeleteJoint()
