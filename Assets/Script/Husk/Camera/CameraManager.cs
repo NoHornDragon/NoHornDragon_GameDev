@@ -22,7 +22,13 @@ public class CameraManager : MonoBehaviour
         Transform player = GameObject.FindWithTag("Player").GetComponent<Transform>();
         SetCameraFollow(camera1, player);
         SetCameraFollow(camera2, player);
-        
+
+        // without this cinemachine confiner will saved by playing
+        // TODO : before launching, must modify cinemachine confiner in inspector window
+        if(!SaveData.instance.userData.nowUseSave())
+        {
+            ChangeCamera(GameObject.Find("Confiner1").GetComponent<PolygonCollider2D>(), 7);
+        }
     }
 
     public void ChangeCamera(PolygonCollider2D border, float lensSize)

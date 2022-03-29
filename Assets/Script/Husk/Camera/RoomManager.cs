@@ -48,10 +48,8 @@ public class RoomManager : MonoBehaviour
 
         if(inputRoomNo == roomNumber)   return;
 
-        // out of range exception
         // Deactive room list => distance 2 from current room
         // should active [-2], [-1(current)], [0]
-        Debug.Log(roomNumber);
         if(roomNumber > 1)
             roomList[roomNumber-2].SetActive(true);
         if(roomNumber < roomList.Length)
@@ -65,7 +63,6 @@ public class RoomManager : MonoBehaviour
 
 
         // finally change camera
-        Debug.Log("Camera change to : " + confiner.name);
         if(CameraChangeEvent != null)
             CameraChangeEvent(confiner, cameraSize);
     }
