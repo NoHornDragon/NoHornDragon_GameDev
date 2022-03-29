@@ -16,6 +16,8 @@ public class CameraManager : MonoBehaviour
         camera1Confiner = camera1.GetComponent<CinemachineConfiner>();
         camera2Confiner = camera2.GetComponent<CinemachineConfiner>();
 
+        FindObjectOfType<RoomManager>().CameraChangeEvent += ChangeCamera;
+
         // make cinemachine follow player
         Transform player = GameObject.FindWithTag("Player").GetComponent<Transform>();
         SetCameraFollow(camera1, player);

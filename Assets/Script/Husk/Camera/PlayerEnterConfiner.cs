@@ -5,7 +5,7 @@ using System;
 
 public class PlayerEnterConfiner : MonoBehaviour
 {
-    public event Action<uint, PolygonCollider2D, float> ActiveRoomEvent;
+    public event Action<uint, PolygonCollider2D, float, bool> ActiveRoomEvent;
     private PolygonCollider2D polygonCollider2D;
     [SerializeField] private float lensSize;
     [SerializeField] private uint roomNo;
@@ -13,18 +13,24 @@ public class PlayerEnterConfiner : MonoBehaviour
     {
         polygonCollider2D = GetComponent<PolygonCollider2D>();
 
-        ActiveRoomEvent += FindObjectOfType<RoomManager>().EnterRoom;
+        ActiveRoomEvent += FindObjectOfType<RoomManager>().RoomChange;
     }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
         if(other.CompareTag("Player"))
         {
-            // TODO : event Action 으로 변경
-            // FindObjectOfType<CameraManager>().ChangeCamera(polygonCollider2D, lensSize);
-
             if(ActiveRoomEvent != null)
-                ActiveRoomEvent(roomNo, polygonCollider2D, lensSize);
+                ActiveRoomEvent(roomNo, polygonCollider2D, lensSize, true);
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        if(other.CompareTag("Player"))
+        {
+            if(ActiveRoomEvent != null)
+                ActiveRoomEvent(roomNo, polygonCollider2D, lensSize, false);
         }
     }
 }
