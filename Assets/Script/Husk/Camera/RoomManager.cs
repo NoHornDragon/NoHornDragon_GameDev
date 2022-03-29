@@ -22,7 +22,7 @@ public class RoomManager : MonoBehaviour
     public event Action<PolygonCollider2D, float> CameraChangeEvent;
     [SerializeField] private GameObject[] roomList;
     private uint roomNumber;
-    private PolygonCollider2D confiner;
+    private PolygonCollider2D confiner = null;
     private float cameraSize;
     
     private void Start()
@@ -38,10 +38,19 @@ public class RoomManager : MonoBehaviour
 
     public void RoomChange(uint inputRoomNo, PolygonCollider2D roomConfiner, float lensSize, bool isIn)
     {
+        if(confiner == null)
+        {
+            // this means initial state
+            this.roomNumber = inputRoomNo;
+            this.confiner = roomConfiner;
+            this.cameraSize = lensSize;
+            CameraChangeEvent(roomConfiner, lensSize);
+            return;
+        }
         if(isIn)
         {
-            roomNumber = inputRoomNo;
-            confiner = roomConfiner;
+            this.roomNumber = inputRoomNo;
+            this.confiner = roomConfiner;
             this.cameraSize = lensSize;
             return;
         }
