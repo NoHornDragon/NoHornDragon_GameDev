@@ -12019,6 +12019,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: NewPlayer
       objectReference: {fileID: 0}
+    - target: {fileID: 1679449339384239237, guid: e7ac847fce6a20347853bb6c97e53972,
+        type: 3}
+      propertyPath: bottomOffset.y
+      value: -0.35
+      objectReference: {fileID: 0}
+    - target: {fileID: 1679449339384239237, guid: e7ac847fce6a20347853bb6c97e53972,
+        type: 3}
+      propertyPath: collisionRadius
+      value: 0.2
+      objectReference: {fileID: 0}
     - target: {fileID: 1679449339384239243, guid: e7ac847fce6a20347853bb6c97e53972,
         type: 3}
       propertyPath: m_RootOrder
