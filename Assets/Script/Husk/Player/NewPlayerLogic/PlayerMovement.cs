@@ -142,6 +142,7 @@ public class PlayerMovement : MonoBehaviour
     public void PlayerBecomeOrigin(bool isOrigin)
     {
         canMove = isOrigin;
+        rigid.gravityScale = (isOrigin) ? 1f : 0f;
 
     }
 }

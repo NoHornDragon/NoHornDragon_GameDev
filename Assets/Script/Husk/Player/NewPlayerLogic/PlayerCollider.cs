@@ -26,8 +26,8 @@ public class PlayerCollider : MonoBehaviour
         }
         if(other.CompareTag("AnotherMovement"))
         {
-            // 플레이어 조작, 비주얼 변경
-            PlayerChanged(false, other.gameObject.GetComponent<AnotherMovement>());
+            // change player
+            PlayerChanged(!isOrigin, other.gameObject.GetComponent<AnotherMovement>());
         }
     }
 
@@ -36,16 +36,12 @@ public class PlayerCollider : MonoBehaviour
         if(isOrigin)                return;
         if(anotherMovement == null) return;
 
+        // if now playing with not originmovement, player collider will follow anothermovement
         this.transform.position = anotherMovement.transform.position;
     }
 
     private void PlayerChanged(bool isOrigin, AnotherMovement newPlayer)
     {
-        /*
-        - 기존 움직임 할 수 없게, 보이지 않게
-        - 여의주 스프라이트 끄기, 발사할 수 없게
-        ? 플레이어가 따라가서 이 콜라이더를 계속 쓴다면?
-        */
         
         this.isOrigin = isOrigin;
         anotherMovement = (isOrigin) ? null : newPlayer;

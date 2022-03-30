@@ -24,6 +24,7 @@ public class YeouijuReflection : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player").transform;
         rigid = GetComponent<Rigidbody2D>();
         coll = GetComponent<CircleCollider2D>();
+        sprite = GetComponent<SpriteRenderer>();
 
         FindObjectOfType<YeouijuLaunch>().DisJointEvent += YeouijuFollowPlayer;
         FindObjectOfType<PlayerCollider>().playerChangeEvent += SetYeouijuSprite;
@@ -60,7 +61,7 @@ public class YeouijuReflection : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D other)
     {
-        // 아직 덜 튕겼을 시 카운트++ 한 뒤 다음 방향으로
+        // still can reflect
         if(reflectCount < collisionCount)
         {
             reflectCount++;
@@ -72,7 +73,7 @@ public class YeouijuReflection : MonoBehaviour
             return;
         }
 
-        // 충돌은 다 되었으나 거리가 너무 멀 때
+        // end to collistion but too far
         if(Vector2.Distance(player.position, this.transform.position) > maxDistance)
         {
             reflectCount = 0;
@@ -84,7 +85,7 @@ public class YeouijuReflection : MonoBehaviour
             return;
         }
         
-        // 충돌이 다 되었고 조건도 만족했을 때 속도를 멈춘 뒤 joint event 실행
+        // end collision -> make disjoint2d
         if(CollisionEvent != null)
             CollisionEvent(this.transform.position);
         

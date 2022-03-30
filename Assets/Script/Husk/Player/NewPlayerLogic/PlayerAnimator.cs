@@ -6,22 +6,29 @@ public class PlayerAnimator : MonoBehaviour
 {
     private PlayerMovement player;
     private Animator anim;
-    private SpriteRenderer sr;
+    [SerializeField] private SpriteRenderer sprite;
     void Start()
     {
-        anim = GetComponent<Animator>();
-        sr = GetComponent<SpriteRenderer>();
+        // anim = GetComponent<Animator>();
+        sprite = GetComponent<SpriteRenderer>();
         player = GetComponentInParent<PlayerMovement>();
+
+        FindObjectOfType<PlayerCollider>().playerChangeEvent += SetPlayerSprite;
     }
 
     void Update()
     {
-        anim.SetBool("onGround", player.onGround);
-        anim.SetBool("nowSwing", player.nowJoint);
-        anim.SetBool("prepareThrow", player.prepareLaunch);
-        anim.SetBool("throw", player.throwYeouiju);
-        anim.SetBool("stuned", player.stuned);
+        // anim.SetBool("onGround", player.onGround);
+        // anim.SetBool("nowSwing", player.nowJoint);
+        // anim.SetBool("prepareThrow", player.prepareLaunch);
+        // anim.SetBool("throw", player.throwYeouiju);
+        // anim.SetBool("stuned", player.stuned);
 
-        sr.flipX = player.PlayerFlip();
+        sprite.flipX = player.PlayerFlip();
+    }
+
+    public void SetPlayerSprite(bool isActive)
+    {
+        sprite.enabled = isActive;
     }
 }
