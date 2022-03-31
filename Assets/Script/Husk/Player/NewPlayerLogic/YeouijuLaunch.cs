@@ -17,8 +17,9 @@ public class YeouijuLaunch : MonoBehaviour
         yeouiju = FindObjectOfType<YeouijuReflection>();
 
         FindObjectOfType<PlayerMovement>().PlayerRecoverEvent += SetLaunchStatus;
-        FindObjectOfType<PlayerCollider>().playerChangeEvent += SetLaunchStatus;
-        FindObjectOfType<PlayerCollider>().playerStunEvent += StunedYeouiju;
+        PlayerCollider playerCollider = FindObjectOfType<PlayerCollider>();
+        playerCollider.playerChangeEvent += SetLaunchStatus;
+        playerCollider.playerStunEvent += StunedYeouiju;
     }
 
     private void Update()
