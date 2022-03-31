@@ -37,11 +37,14 @@ public class PlayerMovement : MonoBehaviour
         grapher = GetComponent<PlayerGrapher>();
         launch = GetComponent<YeouijuLaunch>();
 
-        FindObjectOfType<YeouijuReflection>().collisionEvent += MakeJoint;
-        FindObjectOfType<YeouijuReflection>().YeouijuReturnEvent += DeleteJoint;
+
+        YeouijuReflection yeouijuReflection = FindObjectOfType<YeouijuReflection>();
+        yeouijuReflection.collisionEvent += MakeJoint;
+        yeouijuReflection.YeouijuReturnEvent += DeleteJoint;
+        PlayerCollider playerCollider = FindObjectOfType<PlayerCollider>();
+        playerCollider.playerStunEvent += PlayerStuned;
+        playerCollider.playerChangeEvent += PlayerBecomeOrigin;
         FindObjectOfType<YeouijuLaunch>().disJointEvent += DeleteJoint;
-        FindObjectOfType<PlayerCollider>().playerStunEvent += PlayerStuned;
-        FindObjectOfType<PlayerCollider>().playerChangeEvent += PlayerBecomeOrigin;
 
         if(SaveData.instance.userData.nowUseSave())
         {
