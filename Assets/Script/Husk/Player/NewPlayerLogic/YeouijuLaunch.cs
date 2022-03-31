@@ -5,25 +5,25 @@ using System;
 
 public class YeouijuLaunch : MonoBehaviour
 {
-    public event Action DisJointEvent;
+    public event Action disJointEvent;
     private YeouijuReflection yeouiju;
-    private bool canLaunch;
+    [SerializeField] private bool canLaunch;
     public bool isYeouijuOn;
-    private bool isActive;
     
     private void Start()
     {
         canLaunch = true;
-        isActive = true;
         
         yeouiju = FindObjectOfType<YeouijuReflection>();
 
+        FindObjectOfType<PlayerMovement>().PlayerRecoverEvent += SetLaunchStatus;
         FindObjectOfType<PlayerCollider>().playerChangeEvent += SetLaunchStatus;
+        FindObjectOfType<PlayerCollider>().playerStunEvent += StunedYeouiju;
     }
 
     private void Update()
     {
-        if(!isActive)                   return;
+        if(!canLaunch)                   return;
         if(!Input.GetMouseButtonUp(0))  return;
     
         if(!isYeouijuOn)
@@ -39,18 +39,25 @@ public class YeouijuLaunch : MonoBehaviour
             return;
         }
 
-        if(DisJointEvent != null)
+        if(disJointEvent != null)
         {
             Debug.Log("return 여의주");
             isYeouijuOn = false;
-            DisJointEvent();
+            disJointEvent();
             return;
         }
     }
 
     public void SetLaunchStatus(bool isActive)
     {
-        this.isActive = isActive;
+        this.canLaunch = isActive;
+    }
+
+    public void StunedYeouiju(bool isStuned)
+    {
+        canLaunch = isStuned;   
+        if(disJointEvent != null)
+            disJointEvent();
     }
     
 }

@@ -1,9 +1,10 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using System;
 public class PlayerMovement : MonoBehaviour
 {
+    public event Action<bool> PlayerRecoverEvent;
     // another component
     private Rigidbody2D rigid;
     private PlayerGrapher grapher;
@@ -36,9 +37,9 @@ public class PlayerMovement : MonoBehaviour
         grapher = GetComponent<PlayerGrapher>();
         launch = GetComponent<YeouijuLaunch>();
 
-        FindObjectOfType<YeouijuReflection>().CollisionEvent += MakeJoint;
+        FindObjectOfType<YeouijuReflection>().collisionEvent += MakeJoint;
         FindObjectOfType<YeouijuReflection>().YeouijuReturnEvent += DeleteJoint;
-        FindObjectOfType<YeouijuLaunch>().DisJointEvent += DeleteJoint;
+        FindObjectOfType<YeouijuLaunch>().disJointEvent += DeleteJoint;
         FindObjectOfType<PlayerCollider>().playerStunEvent += PlayerStuned;
         FindObjectOfType<PlayerCollider>().playerChangeEvent += PlayerBecomeOrigin;
 
@@ -129,14 +130,30 @@ public class PlayerMovement : MonoBehaviour
     }
 
     // TODO 플레이어 스턴 함수
-    public void PlayerStuned()
+    public void PlayerStuned(bool isStuned)
     {
-        Debug.Log("플레이어 스턴 당함");
+
+        canMove = false;
+        stuned = true;
+
+        StartCoroutine(PlayerRecoverFromStun());
     }
 
-    public void PlayerChanged()
+    WaitForSeconds stunRecoverCheck = new WaitForSeconds(2f);
+    IEnumerator PlayerRecoverFromStun()
     {
-        Debug.Log("새 플레이어 이동 로직으로 변경");
+        bool nowOnGround = onGround;
+        yield return stunRecoverCheck;
+
+        if(nowOnGround && nowOnGround == onGround)
+        {
+            stuned = false;
+            canMove = true;
+            if(PlayerRecoverEvent != null)
+                PlayerRecoverEvent(true);
+        }
+        else 
+            StartCoroutine(PlayerRecoverFromStun());
     }
 
     public void PlayerBecomeOrigin(bool isOrigin)
