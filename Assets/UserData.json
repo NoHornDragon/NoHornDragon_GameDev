@@ -1,0 +1,35 @@
+{
+    "backGroundsoundVolume": 0.5,
+    "effectSoundVolume": 0.5,
+    "clearCount": 0,
+    "resetCount": 0,
+    "stunedCount": 0,
+    "useSave": false,
+    "PlayerPos": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+    },
+    "paperList": [
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+    ]
+}
