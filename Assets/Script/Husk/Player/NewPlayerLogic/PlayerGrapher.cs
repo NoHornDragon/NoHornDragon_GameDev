@@ -19,8 +19,8 @@ public class PlayerGrapher : MonoBehaviour
 
         SetLine(false);
 
-        FindObjectOfType<YeouijuLaunch>().DisJointEvent += DeleteJoint;
-        FindObjectOfType<YeouijuReflection>().CollisionEvent += MakeJoint;
+        FindObjectOfType<YeouijuLaunch>().disJointEvent += DeleteJoint;
+        FindObjectOfType<YeouijuReflection>().collisionEvent += MakeJoint;
     }
 
     void Update()

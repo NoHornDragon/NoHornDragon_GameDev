@@ -5,9 +5,9 @@ using System;
 
 public class PlayerCollider : MonoBehaviour
 {
-    public event Action playerStunEvent;
+    public event Action<bool> playerStunEvent;
     public event Action<bool> playerChangeEvent;
-    public PlayerMovement player;
+    private PlayerMovement player;
     private bool isOrigin;
     private AnotherMovement anotherMovement;
     void Start()
@@ -22,7 +22,10 @@ public class PlayerCollider : MonoBehaviour
         if(other.CompareTag("Enemy"))
         {
             //TODO :  another movement일때 처리 동작
-            player.PlayerStuned();
+            // if now not origin movement, first change to origin player
+            PlayerChanged(true);
+            if(playerStunEvent != null)
+                playerStunEvent(false);
         }
         if(other.CompareTag("AnotherMovement"))
         {
@@ -40,7 +43,7 @@ public class PlayerCollider : MonoBehaviour
         this.transform.position = anotherMovement.transform.position;
     }
 
-    private void PlayerChanged(bool isOrigin, AnotherMovement newPlayer)
+    private void PlayerChanged(bool isOrigin, AnotherMovement newPlayer = null)
     {
         
         this.isOrigin = isOrigin;

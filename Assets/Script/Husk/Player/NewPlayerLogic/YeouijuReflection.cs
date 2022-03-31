@@ -4,7 +4,7 @@ using UnityEngine;
 using System;
 public class YeouijuReflection : MonoBehaviour
 {
-    public event Action<Vector2> CollisionEvent;
+    public event Action<Vector2> collisionEvent;
     public event Action YeouijuReturnEvent;
     private Rigidbody2D rigid;
     private CircleCollider2D coll;
@@ -26,7 +26,7 @@ public class YeouijuReflection : MonoBehaviour
         coll = GetComponent<CircleCollider2D>();
         sprite = GetComponent<SpriteRenderer>();
 
-        FindObjectOfType<YeouijuLaunch>().DisJointEvent += YeouijuFollowPlayer;
+        FindObjectOfType<YeouijuLaunch>().disJointEvent += YeouijuFollowPlayer;
         FindObjectOfType<PlayerCollider>().playerChangeEvent += SetYeouijuSprite;
     }
 
@@ -43,6 +43,7 @@ public class YeouijuReflection : MonoBehaviour
 
     public void Launched(Vector3 position, float rotation)
     {
+        Debug.Log("발사");
         reflectCount = 0;
 
         yeouijuOn = true;
@@ -86,8 +87,8 @@ public class YeouijuReflection : MonoBehaviour
         }
         
         // end collision -> make disjoint2d
-        if(CollisionEvent != null)
-            CollisionEvent(this.transform.position);
+        if(collisionEvent != null)
+            collisionEvent(this.transform.position);
         
         rigid.velocity = new Vector3(0, 0, 0);
         rigid.freezeRotation = true;
