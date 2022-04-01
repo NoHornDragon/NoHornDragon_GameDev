@@ -132,7 +132,6 @@ public class PlayerMovement : MonoBehaviour
         StartCoroutine(SavePlayerPosition());
     }
 
-    // TODO 플레이어 스턴 함수
     public void PlayerStuned(bool isStuned)
     {
 
