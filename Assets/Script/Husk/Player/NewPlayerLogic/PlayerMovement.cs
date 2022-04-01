@@ -68,6 +68,12 @@ public class PlayerMovement : MonoBehaviour
         // can't move => just return
         if(!canMove)    return;
 
+        // if(rigid.velocity.x < 0)
+        //     transform.localScale = new Vector3(-1, 1, 1);
+        // else 
+        //     transform.localScale = new Vector3(1, 1, 1);
+
+
         horizontalSpeed = Input.GetAxis("Horizontal");
 
         // yeouiju launch
@@ -118,7 +124,7 @@ public class PlayerMovement : MonoBehaviour
 
     public bool PlayerFlip()
     {
-        return rigid.velocity.x < 0;
+        return rigid.velocity.x > 0;
     }
 
     WaitForSeconds saveCycle = new WaitForSeconds(10f);

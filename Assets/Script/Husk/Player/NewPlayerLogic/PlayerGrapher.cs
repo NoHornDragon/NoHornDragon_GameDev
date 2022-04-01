@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerGrapher : MonoBehaviour
 {
     [SerializeField] private float lineModifySpeed;
+    [SerializeField] private Transform grapherPoint;
     private LineRenderer lineRenderer;
     private DistanceJoint2D joint;
     private float verticalInput;
@@ -17,6 +18,7 @@ public class PlayerGrapher : MonoBehaviour
         lineRenderer = GetComponent<LineRenderer>();
         joint = GetComponent<DistanceJoint2D>();
 
+        joint.anchor = grapherPoint.position;
         SetLine(false);
 
         FindObjectOfType<YeouijuLaunch>().disJointEvent += DeleteJoint;
@@ -31,8 +33,10 @@ public class PlayerGrapher : MonoBehaviour
             return;
         }
 
+        
+        joint.anchor = grapherPoint.localPosition;
         joint.distance += Input.GetAxis("Vertical") * lineModifySpeed;
-        lineRenderer.SetPosition(1, transform.position);
+        lineRenderer.SetPosition(1, grapherPoint.position);
     }
 
     public bool NowJoint()
@@ -43,14 +47,13 @@ public class PlayerGrapher : MonoBehaviour
     public void MakeJoint(Vector2 target)
     {
         nowJoint = true;
-
         // set joint position
         joint.connectedAnchor = target;
         
         // set line renderer
         // this should be in update
         lineRenderer.SetPosition(0, target);
-        lineRenderer.SetPosition(1, transform.position);
+        lineRenderer.SetPosition(1, grapherPoint.position);
 
         SetLine(true);
     }
