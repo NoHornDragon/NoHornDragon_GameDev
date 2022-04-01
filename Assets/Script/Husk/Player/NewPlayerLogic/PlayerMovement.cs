@@ -118,7 +118,7 @@ public class PlayerMovement : MonoBehaviour
 
     public bool PlayerFlip()
     {
-        return rigid.velocity.x > 0;
+        return rigid.velocity.x < 0;
     }
 
     WaitForSeconds saveCycle = new WaitForSeconds(10f);

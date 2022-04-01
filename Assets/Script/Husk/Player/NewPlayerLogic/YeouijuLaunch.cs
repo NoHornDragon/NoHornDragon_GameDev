@@ -42,7 +42,6 @@ public class YeouijuLaunch : MonoBehaviour
 
         if(disJointEvent != null)
         {
-            Debug.Log("return 여의주");
             isYeouijuOn = false;
             disJointEvent();
             return;

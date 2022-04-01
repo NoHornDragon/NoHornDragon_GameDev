@@ -61,7 +61,6 @@ public class YeouijuReflection : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D other)
     {
-        Debug.Log("collision");
         // still can reflect
         if(reflectCount < collisionCount)
         {
