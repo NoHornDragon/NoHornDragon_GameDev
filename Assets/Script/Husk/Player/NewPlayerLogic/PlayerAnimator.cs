@@ -6,6 +6,9 @@ public class PlayerAnimator : MonoBehaviour
 {
     private PlayerMovement player;
     private Animator anim;
+    [SerializeField] private Transform baseObject;
+    private Vector3 rightScale = new Vector3(1, 1, 1);
+    private Vector3 leftScale = new Vector3(-1, 1, 1);
     [SerializeField] private SpriteRenderer sprite;
     private bool isright;
     void Start()
@@ -13,10 +16,9 @@ public class PlayerAnimator : MonoBehaviour
         // anim = GetComponent<Animator>();
         sprite = GetComponent<SpriteRenderer>();
         player = GetComponentInParent<PlayerMovement>();
+        baseObject = transform.parent.parent;
 
         FindObjectOfType<PlayerCollider>().playerChangeEvent += SetPlayerSprite;
-        FindObjectOfType<YeouijuReflection>().collisionEvent += PlayerJointAnimation;
-        FindObjectOfType<YeouijuLaunch>().disJointEvent += PlayerDisjointAnimation;
     }
 
     void Update()
@@ -26,6 +28,16 @@ public class PlayerAnimator : MonoBehaviour
         // anim.SetBool("prepareThrow", player.prepareLaunch);
         // anim.SetBool("throw", player.throwYeouiju);
         // anim.SetBool("stuned", player.stuned);
+
+        if(player.nowJoint) return;
+        if(Camera.main.ScreenToWorldPoint(Input.mousePosition).x > transform.position.x)
+        {
+            baseObject.localScale = rightScale;
+        }
+        else
+        {
+            baseObject.localScale = leftScale;
+        }
 
     }
 
@@ -39,8 +51,4 @@ public class PlayerAnimator : MonoBehaviour
         this.transform.localPosition = new Vector3(-0.8f, -0.43f, 0);
     }
 
-    private void PlayerDisjointAnimation()
-    {
-        this.transform.localPosition = Vector3.zero;
-    }
 }
