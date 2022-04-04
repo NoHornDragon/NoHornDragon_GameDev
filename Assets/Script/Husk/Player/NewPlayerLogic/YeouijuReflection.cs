@@ -43,7 +43,6 @@ public class YeouijuReflection : MonoBehaviour
 
     public void Launched(Vector3 position, float rotation)
     {
-        Debug.Log("발사");
         reflectCount = 0;
 
         yeouijuOn = true;

@@ -23,7 +23,7 @@ public class PlayerCollider : MonoBehaviour
         {
             //TODO :  another movement일때 처리 동작
             // if now not origin movement, first change to origin player
-            PlayerChanged(true);
+            PlayerChanged(true, null);
             if(playerStunEvent != null)
                 playerStunEvent(false);
         }
@@ -39,11 +39,11 @@ public class PlayerCollider : MonoBehaviour
         if(isOrigin)                return;
         if(anotherMovement == null) return;
 
-        // if now playing with not originmovement, player collider will follow anothermovement
+        // if now playing with no originmovement, player's collider will follow anothermovement
         this.transform.position = anotherMovement.transform.position;
     }
 
-    private void PlayerChanged(bool isOrigin, AnotherMovement newPlayer = null)
+    private void PlayerChanged(bool isOrigin, AnotherMovement newPlayer)
     {
         
         this.isOrigin = isOrigin;

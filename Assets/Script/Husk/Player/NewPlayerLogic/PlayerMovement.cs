@@ -68,6 +68,12 @@ public class PlayerMovement : MonoBehaviour
         // can't move => just return
         if(!canMove)    return;
 
+        // if(rigid.velocity.x < 0)
+        //     transform.localScale = new Vector3(-1, 1, 1);
+        // else 
+        //     transform.localScale = new Vector3(1, 1, 1);
+
+
         horizontalSpeed = Input.GetAxis("Horizontal");
 
         // yeouiju launch
@@ -132,7 +138,6 @@ public class PlayerMovement : MonoBehaviour
         StartCoroutine(SavePlayerPosition());
     }
 
-    // TODO 플레이어 스턴 함수
     public void PlayerStuned(bool isStuned)
     {
 
