@@ -2,12 +2,12 @@
     "backGroundsoundVolume": 0.5,
     "effectSoundVolume": 0.5,
     "clearCount": 0,
-    "resetCount": 0,
+    "resetCount": 4,
     "stunedCount": 0,
-    "useSave": false,
-    "PlayerPos": {
-        "x": 0.0,
-        "y": 0.0,
+    "easyMode": true,
+    "playerPos": {
+        "x": 1.0574623346328736,
+        "y": -3.494987964630127,
         "z": 0.0
     },
     "paperList": [

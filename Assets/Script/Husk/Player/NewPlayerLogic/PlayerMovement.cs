@@ -5,17 +5,18 @@ using System;
 public class PlayerMovement : MonoBehaviour
 {
     public event Action<bool> PlayerRecoverEvent;
+    public event Action playerResetEvent;
     // another component
     private Rigidbody2D rigid;
     private PlayerGrapher grapher;
     private YeouijuLaunch launch;
-
     
     [Header("플레이어 능력치")]
     private float horizontalSpeed;
     [SerializeField] private float swingPower;
 
     [Header("플레이어 현재 상태")]
+    private bool usingEasyMode;
     [SerializeField] private bool canMove;
     public bool stuned;
     public bool nowJoint;
@@ -46,7 +47,8 @@ public class PlayerMovement : MonoBehaviour
         playerCollider.playerChangeEvent += PlayerBecomeOrigin;
         FindObjectOfType<YeouijuLaunch>().disJointEvent += DeleteJoint;
 
-        if(SaveData.instance.userData.nowUseSave())
+        usingEasyMode = SaveData.instance.userData.UseEasyMode;
+        if(usingEasyMode)
         {
             this.transform.position = SaveData.instance.userData.PlayerPos;
             StartCoroutine(SavePlayerPosition());
@@ -93,13 +95,26 @@ public class PlayerMovement : MonoBehaviour
 
     private void PlayerReset()
     {
+        // if now anothermovement, change to original
+        if(playerResetEvent != null)
+            playerResetEvent();
+
+        if(usingEasyMode)
+        {
+            // if using easymode, respawn at savepoint
+            this.gameObject.transform.position = SaveData.instance.userData.PlayerPos;
+            SaveData.instance.userData.resetCount++;
+            return;
+        }
+
+        // if hardmode, respawn at start point
+        this.gameObject.transform.position = Vector3.zero;
+        SaveData.instance.userData.resetCount++;
         // TODO : 아래 멘트 인게임에 추가
         /*
         혹시나 저희 게임의 버그로 인해 이 버튼을 누르셨다면 정말 죄송합니다. 버그를 제보해주시면 감사합니다.
         아님 실수로 누르셨다면... 그건 좀 안타깝군요.
         */
-        this.gameObject.transform.position = Vector3.zero;
-        SaveData.instance.userData.resetCount++;
     }
 
     private void MakeJoint(Vector2 dummyInput)
@@ -127,13 +142,17 @@ public class PlayerMovement : MonoBehaviour
         return rigid.velocity.x > 0;
     }
 
+    // is using easy mode, save player's position
     WaitForSeconds saveCycle = new WaitForSeconds(10f);
     IEnumerator SavePlayerPosition()
     {
         yield return saveCycle;
 
-        SaveData.instance.userData.PlayerPos = this.transform.position;
-        SaveData.instance.SaveGame();
+        if(onGround)
+        {
+            SaveData.instance.userData.PlayerPos = this.transform.position;
+            SaveData.instance.SaveGame();
+        }
 
         StartCoroutine(SavePlayerPosition());
     }

@@ -13,6 +13,8 @@ public class PlayerCollider : MonoBehaviour
     void Start()
     {
         player = GetComponent<PlayerMovement>();
+
+        FindObjectOfType<PlayerMovement>().playerResetEvent += SetPlayerOrigin;
         
         isOrigin = true;
     }
@@ -43,7 +45,7 @@ public class PlayerCollider : MonoBehaviour
         this.transform.position = anotherMovement.transform.position;
     }
 
-    private void PlayerChanged(bool isOrigin, AnotherMovement newPlayer)
+    private void PlayerChanged(bool isOrigin, AnotherMovement newPlayer = null)
     {
         
         this.isOrigin = isOrigin;
@@ -54,4 +56,8 @@ public class PlayerCollider : MonoBehaviour
         
     }
 
+    private void SetPlayerOrigin()
+    {
+        PlayerChanged(true, null);
+    }
 }

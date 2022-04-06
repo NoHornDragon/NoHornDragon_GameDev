@@ -9,17 +9,23 @@ public class YeouijuLaunch : MonoBehaviour
     private YeouijuReflection yeouiju;
     [SerializeField] private bool canLaunch;
     public bool isYeouijuOn;
+    private bool usingEasyMode;
     
     private void Start()
     {
         canLaunch = true;
+        usingEasyMode = SaveData.instance.userData.UseEasyMode;
         
         yeouiju = FindObjectOfType<YeouijuReflection>();
+
+        disJointEvent += SetYeouijuFalse;
 
         FindObjectOfType<PlayerMovement>().PlayerRecoverEvent += SetLaunchStatus;
         PlayerCollider playerCollider = FindObjectOfType<PlayerCollider>();
         playerCollider.playerChangeEvent += SetLaunchStatus;
         playerCollider.playerStunEvent += StunedYeouiju;
+
+        FindObjectOfType<PlayerMovement>().playerResetEvent += ReturnYeouiju;
     }
 
     private void Update()
@@ -40,14 +46,15 @@ public class YeouijuLaunch : MonoBehaviour
             return;
         }
 
-        if(disJointEvent != null)
-        {
-            isYeouijuOn = false;
-            disJointEvent();
-            return;
-        }
+        // if mode is not easy, there's no return;
+        if(!usingEasyMode)  return;
+        ReturnYeouiju();
     }
 
+    private void SetYeouijuFalse()
+    {
+        isYeouijuOn = false;
+    }
     public void SetLaunchStatus(bool isActive)
     {
         this.canLaunch = isActive;
@@ -56,6 +63,11 @@ public class YeouijuLaunch : MonoBehaviour
     public void StunedYeouiju(bool isStuned)
     {
         canLaunch = isStuned;   
+        ReturnYeouiju();
+    }
+
+    private void ReturnYeouiju()
+    {
         if(disJointEvent != null)
             disJointEvent();
     }
