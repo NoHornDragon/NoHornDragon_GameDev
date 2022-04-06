@@ -26,6 +26,7 @@ public class YeouijuLaunch : MonoBehaviour
         playerCollider.playerStunEvent += StunedYeouiju;
 
         FindObjectOfType<PlayerMovement>().playerResetEvent += ReturnYeouiju;
+        FindObjectOfType<YeouijuReflection>().yeouijuReturnEvent += ReturnYeouiju;
     }
 
     private void Update()
@@ -38,9 +39,9 @@ public class YeouijuLaunch : MonoBehaviour
             isYeouijuOn = true;
 
             // 마우스 방향에 따라 오브젝트의 회전각 결정
-            Vector2 len        = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
-            float z            = Mathf.Atan2(len.y, len.x) * Mathf.Rad2Deg;
-            transform.rotation = Quaternion.Euler(0, 0, z);
+            var len             = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
+            var z               = Mathf.Atan2(len.y, len.x) * Mathf.Rad2Deg;
+            transform.rotation  = Quaternion.Euler(0, 0, z);
 
             yeouiju.Launched(this.transform.position, z);
             return;

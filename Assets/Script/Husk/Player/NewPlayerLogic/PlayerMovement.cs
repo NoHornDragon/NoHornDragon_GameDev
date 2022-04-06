@@ -38,10 +38,7 @@ public class PlayerMovement : MonoBehaviour
         grapher = GetComponent<PlayerGrapher>();
         launch = GetComponent<YeouijuLaunch>();
 
-
-        YeouijuReflection yeouijuReflection = FindObjectOfType<YeouijuReflection>();
-        yeouijuReflection.collisionEvent += MakeJoint;
-        yeouijuReflection.YeouijuReturnEvent += DeleteJoint;
+        FindObjectOfType<YeouijuReflection>().collisionEvent += MakeJoint;
         PlayerCollider playerCollider = FindObjectOfType<PlayerCollider>();
         playerCollider.playerStunEvent += PlayerStuned;
         playerCollider.playerChangeEvent += PlayerBecomeOrigin;

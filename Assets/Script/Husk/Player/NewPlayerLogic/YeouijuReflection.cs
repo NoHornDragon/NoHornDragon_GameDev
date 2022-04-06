@@ -5,7 +5,7 @@ using System;
 public class YeouijuReflection : MonoBehaviour
 {
     public event Action<Vector2> collisionEvent;
-    public event Action YeouijuReturnEvent;
+    public event Action yeouijuReturnEvent;
     private Rigidbody2D rigid;
     private CircleCollider2D coll;
     private Transform player;
@@ -78,8 +78,8 @@ public class YeouijuReflection : MonoBehaviour
         {
             reflectCount = 0;
             
-            if(YeouijuReturnEvent != null)
-                YeouijuReturnEvent();
+            if(yeouijuReturnEvent != null)
+                yeouijuReturnEvent();
 
             YeouijuFollowPlayer();
             return;
