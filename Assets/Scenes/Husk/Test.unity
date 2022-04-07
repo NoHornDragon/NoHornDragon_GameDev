@@ -12214,6 +12214,11 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1679449339384239238, guid: e7ac847fce6a20347853bb6c97e53972,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1679449339384239239, guid: e7ac847fce6a20347853bb6c97e53972,
         type: 3}
       propertyPath: m_Distance
