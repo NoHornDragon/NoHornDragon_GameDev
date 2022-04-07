@@ -18,7 +18,8 @@ public class SaveData : MonoBehaviour
         {
             Destroy(gameObject);
         }
-        LoadGame();
+        // TODO
+        // LoadGame();
     }
 
     
@@ -91,8 +92,32 @@ public class UserData{
     public uint stunedCount;                // 플레이어가 스턴을 당한 횟수
 
     [Header("플레이어 자동저장 여부")]
-    [SerializeField] private bool useSave;                    // 플레이어의 저장 기능
-    public Vector3 PlayerPos;               // 저장을 했을 때 플레이어 위치
+    [SerializeField] private bool easyMode; // 플레이어의 저장 기능
+    public bool UseEasyMode
+    {
+        get
+        {
+            return easyMode;
+        }
+        set
+        {
+            easyMode = value;
+            if(!easyMode)
+                playerPos = Vector3.zero;
+        }
+    }
+    [SerializeField] private Vector3 playerPos;               // 저장을 했을 때 플레이어 위치
+    public Vector3 PlayerPos 
+    { 
+        get
+        {
+            return playerPos;
+        } 
+        set 
+        {
+            playerPos = value;
+        }
+    }
 
     [Header("종이조각 흭득 여부")]
     public bool[] paperList;                // 플레이어의 종이조각 갯수
@@ -106,24 +131,9 @@ public class UserData{
         resetCount = 0;
         stunedCount = 0;
 
-        useSave = false;
-        PlayerPos = Vector3.zero;
+        easyMode = false;
+        playerPos = Vector3.zero;
 
         paperList = new bool[20];
-    }
-
-    public bool nowUseSave()
-    {
-        return useSave;
-    }
-
-    public void SetUseSave(bool use)
-    {
-        useSave = use;
-
-        if(!useSave)
-        {
-            PlayerPos = Vector3.zero;
-        }
     }
 };
