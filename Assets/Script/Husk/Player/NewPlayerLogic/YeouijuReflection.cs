@@ -78,16 +78,14 @@ public class YeouijuReflection : MonoBehaviour
         {
             reflectCount = 0;
             
-            if(yeouijuReturnEvent != null)
-                yeouijuReturnEvent();
+            yeouijuReturnEvent?.Invoke();
 
             YeouijuFollowPlayer();
             return;
         }
         
         // end collision -> make disjoint2d
-        if(collisionEvent != null)
-            collisionEvent(this.transform.position);
+        collisionEvent?.Invoke(this.transform.position);
         
         rigid.velocity = new Vector3(0, 0, 0);
         rigid.freezeRotation = true;

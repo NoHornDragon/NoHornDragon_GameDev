@@ -44,7 +44,7 @@ public class RoomManager : MonoBehaviour
             this.roomNumber = inputRoomNo;
             this.confiner = roomConfiner;
             this.cameraSize = lensSize;
-            CameraChangeEvent(roomConfiner, lensSize);
+            CameraChangeEvent?.Invoke(roomConfiner, lensSize);
             return;
         }
         if(isIn)
@@ -72,8 +72,7 @@ public class RoomManager : MonoBehaviour
 
 
         // finally change camera
-        if(CameraChangeEvent != null)
-            CameraChangeEvent(confiner, cameraSize);
+        CameraChangeEvent?.Invoke(confiner, cameraSize);
     }
 }
 

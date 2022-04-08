@@ -67,8 +67,7 @@ public class YeouijuLaunch : MonoBehaviour
 
     private void ReturnYeouiju()
     {
-        if(disJointEvent != null)
-            disJointEvent();
+        disJointEvent?.Invoke();
     }
     
 }

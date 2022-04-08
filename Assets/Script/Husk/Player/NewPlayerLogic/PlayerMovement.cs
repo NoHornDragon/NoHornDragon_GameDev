@@ -93,8 +93,7 @@ public class PlayerMovement : MonoBehaviour
     private void PlayerReset()
     {
         // if now anothermovement, change to original
-        if(playerResetEvent != null)
-            playerResetEvent();
+        playerResetEvent?.Invoke();
 
         if(usingEasyMode)
         {
@@ -173,8 +172,8 @@ public class PlayerMovement : MonoBehaviour
         {
             stuned = false;
             canMove = true;
-            if(PlayerRecoverEvent != null)
-                PlayerRecoverEvent(true);
+
+            PlayerRecoverEvent?.Invoke(true);
         }
         else 
             StartCoroutine(PlayerRecoverFromStun());

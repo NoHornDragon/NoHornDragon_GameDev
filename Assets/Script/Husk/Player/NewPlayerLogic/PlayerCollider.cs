@@ -26,8 +26,8 @@ public class PlayerCollider : MonoBehaviour
             //TODO :  another movement일때 처리 동작
             // if now not origin movement, first change to origin player
             PlayerChanged(true, null);
-            if(playerStunEvent != null)
-                playerStunEvent(false);
+
+            playerStunEvent?.Invoke(false);
         }
         if(other.CompareTag("AnotherMovement"))
         {
@@ -51,8 +51,7 @@ public class PlayerCollider : MonoBehaviour
         this.isOrigin = isOrigin;
         anotherMovement = (isOrigin) ? null : newPlayer;
 
-        if(playerChangeEvent != null)
-            playerChangeEvent(isOrigin);
+        playerChangeEvent?.Invoke(isOrigin);
         
     }
 
