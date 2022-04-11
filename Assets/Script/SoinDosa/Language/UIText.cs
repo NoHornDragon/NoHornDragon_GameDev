@@ -18,6 +18,11 @@ public class UIText : MonoBehaviour
         LangChange(SettingsManager.instance.languageDropdown.value);
         SettingsManager.instance.LanguageChangeEvent += LangChange;
     }
+
+    private void OnDisable()
+    {
+        SettingsManager.instance.LanguageChangeEvent -= LangChange;
+    }
     public void LangChange(int _val)
     {
         Debug.Log("Lang Change _val = " + _val);

@@ -1015,9 +1015,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 60a9e5dfcb71c894d8f58f37d1850a44, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  title: "1\uBC88 \uC885\uC774"
   image: {fileID: 21300000, guid: 3c00a0e4b234d5d4b912da1c0e8fff18, type: 3}
-  description: "\uAC16\uACE0 \uC2F6\uC740\uC790. \uB178\uB825\uD574\uB77C"
+  title:
+  - "\uC885\uC774 \uC774\uB984"
+  - Paper name
+  description:
+  - "\uC885\uC774\uB97C \uD68D\uB4DD\uD558\uC138\uC694!"
+  - Gain a paper!
 --- !u!1 &30134870
 GameObject:
   m_ObjectHideFlags: 0
@@ -1070,9 +1074,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 60a9e5dfcb71c894d8f58f37d1850a44, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  title: "1\uBC88 \uC885\uC774"
   image: {fileID: 21300000, guid: 3c00a0e4b234d5d4b912da1c0e8fff18, type: 3}
-  description: "\uAC16\uACE0 \uC2F6\uC740\uC790. \uB178\uB825\uD574\uB77C"
+  title:
+  - "\uC885\uC774 \uC774\uB984"
+  - Paper name
+  description:
+  - "\uC885\uC774\uB97C \uD68D\uB4DD\uD558\uC138\uC694!"
+  - Gain a paper!
 --- !u!114 &30134873
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2087,9 +2095,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 60a9e5dfcb71c894d8f58f37d1850a44, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  title: "1\uBC88 \uC885\uC774"
   image: {fileID: 21300000, guid: 3c00a0e4b234d5d4b912da1c0e8fff18, type: 3}
-  description: "\uAC16\uACE0 \uC2F6\uC740\uC790. \uB178\uB825\uD574\uB77C"
+  title:
+  - "\uC885\uC774 \uC774\uB984"
+  - Paper name
+  description:
+  - "\uC885\uC774\uB97C \uD68D\uB4DD\uD558\uC138\uC694!"
+  - Gain a paper!
 --- !u!114 &164723209
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2278,9 +2290,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 60a9e5dfcb71c894d8f58f37d1850a44, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  title: "1\uBC88 \uC885\uC774"
   image: {fileID: 21300000, guid: 3c00a0e4b234d5d4b912da1c0e8fff18, type: 3}
-  description: "\uAC16\uACE0 \uC2F6\uC740\uC790. \uB178\uB825\uD574\uB77C"
+  title:
+  - "\uC885\uC774 \uC774\uB984"
+  - Paper name
+  description:
+  - "\uC885\uC774\uB97C \uD68D\uB4DD\uD558\uC138\uC694!"
+  - Gain a paper!
 --- !u!114 &170839569
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3485,9 +3501,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 60a9e5dfcb71c894d8f58f37d1850a44, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  title: "1\uBC88 \uC885\uC774"
   image: {fileID: 21300000, guid: 3c00a0e4b234d5d4b912da1c0e8fff18, type: 3}
-  description: "\uAC16\uACE0 \uC2F6\uC740\uC790. \uB178\uB825\uD574\uB77C"
+  title:
+  - "\uC885\uC774 \uC774\uB984"
+  - Paper name
+  description:
+  - "\uC885\uC774\uB97C \uD68D\uB4DD\uD558\uC138\uC694!"
+  - Gain a paper!
 --- !u!114 &362442735
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3812,9 +3832,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 60a9e5dfcb71c894d8f58f37d1850a44, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  title: "1\uBC88 \uC885\uC774"
   image: {fileID: 21300000, guid: 3c00a0e4b234d5d4b912da1c0e8fff18, type: 3}
-  description: "\uAC16\uACE0 \uC2F6\uC740\uC790. \uB178\uB825\uD574\uB77C"
+  title:
+  - "\uC885\uC774 \uC774\uB984"
+  - Paper name
+  description:
+  - "\uC885\uC774\uB97C \uD68D\uB4DD\uD558\uC138\uC694!"
+  - Gain a paper!
 --- !u!114 &380861271
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4479,9 +4503,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 60a9e5dfcb71c894d8f58f37d1850a44, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  title: "1\uBC88 \uC885\uC774"
   image: {fileID: 21300000, guid: 3c00a0e4b234d5d4b912da1c0e8fff18, type: 3}
-  description: "\uAC16\uACE0 \uC2F6\uC740\uC790. \uB178\uB825\uD574\uB77C"
+  title:
+  - "\uC885\uC774 \uC774\uB984"
+  - Paper name
+  description:
+  - "\uC885\uC774\uB97C \uD68D\uB4DD\uD558\uC138\uC694!"
+  - Gain a paper!
 --- !u!114 &424428672
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4625,9 +4653,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 60a9e5dfcb71c894d8f58f37d1850a44, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  title: "1\uBC88 \uC885\uC774"
   image: {fileID: 21300000, guid: 3c00a0e4b234d5d4b912da1c0e8fff18, type: 3}
-  description: "\uAC16\uACE0 \uC2F6\uC740\uC790. \uB178\uB825\uD574\uB77C"
+  title:
+  - "\uC885\uC774 \uC774\uB984"
+  - Paper name
+  description:
+  - "\uC885\uC774\uB97C \uD68D\uB4DD\uD558\uC138\uC694!"
+  - Gain a paper!
 --- !u!114 &433365607
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4857,6 +4889,7 @@ GameObject:
   - component: {fileID: 442010621}
   - component: {fileID: 442010623}
   - component: {fileID: 442010622}
+  - component: {fileID: 442010624}
   m_Layer: 5
   m_Name: History_Text
   m_TagString: Untagged
@@ -4924,6 +4957,22 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 442010620}
   m_CullTransparentMesh: 0
+--- !u!114 &442010624
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 442010620}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d53faf139dfcfa4eb9086ab4b388de8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  texts:
+  - "\uC9C0\uAE08\uAE4C\uC9C0\uC758 \uC5EC\uC815"
+  - History
+  uiText: {fileID: 0}
 --- !u!1 &444336738
 GameObject:
   m_ObjectHideFlags: 0
@@ -5132,9 +5181,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 60a9e5dfcb71c894d8f58f37d1850a44, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  title: "1\uBC88 \uC885\uC774"
   image: {fileID: 21300000, guid: 3c00a0e4b234d5d4b912da1c0e8fff18, type: 3}
-  description: "\uAC16\uACE0 \uC2F6\uC740\uC790. \uB178\uB825\uD574\uB77C"
+  title:
+  - "\uC885\uC774 \uC774\uB984"
+  - Paper name
+  description:
+  - "\uC885\uC774\uB97C \uD68D\uB4DD\uD558\uC138\uC694!"
+  - Gain a paper!
 --- !u!114 &453133783
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5352,9 +5405,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 60a9e5dfcb71c894d8f58f37d1850a44, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  title: "1\uBC88 \uC885\uC774"
   image: {fileID: 21300000, guid: 3c00a0e4b234d5d4b912da1c0e8fff18, type: 3}
-  description: "\uAC16\uACE0 \uC2F6\uC740\uC790. \uB178\uB825\uD574\uB77C"
+  title:
+  - "\uC885\uC774 \uC774\uB984"
+  - Paper name
+  description:
+  - "\uC885\uC774\uB97C \uD68D\uB4DD\uD558\uC138\uC694!"
+  - Gain a paper!
 --- !u!114 &464782276
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6027,9 +6084,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 60a9e5dfcb71c894d8f58f37d1850a44, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  title: "1\uBC88 \uC885\uC774"
   image: {fileID: 21300000, guid: 3c00a0e4b234d5d4b912da1c0e8fff18, type: 3}
-  description: "\uAC16\uACE0 \uC2F6\uC740\uC790. \uB178\uB825\uD574\uB77C"
+  title:
+  - "\uC885\uC774 \uC774\uB984"
+  - Paper name
+  description:
+  - "\uC885\uC774\uB97C \uD68D\uB4DD\uD558\uC138\uC694!"
+  - Gain a paper!
 --- !u!114 &497371403
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7286,8 +7347,8 @@ RectTransform:
   m_Father: {fileID: 749823465}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMin: {x: 0.5, y: 0}
+  m_AnchorMax: {x: 0.5, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 24, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -7462,9 +7523,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 60a9e5dfcb71c894d8f58f37d1850a44, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  title: "1\uBC88 \uC885\uC774"
   image: {fileID: 21300000, guid: 3c00a0e4b234d5d4b912da1c0e8fff18, type: 3}
-  description: "\uAC16\uACE0 \uC2F6\uC740\uC790. \uB178\uB825\uD574\uB77C"
+  title:
+  - "\uC885\uC774 \uC774\uB984"
+  - Paper name
+  description:
+  - "\uC885\uC774\uB97C \uD68D\uB4DD\uD558\uC138\uC694!"
+  - Gain a paper!
 --- !u!114 &605118552
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7645,9 +7710,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 60a9e5dfcb71c894d8f58f37d1850a44, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  title: "1\uBC88 \uC885\uC774"
   image: {fileID: 21300000, guid: 3c00a0e4b234d5d4b912da1c0e8fff18, type: 3}
-  description: "\uAC16\uACE0 \uC2F6\uC740\uC790. \uB178\uB825\uD574\uB77C"
+  title:
+  - "\uC885\uC774 \uC774\uB984"
+  - Paper name
+  description:
+  - "\uC885\uC774\uB97C \uD68D\uB4DD\uD558\uC138\uC694!"
+  - Gain a paper!
 --- !u!114 &655009469
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8567,9 +8636,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 60a9e5dfcb71c894d8f58f37d1850a44, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  title: "1\uBC88 \uC885\uC774"
   image: {fileID: 21300000, guid: 3c00a0e4b234d5d4b912da1c0e8fff18, type: 3}
-  description: "\uAC16\uACE0 \uC2F6\uC740\uC790. \uB178\uB825\uD574\uB77C"
+  title:
+  - "\uC885\uC774 \uC774\uB984"
+  - Paper name
+  description:
+  - "\uC885\uC774\uB97C \uD68D\uB4DD\uD558\uC138\uC694!"
+  - Gain a paper!
 --- !u!114 &744924060
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9028,9 +9101,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 60a9e5dfcb71c894d8f58f37d1850a44, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  title: "1\uBC88 \uC885\uC774"
   image: {fileID: 21300000, guid: 3c00a0e4b234d5d4b912da1c0e8fff18, type: 3}
-  description: "\uAC16\uACE0 \uC2F6\uC740\uC790. \uB178\uB825\uD574\uB77C"
+  title:
+  - "\uC885\uC774 \uC774\uB984"
+  - Paper name
+  description:
+  - "\uC885\uC774\uB97C \uD68D\uB4DD\uD558\uC138\uC694!"
+  - Gain a paper!
 --- !u!114 &808966572
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9174,9 +9251,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 60a9e5dfcb71c894d8f58f37d1850a44, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  title: "1\uBC88 \uC885\uC774"
   image: {fileID: 21300000, guid: 3c00a0e4b234d5d4b912da1c0e8fff18, type: 3}
-  description: "\uAC16\uACE0 \uC2F6\uC740\uC790. \uB178\uB825\uD574\uB77C"
+  title:
+  - "\uC885\uC774 \uC774\uB984"
+  - Paper name
+  description:
+  - "\uC885\uC774\uB97C \uD68D\uB4DD\uD558\uC138\uC694!"
+  - Gain a paper!
 --- !u!114 &834609987
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9726,9 +9807,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 60a9e5dfcb71c894d8f58f37d1850a44, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  title: "1\uBC88 \uC885\uC774"
   image: {fileID: 21300000, guid: 3c00a0e4b234d5d4b912da1c0e8fff18, type: 3}
-  description: "\uAC16\uACE0 \uC2F6\uC740\uC790. \uB178\uB825\uD574\uB77C"
+  title:
+  - "\uC885\uC774 \uC774\uB984"
+  - Paper name
+  description:
+  - "\uC885\uC774\uB97C \uD68D\uB4DD\uD558\uC138\uC694!"
+  - Gain a paper!
 --- !u!114 &884343391
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10225,9 +10310,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 60a9e5dfcb71c894d8f58f37d1850a44, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  title: "1\uBC88 \uC885\uC774"
   image: {fileID: 21300000, guid: 3c00a0e4b234d5d4b912da1c0e8fff18, type: 3}
-  description: "\uAC16\uACE0 \uC2F6\uC740\uC790. \uB178\uB825\uD574\uB77C"
+  title:
+  - "\uC885\uC774 \uC774\uB984"
+  - Paper name
+  description:
+  - "\uC885\uC774\uB97C \uD68D\uB4DD\uD558\uC138\uC694!"
+  - Gain a paper!
 --- !u!114 &977556923
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10408,9 +10497,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 60a9e5dfcb71c894d8f58f37d1850a44, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  title: "1\uBC88 \uC885\uC774"
   image: {fileID: 21300000, guid: 3c00a0e4b234d5d4b912da1c0e8fff18, type: 3}
-  description: "\uAC16\uACE0 \uC2F6\uC740\uC790. \uB178\uB825\uD574\uB77C"
+  title:
+  - "\uC885\uC774 \uC774\uB984"
+  - Paper name
+  description:
+  - "\uC885\uC774\uB97C \uD68D\uB4DD\uD558\uC138\uC694!"
+  - Gain a paper!
 --- !u!114 &1007684907
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11138,9 +11231,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 60a9e5dfcb71c894d8f58f37d1850a44, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  title: "1\uBC88 \uC885\uC774"
   image: {fileID: 21300000, guid: 3c00a0e4b234d5d4b912da1c0e8fff18, type: 3}
-  description: "\uAC16\uACE0 \uC2F6\uC740\uC790. \uB178\uB825\uD574\uB77C"
+  title:
+  - "\uC885\uC774 \uC774\uB984"
+  - Paper name
+  description:
+  - "\uC885\uC774\uB97C \uD68D\uB4DD\uD558\uC138\uC694!"
+  - Gain a paper!
 --- !u!114 &1047336866
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11284,9 +11381,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 60a9e5dfcb71c894d8f58f37d1850a44, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  title: "1\uBC88 \uC885\uC774"
   image: {fileID: 21300000, guid: 3c00a0e4b234d5d4b912da1c0e8fff18, type: 3}
-  description: "\uAC16\uACE0 \uC2F6\uC740\uC790. \uB178\uB825\uD574\uB77C"
+  title:
+  - "\uC885\uC774 \uC774\uB984"
+  - Paper name
+  description:
+  - "\uC885\uC774\uB97C \uD68D\uB4DD\uD558\uC138\uC694!"
+  - Gain a paper!
 --- !u!114 &1073501472
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11430,9 +11531,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 60a9e5dfcb71c894d8f58f37d1850a44, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  title: "1\uBC88 \uC885\uC774"
   image: {fileID: 21300000, guid: 3c00a0e4b234d5d4b912da1c0e8fff18, type: 3}
-  description: "\uAC16\uACE0 \uC2F6\uC740\uC790. \uB178\uB825\uD574\uB77C"
+  title:
+  - "\uC885\uC774 \uC774\uB984"
+  - Paper name
+  description:
+  - "\uC885\uC774\uB97C \uD68D\uB4DD\uD558\uC138\uC694!"
+  - Gain a paper!
 --- !u!114 &1076109818
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11749,9 +11854,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 60a9e5dfcb71c894d8f58f37d1850a44, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  title: "1\uBC88 \uC885\uC774"
   image: {fileID: 21300000, guid: 3c00a0e4b234d5d4b912da1c0e8fff18, type: 3}
-  description: "\uAC16\uACE0 \uC2F6\uC740\uC790. \uB178\uB825\uD574\uB77C"
+  title:
+  - "\uC885\uC774 \uC774\uB984"
+  - Paper name
+  description:
+  - "\uC885\uC774\uB97C \uD68D\uB4DD\uD558\uC138\uC694!"
+  - Gain a paper!
 --- !u!114 &1095276988
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12892,9 +13001,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 60a9e5dfcb71c894d8f58f37d1850a44, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  title: "1\uBC88 \uC885\uC774"
   image: {fileID: 21300000, guid: 3c00a0e4b234d5d4b912da1c0e8fff18, type: 3}
-  description: "\uAC16\uACE0 \uC2F6\uC740\uC790. \uB178\uB825\uD574\uB77C"
+  title:
+  - "\uC885\uC774 \uC774\uB984"
+  - Paper name
+  description:
+  - "\uC885\uC774\uB97C \uD68D\uB4DD\uD558\uC138\uC694!"
+  - Gain a paper!
 --- !u!114 &1279295358
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13451,6 +13564,7 @@ GameObject:
   - component: {fileID: 1426668390}
   - component: {fileID: 1426668393}
   - component: {fileID: 1426668392}
+  - component: {fileID: 1426668394}
   m_Layer: 5
   m_Name: HowToExit_Text
   m_TagString: Untagged
@@ -13548,6 +13662,22 @@ MonoBehaviour:
   m_EffectColor: {r: 0, g: 0, b: 0, a: 1}
   m_EffectDistance: {x: 3, y: 0}
   m_UseGraphicAlpha: 1
+--- !u!114 &1426668394
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1426668388}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d53faf139dfcfa4eb9086ab4b388de8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  texts:
+  - "\uB4A4\uB85C"
+  - Back
+  uiText: {fileID: 0}
 --- !u!1 &1430598904
 GameObject:
   m_ObjectHideFlags: 0
@@ -14023,9 +14153,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 60a9e5dfcb71c894d8f58f37d1850a44, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  title: "1\uBC88 \uC885\uC774"
   image: {fileID: 21300000, guid: 3c00a0e4b234d5d4b912da1c0e8fff18, type: 3}
-  description: "\uAC16\uACE0 \uC2F6\uC740\uC790. \uB178\uB825\uD574\uB77C"
+  title:
+  - "\uC885\uC774 \uC774\uB984"
+  - Paper name
+  description:
+  - "\uC885\uC774\uB97C \uD68D\uB4DD\uD558\uC138\uC694!"
+  - Gain a paper!
 --- !u!114 &1542730211
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14795,7 +14929,7 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 0.5, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -14905,8 +15039,8 @@ RectTransform:
   m_Father: {fileID: 1208378413}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMin: {x: 0.5, y: 0}
+  m_AnchorMax: {x: 0.5, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 24, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -15210,7 +15344,7 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 0.5, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -15268,7 +15402,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1700687257
 RectTransform:
   m_ObjectHideFlags: 0
@@ -16170,9 +16304,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 60a9e5dfcb71c894d8f58f37d1850a44, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  title: "1\uBC88 \uC885\uC774"
   image: {fileID: 21300000, guid: 3c00a0e4b234d5d4b912da1c0e8fff18, type: 3}
-  description: "\uAC16\uACE0 \uC2F6\uC740\uC790. \uB178\uB825\uD574\uB77C"
+  title:
+  - "\uC885\uC774 \uC774\uB984"
+  - Paper name
+  description:
+  - "\uC885\uC774\uB97C \uD68D\uB4DD\uD558\uC138\uC694!"
+  - Gain a paper!
 --- !u!114 &1853461442
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16970,9 +17108,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 60a9e5dfcb71c894d8f58f37d1850a44, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  title: "1\uBC88 \uC885\uC774"
   image: {fileID: 21300000, guid: 3c00a0e4b234d5d4b912da1c0e8fff18, type: 3}
-  description: "\uAC16\uACE0 \uC2F6\uC740\uC790. \uB178\uB825\uD574\uB77C"
+  title:
+  - "\uC885\uC774 \uC774\uB984"
+  - Paper name
+  description:
+  - "\uC885\uC774\uB97C \uD68D\uB4DD\uD558\uC138\uC694!"
+  - Gain a paper!
 --- !u!114 &2007962220
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17318,9 +17460,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 60a9e5dfcb71c894d8f58f37d1850a44, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  title: "1\uBC88 \uC885\uC774"
   image: {fileID: 21300000, guid: 3c00a0e4b234d5d4b912da1c0e8fff18, type: 3}
-  description: "\uAC16\uACE0 \uC2F6\uC740\uC790. \uB178\uB825\uD574\uB77C"
+  title:
+  - "\uC885\uC774 \uC774\uB984"
+  - Paper name
+  description:
+  - "\uC885\uC774\uB97C \uD68D\uB4DD\uD558\uC138\uC694!"
+  - Gain a paper!
 --- !u!114 &2022723557
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17918,9 +18064,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 60a9e5dfcb71c894d8f58f37d1850a44, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  title: "1\uBC88 \uC885\uC774"
   image: {fileID: 21300000, guid: 3c00a0e4b234d5d4b912da1c0e8fff18, type: 3}
-  description: "\uAC16\uACE0 \uC2F6\uC740\uC790. \uB178\uB825\uD574\uB77C"
+  title:
+  - "\uC885\uC774 \uC774\uB984"
+  - Paper name
+  description:
+  - "\uC885\uC774\uB97C \uD68D\uB4DD\uD558\uC138\uC694!"
+  - Gain a paper!
 --- !u!114 &2107196204
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -18111,9 +18261,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 60a9e5dfcb71c894d8f58f37d1850a44, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  title: "1\uBC88 \uC885\uC774"
   image: {fileID: 21300000, guid: 3c00a0e4b234d5d4b912da1c0e8fff18, type: 3}
-  description: "\uAC16\uACE0 \uC2F6\uC740\uC790. \uB178\uB825\uD574\uB77C"
+  title:
+  - "\uC885\uC774 \uC774\uB984"
+  - Paper name
+  description:
+  - "\uC885\uC774\uB97C \uD68D\uB4DD\uD558\uC138\uC694!"
+  - Gain a paper!
 --- !u!114 &2129556762
 MonoBehaviour:
   m_ObjectHideFlags: 0
