@@ -20,6 +20,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private bool canMove;
     public bool stuned;
     public bool nowJoint;
+    public bool throwed;
     public bool prepareLaunch;
     public bool throwYeouiju;
     
@@ -67,19 +68,19 @@ public class PlayerMovement : MonoBehaviour
         // can't move => just return
         if(!canMove)    return;
 
-        // if(rigid.velocity.x < 0)
-        //     transform.localScale = new Vector3(-1, 1, 1);
-        // else 
-        //     transform.localScale = new Vector3(1, 1, 1);
-
-
         horizontalSpeed = Input.GetAxis("Horizontal");
 
         // yeouiju launch
         if(Input.GetMouseButtonDown(0))
+        {
             prepareLaunch = true;
+        }
         if(Input.GetMouseButtonUp(0) && prepareLaunch)
+        {
+            prepareLaunch = false;
             throwYeouiju = true;
+            throwed = !throwed;
+        }
     }
 
     private void FixedUpdate()

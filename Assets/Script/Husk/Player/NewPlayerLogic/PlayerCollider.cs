@@ -8,11 +8,15 @@ public class PlayerCollider : MonoBehaviour
     public event Action<bool> playerStunEvent;
     public event Action<bool> playerChangeEvent;
     private PlayerMovement player;
+    [SerializeField] GameObject playerVisual;
     private bool isOrigin;
     private AnotherMovement anotherMovement;
     void Start()
     {
         player = GetComponent<PlayerMovement>();
+        playerVisual = transform.GetChild(0).gameObject;
+
+        playerChangeEvent += (bool input) => { playerVisual.SetActive(input); };
 
         FindObjectOfType<PlayerMovement>().playerResetEvent += SetPlayerOrigin;
         
