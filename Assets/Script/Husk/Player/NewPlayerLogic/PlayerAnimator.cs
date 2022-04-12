@@ -44,6 +44,7 @@ public class PlayerAnimator : MonoBehaviour
         }
 
         // player flip by velocity
+        if(player.onGround) return;
         if(rigid.velocity.x < 0)
         {
             baseObject.localScale = leftScale;

@@ -124,6 +124,7 @@ public class PlayerMovement : MonoBehaviour
         nowJoint = false;
         prepareLaunch = false;
         throwYeouiju = false;
+        throwed = false;
     }
 
     // TODO : 디버그용임
