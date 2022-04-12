@@ -18,7 +18,7 @@ public class PlayerGrapher : MonoBehaviour
         lineRenderer = GetComponent<LineRenderer>();
         joint = GetComponent<DistanceJoint2D>();
 
-        joint.anchor = grapherPoint.position;
+        joint.anchor = this.transform.position;
         SetLine(false);
 
         FindObjectOfType<YeouijuLaunch>().disJointEvent += DeleteJoint;
@@ -34,9 +34,9 @@ public class PlayerGrapher : MonoBehaviour
         }
 
         
-        joint.anchor = grapherPoint.localPosition;
+        // joint.anchor = this.transform.localPosition;
         joint.distance += Input.GetAxis("Vertical") * lineModifySpeed;
-        lineRenderer.SetPosition(1, grapherPoint.position);
+        lineRenderer.SetPosition(1, this.transform.position);
     }
 
     public bool NowJoint()
@@ -53,7 +53,7 @@ public class PlayerGrapher : MonoBehaviour
         // set line renderer
         // this should be in update
         lineRenderer.SetPosition(0, target);
-        lineRenderer.SetPosition(1, grapherPoint.position);
+        lineRenderer.SetPosition(1, this.transform.position);
 
         SetLine(true);
     }

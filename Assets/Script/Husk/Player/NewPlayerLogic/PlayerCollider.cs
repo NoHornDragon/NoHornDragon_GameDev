@@ -8,11 +8,17 @@ public class PlayerCollider : MonoBehaviour
     public event Action<bool> playerStunEvent;
     public event Action<bool> playerChangeEvent;
     private PlayerMovement player;
+    [SerializeField] GameObject playerVisual;
     private bool isOrigin;
     private AnotherMovement anotherMovement;
     void Start()
     {
         player = GetComponent<PlayerMovement>();
+        playerVisual = transform.GetChild(0).gameObject;
+
+        playerChangeEvent += (bool input) => { playerVisual.SetActive(input); };
+
+        FindObjectOfType<PlayerMovement>().playerResetEvent += SetPlayerOrigin;
         
         isOrigin = true;
     }
@@ -24,8 +30,8 @@ public class PlayerCollider : MonoBehaviour
             //TODO :  another movement일때 처리 동작
             // if now not origin movement, first change to origin player
             PlayerChanged(true, null);
-            if(playerStunEvent != null)
-                playerStunEvent(false);
+
+            playerStunEvent?.Invoke(false);
         }
         if(other.CompareTag("AnotherMovement"))
         {
@@ -43,15 +49,18 @@ public class PlayerCollider : MonoBehaviour
         this.transform.position = anotherMovement.transform.position;
     }
 
-    private void PlayerChanged(bool isOrigin, AnotherMovement newPlayer)
+    private void PlayerChanged(bool isOrigin, AnotherMovement newPlayer = null)
     {
         
         this.isOrigin = isOrigin;
         anotherMovement = (isOrigin) ? null : newPlayer;
 
-        if(playerChangeEvent != null)
-            playerChangeEvent(isOrigin);
+        playerChangeEvent?.Invoke(isOrigin);
         
     }
 
+    private void SetPlayerOrigin()
+    {
+        PlayerChanged(true, null);
+    }
 }

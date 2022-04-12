@@ -9,17 +9,24 @@ public class YeouijuLaunch : MonoBehaviour
     private YeouijuReflection yeouiju;
     [SerializeField] private bool canLaunch;
     public bool isYeouijuOn;
+    private bool usingEasyMode;
     
     private void Start()
     {
         canLaunch = true;
+        usingEasyMode = SaveData.instance.userData.UseEasyMode;
         
         yeouiju = FindObjectOfType<YeouijuReflection>();
+
+        disJointEvent += SetYeouijuFalse;
 
         FindObjectOfType<PlayerMovement>().PlayerRecoverEvent += SetLaunchStatus;
         PlayerCollider playerCollider = FindObjectOfType<PlayerCollider>();
         playerCollider.playerChangeEvent += SetLaunchStatus;
         playerCollider.playerStunEvent += StunedYeouiju;
+
+        FindObjectOfType<PlayerMovement>().playerResetEvent += ReturnYeouiju;
+        FindObjectOfType<YeouijuReflection>().yeouijuReturnEvent += ReturnYeouiju;
     }
 
     private void Update()
@@ -32,22 +39,21 @@ public class YeouijuLaunch : MonoBehaviour
             isYeouijuOn = true;
 
             // 마우스 방향에 따라 오브젝트의 회전각 결정
-            Vector2 len        = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
-            float z            = Mathf.Atan2(len.y, len.x) * Mathf.Rad2Deg;
-            transform.rotation = Quaternion.Euler(0, 0, z);
+            var len             = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
+            var z               = Mathf.Atan2(len.y, len.x) * Mathf.Rad2Deg;
+            transform.rotation  = Quaternion.Euler(0, 0, z);
 
             yeouiju.Launched(this.transform.position, z);
             return;
         }
 
-        if(disJointEvent != null)
-        {
-            isYeouijuOn = false;
-            disJointEvent();
-            return;
-        }
+        ReturnYeouiju();
     }
 
+    private void SetYeouijuFalse()
+    {
+        isYeouijuOn = false;
+    }
     public void SetLaunchStatus(bool isActive)
     {
         this.canLaunch = isActive;
@@ -56,8 +62,12 @@ public class YeouijuLaunch : MonoBehaviour
     public void StunedYeouiju(bool isStuned)
     {
         canLaunch = isStuned;   
-        if(disJointEvent != null)
-            disJointEvent();
+        ReturnYeouiju();
+    }
+
+    private void ReturnYeouiju()
+    {
+        disJointEvent?.Invoke();
     }
     
 }
