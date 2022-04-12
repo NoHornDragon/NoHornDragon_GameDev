@@ -17,7 +17,7 @@ public class PlayerCollision : MonoBehaviour
         originMovement = GetComponent<Player>();
         grapher = GetComponent<Grapher>();
 
-        originSprite = transform.FindChild("Visual").gameObject;
+        originSprite = transform.Find("Visual").gameObject;
     }
 
     private void OnTriggerEnter2D(Collider2D other)
