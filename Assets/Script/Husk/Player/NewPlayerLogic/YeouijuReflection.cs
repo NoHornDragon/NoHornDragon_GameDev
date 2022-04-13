@@ -64,6 +64,7 @@ public class YeouijuReflection : MonoBehaviour
         // still can reflect
         if(reflectCount < collisionCount)
         {
+            Debug.Log("튕기는 여의주");
             reflectCount++;
 
             float speed = prevVelocity.magnitude;
@@ -76,6 +77,7 @@ public class YeouijuReflection : MonoBehaviour
         // end to collistion but too far
         if(Vector2.Distance(player.position, this.transform.position) > maxDistance)
         {
+            Debug.Log("다 튕겼는데 너무 멀다");
             reflectCount = 0;
             
             yeouijuReturnEvent?.Invoke();
@@ -85,6 +87,7 @@ public class YeouijuReflection : MonoBehaviour
         }
         
         // end collision -> make disjoint2d
+        Debug.Log("여의주 연결");
         collisionEvent?.Invoke(this.transform.position);
         
         rigid.velocity = new Vector3(0, 0, 0);

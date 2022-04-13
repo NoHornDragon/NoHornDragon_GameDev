@@ -18,7 +18,7 @@ public class PlayerGrapher : MonoBehaviour
         lineRenderer = GetComponent<LineRenderer>();
         joint = GetComponent<DistanceJoint2D>();
 
-        joint.anchor = this.transform.position;
+        joint.anchor = Vector3.zero;
         SetLine(false);
 
         FindObjectOfType<YeouijuLaunch>().disJointEvent += DeleteJoint;
