@@ -27,6 +27,7 @@ public class YeouijuLaunch : MonoBehaviour
 
         FindObjectOfType<PlayerMovement>().playerResetEvent += ReturnYeouiju;
         FindObjectOfType<YeouijuReflection>().yeouijuReturnEvent += ReturnYeouiju;
+        FindObjectOfType<PlayerGrapher>().deleteJointEvent += ReturnYeouiju;
     }
 
     private void Update()

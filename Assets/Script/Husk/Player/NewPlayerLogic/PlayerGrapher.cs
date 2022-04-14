@@ -1,15 +1,15 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using System;
 public class PlayerGrapher : MonoBehaviour
 {
+    public event Action deleteJointEvent;
     [SerializeField] private float lineModifySpeed;
-    [SerializeField] private Transform grapherPoint;
     private LineRenderer lineRenderer;
     private DistanceJoint2D joint;
-    private float verticalInput;
     private bool nowJoint;
+    [SerializeField] private float minDistance;
 
     void Start()
     {
@@ -34,8 +34,10 @@ public class PlayerGrapher : MonoBehaviour
         }
 
         
-        // joint.anchor = this.transform.localPosition;
+
         joint.distance += Input.GetAxis("Vertical") * lineModifySpeed;
+        if(joint.distance < minDistance)
+            deleteJointEvent?.Invoke();
         lineRenderer.SetPosition(1, this.transform.position);
     }
 
