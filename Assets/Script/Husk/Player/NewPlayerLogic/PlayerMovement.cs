@@ -10,6 +10,7 @@ public class PlayerMovement : MonoBehaviour
     private Rigidbody2D rigid;
     private PlayerGrapher grapher;
     private YeouijuLaunch launch;
+    private PlayerCollider coll;
     
     [Header("플레이어 능력치")]
     private float horizontalSpeed;
@@ -18,11 +19,17 @@ public class PlayerMovement : MonoBehaviour
     [Header("플레이어 현재 상태")]
     private bool usingEasyMode;
     [SerializeField] private bool canMove;
-    public bool stuned;
+
+    [Space(20f)]
     public bool nowJoint;
     public bool throwed;
     public bool prepareLaunch;
     public bool throwYeouiju;
+
+    [Space(20f)]
+    public bool stuned;
+    [SerializeField] private float stunedTime;
+    private float stunTimer;
     
     [Space(20f)]
 
@@ -38,11 +45,11 @@ public class PlayerMovement : MonoBehaviour
         rigid = GetComponent<Rigidbody2D>();
         grapher = GetComponent<PlayerGrapher>();
         launch = GetComponent<YeouijuLaunch>();
+        coll = GetComponent<PlayerCollider>();
 
         FindObjectOfType<YeouijuReflection>().collisionEvent += MakeJoint;
-        PlayerCollider playerCollider = FindObjectOfType<PlayerCollider>();
-        playerCollider.playerStunEvent += PlayerStuned;
-        playerCollider.playerChangeEvent += PlayerBecomeOrigin;
+        coll.playerStunEvent += PlayerStuned;
+        coll.playerChangeEvent += PlayerBecomeOrigin;
         FindObjectOfType<YeouijuLaunch>().disJointEvent += DeleteJoint;
 
         usingEasyMode = SaveData.instance.userData.UseEasyMode;
@@ -64,6 +71,19 @@ public class PlayerMovement : MonoBehaviour
         }
 
         onGround = Physics2D.OverlapCircle((Vector2)transform.position + bottomOffset, collisionRadius, groundLayer);
+
+        if(!onGround && !nowJoint)
+        {
+            stunTimer += Time.deltaTime;
+            if(stunTimer > stunedTime)
+            {
+                coll.PlayerStunEvent();
+            }
+        }
+        else
+        {
+            stunTimer = 0;
+        }
 
         // can't move => just return
         if(!canMove)    return;
@@ -158,8 +178,8 @@ public class PlayerMovement : MonoBehaviour
     public void PlayerStuned(bool isStuned)
     {
 
-        canMove = false;
-        stuned = true;
+        canMove = !isStuned;
+        stuned = isStuned;
 
         StartCoroutine(PlayerRecoverFromStun());
     }
