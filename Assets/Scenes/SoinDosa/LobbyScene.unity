@@ -16585,7 +16585,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 69db80d0a88b2f44c9a5972f3218aa5d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameSceneName: Test
+  gameSceneName: GameScene_Dummy
   historyPanel: {fileID: 1892465061}
   settingsPanel: {fileID: 1700687256}
   exitPanel: {fileID: 1034542820}

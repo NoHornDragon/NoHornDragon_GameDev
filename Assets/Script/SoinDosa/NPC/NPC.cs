@@ -6,13 +6,10 @@ using UnityEngine.UI;
 [System.Serializable]
 public class NPCTalks
 {
-    public NPCTalks(int _count, string _talk)
-    {
-        count = _count;
-        talk = _talk;
-    }
+    [Header("방문 횟수")]
     public int count;
-    public string talk;
+    [Header("talk[0] = kor, talk[1] = eng")]
+    public string[] talk;
 }
 public class NPC : MonoBehaviour
 {
@@ -61,7 +58,7 @@ public class NPC : MonoBehaviour
             {
                 if(visitCount >= npcTalks[i].count)
                 {
-                    visitText.GetComponent<TextMesh>().text = npcTalks[i].talk;
+                    visitText.GetComponent<TextMesh>().text = npcTalks[i].talk[SettingsManager.instance.languageDropdown.value];
                     break;
                 }
             }
