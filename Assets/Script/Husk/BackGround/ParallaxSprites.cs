@@ -11,6 +11,7 @@ public class ParallaxSprites : MonoBehaviour
     [Header("상하좌우 이동 잠그는 여부")]
     [SerializeField] private bool lockHorizontal;
     [SerializeField] private bool lockVertical;
+    Vector3 newPosition;
 
     void Start()
     {
@@ -19,7 +20,7 @@ public class ParallaxSprites : MonoBehaviour
 
     void MoveLayer(float x, float y)
     {
-        Vector3 newPosition = transform.localPosition;
+        newPosition = transform.localPosition;
         if(!lockHorizontal)   newPosition.x -= x * moveAmount;
         if(!lockVertical)     newPosition.y -= y * moveAmount;
 

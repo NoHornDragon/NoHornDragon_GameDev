@@ -8,8 +8,8 @@ public class PlayerCollider : MonoBehaviour
     public event Action<bool> playerStunEvent;
     public event Action<bool> playerChangeEvent;
     private PlayerMovement player;
-    [SerializeField] GameObject playerVisual;
-    private bool isOrigin;
+    private GameObject playerVisual;
+    private bool isOrigin = true;
     private AnotherMovement anotherMovement;
     void Start()
     {
@@ -19,8 +19,6 @@ public class PlayerCollider : MonoBehaviour
         playerChangeEvent += (bool input) => { playerVisual.SetActive(input); };
 
         FindObjectOfType<PlayerMovement>().playerResetEvent += SetPlayerOrigin;
-        
-        isOrigin = true;
     }
 
     private void OnTriggerEnter2D(Collider2D other)

@@ -10,6 +10,8 @@ public class PlayerGrapher : MonoBehaviour
     private DistanceJoint2D joint;
     private bool nowJoint;
     [SerializeField] private float minDistance;
+    [SerializeField] private float jointMaxTime;
+    [SerializeField] private float jointTimer;
 
     void Start()
     {
@@ -30,14 +32,21 @@ public class PlayerGrapher : MonoBehaviour
         if(!nowJoint)
         {
             SetLine(false);
+            jointTimer = jointMaxTime;
             return;
         }
 
-        
-
         joint.distance += Input.GetAxis("Vertical") * lineModifySpeed;
+        jointTimer -= Time.deltaTime;
+
         if(joint.distance < minDistance)
             deleteJointEvent?.Invoke();
+        if(jointTimer < 0)
+        {
+            nowJoint = false;
+            deleteJointEvent?.Invoke();
+        }
+
         lineRenderer.SetPosition(1, this.transform.position);
     }
 

@@ -6,7 +6,7 @@ public class PlayerAnimator : MonoBehaviour
 {
     [SerializeField] private PlayerMovement player;
     private Animator anim;
-    [SerializeField] private Transform baseObject;
+    private Transform baseObject;
     Rigidbody2D rigid;
     private Vector3 rightScale = new Vector3(1, 1, 1);
     private Vector3 leftScale = new Vector3(-1, 1, 1);

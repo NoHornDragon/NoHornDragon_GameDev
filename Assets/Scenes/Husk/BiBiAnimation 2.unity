@@ -4079,6 +4079,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lineModifySpeed: 0.1
   minDistance: 0
+  jointMaxTime: 0
+  jointTimer: 0
 --- !u!114 &842288106
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4476,6 +4478,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lineModifySpeed: 0.1
   minDistance: 1
+  jointMaxTime: 10
+  jointTimer: 0
 --- !u!114 &1043390808
 MonoBehaviour:
   m_ObjectHideFlags: 0
