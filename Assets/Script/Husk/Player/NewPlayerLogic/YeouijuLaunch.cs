@@ -27,6 +27,7 @@ public class YeouijuLaunch : MonoBehaviour
 
         FindObjectOfType<PlayerMovement>().playerResetEvent += ReturnYeouiju;
         FindObjectOfType<YeouijuReflection>().yeouijuReturnEvent += ReturnYeouiju;
+        FindObjectOfType<PlayerGrapher>().deleteJointEvent += ReturnYeouiju;
     }
 
     private void Update()
@@ -47,8 +48,6 @@ public class YeouijuLaunch : MonoBehaviour
             return;
         }
 
-        // if mode is not easy, there's no return;
-        if(!usingEasyMode)  return;
         ReturnYeouiju();
     }
 
@@ -63,14 +62,13 @@ public class YeouijuLaunch : MonoBehaviour
 
     public void StunedYeouiju(bool isStuned)
     {
-        canLaunch = isStuned;   
+        canLaunch = !isStuned;   
         ReturnYeouiju();
     }
 
     private void ReturnYeouiju()
     {
-        if(disJointEvent != null)
-            disJointEvent();
+        disJointEvent?.Invoke();
     }
     
 }

@@ -20,8 +20,7 @@ public class PlayerEnterConfiner : MonoBehaviour
     {
         if(other.CompareTag("Player"))
         {
-            if(ActiveRoomEvent != null)
-                ActiveRoomEvent(roomNo, polygonCollider2D, lensSize, true);
+            ActiveRoomEvent?.Invoke(roomNo, polygonCollider2D, lensSize, true);
         }
     }
 
@@ -29,8 +28,7 @@ public class PlayerEnterConfiner : MonoBehaviour
     {
         if(other.CompareTag("Player"))
         {
-            if(ActiveRoomEvent != null)
-                ActiveRoomEvent(roomNo, polygonCollider2D, lensSize, false);
+            ActiveRoomEvent?.Invoke(roomNo, polygonCollider2D, lensSize, false);
         }
     }
 }
