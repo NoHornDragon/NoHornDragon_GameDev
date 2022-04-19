@@ -28,6 +28,7 @@ public class YeouijuReflection : MonoBehaviour
 
         FindObjectOfType<YeouijuLaunch>().disJointEvent += YeouijuFollowPlayer;
         FindObjectOfType<PlayerCollider>().playerChangeEvent += SetYeouijuSprite;
+        coll.enabled = false;
     }
 
     private void FixedUpdate()

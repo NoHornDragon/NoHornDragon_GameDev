@@ -8,7 +8,7 @@ public class YeouijuLaunch : MonoBehaviour
     public event Action disJointEvent;
     private YeouijuReflection yeouiju;
     [SerializeField] private bool canLaunch;
-    public bool isYeouijuOn;
+    private bool isYeouijuOn;
     private bool usingEasyMode;
     
     private void Start()

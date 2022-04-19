@@ -8,6 +8,8 @@ public class YoueiJuCoolTimeUI : MonoBehaviour
     private Camera cam;
     void Start()
     {   
+        if(SaveData.instance.userData.UseEasyMode)  Destroy(gameObject);
+
         playerPos = transform.parent.parent;
         cam = Camera.main;
     }

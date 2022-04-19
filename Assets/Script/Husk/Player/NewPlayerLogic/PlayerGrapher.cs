@@ -12,17 +12,20 @@ public class PlayerGrapher : MonoBehaviour
     private DistanceJoint2D joint;
     [Header("여의주 상태")]
     private bool nowJoint;
+    [SerializeField] private bool easyMode;
     [SerializeField] private float minDistance;
     [SerializeField] private float jointMaxTime;
-    private float jointTimer;
+    [SerializeField] private float jointTimer;
     [Header("여의주 HUD")]
-    [SerializeField] GameObject coolTimeUI;
+    [SerializeField] private GameObject coolTimeUI;
     [SerializeField] private Image coolTimeImage;
 
 
     void Start()
     {
+        SetHUDInitial();
         lineModifySpeed *= -1;
+        
 
         lineRenderer = GetComponent<LineRenderer>();
         joint = GetComponent<DistanceJoint2D>();
@@ -31,8 +34,18 @@ public class PlayerGrapher : MonoBehaviour
         SetLine(false);
 
         FindObjectOfType<YeouijuLaunch>().disJointEvent += DeleteJoint;
-        FindObjectOfType<YeouijuLaunch>().disJointEvent += SetHUDInitial;
         FindObjectOfType<YeouijuReflection>().collisionEvent += MakeJoint;
+        
+        easyMode = SaveData.instance.userData.UseEasyMode;
+        if(easyMode)
+        {
+            coolTimeImage = null;
+            coolTimeUI = null;
+            return;
+        }
+        // time limit is on only hard mode
+        FindObjectOfType<YeouijuLaunch>().disJointEvent += SetHUDInitial;
+        FindObjectOfType<YeouijuReflection>().collisionEvent += ActiveUI;
     }
 
     void Update()
@@ -41,23 +54,30 @@ public class PlayerGrapher : MonoBehaviour
         {
             SetLine(false);
             jointTimer = jointMaxTime;
-            SetHUDInitial();
+            if(!easyMode)
+                SetHUDInitial();
             return;
         }
 
         joint.distance += Input.GetAxis("Vertical") * lineModifySpeed;
-        jointTimer -= Time.deltaTime;
-        coolTimeImage.fillAmount = jointTimer / jointMaxTime;
 
         if(joint.distance < minDistance)
             deleteJointEvent?.Invoke();
+        
+        lineRenderer.SetPosition(1, this.transform.position);
+
+        if(easyMode)    return;
+
+        // if game is hard mode, Timer is on
+        jointTimer -= Time.deltaTime;
+        coolTimeImage.fillAmount = jointTimer / jointMaxTime;
+
         if(jointTimer < 0)
         {
             nowJoint = false;
             deleteJointEvent?.Invoke();
         }
 
-        lineRenderer.SetPosition(1, this.transform.position);
     }
 
     public bool NowJoint()
@@ -75,10 +95,12 @@ public class PlayerGrapher : MonoBehaviour
         lineRenderer.SetPosition(0, target);
         lineRenderer.SetPosition(1, this.transform.position);
 
-        // active cool time ui
-        coolTimeUI.SetActive(true);
-
         SetLine(true);
+    }
+
+    public void ActiveUI(Vector2 dummy)
+    {
+        coolTimeUI.SetActive(true);
     }
 
     public void DeleteJoint()
