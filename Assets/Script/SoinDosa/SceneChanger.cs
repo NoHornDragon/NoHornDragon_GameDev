@@ -37,9 +37,9 @@ public class SceneChanger : MonoBehaviour
     IEnumerator FadeInCoroutine()
     {
         tempA = 1.0f;
-        for(int i = 0; i < 200; i++)
+        for(int i = 0; i < 50; i++)
         {
-            tempA -= 0.005f;
+            tempA -= 0.02f;
             fadeImage.color = new Vector4(0, 0, 0, tempA);
             yield return null;
         }
@@ -56,9 +56,9 @@ public class SceneChanger : MonoBehaviour
     IEnumerator ChangeSceneCoroutine(string _sceneName) // 페이드아웃과 씬 로드가 끝나면 페이드인
     {
         tempA = 0.0f;
-        for (int i = 0; i < 200; i++)
+        for (int i = 0; i < 50; i++)
         {
-            tempA += 0.005f;
+            tempA += 0.02f;
             fadeImage.color = new Vector4(0, 0, 0, tempA);
             yield return null;
         }
