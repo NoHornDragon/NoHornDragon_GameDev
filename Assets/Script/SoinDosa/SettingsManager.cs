@@ -24,11 +24,11 @@ public class SettingsManager : MonoBehaviour
 
     [SerializeField]
     private Dropdown resolutionDropdown;
-    [SerializeField]
-    private Slider bgmSlider;
-    [SerializeField]
-    private Slider effectSlider;
+
+    public Slider bgmSlider;
+    public Slider effectSlider;
     // Start is called before the first frame update
+
 
     
 
@@ -41,18 +41,10 @@ public class SettingsManager : MonoBehaviour
         }
         else
             Destroy(this.gameObject);
-    }
 
-    void Start()
-    {
         LoadSettingsValue();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 
     public void ChangeResolution()
     {

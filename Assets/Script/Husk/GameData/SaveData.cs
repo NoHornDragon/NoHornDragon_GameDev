@@ -18,6 +18,8 @@ public class SaveData : MonoBehaviour
         {
             Destroy(gameObject);
         }
+        // TODO
+        // LoadGame();
     }
 
     
@@ -80,15 +82,58 @@ public class SaveData : MonoBehaviour
 
 [System.Serializable]
 public class UserData{
-    public float backGroundsoundVolume;
-    public float effectSoundVolume;
-    public uint clearCount;
-    public uint resetCount;
-    public uint stunedCount;
-    public bool[] paperList;
+    [Header("사운드 설정")]
+    public float backGroundsoundVolume;     // 인게임 내 BGM 볼륨
+    public float effectSoundVolume;         // 인게임 내 사운드 볼륨
+    
+    [Header("플레이어 기록")]
+    public uint clearCount;                 // 플레이어의 게임 엔딩 본 횟수
+    public uint resetCount;                 // 플레이어가 R 버튼을 눌러 리셋한 횟수
+    public uint stunedCount;                // 플레이어가 스턴을 당한 횟수
 
-    public UserData(){
+    [Header("플레이어 자동저장 여부")]
+    [SerializeField] private bool easyMode; // 플레이어의 저장 기능
+    public bool UseEasyMode
+    {
+        get
+        {
+            return easyMode;
+        }
+        set
+        {
+            easyMode = value;
+            if(!easyMode)
+                playerPos = Vector3.zero;
+        }
+    }
+    [SerializeField] private Vector3 playerPos;               // 저장을 했을 때 플레이어 위치
+    public Vector3 PlayerPos 
+    { 
+        get
+        {
+            return playerPos;
+        } 
+        set 
+        {
+            playerPos = value;
+        }
+    }
+
+    [Header("종이조각 흭득 여부")]
+    public bool[] paperList;                // 플레이어의 종이조각 갯수
+
+    public UserData()
+    {
         backGroundsoundVolume = 0.5f;
         effectSoundVolume = 0.5f;
+
+        clearCount = 0;
+        resetCount = 0;
+        stunedCount = 0;
+
+        easyMode = false;
+        playerPos = Vector3.zero;
+
+        paperList = new bool[20];
     }
 };
