@@ -5,16 +5,20 @@ using System;
 
 public class PlayerCollider : MonoBehaviour
 {
-    public event Action playerStunEvent;
+    public event Action<bool> playerStunEvent;
     public event Action<bool> playerChangeEvent;
-    public PlayerMovement player;
-    private bool isOrigin;
+    private PlayerMovement player;
+    private GameObject playerVisual;
+    private bool isOrigin = true;
     private AnotherMovement anotherMovement;
     void Start()
     {
         player = GetComponent<PlayerMovement>();
-        
-        isOrigin = true;
+        playerVisual = transform.GetChild(0).gameObject;
+
+        playerChangeEvent += (bool input) => { playerVisual.SetActive(input); };
+
+        FindObjectOfType<PlayerMovement>().playerResetEvent += SetPlayerOrigin;
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -22,12 +26,15 @@ public class PlayerCollider : MonoBehaviour
         if(other.CompareTag("Enemy"))
         {
             //TODO :  another movement일때 처리 동작
-            player.PlayerStuned();
+            // if now not origin movement, first change to origin player
+            PlayerChanged(true, null);
+
+            playerStunEvent?.Invoke(true);
         }
         if(other.CompareTag("AnotherMovement"))
         {
-            // 플레이어 조작, 비주얼 변경
-            PlayerChanged(false, other.gameObject.GetComponent<AnotherMovement>());
+            // change player
+            PlayerChanged(!isOrigin, other.gameObject.GetComponent<AnotherMovement>());
         }
     }
 
@@ -36,23 +43,27 @@ public class PlayerCollider : MonoBehaviour
         if(isOrigin)                return;
         if(anotherMovement == null) return;
 
+        // if now playing with no originmovement, player's collider will follow anothermovement
         this.transform.position = anotherMovement.transform.position;
     }
 
-    private void PlayerChanged(bool isOrigin, AnotherMovement newPlayer)
+    private void PlayerChanged(bool isOrigin, AnotherMovement newPlayer = null)
     {
-        /*
-        - 기존 움직임 할 수 없게, 보이지 않게
-        - 여의주 스프라이트 끄기, 발사할 수 없게
-        ? 플레이어가 따라가서 이 콜라이더를 계속 쓴다면?
-        */
         
         this.isOrigin = isOrigin;
         anotherMovement = (isOrigin) ? null : newPlayer;
 
-        if(playerChangeEvent != null)
-            playerChangeEvent(isOrigin);
+        playerChangeEvent?.Invoke(isOrigin);
         
     }
 
+    private void SetPlayerOrigin()
+    {
+        PlayerChanged(true, null);
+    }
+
+    public void PlayerStunEvent()
+    {
+        playerStunEvent?.Invoke(true);
+    }
 }

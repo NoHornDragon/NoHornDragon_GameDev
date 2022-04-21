@@ -4,8 +4,8 @@ using UnityEngine;
 using System;
 public class YeouijuReflection : MonoBehaviour
 {
-    public event Action<Vector2> CollisionEvent;
-    public event Action YeouijuReturnEvent;
+    public event Action<Vector2> collisionEvent;
+    public event Action yeouijuReturnEvent;
     private Rigidbody2D rigid;
     private CircleCollider2D coll;
     private Transform player;
@@ -24,9 +24,11 @@ public class YeouijuReflection : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player").transform;
         rigid = GetComponent<Rigidbody2D>();
         coll = GetComponent<CircleCollider2D>();
+        sprite = GetComponent<SpriteRenderer>();
 
-        FindObjectOfType<YeouijuLaunch>().DisJointEvent += YeouijuFollowPlayer;
+        FindObjectOfType<YeouijuLaunch>().disJointEvent += YeouijuFollowPlayer;
         FindObjectOfType<PlayerCollider>().playerChangeEvent += SetYeouijuSprite;
+        coll.enabled = false;
     }
 
     private void FixedUpdate()
@@ -60,9 +62,10 @@ public class YeouijuReflection : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D other)
     {
-        // 아직 덜 튕겼을 시 카운트++ 한 뒤 다음 방향으로
+        // still can reflect
         if(reflectCount < collisionCount)
         {
+            Debug.Log("튕기는 여의주");
             reflectCount++;
 
             float speed = prevVelocity.magnitude;
@@ -72,21 +75,21 @@ public class YeouijuReflection : MonoBehaviour
             return;
         }
 
-        // 충돌은 다 되었으나 거리가 너무 멀 때
+        // end to collistion but too far
         if(Vector2.Distance(player.position, this.transform.position) > maxDistance)
         {
+            Debug.Log("다 튕겼는데 너무 멀다");
             reflectCount = 0;
             
-            if(YeouijuReturnEvent != null)
-                YeouijuReturnEvent();
+            yeouijuReturnEvent?.Invoke();
 
             YeouijuFollowPlayer();
             return;
         }
         
-        // 충돌이 다 되었고 조건도 만족했을 때 속도를 멈춘 뒤 joint event 실행
-        if(CollisionEvent != null)
-            CollisionEvent(this.transform.position);
+        // end collision -> make disjoint2d
+        Debug.Log("여의주 연결");
+        collisionEvent?.Invoke(this.transform.position);
         
         rigid.velocity = new Vector3(0, 0, 0);
         rigid.freezeRotation = true;
