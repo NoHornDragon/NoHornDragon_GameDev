@@ -42,25 +42,40 @@ public class YeouijuLaunch : MonoBehaviour
     {
         if(!canLaunch)                  return;
 
-        predictionLine.SetPosition(0, this.transform.position);
-
         if(Input.GetMouseButtonDown(0))
         {
             prepareYeouiju = true;
         }
 
+        // calculate angle by mouse pointer
+        var len             = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
+        var z               = Mathf.Atan2(len.y, len.x) * Mathf.Rad2Deg;
+        transform.rotation  = Quaternion.Euler(0, 0, z);
+
         if(!isYeouijuOn && prepareYeouiju)
         {
-            var len             = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
-            var z               = Mathf.Atan2(len.y, len.x) * Mathf.Rad2Deg;
-            transform.rotation  = Quaternion.Euler(0, 0, z);
-
+            // Draw Prediction Line
+            predictionLine.SetPosition(0, this.transform.position);
             predictionHit = Physics2D.Raycast(this.gameObject.transform.position, transform.right, Mathf.Infinity, predictionLayerMask);
 
-            if(predictionHit.collider != null)
+            if(predictionHit.collider == null)
             {
-                predictionLine.SetPosition(1, predictionHit.point);
+                predictionLine.enabled = false;
+                return;
             }
+
+            // first collision ray
+            predictionLine.SetPosition(1, predictionHit.point);
+
+            //! second collision ray -> HOLD
+            //! ERROR : sometimes this calculate first.point, second.point is same
+            // var reflectionDir = Vector2.Reflect(transform.right.normalized, predictionHit.normal);
+            // var predictionHit2 = Physics2D.Raycast(predictionHit.point, reflectionDir, Mathf.Infinity, predictionLayerMask);
+
+            // if(predictionHit2.collider == null)
+            //     return;
+            
+            // predictionLine.SetPosition(2, predictionHit2.point);
 
             predictionLine.enabled = true;
         }
@@ -72,32 +87,20 @@ public class YeouijuLaunch : MonoBehaviour
             predictionLine.enabled = false;
             isYeouijuOn = true;
 
-            // 마우스 방향에 따라 오브젝트의 회전각 결정
-            var len             = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
-            var z               = Mathf.Atan2(len.y, len.x) * Mathf.Rad2Deg;
-            transform.rotation  = Quaternion.Euler(0, 0, z);
-
             yeouiju.Launched(this.transform.position, z);
             return;
         }
 
-        predictionLine.enabled = false;
-
+        // predictionLine.enabled = false;
         ReturnYeouiju();
     }
-
-
-    private void DrawPredictionLine()
-    {
-
-    }
-
 
     private void SetYeouijuFalse()
     {
         isYeouijuOn = false;
         prepareYeouiju = false;
     }
+
     public void SetLaunchStatus(bool isActive)
     {
         this.canLaunch = isActive;
