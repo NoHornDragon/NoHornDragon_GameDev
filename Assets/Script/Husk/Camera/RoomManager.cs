@@ -19,11 +19,11 @@ To doing this initialize roomstages active false
 */
 public class RoomManager : MonoBehaviour
 {
-    public event Action<PolygonCollider2D, float> CameraChangeEvent;
+    // public event Action<PolygonCollider2D, float> CameraChangeEvent;
     [SerializeField] private GameObject[] roomList;
-    private uint roomNumber;
-    private PolygonCollider2D confiner = null;
-    private float cameraSize;
+    [SerializeField] private uint roomNumber;
+    // private PolygonCollider2D confiner = null;
+    // private float cameraSize;
     
     private void Start()
     {
@@ -36,22 +36,20 @@ public class RoomManager : MonoBehaviour
         }
     }
 
-    public void RoomChange(uint inputRoomNo, PolygonCollider2D roomConfiner, float lensSize, bool isIn)
+    public void RoomChange(uint inputRoomNo, bool isIn)
     {
-        if(confiner == null)
-        {
-            // this means initial state
-            this.roomNumber = inputRoomNo;
-            this.confiner = roomConfiner;
-            this.cameraSize = lensSize;
-            CameraChangeEvent?.Invoke(roomConfiner, lensSize);
-            return;
-        }
+        // if(confiner == null)
+        // {
+        //     // this means initial state
+        //     this.roomNumber = inputRoomNo;
+        //     this.confiner = roomConfiner;
+        //     this.cameraSize = lensSize;
+        //     // CameraChangeEvent?.Invoke(roomConfiner, lensSize);
+        //     return;
+        // }
         if(isIn)
         {
             this.roomNumber = inputRoomNo;
-            this.confiner = roomConfiner;
-            this.cameraSize = lensSize;
             return;
         }
 
@@ -72,7 +70,7 @@ public class RoomManager : MonoBehaviour
 
 
         // finally change camera
-        CameraChangeEvent?.Invoke(confiner, cameraSize);
+        // CameraChangeEvent?.Invoke(confiner, cameraSize);
     }
 }
 

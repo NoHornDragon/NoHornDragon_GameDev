@@ -88,7 +88,6 @@ public class YeouijuReflection : MonoBehaviour
         }
         
         // end collision -> make disjoint2d
-        Debug.Log("여의주 연결");
         collisionEvent?.Invoke(this.transform.position);
         
         rigid.velocity = new Vector3(0, 0, 0);
