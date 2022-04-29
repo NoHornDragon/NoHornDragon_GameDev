@@ -16,6 +16,8 @@ public class PlayerGrapher : MonoBehaviour
     [SerializeField] private float minDistance;
     [SerializeField] private float jointMaxTime;
     [SerializeField] private float jointTimer;
+    [SerializeField] private float maxModifiable;
+    private float curModifiable;
     [Header("여의주 HUD")]
     [SerializeField] private GameObject coolTimeUI;
     [SerializeField] private Image coolTimeImage;
@@ -59,9 +61,13 @@ public class PlayerGrapher : MonoBehaviour
             return;
         }
 
-        joint.distance += Input.GetAxis("Vertical") * lineModifySpeed;
+        float modify = Input.GetAxis("Vertical") * lineModifySpeed;
+        joint.distance += modify;
 
-        if(joint.distance < minDistance)
+        curModifiable -= Mathf.Abs(modify);
+
+
+        if(joint.distance < minDistance || curModifiable < 0)
             deleteJointEvent?.Invoke();
         
         lineRenderer.SetPosition(1, this.transform.position);
@@ -105,6 +111,7 @@ public class PlayerGrapher : MonoBehaviour
 
     public void DeleteJoint()
     {
+        curModifiable = maxModifiable;
         nowJoint = false;
         SetLine(false);
     }
