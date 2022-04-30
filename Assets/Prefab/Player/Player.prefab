@@ -280,6 +280,7 @@ MonoBehaviour:
   minDistance: 1
   jointMaxTime: 10
   jointTimer: 0
+  maxModifiable: 5
   coolTimeUI: {fileID: 3960251306830892333}
   coolTimeImage: {fileID: 3960251306083635084}
 --- !u!1 &3960251306083635083
