@@ -4429,6 +4429,21 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3960251306022774834, guid: 6b8e24873c5884b49b90e6d77b13dcaa,
+        type: 3}
+      propertyPath: m_Positions.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3960251306022774834, guid: 6b8e24873c5884b49b90e6d77b13dcaa,
+        type: 3}
+      propertyPath: m_Positions.Array.data[1].z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3960251306022774834, guid: 6b8e24873c5884b49b90e6d77b13dcaa,
+        type: 3}
+      propertyPath: m_Positions.Array.data[2].z
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3960251306022774838, guid: 6b8e24873c5884b49b90e6d77b13dcaa,
         type: 3}
       propertyPath: m_RootOrder
@@ -4489,10 +4504,15 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 3960251306022774847, guid: 6b8e24873c5884b49b90e6d77b13dcaa,
+        type: 3}
+      propertyPath: canModifyAmount
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 8216678626746610351, guid: 6b8e24873c5884b49b90e6d77b13dcaa,
         type: 3}
       propertyPath: m_Positions.Array.size
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6b8e24873c5884b49b90e6d77b13dcaa, type: 3}
@@ -7148,7 +7168,7 @@ MonoBehaviour:
     clearCount: 0
     resetCount: 0
     stunedCount: 0
-    easyMode: 0
+    easyMode: 1
     playerPos: {x: 0, y: 0, z: 0}
     paperList: 0000000000000000000000000000000000000000
 --- !u!4 &1500971434

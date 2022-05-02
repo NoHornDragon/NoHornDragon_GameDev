@@ -13,12 +13,12 @@ public class PlayerGrapher : MonoBehaviour
 
     [Header("여의주 상태")]
     private bool nowJoint;
-    [SerializeField] private bool easyMode;
+    private bool easyMode;
     [SerializeField] private float minDistance;
     [SerializeField] private float jointMaxTime;
     private float jointTimer;
     [SerializeField] private float canModifyAmount;
-    [SerializeField] private float nowModify;
+    private float nowModify;
 
     [Header("여의주 HUD")]
     [SerializeField] private GameObject playerHUD;
