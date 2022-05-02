@@ -7148,7 +7148,7 @@ MonoBehaviour:
     clearCount: 0
     resetCount: 0
     stunedCount: 0
-    easyMode: 1
+    easyMode: 0
     playerPos: {x: 0, y: 0, z: 0}
     paperList: 0000000000000000000000000000000000000000
 --- !u!4 &1500971434

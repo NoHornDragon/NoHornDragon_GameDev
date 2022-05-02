@@ -4,10 +4,10 @@
     "clearCount": 0,
     "resetCount": 0,
     "stunedCount": 0,
-    "easyMode": true,
+    "easyMode": false,
     "playerPos": {
-        "x": 1.645039660047587e-8,
-        "y": -3.594989061355591,
+        "x": 0.0,
+        "y": 0.0,
         "z": 0.0
     },
     "paperList": [

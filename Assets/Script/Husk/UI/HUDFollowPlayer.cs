@@ -1,7 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-public class YoueiJuCoolTimeUI : MonoBehaviour
+
+public class HUDFollowPlayer : MonoBehaviour
 {
     private Transform playerPos;
     [SerializeField] private Vector3 UIOffset;

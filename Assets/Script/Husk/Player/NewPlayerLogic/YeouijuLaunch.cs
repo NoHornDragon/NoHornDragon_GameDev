@@ -67,7 +67,6 @@ public class YeouijuLaunch : MonoBehaviour
             // first collision ray
             predictionLine.SetPosition(1, predictionHit.point);
 
-            //! second collision ray -> HOLD
             //! ERROR : sometimes this calculate first.point, second.point is same
             // var reflectionDir = Vector2.Reflect(transform.right.normalized, predictionHit.normal);
             // var predictionHit2 = Physics2D.Raycast(predictionHit.point, reflectionDir, Mathf.Infinity, predictionLayerMask);

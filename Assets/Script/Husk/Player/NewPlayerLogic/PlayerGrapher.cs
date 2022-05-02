@@ -10,15 +10,20 @@ public class PlayerGrapher : MonoBehaviour
     [SerializeField] private float lineModifySpeed;
     private LineRenderer lineRenderer;
     private DistanceJoint2D joint;
+
     [Header("여의주 상태")]
     private bool nowJoint;
     [SerializeField] private bool easyMode;
     [SerializeField] private float minDistance;
     [SerializeField] private float jointMaxTime;
-    [SerializeField] private float jointTimer;
+    private float jointTimer;
+    [SerializeField] private float canModifyAmount;
+    [SerializeField] private float nowModify;
+
     [Header("여의주 HUD")]
-    [SerializeField] private GameObject coolTimeUI;
+    [SerializeField] private GameObject playerHUD;
     [SerializeField] private Image coolTimeImage;
+    [SerializeField] private Image modifyAmountImage;
 
 
     void Start()
@@ -36,14 +41,16 @@ public class PlayerGrapher : MonoBehaviour
         FindObjectOfType<YeouijuLaunch>().disJointEvent += DeleteJoint;
         FindObjectOfType<YeouijuReflection>().collisionEvent += MakeJoint;
         
+        // if player using easymode, make limit null and don't sub delegate
         easyMode = SaveData.instance.userData.UseEasyMode;
         if(easyMode)
         {
             coolTimeImage = null;
-            coolTimeUI = null;
+            playerHUD = null;
+            modifyAmountImage = null;
             return;
         }
-        // time limit is on only hard mode
+        // another limit is only in hard mode
         FindObjectOfType<YeouijuLaunch>().disJointEvent += SetHUDInitial;
         FindObjectOfType<YeouijuReflection>().collisionEvent += ActiveUI;
     }
@@ -54,20 +61,25 @@ public class PlayerGrapher : MonoBehaviour
         {
             SetLine(false);
             jointTimer = jointMaxTime;
+            nowModify = 0;
             if(!easyMode)
                 SetHUDInitial();
             return;
         }
-
-        joint.distance += Input.GetAxis("Vertical") * lineModifySpeed;
 
         if(joint.distance < minDistance)
             deleteJointEvent?.Invoke();
         
         lineRenderer.SetPosition(1, this.transform.position);
 
-        if(easyMode)    return;
+        
 
+        // modify grapher line
+        float inputModify = Input.GetAxis("Vertical") * lineModifySpeed;
+        if(inputModify != 0)
+            ModifyLine(inputModify);
+
+        if(easyMode)    return;
         // if game is hard mode, Timer is on
         jointTimer -= Time.deltaTime;
         coolTimeImage.fillAmount = jointTimer / jointMaxTime;
@@ -78,6 +90,22 @@ public class PlayerGrapher : MonoBehaviour
             deleteJointEvent?.Invoke();
         }
 
+    }
+
+    void ModifyLine(float amount)
+    {
+        // if all use modify amount, player can't modify line
+        if(nowModify > canModifyAmount)    return;
+        
+        // modify yeouiju line
+        joint.distance += amount;
+
+        if(easyMode)                       return;
+
+        nowModify += Mathf.Abs(amount);
+
+        // set hud 
+        modifyAmountImage.fillAmount = (canModifyAmount - nowModify) / canModifyAmount;
     }
 
     public bool NowJoint()
@@ -100,7 +128,7 @@ public class PlayerGrapher : MonoBehaviour
 
     public void ActiveUI(Vector2 dummy)
     {
-        coolTimeUI.SetActive(true);
+        playerHUD.SetActive(true);
     }
 
     public void DeleteJoint()
@@ -118,6 +146,8 @@ public class PlayerGrapher : MonoBehaviour
     private void SetHUDInitial()
     {
         coolTimeImage.fillAmount = 1;
-        coolTimeUI.SetActive(false);
+        modifyAmountImage.fillAmount = 1;
+
+        playerHUD.SetActive(false);
     }
 }
