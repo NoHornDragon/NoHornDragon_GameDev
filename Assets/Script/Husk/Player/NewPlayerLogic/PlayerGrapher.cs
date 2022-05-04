@@ -28,13 +28,14 @@ public class PlayerGrapher : MonoBehaviour
 
     void Start()
     {
-        SetHUDInitial();
-        lineModifySpeed *= -1;
-        
-
         lineRenderer = GetComponent<LineRenderer>();
-        joint = GetComponent<DistanceJoint2D>();
+        joint = GetComponent<DistanceJoint2D>();   
+        easyMode = SaveData.instance.userData.UseEasyMode;     
+        
+        SetHUDInitial();
+        lineModifySpeed *= -1;  
 
+        // Set DistanceJoint2D's anchor to player
         joint.anchor = Vector3.zero;
         SetLine(false);
 
@@ -42,7 +43,6 @@ public class PlayerGrapher : MonoBehaviour
         FindObjectOfType<YeouijuReflection>().collisionEvent += MakeJoint;
         
         // if player using easymode, make limit null and don't sub delegate
-        easyMode = SaveData.instance.userData.UseEasyMode;
         if(easyMode)
         {
             coolTimeImage = null;
@@ -92,6 +92,8 @@ public class PlayerGrapher : MonoBehaviour
 
     }
 
+
+    // 
     void ModifyLine(float amount)
     {
         // if all use modify amount, player can't modify line
@@ -102,6 +104,7 @@ public class PlayerGrapher : MonoBehaviour
 
         if(easyMode)                       return;
 
+        // hard mode have modify limit
         nowModify += Mathf.Abs(amount);
 
         // set hud 
@@ -126,6 +129,7 @@ public class PlayerGrapher : MonoBehaviour
         SetLine(true);
     }
 
+    // active player HUDs. only in hardmode
     public void ActiveUI(Vector2 dummy)
     {
         playerHUD.SetActive(true);
@@ -143,6 +147,7 @@ public class PlayerGrapher : MonoBehaviour
         joint.enabled = active;
     }
 
+    // return HUD UI to initial
     private void SetHUDInitial()
     {
         coolTimeImage.fillAmount = 1;

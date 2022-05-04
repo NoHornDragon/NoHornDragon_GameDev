@@ -9,6 +9,7 @@ public class HUDFollowPlayer : MonoBehaviour
     private Camera cam;
     void Start()
     {   
+        // if using easy mode, game don't need this hud
         if(SaveData.instance.userData.UseEasyMode)  Destroy(gameObject);
 
         playerPos = transform.parent.parent;
@@ -17,6 +18,7 @@ public class HUDFollowPlayer : MonoBehaviour
 
     void Update()
     {
+        // following player
         transform.position = cam.WorldToScreenPoint(playerPos.position + UIOffset);
     }
 }
