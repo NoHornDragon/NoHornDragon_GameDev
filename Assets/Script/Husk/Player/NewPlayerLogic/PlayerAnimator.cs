@@ -28,10 +28,9 @@ public class PlayerAnimator : MonoBehaviour
         anim.SetBool("stuned", player.stuned);
         anim.SetBool("throwed", player.throwed);
 
-        // if don't want flip while swing
+        // player flip by mouse direction
         if(!player.nowJoint) 
         {
-            // player flip by mouse direction
             if(Camera.main.ScreenToWorldPoint(Input.mousePosition).x > transform.position.x)
             {
                 baseObject.localScale = rightScale;
@@ -43,7 +42,7 @@ public class PlayerAnimator : MonoBehaviour
             return;
         }
 
-        // player flip by velocity
+        // player flip by velocity when jointed
         if(player.onGround) return;
         if(rigid.velocity.x < 0)
         {
@@ -53,12 +52,5 @@ public class PlayerAnimator : MonoBehaviour
         {
             baseObject.localScale = rightScale;
         }
-
     }
-
-    private void PlayerJointAnimation(Vector2 dummyinput)
-    {
-        this.transform.localPosition = new Vector3(-0.8f, -0.43f, 0);
-    }
-
 }

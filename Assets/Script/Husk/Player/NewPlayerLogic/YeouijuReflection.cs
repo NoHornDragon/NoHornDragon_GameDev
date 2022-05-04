@@ -42,6 +42,7 @@ public class YeouijuReflection : MonoBehaviour
         transform.position = Vector3.MoveTowards(transform.position, player.position, yeouijuSpeed * 3f * Time.deltaTime);
     }
 
+    // will use in launch time
     public void Launched(Vector3 position, float rotation)
     {
         reflectCount = 0;
