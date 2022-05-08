@@ -28,6 +28,7 @@ public class YeouijuReflection : MonoBehaviour
 
         FindObjectOfType<YeouijuLaunch>().disJointEvent += YeouijuFollowPlayer;
         FindObjectOfType<PlayerCollider>().playerChangeEvent += SetYeouijuSprite;
+        coll.enabled = false;
     }
 
     private void FixedUpdate()
@@ -41,6 +42,7 @@ public class YeouijuReflection : MonoBehaviour
         transform.position = Vector3.MoveTowards(transform.position, player.position, yeouijuSpeed * 3f * Time.deltaTime);
     }
 
+    // will use in launch time
     public void Launched(Vector3 position, float rotation)
     {
         reflectCount = 0;
@@ -87,7 +89,6 @@ public class YeouijuReflection : MonoBehaviour
         }
         
         // end collision -> make disjoint2d
-        Debug.Log("여의주 연결");
         collisionEvent?.Invoke(this.transform.position);
         
         rigid.velocity = new Vector3(0, 0, 0);
