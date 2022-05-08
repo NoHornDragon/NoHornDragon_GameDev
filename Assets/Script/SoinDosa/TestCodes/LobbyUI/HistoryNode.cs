@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 public class HistoryNode : MonoBehaviour
 {
     public Sprite image;
@@ -10,4 +11,11 @@ public class HistoryNode : MonoBehaviour
     
     [Header("종이 설명, text[0] = kor, text[1] = eng")]
     public string[] description;
+
+    public Image childImage;
+
+    private void Awake()
+    {
+        childImage = transform.GetChild(0).GetComponent<Image>();
+    }
 }

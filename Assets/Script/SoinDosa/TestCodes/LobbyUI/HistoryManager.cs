@@ -40,6 +40,8 @@ public class HistoryManager : MonoBehaviour
         {
             if (!getNodes[i])
                 nodes[i].GetComponent<Button>().interactable = false;
+            else
+                nodes[i].childImage.sprite = nodes[i].image;
         }
     }
     public void DescriptionPanelOpen(int _val)
