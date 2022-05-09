@@ -10,7 +10,6 @@ public class YeouijuLaunch : MonoBehaviour
     private LineRenderer predictionLine;
     private int predictionLayerMask;
     private RaycastHit2D predictionHit;
-    private RaycastHit2D predictionHit2;
     [SerializeField] private bool canLaunch;
     [SerializeField] private bool prepareYeouiju;
     private bool isYeouijuOn;
@@ -97,13 +96,13 @@ public class YeouijuLaunch : MonoBehaviour
         var inDirection = (predictionHit.point - (Vector2)transform.position).normalized;
         var reflectionDir = Vector2.Reflect(inDirection, predictionHit.normal);
 
-        // By multiply 0.0001, can have detail calculation
-        predictionHit2 = Physics2D.Raycast(predictionHit.point + (reflectionDir * 0.0001f), reflectionDir, Mathf.Infinity, predictionLayerMask);
+        // By multiply 0.001, can have detail calculation
+        predictionHit = Physics2D.Raycast(predictionHit.point + (reflectionDir * 0.001f), reflectionDir, Mathf.Infinity, predictionLayerMask);
 
-        if(predictionHit2.collider == null)
+        if(predictionHit.collider == null)
             return;
         
-        predictionLine.SetPosition(2, predictionHit2.point);
+        predictionLine.SetPosition(2, predictionHit.point);
 
         // finally render linerenderer
         predictionLine.enabled = true;
