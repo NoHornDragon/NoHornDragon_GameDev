@@ -147,7 +147,7 @@ public class PlayerMovement : MonoBehaviour
         throwed = false;
     }
 
-    // TODO : 디버그용임
+    // TODO : For debug
     void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
@@ -160,7 +160,7 @@ public class PlayerMovement : MonoBehaviour
         return rigid.velocity.x > 0;
     }
 
-    // is using easy mode, save player's position
+    // Now using easy mode, save player's position in 10s
     WaitForSeconds saveCycle = new WaitForSeconds(10f);
     IEnumerator SavePlayerPosition()
     {

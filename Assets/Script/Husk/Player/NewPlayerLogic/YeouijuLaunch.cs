@@ -10,6 +10,7 @@ public class YeouijuLaunch : MonoBehaviour
     private LineRenderer predictionLine;
     private int predictionLayerMask;
     private RaycastHit2D predictionHit;
+    private RaycastHit2D predictionHit2;
     [SerializeField] private bool canLaunch;
     [SerializeField] private bool prepareYeouiju;
     private bool isYeouijuOn;
@@ -28,12 +29,14 @@ public class YeouijuLaunch : MonoBehaviour
 
         disJointEvent += SetYeouijuFalse;
 
-        FindObjectOfType<PlayerMovement>().PlayerRecoverEvent += SetLaunchStatus;
+        PlayerMovement playerMovement = FindObjectOfType<PlayerMovement>();
+        playerMovement.PlayerRecoverEvent += SetLaunchStatus;
+        playerMovement.playerResetEvent += ReturnYeouiju;
+
         PlayerCollider playerCollider = FindObjectOfType<PlayerCollider>();
         playerCollider.playerChangeEvent += SetLaunchStatus;
         playerCollider.playerStunEvent += StunedYeouiju;
-
-        FindObjectOfType<PlayerMovement>().playerResetEvent += ReturnYeouiju;
+        
         FindObjectOfType<YeouijuReflection>().yeouijuReturnEvent += ReturnYeouiju;
         FindObjectOfType<PlayerGrapher>().deleteJointEvent += ReturnYeouiju;
     }
@@ -52,36 +55,15 @@ public class YeouijuLaunch : MonoBehaviour
         var z               = Mathf.Atan2(len.y, len.x) * Mathf.Rad2Deg;
         transform.rotation  = Quaternion.Euler(0, 0, z);
 
-        if(!isYeouijuOn && prepareYeouiju)
+        // before launch yeouiju, draw prediction line (only in easy mode)
+        if(!isYeouijuOn && prepareYeouiju && usingEasyMode)
         {
-            // Draw Prediction Line
-            predictionLine.SetPosition(0, this.transform.position);
-            predictionHit = Physics2D.Raycast(this.gameObject.transform.position, transform.right, Mathf.Infinity, predictionLayerMask);
-
-            if(predictionHit.collider == null)
-            {
-                predictionLine.enabled = false;
-                return;
-            }
-
-            // first collision ray
-            predictionLine.SetPosition(1, predictionHit.point);
-
-            //! second collision ray -> HOLD
-            //! ERROR : sometimes this calculate first.point, second.point is same
-            // var reflectionDir = Vector2.Reflect(transform.right.normalized, predictionHit.normal);
-            // var predictionHit2 = Physics2D.Raycast(predictionHit.point, reflectionDir, Mathf.Infinity, predictionLayerMask);
-
-            // if(predictionHit2.collider == null)
-            //     return;
-            
-            // predictionLine.SetPosition(2, predictionHit2.point);
-
-            predictionLine.enabled = true;
+            DrawPredictionLine();
         }
 
         if(!Input.GetMouseButtonUp(0))  return;
-    
+
+        // By button up, yeouiju will launched or returned
         if(!isYeouijuOn)
         {
             predictionLine.enabled = false;
@@ -91,8 +73,40 @@ public class YeouijuLaunch : MonoBehaviour
             return;
         }
 
-        // predictionLine.enabled = false;
         ReturnYeouiju();
+    }
+
+    /* Draw launch prediction line */
+    private void DrawPredictionLine()
+    {
+        // Draw Prediction Line
+        predictionLine.SetPosition(0, this.transform.position);
+        predictionHit = Physics2D.Raycast(transform.position, transform.right, Mathf.Infinity, predictionLayerMask);
+
+        if(predictionHit.collider == null)
+        {
+            // no collision => don't draw prediction line
+            predictionLine.enabled = false;
+            return;
+        }
+
+        // draw first collision point
+        predictionLine.SetPosition(1, predictionHit.point);
+
+        // calculate second ray by Vector2.Reflect
+        var inDirection = (predictionHit.point - (Vector2)transform.position).normalized;
+        var reflectionDir = Vector2.Reflect(inDirection, predictionHit.normal);
+
+        // By multiply 0.0001, can have detail calculation
+        predictionHit2 = Physics2D.Raycast(predictionHit.point + (reflectionDir * 0.0001f), reflectionDir, Mathf.Infinity, predictionLayerMask);
+
+        if(predictionHit2.collider == null)
+            return;
+        
+        predictionLine.SetPosition(2, predictionHit2.point);
+
+        // finally render linerenderer
+        predictionLine.enabled = true;
     }
 
     private void SetYeouijuFalse()
