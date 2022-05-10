@@ -22,13 +22,16 @@ public class RoomManager : MonoBehaviour
     // public event Action<PolygonCollider2D, float> CameraChangeEvent;
     [SerializeField] private GameObject[] roomList;
     [SerializeField] private uint roomNumber;
+    // TODO : 테스트 후 제거
+    public bool nowTesting;
     // private PolygonCollider2D confiner = null;
     // private float cameraSize;
     
     private void Start()
     {
-
         roomList = GameObject.FindGameObjectsWithTag("Room");
+
+        if(nowTesting)  return;
 
         for(int i = 2; i < roomList.Length; i++)
         {
@@ -38,6 +41,7 @@ public class RoomManager : MonoBehaviour
 
     public void RoomChange(uint inputRoomNo, bool isIn)
     {
+        if(nowTesting)  return;
         // if(confiner == null)
         // {
         //     // this means initial state
