@@ -4185,6 +4185,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b52d119645b504b49b9e403cab17fa4e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxZoomTime: 5
+  zoomTimer: 0
+  zoomCoolTime: 5
+  coolTimer: 0
+  zoomSpeed: 2
+  maxCameraSize: 9
+  initialLensSize: 0
+  initialized: 0
 --- !u!1001 &971015465
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4192,6 +4200,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1229649951096129620, guid: 6b8e24873c5884b49b90e6d77b13dcaa,
+        type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
     - target: {fileID: 3960251306022774834, guid: 6b8e24873c5884b49b90e6d77b13dcaa,
         type: 3}
       propertyPath: m_Positions.Array.size
@@ -4271,6 +4284,26 @@ PrefabInstance:
         type: 3}
       propertyPath: canModifyAmount
       value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 4309562220606090553, guid: 6b8e24873c5884b49b90e6d77b13dcaa,
+        type: 3}
+      propertyPath: cameraMoveSpeed
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4309562220606090553, guid: 6b8e24873c5884b49b90e6d77b13dcaa,
+        type: 3}
+      propertyPath: cameraMoveAmount
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4309562220606090553, guid: 6b8e24873c5884b49b90e6d77b13dcaa,
+        type: 3}
+      propertyPath: maxVerticalAmount
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4309562220606090553, guid: 6b8e24873c5884b49b90e6d77b13dcaa,
+        type: 3}
+      propertyPath: maxHorizontalAmount
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 8216678626746610351, guid: 6b8e24873c5884b49b90e6d77b13dcaa,
         type: 3}
@@ -12339,6 +12372,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   roomList: []
   roomNumber: 0
+  nowTesting: 0
 --- !u!4 &1971242359
 Transform:
   m_ObjectHideFlags: 0
