@@ -10,7 +10,7 @@ public class PlayerMoveCamera : MonoBehaviour
 
     [SerializeField] [Range(0, 0.3f)] 
     private float cameraMoveSpeed;
-    [SerializeField] private Vector3 nowInput = new Vector3(0, 0, 0);
+    private Vector3 nowInput = new Vector3(0, 0, 0);
     private bool initialized;
 
     private void Start()
