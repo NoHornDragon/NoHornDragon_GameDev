@@ -8,17 +8,19 @@ using UnityEngine.UI;
 [System.Serializable]
 class SettingsValue
 {
-    public SettingsValue(int _resolutionVal, float _bgmVal, float _effectVal, int _languageVal)
+    public SettingsValue(int _resolutionVal, float _bgmVal, float _effectVal, int _languageVal, bool _isAutoSave)
     {
         this.resolutionVal = _resolutionVal;
         this.bgmVal = _bgmVal;
         this.effectVal = _effectVal;
         this.languageVal = _languageVal;
+        this.isAutoSave = _isAutoSave;
     }
     public int resolutionVal;
     public float bgmVal;
     public float effectVal;
     public int languageVal;
+    public bool isAutoSave;
 }
 public class SettingsManager : MonoBehaviour
 {
@@ -33,11 +35,10 @@ public class SettingsManager : MonoBehaviour
     public Dropdown languageDropdown;
     public Slider bgmSlider;
     public Slider effectSlider;
+    public Toggle autoSaveToggle;
+    public GameObject autoSavePanel;
+    public GameObject dataResetPanel;
     // Start is called before the first frame update
-
-
-    
-
 
     private void Awake()
     {
@@ -88,12 +89,34 @@ public class SettingsManager : MonoBehaviour
                     break;
             }
         }
-        
+    }
+
+    public void AutoSaveAsk()
+    {
+        if (!autoSaveToggle.isOn)
+        {
+
+        }
+    }
+
+    public void AutoSaveSet(bool _val)
+    {
+        autoSaveToggle.isOn = _val;
+    }
+
+    public void DataResetAsk()
+    {
+
+    }
+
+    public void DataReset()
+    {
+
     }
 
     public void SaveSettingsValue()
     {
-        SettingsValue saveData = new SettingsValue(resolutionDropdown.value, bgmSlider.value, effectSlider.value, languageDropdown.value);
+        SettingsValue saveData = new SettingsValue(resolutionDropdown.value, bgmSlider.value, effectSlider.value, languageDropdown.value, autoSaveToggle.isOn);
 
         string jsonData = JsonUtility.ToJson(saveData);
         byte[] data = Encoding.UTF8.GetBytes(jsonData);
@@ -122,6 +145,7 @@ public class SettingsManager : MonoBehaviour
         bgmSlider.value = saveData.bgmVal;
         effectSlider.value = saveData.effectVal;
         languageDropdown.value = saveData.languageVal;
+        autoSaveToggle.isOn = saveData.isAutoSave;
 
         ChangeResolution();
         ChangeLanguage();

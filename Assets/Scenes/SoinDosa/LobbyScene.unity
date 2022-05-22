@@ -13258,7 +13258,18 @@ MonoBehaviour:
   m_Group: {fileID: 0}
   onValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2120515784}
+        m_MethodName: SaveSettingsValue
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_IsOn: 0
 --- !u!1 &1183847332
 GameObject:
@@ -21730,6 +21741,9 @@ MonoBehaviour:
   languageDropdown: {fileID: 444336740}
   bgmSlider: {fileID: 2027608241}
   effectSlider: {fileID: 413752116}
+  autoSaveToggle: {fileID: 1183132245}
+  autoSavePanel: {fileID: 1492617363}
+  dataResetPanel: {fileID: 0}
 --- !u!4 &2120515785
 Transform:
   m_ObjectHideFlags: 0
