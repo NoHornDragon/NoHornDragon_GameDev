@@ -5,10 +5,11 @@ using System;
 
 public class PlayerEnterConfiner : MonoBehaviour
 {
-    public event Action<uint, bool> ActiveRoomEvent;
+    public event Action<uint, bool, uint> ActiveRoomEvent;
     private PolygonCollider2D polygonCollider2D;
     // [SerializeField] private float lensSize;
     [SerializeField] private uint roomNo;
+    [SerializeField] private uint stageIndex;
     private void Start()
     {
         polygonCollider2D = GetComponent<PolygonCollider2D>();
@@ -21,7 +22,7 @@ public class PlayerEnterConfiner : MonoBehaviour
         if(other.CompareTag("Player"))
         {
             Debug.Log($"room {roomNo} - Enter");
-            ActiveRoomEvent?.Invoke(roomNo, true);
+            ActiveRoomEvent?.Invoke(roomNo, true, stageIndex);
         }
     }
 
@@ -30,7 +31,7 @@ public class PlayerEnterConfiner : MonoBehaviour
         if(other.CompareTag("Player"))
         {
             Debug.Log($"room {roomNo} - Exit");
-            ActiveRoomEvent?.Invoke(roomNo, false);
+            ActiveRoomEvent?.Invoke(roomNo, false, stageIndex);
         }
     }
 }

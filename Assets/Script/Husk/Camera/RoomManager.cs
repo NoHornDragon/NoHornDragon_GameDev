@@ -39,7 +39,7 @@ public class RoomManager : MonoBehaviour
         }
     }
 
-    public void RoomChange(uint inputRoomNo, bool isIn)
+    public void RoomChange(uint inputRoomNo, bool isIn, uint dummy)
     {
         if(nowTesting)  return;
         // if(confiner == null)
