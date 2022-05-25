@@ -31,6 +31,7 @@ public class SettingsManager : MonoBehaviour
 
     [SerializeField]
     private Dropdown resolutionDropdown;
+    private bool isAutoSaving;
 
     public Dropdown languageDropdown;
     public Slider bgmSlider;
@@ -93,25 +94,31 @@ public class SettingsManager : MonoBehaviour
 
     public void AutoSaveAsk()
     {
-        if (!autoSaveToggle.isOn)
+        if (autoSaveToggle.isOn && !isAutoSaving)
         {
-
+            autoSavePanel.SetActive(true);
+        }
+        else if(!autoSaveToggle.isOn)
+        {
+            isAutoSaving = false;
         }
     }
 
     public void AutoSaveSet(bool _val)
     {
+        autoSavePanel.SetActive(false);
         autoSaveToggle.isOn = _val;
     }
 
-    public void DataResetAsk()
+    public void DataResetAsk(bool _val)
     {
-
+        dataResetPanel.SetActive(_val);
     }
 
     public void DataReset()
     {
-
+        Debug.Log("Data reset!");
+        dataResetPanel.SetActive(false);
     }
 
     public void SaveSettingsValue()
@@ -145,7 +152,10 @@ public class SettingsManager : MonoBehaviour
         bgmSlider.value = saveData.bgmVal;
         effectSlider.value = saveData.effectVal;
         languageDropdown.value = saveData.languageVal;
+        if (saveData.isAutoSave)
+            isAutoSaving = true;
         autoSaveToggle.isOn = saveData.isAutoSave;
+        
 
         ChangeResolution();
         ChangeLanguage();
