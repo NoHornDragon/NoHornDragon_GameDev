@@ -13,6 +13,8 @@ public class NPCTalks
 }
 public class NPC : MonoBehaviour
 {
+    private Coroutine crtPtr;
+
     [Header("플레이어 인식 거리")]
     public float catchDistance;
     [Header("플레이어 멀리갔음을 인식하는 거리")]
@@ -53,15 +55,7 @@ public class NPC : MonoBehaviour
         if(collision.tag == "Player")
         {
             visitText.SetActive(true);
-
-            for (int i = npcTalks.Length - 1; i >= 0; i--)
-            {
-                if(visitCount >= npcTalks[i].count)
-                {
-                    visitText.GetComponent<TextMesh>().text = npcTalks[i].talk[SettingsManager.instance.languageDropdown.value];
-                    break;
-                }
-            }
+            crtPtr = StartCoroutine(TalkCoroutine());
         }
     }
 
@@ -69,9 +63,28 @@ public class NPC : MonoBehaviour
     {
         if (collision.tag == "Player")
         {
+            if(crtPtr != null)
+                StopCoroutine(crtPtr);
+            visitText.GetComponent<TextMesh>().text = "";
             visitText.SetActive(false);
         }
     }
 
+    IEnumerator TalkCoroutine()
+    {
+        for (int i = npcTalks.Length - 1; i >= 0; i--)
+        {
+            if (visitCount >= npcTalks[i].count)
+            {
+                for(int j = 0; j < npcTalks[i].talk[SettingsManager.instance.languageDropdown.value].Length; j++)
+                {
+                    visitText.GetComponent<TextMesh>().text = npcTalks[i].talk[SettingsManager.instance.languageDropdown.value].Substring(0, j);
+                    yield return new WaitForSeconds(0.05f);
+                }
+                visitText.GetComponent<TextMesh>().text = npcTalks[i].talk[SettingsManager.instance.languageDropdown.value];
+                break;
+            }
+        }
+    }
 
 }
