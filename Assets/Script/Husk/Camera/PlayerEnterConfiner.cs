@@ -13,7 +13,7 @@ public class PlayerEnterConfiner : MonoBehaviour
     {
         polygonCollider2D = GetComponent<PolygonCollider2D>();
 
-        ActiveRoomEvent += FindObjectOfType<RoomManager>().RoomChange;
+        ActiveRoomEvent += FindObjectOfType<StageManager>().StageChange;
     }
 
     private void OnTriggerEnter2D(Collider2D other)

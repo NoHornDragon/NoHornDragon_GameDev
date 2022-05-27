@@ -16,12 +16,20 @@ public class ParallaxSprite : MonoBehaviour
     [SerializeField] private bool lockVertical;
     Vector3 newPosition;
 
-    void Start()
+    // void Start()
+    // {
+    //     FindObjectOfType<BackGroundScroller>().playerMoveEvent += MoveLayer;
+    // }
+
+    private void OnEnable()
     {
         FindObjectOfType<BackGroundScroller>().playerMoveEvent += MoveLayer;
     }
-
-    // OnEnable
+    
+    private void OnDisable()
+    {
+        FindObjectOfType<BackGroundScroller>().playerMoveEvent -= MoveLayer;
+    }
 
     void MoveLayer(float x, float y)
     {
