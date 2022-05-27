@@ -14,7 +14,7 @@ public class ParallaxSprite : MonoBehaviour
     [SerializeField] private bool lockHorizontal;
     [Tooltip("체크하면 상하 이동을 하지 않습니다.")]
     [SerializeField] private bool lockVertical;
-    Vector3 newPosition;
+    private Vector3 newPosition;
 
     // void Start()
     // {

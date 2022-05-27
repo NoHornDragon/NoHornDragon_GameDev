@@ -17,6 +17,8 @@ public class StageBackGroundManager : MonoBehaviour
         {
             confiner.ActiveRoomEvent += StageEvent;
         }
+
+        ActiveBG(false);
     }
 
     private void StageEvent(uint playerStage, bool isIn)
@@ -33,6 +35,8 @@ public class StageBackGroundManager : MonoBehaviour
 
     private void ActiveBG(bool isActive)
     {
+        if (nowActive == isActive) return;
+
         for(int i = 1; i < bgImages.Length; i++)
         {
             bgImages[i].gameObject.SetActive(isActive);
@@ -40,4 +44,4 @@ public class StageBackGroundManager : MonoBehaviour
 
         nowActive = isActive;
     }
-}
+}                                           
