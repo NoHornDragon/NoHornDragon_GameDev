@@ -21,6 +21,8 @@ public class ParallaxSprite : MonoBehaviour
         FindObjectOfType<BackGroundScroller>().playerMoveEvent += MoveLayer;
     }
 
+    // OnEnable
+
     void MoveLayer(float x, float y)
     {
         newPosition = transform.localPosition;
