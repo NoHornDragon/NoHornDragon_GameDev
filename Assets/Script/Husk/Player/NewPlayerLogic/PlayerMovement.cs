@@ -72,6 +72,7 @@ public class PlayerMovement : MonoBehaviour
 
         onGround = Physics2D.OverlapCircle((Vector2)transform.position + bottomOffset, collisionRadius, groundLayer);
 
+        // stun
         if(!onGround && !nowJoint)
         {
             stunTimer += Time.deltaTime;

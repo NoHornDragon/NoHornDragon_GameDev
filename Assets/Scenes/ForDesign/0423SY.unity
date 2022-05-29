@@ -5010,8 +5010,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da6c7b28751a7164da09362680ddc35e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  wiseSayingClass:
-    sayings: []
+  wiseSayings: []
   wiseSayingUI: {fileID: 905758223}
   wiseSayingText: {fileID: 260486373}
 --- !u!1 &1235008988

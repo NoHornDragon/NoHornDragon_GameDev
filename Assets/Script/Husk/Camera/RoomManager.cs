@@ -17,27 +17,35 @@ Seperate remembering, changing camera prevent below bug.
 And if change room, this class active only 3 rooms(previous, current, next). and make other room's active false
 To doing this initialize roomstages active false
 */
+
 public class RoomManager : MonoBehaviour
 {
     // public event Action<PolygonCollider2D, float> CameraChangeEvent;
     [SerializeField] private GameObject[] roomList;
     [SerializeField] private uint roomNumber;
+    // TODO : 테스트 후 제거
+    public bool nowTesting;
     // private PolygonCollider2D confiner = null;
     // private float cameraSize;
+    [Header("스테이지")]
+    [SerializeField] private GameObject[] stageList;
+    private uint stageNumber;
     
-    private void Start()
+    // private void Start()
+    // {
+    //     roomList = GameObject.FindGameObjectsWithTag("Room");
+
+    //     if(nowTesting)  return;
+
+    //     for(int i = 2; i < roomList.Length; i++)
+    //     {
+    //         roomList[i].SetActive(false);
+    //     }
+    // }
+
+    public void RoomChange(uint inputStageNumber, bool isIn)
     {
-
-        roomList = GameObject.FindGameObjectsWithTag("Room");
-
-        for(int i = 2; i < roomList.Length; i++)
-        {
-            roomList[i].SetActive(false);
-        }
-    }
-
-    public void RoomChange(uint inputRoomNo, bool isIn)
-    {
+        if(nowTesting)  return;
         // if(confiner == null)
         // {
         //     // this means initial state
@@ -49,24 +57,24 @@ public class RoomManager : MonoBehaviour
         // }
         if(isIn)
         {
-            this.roomNumber = inputRoomNo;
+            this.stageNumber = inputStageNumber;
             return;
         }
 
-        if(inputRoomNo == roomNumber)   return;
+        if(inputStageNumber == stageNumber)   return;
 
         // Deactive room list => distance 2 from current room
         // should active [-2], [-1(current)], [0]
-        if(roomNumber > 1)
-            roomList[roomNumber-2].SetActive(true);
-        if(roomNumber < roomList.Length)
-            roomList[roomNumber].SetActive(true);
+        // if(roomNumber > 1)
+        //     roomList[roomNumber-2].SetActive(true);
+        // if(roomNumber < roomList.Length)
+        //     roomList[roomNumber].SetActive(true);
         
-        // deactive [-3]. [+1] room
-        if(roomNumber >= 3)
-            roomList[roomNumber-3].SetActive(false);
-        if(roomNumber + 1 < roomList.Length)
-            roomList[roomNumber+1].SetActive(false);
+        // // deactive [-3]. [+1] room
+        // if(roomNumber >= 3)
+        //     roomList[roomNumber-3].SetActive(false);
+        // if(roomNumber + 1 < roomList.Length)
+        //     roomList[roomNumber+1].SetActive(false);
 
 
         // finally change camera

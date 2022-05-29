@@ -14,11 +14,21 @@ public class ParallaxSprite : MonoBehaviour
     [SerializeField] private bool lockHorizontal;
     [Tooltip("체크하면 상하 이동을 하지 않습니다.")]
     [SerializeField] private bool lockVertical;
-    Vector3 newPosition;
+    private Vector3 newPosition;
 
-    void Start()
+    // void Start()
+    // {
+    //     FindObjectOfType<BackGroundScroller>().playerMoveEvent += MoveLayer;
+    // }
+
+    private void OnEnable()
     {
         FindObjectOfType<BackGroundScroller>().playerMoveEvent += MoveLayer;
+    }
+    
+    private void OnDisable()
+    {
+        FindObjectOfType<BackGroundScroller>().playerMoveEvent -= MoveLayer;
     }
 
     void MoveLayer(float x, float y)
