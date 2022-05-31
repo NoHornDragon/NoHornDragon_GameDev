@@ -6,13 +6,10 @@ using System;
 public class PlayerEnterConfiner : MonoBehaviour
 {
     public event Action<uint, bool> ActiveRoomEvent;
-    private PolygonCollider2D polygonCollider2D;
     // [SerializeField] private float lensSize;
     [SerializeField] private uint stageIndex;
     private void Start()
     {
-        polygonCollider2D = GetComponent<PolygonCollider2D>();
-
         ActiveRoomEvent += FindObjectOfType<StageManager>().StageChange;
     }
 

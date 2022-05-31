@@ -11,9 +11,9 @@ public class StageBackGroundManager : MonoBehaviour
     private void Start()
     {
         bgImages = gameObject.GetComponentsInChildren<Transform>();
-    
+
         PlayerEnterConfiner[] confiners = FindObjectsOfType<PlayerEnterConfiner>();
-        foreach(PlayerEnterConfiner confiner in confiners)
+        foreach (PlayerEnterConfiner confiner in confiners)
         {
             confiner.ActiveRoomEvent += StageEvent;
         }
@@ -35,7 +35,7 @@ public class StageBackGroundManager : MonoBehaviour
     {
         if (nowActive == isActive) return;
 
-        for(int i = 1; i < bgImages.Length; i++)
+        for(int i = 0; i < bgImages.Length; i++)
         {
             bgImages[i].gameObject.SetActive(isActive);
         }

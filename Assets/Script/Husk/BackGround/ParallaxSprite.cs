@@ -16,19 +16,27 @@ public class ParallaxSprite : MonoBehaviour
     [SerializeField] private bool lockVertical;
     private Vector3 newPosition;
 
+    private void Awake()
+    {
+        if (moveAmount == 0)
+            Destroy(GetComponent<ParallaxSprite>());
+    }
 
     private void OnEnable()
     {
+        Debug.Log("델리게이트 추가" + transform.parent.name);
         FindObjectOfType<BackGroundScroller>().playerMoveEvent += MoveLayer;
     }
     
     private void OnDisable()
     {
+        Debug.Log("델리게이트 제거" + transform.parent.name);
         FindObjectOfType<BackGroundScroller>().playerMoveEvent -= MoveLayer;
     }
 
     void MoveLayer(float x, float y)
     {
+        Debug.Log("move");
         newPosition = transform.localPosition;
         if(!lockHorizontal)   newPosition.x -= x * moveAmount;
         if(!lockVertical)     newPosition.y -= y * moveAmount;

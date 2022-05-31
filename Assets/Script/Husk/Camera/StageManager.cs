@@ -6,6 +6,14 @@ public class StageManager : MonoBehaviour
 {
     [SerializeField] private GameObject[] stageList;
 
+    private void Awake()
+    {
+        for(int i = 0; i < stageList.Length; i++)
+        {
+            stageList[i].SetActive(false);
+        }
+    }
+
 
     /// <param name="inputStageNumber">스테이지 번호</param>
     /// <param name="isIn">플레이어가 들어오면 true, 아니면 false</param>

@@ -17,7 +17,8 @@ public class BackGroundScroller : MonoBehaviour
         float xChangeAmount = prevPos.x - transform.position.x;
         float yChangeAmount = prevPos.y - transform.position.y;
 
-        if(xChangeAmount != 0 || yChangeAmount != 0){
+        if(xChangeAmount != 0 || yChangeAmount != 0)
+        {
             playerMoveEvent?.Invoke(xChangeAmount, yChangeAmount);
             prevPos = transform.position;
         }
