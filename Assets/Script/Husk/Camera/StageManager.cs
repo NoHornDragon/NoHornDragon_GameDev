@@ -5,20 +5,19 @@ using UnityEngine;
 public class StageManager : MonoBehaviour
 {
     [SerializeField] private GameObject[] stageList;
-    [SerializeField] private uint nowStageNumber;
 
- 
+
+    /// <param name="inputStageNumber">스테이지 번호</param>
+    /// <param name="isIn">플레이어가 들어오면 true, 아니면 false</param>
     public void StageChange(uint inputStageNumber, bool isIn)
     {
         if(isIn)
         {
             stageList[inputStageNumber - 1].SetActive(true);
-            this.nowStageNumber = inputStageNumber;
             return;
         }
 
         stageList[inputStageNumber - 1].SetActive(false);
-        // if (nowStageNumber == inputStageNumber) return;
     }
 }
 
