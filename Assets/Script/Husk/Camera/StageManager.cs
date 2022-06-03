@@ -5,13 +5,14 @@ using UnityEngine;
 public class StageManager : MonoBehaviour
 {
     [SerializeField] private GameObject[] stageList;
+    private uint stageNumber;
 
     private void Awake()
     {
-        for(int i = 0; i < stageList.Length; i++)
-        {
-            stageList[i].SetActive(false);
-        }
+        //for(int i = 0; i < stageList.Length; i++)
+        //{
+        //    stageList[i].SetActive(false);
+        //}
     }
 
 
@@ -21,11 +22,20 @@ public class StageManager : MonoBehaviour
     {
         if(isIn)
         {
-            stageList[inputStageNumber - 1].SetActive(true);
+            stageNumber = inputStageNumber;
             return;
         }
 
-        stageList[inputStageNumber - 1].SetActive(false);
+        if (inputStageNumber == stageNumber) return;
+
+        if (inputStageNumber > 1)
+            stageList[inputStageNumber - 2].SetActive(true);
+        if (inputStageNumber < stageList.Length)
+            stageList[inputStageNumber].SetActive(true);
+
+        if (inputStageNumber >= 3)
+            stageList[inputStageNumber - 3].SetActive(false);
+        if (inputStageNumber + 1 < stageList.Length)
+            stageList[inputStageNumber + 1].SetActive(false);
     }
 }
-
