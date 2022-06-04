@@ -3,6 +3,49 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
+
+public class SavePos
+{
+    public readonly Vector3 pos;
+
+    public SavePos(Vector3 newPos)
+    {
+        pos = newPos;
+    }
+}
+
+public class BackGroundScroller : MonoBehaviour
+{
+    public event Action<float, float> playerMoveEvent;
+    Vector2 prevPos;
+    SavePos initialPos;
+    public Transform player;
+
+    private void Awake()
+    {
+        player = GameObject.FindWithTag("Player").transform;
+        initialPos = new SavePos(this.transform.position);
+    }
+
+    private void Start()
+    {
+        prevPos = transform.position;
+    }
+
+    private void Update()
+    {
+        playerMoveEvent?.Invoke(initialPos.pos.x - transform.position.x, initialPos.pos.y - transform.position.y);
+    }
+
+    public void test(uint d, bool input)
+    {
+        if(!input)  return;
+
+        initialPos = new SavePos(player.position);
+    }
+}
+
+/*
 public class BackGroundScroller : MonoBehaviour
 {
     public event Action<float, float> playerMoveEvent;
@@ -24,3 +67,4 @@ public class BackGroundScroller : MonoBehaviour
         }
     }
 }
+*/

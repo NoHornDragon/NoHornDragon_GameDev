@@ -10,7 +10,7 @@ public class StageBackGroundManager : MonoBehaviour
 
     private void Start()
     {
-        bgImages = gameObject.GetComponentsInChildren<Transform>();
+        // bgImages = gameObject.GetComponentsInChildren<Transform>();
 
         PlayerEnterConfiner[] confiners = FindObjectsOfType<PlayerEnterConfiner>();
         foreach (PlayerEnterConfiner confiner in confiners)
