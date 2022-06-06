@@ -4,9 +4,11 @@ using UnityEngine;
 using System;
 
 
+// TODO : 테스트 후 삭제
+[Serializable]
 public class SavePos
 {
-    public readonly Vector3 pos;
+    public Vector3 pos;
 
     public SavePos(Vector3 newPos)
     {
@@ -37,7 +39,7 @@ public class BackGroundScroller : MonoBehaviour
         playerMoveEvent?.Invoke(initialPos.pos.x - transform.position.x, initialPos.pos.y - transform.position.y);
     }
 
-    public void test(uint d, bool input)
+    public void ChangeCameraPos(uint d, bool input)
     {
         if(!input)  return;
 

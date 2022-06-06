@@ -16,7 +16,7 @@ public class ParallaxSprite : MonoBehaviour
     [Tooltip("체크하면 상하 이동을 하지 않습니다.")]
     [SerializeField] private bool lockVertical;
     bool canMove = true;
-    private SavePos initialPos;
+    [SerializeField] private SavePos initialPos;
     [SerializeField] Vector3 newPos;
 
     private void Awake()
@@ -31,14 +31,8 @@ public class ParallaxSprite : MonoBehaviour
     
     private void OnDisable()
     {
+        initialPos = new SavePos(this.transform.position);
         FindObjectOfType<BackGroundScroller>().playerMoveEvent -= MoveLayer;
-    }
-
-    IEnumerator Delay()
-    {
-        yield return null;
-
-        canMove = true;
     }
 
     void MoveLayer(float inputX, float inputY)

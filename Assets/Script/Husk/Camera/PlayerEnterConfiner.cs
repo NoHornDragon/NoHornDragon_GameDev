@@ -10,7 +10,7 @@ public class PlayerEnterConfiner : MonoBehaviour
     [SerializeField] private uint stageIndex;
     private void Start()
     {
-        ActiveRoomEvent += FindObjectOfType<BackGroundScroller>().test;
+        ActiveRoomEvent += FindObjectOfType<BackGroundScroller>().ChangeCameraPos;
         ActiveRoomEvent += FindObjectOfType<StageManager>().StageChange;
     }
 
