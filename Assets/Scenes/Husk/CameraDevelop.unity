@@ -168,6 +168,8 @@ MonoBehaviour:
   moveAmount: 0.3
   lockHorizontal: 0
   lockVertical: 0
+  initialPos:
+    pos: {x: 0, y: 0, z: 0}
   newPos: {x: 0, y: 0, z: 0}
 --- !u!212 &7409775
 SpriteRenderer:
@@ -266,6 +268,8 @@ MonoBehaviour:
   moveAmount: 0
   lockHorizontal: 0
   lockVertical: 0
+  initialPos:
+    pos: {x: 0, y: 0, z: 0}
   newPos: {x: 0, y: 0, z: 0}
 --- !u!212 &26108976
 SpriteRenderer:
@@ -364,6 +368,8 @@ MonoBehaviour:
   moveAmount: 0.1
   lockHorizontal: 0
   lockVertical: 0
+  initialPos:
+    pos: {x: 0, y: 0, z: 0}
   newPos: {x: 0, y: 0, z: 0}
 --- !u!212 &27744661
 SpriteRenderer:
@@ -462,6 +468,8 @@ MonoBehaviour:
   moveAmount: 0
   lockHorizontal: 0
   lockVertical: 0
+  initialPos:
+    pos: {x: 0, y: 0, z: 0}
   newPos: {x: 0, y: 0, z: 0}
 --- !u!212 &213491411
 SpriteRenderer:
@@ -4308,6 +4316,8 @@ MonoBehaviour:
   moveAmount: 0.5
   lockHorizontal: 0
   lockVertical: 0
+  initialPos:
+    pos: {x: 0, y: 0, z: 0}
   newPos: {x: 0, y: 0, z: 0}
 --- !u!212 &383853895
 SpriteRenderer:
@@ -8005,6 +8015,8 @@ MonoBehaviour:
   moveAmount: 0
   lockHorizontal: 0
   lockVertical: 0
+  initialPos:
+    pos: {x: 0, y: 0, z: 0}
   newPos: {x: 0, y: 0, z: 0}
 --- !u!212 &568580036
 SpriteRenderer:
@@ -8103,6 +8115,8 @@ MonoBehaviour:
   moveAmount: 0.3
   lockHorizontal: 0
   lockVertical: 0
+  initialPos:
+    pos: {x: 0, y: 0, z: 0}
   newPos: {x: 0, y: 0, z: 0}
 --- !u!212 &591913719
 SpriteRenderer:
@@ -8201,6 +8215,8 @@ MonoBehaviour:
   moveAmount: 0.1
   lockHorizontal: 0
   lockVertical: 0
+  initialPos:
+    pos: {x: 0, y: 0, z: 0}
   newPos: {x: 0, y: 0, z: 0}
 --- !u!212 &632385454
 SpriteRenderer:
@@ -8329,6 +8345,8 @@ MonoBehaviour:
   moveAmount: 0
   lockHorizontal: 0
   lockVertical: 0
+  initialPos:
+    pos: {x: 0, y: 0, z: 0}
   newPos: {x: 0, y: 0, z: 0}
 --- !u!212 &715822820
 SpriteRenderer:
@@ -8615,6 +8633,8 @@ MonoBehaviour:
   moveAmount: 0.3
   lockHorizontal: 0
   lockVertical: 0
+  initialPos:
+    pos: {x: 0, y: 0, z: 0}
   newPos: {x: 0, y: 0, z: 0}
 --- !u!212 &879286059
 SpriteRenderer:
@@ -8713,6 +8733,8 @@ MonoBehaviour:
   moveAmount: 0.5
   lockHorizontal: 0
   lockVertical: 0
+  initialPos:
+    pos: {x: 0, y: 0, z: 0}
   newPos: {x: 0, y: 0, z: 0}
 --- !u!212 &891036039
 SpriteRenderer:
@@ -8974,10 +8996,20 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 3960251306022774846, guid: 6b8e24873c5884b49b90e6d77b13dcaa,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3960251306022774847, guid: 6b8e24873c5884b49b90e6d77b13dcaa,
         type: 3}
       propertyPath: canModifyAmount
       value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 3960251306830892333, guid: 6b8e24873c5884b49b90e6d77b13dcaa,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4309562220606090553, guid: 6b8e24873c5884b49b90e6d77b13dcaa,
         type: 3}
@@ -9114,6 +9146,8 @@ MonoBehaviour:
   moveAmount: 0.2
   lockHorizontal: 0
   lockVertical: 0
+  initialPos:
+    pos: {x: 0, y: 0, z: 0}
   newPos: {x: 0, y: 0, z: 0}
 --- !u!212 &1045098053
 SpriteRenderer:
@@ -16792,6 +16826,8 @@ MonoBehaviour:
   moveAmount: 0.3
   lockHorizontal: 0
   lockVertical: 0
+  initialPos:
+    pos: {x: 0, y: 0, z: 0}
   newPos: {x: 0, y: 0, z: 0}
 --- !u!212 &1562178883
 SpriteRenderer:
@@ -16890,6 +16926,8 @@ MonoBehaviour:
   moveAmount: 0
   lockHorizontal: 0
   lockVertical: 0
+  initialPos:
+    pos: {x: 0, y: 0, z: 0}
   newPos: {x: 0, y: 0, z: 0}
 --- !u!212 &1587975094
 SpriteRenderer:
@@ -17048,6 +17086,8 @@ MonoBehaviour:
   moveAmount: 0.2
   lockHorizontal: 0
   lockVertical: 0
+  initialPos:
+    pos: {x: 0, y: 0, z: 0}
   newPos: {x: 0, y: 0, z: 0}
 --- !u!212 &1677733371
 SpriteRenderer:
@@ -17146,6 +17186,8 @@ MonoBehaviour:
   moveAmount: 0
   lockHorizontal: 0
   lockVertical: 0
+  initialPos:
+    pos: {x: 0, y: 0, z: 0}
   newPos: {x: 0, y: 0, z: 0}
 --- !u!212 &1699644852
 SpriteRenderer:
@@ -22507,6 +22549,8 @@ MonoBehaviour:
   moveAmount: 0.5
   lockHorizontal: 0
   lockVertical: 0
+  initialPos:
+    pos: {x: 0, y: 0, z: 0}
   newPos: {x: 0, y: 0, z: 0}
 --- !u!212 &2024294215
 SpriteRenderer:
@@ -24711,6 +24755,8 @@ MonoBehaviour:
   moveAmount: 0.5
   lockHorizontal: 0
   lockVertical: 0
+  initialPos:
+    pos: {x: 0, y: 0, z: 0}
   newPos: {x: 0, y: 0, z: 0}
 --- !u!212 &2085172322
 SpriteRenderer:
