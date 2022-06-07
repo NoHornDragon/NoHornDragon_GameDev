@@ -7,22 +7,13 @@ public class MenuButtonManager : MonoBehaviour
 {
     [SerializeField]
     private GameObject pausePanel;
-    [SerializeField]
-    private GameObject settingsPanel;
-    [SerializeField]
-    private GameObject exitPanel;
-    [SerializeField]
-    private GameObject goToLobbyPanel;
-    private bool isOnePanelOpen = false;
     private bool isPausePanelOpen = false;
 
     public void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape) && isOnePanelOpen && isPausePanelOpen)
-            AllPanelClose();
-        else if(Input.GetKeyDown(KeyCode.Escape) && !isOnePanelOpen && isPausePanelOpen)
+        if (Input.GetKeyDown(KeyCode.Escape) && isPausePanelOpen)
             PausePanelClose();
-        else if (Input.GetKeyDown(KeyCode.Escape) && !isOnePanelOpen && !isPausePanelOpen)
+        else if (Input.GetKeyDown(KeyCode.Escape) && !isPausePanelOpen)
             PausePanelOpen();
     }
 
@@ -36,42 +27,6 @@ public class MenuButtonManager : MonoBehaviour
     {
         isPausePanelOpen = false;
         pausePanel.SetActive(false);
-    }
-
-    public void settingsPanelOpen()
-    {
-        if (!isOnePanelOpen)
-        {
-            isOnePanelOpen = true;
-            settingsPanel.SetActive(true);
-        }
-    }
-
-    public void ExitPanelOpen()
-    {
-        if (!isOnePanelOpen)
-        {
-            isOnePanelOpen = true;
-            exitPanel.SetActive(true);
-        }
-    }
-
-    public void GoToLobbyPanelOpen()
-    {
-        if (!isOnePanelOpen)
-        {
-            isOnePanelOpen = true;
-            goToLobbyPanel.SetActive(true);
-        }
-    }
-    public void AllPanelClose()
-    {
-        isOnePanelOpen = false;
-
-        
-        settingsPanel.SetActive(false);
-        exitPanel.SetActive(false);
-        goToLobbyPanel.SetActive(false);
     }
 
     public void GameQuit()

@@ -3,15 +3,28 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+[System.Serializable]
+public class NPCTalks
+{
+    [Header("방문 횟수")]
+    public int count;
+    [Header("talk[0] = kor, talk[1] = eng")]
+    public string[] talk;
+}
 public class NPC : MonoBehaviour
 {
+    private Coroutine crtPtr;
+
     [Header("플레이어 인식 거리")]
     public float catchDistance;
     [Header("플레이어 멀리갔음을 인식하는 거리")]
     public float farDistance;
 
     [Header("그 외")]
-    public GameObject visitText; // NPC를 방문하면 출력되는 텍스트 <- 이걸 나중에 따로 매니저로 빼야함
+    public GameObject visitText; // NPC를 방문하면 출력되는 텍스트
+    [Header("방문 횟수가 이상일 경우 출력하는 텍스트")]
+    public NPCTalks[] npcTalks;
+
     private BoxCollider2D npcCol;
 
     public int visitCount; // NPC를 방문한 횟수
@@ -31,7 +44,6 @@ public class NPC : MonoBehaviour
     private void SetColSize()
     {
         npcCol.size = new Vector2(catchDistance, catchDistance);
-        visitText = GameObject.Find("Canvas").transform.Find("Visit_Text").gameObject;
     }
     private void SetFarColSize()
     {
@@ -42,8 +54,8 @@ public class NPC : MonoBehaviour
     {
         if(collision.tag == "Player")
         {
-            visitText.GetComponent<Text>().text = "안녕하신가 여행자여! " + visitCount + "번 방문했구만!";
             visitText.SetActive(true);
+            crtPtr = StartCoroutine(TalkCoroutine());
         }
     }
 
@@ -51,9 +63,28 @@ public class NPC : MonoBehaviour
     {
         if (collision.tag == "Player")
         {
+            if(crtPtr != null)
+                StopCoroutine(crtPtr);
+            visitText.GetComponent<TextMesh>().text = "";
             visitText.SetActive(false);
         }
     }
 
+    IEnumerator TalkCoroutine()
+    {
+        for (int i = npcTalks.Length - 1; i >= 0; i--)
+        {
+            if (visitCount >= npcTalks[i].count)
+            {
+                for(int j = 0; j < npcTalks[i].talk[SettingsManager.instance.languageDropdown.value].Length; j++)
+                {
+                    visitText.GetComponent<TextMesh>().text = npcTalks[i].talk[SettingsManager.instance.languageDropdown.value].Substring(0, j);
+                    yield return new WaitForSeconds(0.05f);
+                }
+                visitText.GetComponent<TextMesh>().text = npcTalks[i].talk[SettingsManager.instance.languageDropdown.value];
+                break;
+            }
+        }
+    }
 
 }

@@ -40,6 +40,8 @@ public class HistoryManager : MonoBehaviour
         {
             if (!getNodes[i])
                 nodes[i].GetComponent<Button>().interactable = false;
+            else
+                nodes[i].childImage.sprite = nodes[i].image;
         }
     }
     public void DescriptionPanelOpen(int _val)
@@ -47,9 +49,9 @@ public class HistoryManager : MonoBehaviour
         if (!isDescriptionOpen && !isDescriptionMoving)
         {
             DescriptionPanel.SetActive(true);
-            nodeName.text = nodes[_val].title;
+            nodeName.text = nodes[_val].title[SettingsManager.instance.languageDropdown.value];
             nodeImage.sprite = nodes[_val].image;
-            nodeDescription.text = nodes[_val].description;
+            nodeDescription.text = nodes[_val].description[SettingsManager.instance.languageDropdown.value];
             StartCoroutine(DescriptionPanelCoroutine(true)); // -> isDescriptionOpen = true
         }
     }
