@@ -9,6 +9,7 @@ public class NPCTalks
     [Header("방문 횟수")]
     public int count;
     [Header("talk[0] = kor, talk[1] = eng")]
+    [TextArea]
     public string[] talk;
 }
 public class NPC : MonoBehaviour
@@ -21,7 +22,11 @@ public class NPC : MonoBehaviour
     public float farDistance;
 
     [Header("그 외")]
-    public GameObject visitText; // NPC를 방문하면 출력되는 텍스트
+    [SerializeField]
+    private GameObject visitText; // NPC를 방문하면 출력되는 텍스트
+    [SerializeField]
+    private GameObject textBox; // 텍스트 박스
+    
     [Header("방문 횟수가 이상일 경우 출력하는 텍스트")]
     public NPCTalks[] npcTalks;
 
@@ -54,6 +59,7 @@ public class NPC : MonoBehaviour
     {
         if(collision.tag == "Player")
         {
+            textBox.SetActive(true);
             visitText.SetActive(true);
             crtPtr = StartCoroutine(TalkCoroutine());
         }
@@ -67,6 +73,7 @@ public class NPC : MonoBehaviour
                 StopCoroutine(crtPtr);
             visitText.GetComponent<TextMesh>().text = "";
             visitText.SetActive(false);
+            textBox.SetActive(false);
         }
     }
 

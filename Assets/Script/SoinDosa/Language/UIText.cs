@@ -27,8 +27,6 @@ public class UIText : MonoBehaviour
     }
     public void LangChange(int _val)
     {
-        Debug.Log("Lang Change _val = " + _val);
-        Debug.Log("Text 0 = " + texts[0] + ", Text 1 = " + texts[1]);
         uiText.text = texts[_val];
     }
 }

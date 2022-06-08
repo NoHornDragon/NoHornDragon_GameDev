@@ -55,6 +55,7 @@ public class SettingsManager : MonoBehaviour
 
     private void Start()
     {
+        Debug.Log("SettingsManager Start!");
         LoadSettingsValue();
     }
 
