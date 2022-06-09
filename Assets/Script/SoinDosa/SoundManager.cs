@@ -27,6 +27,7 @@ public class SoundManager : MonoBehaviour
         if (instance == null)
         {
             instance = this;
+            DontDestroyOnLoad(this.gameObject);
         }
         else
             Destroy(this.gameObject);
@@ -51,6 +52,11 @@ public class SoundManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// BGM 재생 메서드
+    /// </summary>
+    /// <param name="_name"></param>
+    /// <param name="_isFade"></param>
     public void PlayBGM(string _name, bool _isFade) 
     {
         if (_isFade) // Fade와 함께 bgm 실행
@@ -73,6 +79,10 @@ public class SoundManager : MonoBehaviour
         return;
     }
 
+    /// <summary>
+    /// 현재 실행중인 BGM 중지
+    /// </summary>
+    /// <param name="_isFade"></param>
     public void StopBGM(bool _isFade) // 즉시 bgm 중지
     {
         if (_isFade)
@@ -126,6 +136,10 @@ public class SoundManager : MonoBehaviour
         audioSourceBGM.volume = SettingsManager.instance.effectSlider.value;
     }
 
+    /// <summary>
+    /// 효과음을 재생
+    /// </summary>
+    /// <param name="_name"></param>
     public void PlaySE(string _name)
     {
         foreach(var effectSound in effectSounds)
@@ -144,7 +158,9 @@ public class SoundManager : MonoBehaviour
             }
         }
     }
-
+    /// <summary>
+    /// 모든 효과음 중지
+    /// </summary>
     public void StopAllSE()
     {
         foreach(var audioSourceEffect in audioSourceEffects)
