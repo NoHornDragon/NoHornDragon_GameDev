@@ -9003,6 +9003,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3960251306022774847, guid: 6b8e24873c5884b49b90e6d77b13dcaa,
         type: 3}
+      propertyPath: jointMaxTime
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 3960251306022774847, guid: 6b8e24873c5884b49b90e6d77b13dcaa,
+        type: 3}
       propertyPath: canModifyAmount
       value: 7
       objectReference: {fileID: 0}
@@ -14577,7 +14582,7 @@ MonoBehaviour:
     clearCount: 0
     resetCount: 0
     stunedCount: 0
-    easyMode: 1
+    easyMode: 0
     playerPos: {x: 0, y: 0, z: 0}
     paperList: 0000000000000000000000000000000000000000
 --- !u!4 &1500971434

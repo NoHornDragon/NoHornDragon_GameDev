@@ -55,7 +55,8 @@ public class YeouijuLaunch : MonoBehaviour
         transform.rotation  = Quaternion.Euler(0, 0, z);
 
         // before launch yeouiju, draw prediction line (only in easy mode)
-        if(!isYeouijuOn && prepareYeouiju && usingEasyMode)
+        // if(!isYeouijuOn && prepareYeouiju && usingEasyMode)
+        if(!isYeouijuOn && prepareYeouiju)
         {
             DrawPredictionLine();
         }
