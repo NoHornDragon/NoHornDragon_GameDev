@@ -1,5 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.IO;
+using System.Text;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -12,8 +14,16 @@ public class NPCTalks
     [TextArea]
     public string[] talk;
 }
+[System.Serializable]
+public class NPCTalksData
+{
+    public List<NPCTalks> npcTalksList;
+}
 public class NPC : MonoBehaviour
 {
+    [Header("대사 파일 이름")]
+    public string filePath;
+
     private Coroutine crtPtr;
 
     [Header("플레이어 인식 거리")]
@@ -28,8 +38,9 @@ public class NPC : MonoBehaviour
     private GameObject textBox; // 텍스트 박스
     
     [Header("방문 횟수가 이상일 경우 출력하는 텍스트")]
-    public NPCTalks[] npcTalks;
-
+    //public NPCTalks[] npcTalks;
+    //[Header("Test")]
+    public NPCTalksData npcTalks;
     private BoxCollider2D npcCol;
 
     public int visitCount; // NPC를 방문한 횟수
@@ -39,6 +50,21 @@ public class NPC : MonoBehaviour
     {
         npcCol = this.GetComponent<BoxCollider2D>();
         farCheckCol = this.transform.GetChild(0).GetComponentInChildren<BoxCollider2D>();
+
+        if (!File.Exists(Application.dataPath + "/Resources/NpcTexts/" + filePath + ".json"))
+        {
+            Debug.Log(filePath + " load failed");
+        }
+        else
+        {
+            FileStream fs = new FileStream(string.Format("{0}/Resources/NpcTexts/{1}.json", Application.dataPath, filePath), FileMode.Open);
+            byte[] data = new byte[fs.Length];
+            fs.Read(data, 0, data.Length);
+            fs.Close();
+            string jsonData = Encoding.UTF8.GetString(data);
+            npcTalks = JsonUtility.FromJson<NPCTalksData>(jsonData);
+            Debug.Log(jsonData);
+        }
     }
     private void Start()
     {
@@ -79,16 +105,16 @@ public class NPC : MonoBehaviour
 
     IEnumerator TalkCoroutine()
     {
-        for (int i = npcTalks.Length - 1; i >= 0; i--)
+        for (int i = npcTalks.npcTalksList.Count - 1; i >= 0; i--)
         {
-            if (visitCount >= npcTalks[i].count)
+            if (visitCount >= npcTalks.npcTalksList[i].count)
             {
-                for(int j = 0; j < npcTalks[i].talk[SettingsManager.instance.languageDropdown.value].Length; j++)
+                for(int j = 0; j < npcTalks.npcTalksList[i].talk[SettingsManager.instance.languageDropdown.value].Length; j++)
                 {
-                    visitText.GetComponent<TextMesh>().text = npcTalks[i].talk[SettingsManager.instance.languageDropdown.value].Substring(0, j);
+                    visitText.GetComponent<TextMesh>().text = npcTalks.npcTalksList[i].talk[SettingsManager.instance.languageDropdown.value].Substring(0, j);
                     yield return new WaitForSeconds(0.05f);
                 }
-                visitText.GetComponent<TextMesh>().text = npcTalks[i].talk[SettingsManager.instance.languageDropdown.value];
+                visitText.GetComponent<TextMesh>().text = npcTalks.npcTalksList[i].talk[SettingsManager.instance.languageDropdown.value];
                 break;
             }
         }

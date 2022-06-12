@@ -41,6 +41,8 @@ public class SettingsManager : MonoBehaviour
     public GameObject dataResetPanel;
     // Start is called before the first frame update
 
+    private SoundManager sm;
+
     private void Awake()
     {
         if (instance == null)
@@ -56,6 +58,7 @@ public class SettingsManager : MonoBehaviour
     private void Start()
     {
         Debug.Log("SettingsManager Start!");
+        sm = FindObjectOfType<SoundManager>();
         LoadSettingsValue();
     }
 
@@ -90,6 +93,19 @@ public class SettingsManager : MonoBehaviour
                 default:
                     break;
             }
+        }
+    }
+
+    public void ChangeBGMVolume()
+    {
+        sm.audioSourceBGM.volume = bgmSlider.value;
+    }
+
+    public void ChangeEffectVolume()
+    {
+        foreach (var audioSourceEffect in sm.audioSourceEffects)
+        {
+            audioSourceEffect.volume = effectSlider.value;
         }
     }
 
