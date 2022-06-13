@@ -41,9 +41,10 @@ public class BackGroundScroller : MonoBehaviour
 
     public void ChangeCameraPos(uint d, bool input)
     {
-        if(!input)  return;
+        // if(!input)  return;
 
         initialPos = new SavePos(player.position);
+        Debug.Log($"{initialPos.pos}");
     }
 }
 
