@@ -8939,7 +8939,7 @@ PrefabInstance:
     - target: {fileID: 3960251306022774838, guid: 6b8e24873c5884b49b90e6d77b13dcaa,
         type: 3}
       propertyPath: m_RootOrder
-      value: 12
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 3960251306022774838, guid: 6b8e24873c5884b49b90e6d77b13dcaa,
         type: 3}
@@ -9000,6 +9000,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3960251306022774847, guid: 6b8e24873c5884b49b90e6d77b13dcaa,
+        type: 3}
+      propertyPath: jointMaxTime
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 3960251306022774847, guid: 6b8e24873c5884b49b90e6d77b13dcaa,
         type: 3}
@@ -12137,7 +12142,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: fd60742add1d9944f8bc84a8d0270a7d, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 648571ac067528b4c8fef275ffc659c5, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -12156,7 +12161,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1200491649}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.7218323, y: -1.3622799, z: 0}
+  m_LocalPosition: {x: -7.87, y: -2.93, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -12179,7 +12184,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 2.56, y: 2.56}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -14577,7 +14582,7 @@ MonoBehaviour:
     clearCount: 0
     resetCount: 0
     stunedCount: 0
-    easyMode: 1
+    easyMode: 0
     playerPos: {x: 0, y: 0, z: 0}
     paperList: 0000000000000000000000000000000000000000
 --- !u!4 &1500971434
@@ -22574,7 +22579,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2024294212
 GameObject:
@@ -25098,7 +25103,7 @@ PrefabInstance:
     - target: {fileID: 2604739881317978143, guid: b5146b24139280842a67af96137a4d1c,
         type: 3}
       propertyPath: m_RootOrder
-      value: 13
+      value: 14
       objectReference: {fileID: 0}
     - target: {fileID: 2604739881317978143, guid: b5146b24139280842a67af96137a4d1c,
         type: 3}
