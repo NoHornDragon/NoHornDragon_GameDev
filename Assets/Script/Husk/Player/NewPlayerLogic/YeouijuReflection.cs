@@ -85,6 +85,7 @@ public class YeouijuReflection : MonoBehaviour
             yeouijuReturnEvent?.Invoke();
 
             YeouijuFollowPlayer();
+            rigid.freezeRotation = true;
             return;
         }
         
