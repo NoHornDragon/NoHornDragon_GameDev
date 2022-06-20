@@ -38,6 +38,7 @@ public class YeouijuLaunch : MonoBehaviour
         
         FindObjectOfType<YeouijuReflection>().yeouijuReturnEvent += ReturnYeouiju;
         FindObjectOfType<PlayerGrapher>().deleteJointEvent += ReturnYeouiju;
+        FindObjectOfType<MenuButtonManager>().menuButtonEvent += SetLaunchStatus;
     }
 
     private void Update()
@@ -117,7 +118,7 @@ public class YeouijuLaunch : MonoBehaviour
 
     public void SetLaunchStatus(bool isActive)
     {
-        this.canLaunch = isActive;
+        StartCoroutine(SetYeouijuStatueCourtine(isActive));
     }
 
     public void StunedYeouiju(bool isStuned)
@@ -129,6 +130,12 @@ public class YeouijuLaunch : MonoBehaviour
     private void ReturnYeouiju()
     {
         disJointEvent?.Invoke();
+    }
+
+    IEnumerator SetYeouijuStatueCourtine(bool isActive)
+    {
+        yield return null;
+        this.canLaunch = isActive;
     }
     
 }

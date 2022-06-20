@@ -44,7 +44,6 @@ public class BackGroundScroller : MonoBehaviour
         // if(!input)  return;
 
         initialPos = new SavePos(player.position);
-        Debug.Log($"{initialPos.pos}");
     }
 }
 
