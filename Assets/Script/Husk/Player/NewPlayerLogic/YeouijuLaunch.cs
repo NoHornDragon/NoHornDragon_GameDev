@@ -14,6 +14,7 @@ public class YeouijuLaunch : MonoBehaviour
     [SerializeField] private bool prepareYeouiju;
     private bool isYeouijuOn;
     private bool usingEasyMode;
+    private Vector2 shouldDrawPoint;
     
     private void Start()
     {
@@ -92,7 +93,8 @@ public class YeouijuLaunch : MonoBehaviour
         }
 
         // draw first collision point
-        predictionLine.SetPosition(1, predictionHit.point);
+        shouldDrawPoint = predictionHit.point;
+        predictionLine.SetPosition(1, shouldDrawPoint);
 
         // calculate second ray by Vector2.Reflect
         var inDirection = (predictionHit.point - (Vector2)transform.position).normalized;
@@ -102,9 +104,15 @@ public class YeouijuLaunch : MonoBehaviour
         predictionHit = Physics2D.Raycast(predictionHit.point + (reflectionDir * 0.001f), reflectionDir, Mathf.Infinity, predictionLayerMask);
 
         if(predictionHit.collider == null)
-            return;
+        {
+            shouldDrawPoint = (Vector2)predictionLine.GetPosition(1) + (reflectionDir * 15f);
+        }
+        else
+        {
+            shouldDrawPoint = predictionHit.point;
+        }
         
-        predictionLine.SetPosition(2, predictionHit.point);
+        predictionLine.SetPosition(2, shouldDrawPoint);
 
         // finally render linerenderer
         predictionLine.enabled = true;

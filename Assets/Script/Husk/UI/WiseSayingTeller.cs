@@ -60,7 +60,6 @@ public class WiseSayingTeller : MonoBehaviour
             
             string jsonData = Encoding.UTF8.GetString(data);
             wiseSayingTexts = JsonUtility.FromJson<WiaeSayingData>(jsonData);
-            Debug.Log(jsonData);
         }
     }
 
