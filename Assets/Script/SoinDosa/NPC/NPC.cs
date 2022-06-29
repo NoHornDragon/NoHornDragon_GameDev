@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using UnityEngine;
-using UnityEngine.UI;
+using TMPro;
 
 [System.Serializable]
 public class NPCTalks
@@ -30,7 +30,7 @@ public class NPC : MonoBehaviour
     public float catchDistance;
     [Header("플레이어 멀리갔음을 인식하는 거리")]
     public float farDistance;
-
+    
     [Header("그 외")]
     [SerializeField]
     private GameObject visitText; // NPC를 방문하면 출력되는 텍스트
@@ -97,7 +97,7 @@ public class NPC : MonoBehaviour
         {
             if(crtPtr != null)
                 StopCoroutine(crtPtr);
-            visitText.GetComponent<TextMesh>().text = "";
+            visitText.GetComponent<TextMeshPro>().text = "";
             visitText.SetActive(false);
             textBox.SetActive(false);
         }
@@ -111,10 +111,10 @@ public class NPC : MonoBehaviour
             {
                 for(int j = 0; j < npcTalks.npcTalksList[i].talk[SettingsManager.instance.languageDropdown.value].Length; j++)
                 {
-                    visitText.GetComponent<TextMesh>().text = npcTalks.npcTalksList[i].talk[SettingsManager.instance.languageDropdown.value].Substring(0, j);
+                    visitText.GetComponent<TextMeshPro>().text = npcTalks.npcTalksList[i].talk[SettingsManager.instance.languageDropdown.value].Substring(0, j);
                     yield return new WaitForSeconds(0.05f);
                 }
-                visitText.GetComponent<TextMesh>().text = npcTalks.npcTalksList[i].talk[SettingsManager.instance.languageDropdown.value];
+                visitText.GetComponent<TextMeshPro>().text = npcTalks.npcTalksList[i].talk[SettingsManager.instance.languageDropdown.value];
                 break;
             }
         }
