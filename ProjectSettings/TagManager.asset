@@ -58,3 +58,6 @@ TagManager:
   - name: Player
     uniqueID: 2388519353
     locked: 0
+  - name: TextBox
+    uniqueID: 2003232425
+    locked: 0
