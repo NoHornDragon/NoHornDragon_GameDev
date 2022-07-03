@@ -144,19 +144,19 @@ public class SettingsManager : MonoBehaviour
 
         string jsonData = JsonUtility.ToJson(saveData);
         byte[] data = Encoding.UTF8.GetBytes(jsonData);
-        FileStream fs = new FileStream(Application.dataPath + "SettingsValue.json", FileMode.Create);
+        FileStream fs = new FileStream(Application.persistentDataPath + "/SettingsValue.json", FileMode.Create);
         fs.Write(data, 0, data.Length);
         fs.Close();
     }
 
     public void LoadSettingsValue()
     {
-        if (!File.Exists(Application.dataPath + "SettingsValue.json"))
+        if (!File.Exists(Application.persistentDataPath + "/SettingsValue.json"))
         {
             Debug.Log("No Settings Value!");
             return;
         }
-        FileStream fs = new FileStream(Application.dataPath + "SettingsValue.json", FileMode.Open);
+        FileStream fs = new FileStream(Application.persistentDataPath + "/SettingsValue.json", FileMode.Open);
 
         byte[] data = new byte[fs.Length];
         fs.Read(data, 0, data.Length);

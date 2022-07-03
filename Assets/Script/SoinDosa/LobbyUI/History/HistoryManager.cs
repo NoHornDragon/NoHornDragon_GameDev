@@ -4,13 +4,24 @@ using UnityEngine;
 using UnityEngine.UI;
 public class HistoryManager : MonoBehaviour
 {
+    // 총 종이조각의 수
+    public const int TOTAL_PAPER = 20;
+
     public static bool isDescriptionMoving = false;
     public static bool isDescriptionOpen = false;
 
     [SerializeField]
     private HistoryNode[] nodes;
+
+    [Header("UI Element")]
     [SerializeField]
-    private bool[] getNodes;
+    private Text paperInfoText;
+    [SerializeField]
+    private Text playTimeText;
+    [SerializeField]
+    private Text stunText;
+    [SerializeField]
+    private Text restartText;
 
     [Header("DescriptionPanel 관련")]
     [SerializeField]
@@ -24,9 +35,13 @@ public class HistoryManager : MonoBehaviour
     [SerializeField]
     private Text nodeDescription;
 
+    // 현재 보유한 종이조각의 수
+    private int paperCount;
+
+    private HistoryData historyData;
     public void Start()
     {
-        ActiveNodes();
+        paperCount = 0;
     }
 
     private void Update()
@@ -36,13 +51,24 @@ public class HistoryManager : MonoBehaviour
     }
     public void ActiveNodes()
     {
-        for(int i = 0; i < nodes.Length; i++)
+        historyData = HistoryDataManager.instance.GetHistoryData();
+        for (int i = 0; i < nodes.Length; i++)
         {
-            if (!getNodes[i])
+            if (!historyData.activeNodes[i])
                 nodes[i].GetComponent<Button>().interactable = false;
             else
+            {
                 nodes[i].childImage.sprite = nodes[i].image;
+                paperCount++;
+            }
         }
+
+        paperInfoText.text = paperCount + "/" + TOTAL_PAPER;
+        playTimeText.text = historyData.playTime.ToString();
+        stunText.text = historyData.stunCount.ToString();
+        restartText.text = historyData.restartCount.ToString();
+
+        paperCount = 0;
     }
     public void DescriptionPanelOpen(int _val)
     {
