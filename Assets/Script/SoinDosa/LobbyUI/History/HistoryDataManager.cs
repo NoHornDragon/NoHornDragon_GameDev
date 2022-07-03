@@ -28,6 +28,10 @@ public class HistoryDataManager : MonoBehaviour
     {
         return historyData;
     }
+    public void SetPaperTrue(int _val)
+    {
+        historyData.activeNodes[_val] = true;
+    }
     public void AddPlayTime(int _val)
     {
         historyData.playTime += _val;
