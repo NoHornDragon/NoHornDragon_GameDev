@@ -7,10 +7,15 @@ public class GamePlayTimer : MonoBehaviour
     [SerializeField]
     private float playTime = 0.0f;
     private bool timerActive = true;
+    
+    [SerializeField]
+    private Material seasonMaterial;
 
     private void Start()
     {
         FindObjectOfType<MenuButtonManager>().menuButtonEvent += SetTimerStatue;
+
+        seasonMaterial = FindObjectOfType<ParallaxSprite>().GetComponent<Material>();
     }
 
     public void SetTimerStatue(bool isActive)

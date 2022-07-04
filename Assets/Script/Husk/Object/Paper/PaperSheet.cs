@@ -47,12 +47,7 @@ public class PaperSheet : MonoBehaviour
 
     private void PlayerGetPaper()
     {
-        //TODO : 접근 함수 생성지 이를 처리
-        //HistoryManager historyManager = FindObjectOfType<HistoryManager>();
-        //if(historyManager != null) 
-        //{
-        //    historyManager.
-        //}
+        HistoryDataManager.instance.SetPaperTrue(paperIndex);
 
         // 사라지는 애니메이션
         paperSequence.Kill();
