@@ -19,10 +19,10 @@ public class PaperSheet : MonoBehaviour
     void Start()
     {
 
-        if(HistoryDataManager.instance.GetPaperTrue(paperIndex))
-        {
-            Destroy(this.gameObject);
-        }
+        // if(HistoryDataManager.instance.GetPaperTrue(paperIndex))
+        // {
+        //     Destroy(this.gameObject);
+        // }
 
         originPos = this.transform.position;
 

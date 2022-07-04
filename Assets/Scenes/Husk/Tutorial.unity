@@ -2024,6 +2024,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playTime: 0
   seasonMaterial: {fileID: 2100000, guid: c603ae9c62e4ca44d8f38cbbe61bd7ce, type: 2}
+  seasonChangeTime: 0.1
+  newColor:
+    serializedVersion: 2
+    rgba: 4278190335
 --- !u!4 &521781489
 Transform:
   m_ObjectHideFlags: 0
@@ -9215,7 +9219,6 @@ MonoBehaviour:
     stunedCount: 0
     easyMode: 0
     playerPos: {x: 0, y: 0, z: 0}
-    paperList: 0000000000000000000000000000000000000000
 --- !u!4 &1500971434
 Transform:
   m_ObjectHideFlags: 0
