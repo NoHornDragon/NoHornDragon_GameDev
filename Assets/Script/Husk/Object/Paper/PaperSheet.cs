@@ -18,7 +18,8 @@ public class PaperSheet : MonoBehaviour
 
     void Start()
     {
-        if(SaveData.instance.userData.paperList[paperIndex])
+
+        if(HistoryDataManager.instance.GetPaperTrue(paperIndex))
         {
             Destroy(this.gameObject);
         }

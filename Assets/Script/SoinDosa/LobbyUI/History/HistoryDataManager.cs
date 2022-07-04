@@ -32,9 +32,19 @@ public class HistoryDataManager : MonoBehaviour
     {
         historyData.activeNodes[_val] = true;
     }
-    public void AddPlayTime(int _val)
+
+    public bool GetPaperTrue(int _val)
     {
-        historyData.playTime += _val;
+        return historyData.activeNodes[_val];
+    }
+    public void AddPlayTime(float _val)
+    {
+        historyData.playTime += (int)_val;
+
+        if(_val < historyData.minPlayTime)
+        {
+            historyData.minPlayTime = _val;
+        }
     }
     public void AddStunCount(int _val)
     {
@@ -44,6 +54,7 @@ public class HistoryDataManager : MonoBehaviour
     {
         historyData.restartCount += _val;
     }
+
     public void SaveHistoryData()
     {
         string jsonData = JsonUtility.ToJson(historyData);
