@@ -18,7 +18,8 @@ public class StageBackGroundManager : MonoBehaviour
             confiner.ActiveRoomEvent += StageEvent;
         }
 
-        ActiveBG(false);
+        if(stageIndex != 1)
+            ActiveBG(false);
     }
 
     /// <summary>

@@ -42,6 +42,7 @@ public class MenuButtonManager : MonoBehaviour
 
     public void GameQuit()
     {
+        Time.timeScale = 1.0f;
         HistoryDataManager.instance.SaveHistoryData();
 #if UNITY_EDITOR
         UnityEditor.EditorApplication.isPlaying = false;
@@ -51,6 +52,7 @@ public class MenuButtonManager : MonoBehaviour
     }
     public void GoToLobbyYes()
     {
+        Time.timeScale = 1.0f;
         HistoryDataManager.instance.SaveHistoryData();
         SceneChanger.instance.ChangeScene("LobbyScene");
         

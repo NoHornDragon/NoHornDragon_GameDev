@@ -27,12 +27,20 @@ public class ParallaxSprite : MonoBehaviour
     private void OnEnable()
     {
         FindObjectOfType<BackGroundScroller>().playerMoveEvent += MoveLayer;
+        // Debug.Log($"구독 onenable");
     }
     
     private void OnDisable()
     {
         initialPos = new SavePos(this.transform.position);
         FindObjectOfType<BackGroundScroller>().playerMoveEvent -= MoveLayer;
+        // Debug.Log($"구독 취소 ondisable");
+    }
+
+    private void OnDestroy()
+    {
+        FindObjectOfType<BackGroundScroller>().playerMoveEvent -= MoveLayer;
+        Debug.Log($"구독 취소 ondestroy");
     }
 
     void MoveLayer(float inputX, float inputY)

@@ -17182,6 +17182,7 @@ MonoBehaviour:
   historyData:
     activeNodes: 0000000000000000000000000000000000000000
     playTime: 0
+    minPlayTime: 0
     stunCount: 0
     restartCount: 0
 --- !u!4 &1724902971

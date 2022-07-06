@@ -18,7 +18,7 @@ public class PlayerEnterConfiner : MonoBehaviour
     {
         if(other.CompareTag("Player"))
         {
-            // Debug.Log($"stage {stageIndex} - Enter");
+            Debug.Log($"stage {stageIndex} - Enter");
             ActiveRoomEvent?.Invoke(stageIndex, true);
         }
     }
