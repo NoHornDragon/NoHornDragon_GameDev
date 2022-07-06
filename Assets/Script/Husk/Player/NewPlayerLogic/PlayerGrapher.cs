@@ -30,7 +30,8 @@ public class PlayerGrapher : MonoBehaviour
     {
         lineRenderer = GetComponent<LineRenderer>();
         joint = GetComponent<DistanceJoint2D>();   
-        easyMode = SaveData.instance.userData.UseEasyMode;     
+        // easyMode = SaveData.instance.userData.UseEasyMode; 
+        easyMode = SettingsManager.instance.UseEasyMode;
         
         SetHUDInitial();
         lineModifySpeed *= -1;  

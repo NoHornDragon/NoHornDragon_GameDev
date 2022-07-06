@@ -21,7 +21,8 @@ public class YeouijuLaunch : MonoBehaviour
         predictionLayerMask = (1 << LayerMask.NameToLayer("Ground"));
 
         canLaunch = true;
-        usingEasyMode = SaveData.instance.userData.UseEasyMode;
+        // usingEasyMode = SaveData.instance.userData.UseEasyMode;
+        usingEasyMode = SettingsManager.instance.UseEasyMode;
         
         yeouiju = FindObjectOfType<YeouijuReflection>();
         predictionLine = GetComponent<LineRenderer>();

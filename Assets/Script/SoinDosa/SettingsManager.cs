@@ -6,7 +6,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 [System.Serializable]
-class SettingsValue
+public class SettingsValue
 {
     public SettingsValue(int _resolutionVal, float _bgmVal, float _effectVal, int _languageVal, bool _isAutoSave)
     {
@@ -32,6 +32,8 @@ public class SettingsManager : MonoBehaviour
     [SerializeField]
     private Dropdown resolutionDropdown;
     private bool isAutoSaving;
+
+    public bool UseEasyMode { get { return isAutoSaving; } }
 
     public Dropdown languageDropdown;
     public Slider bgmSlider;
