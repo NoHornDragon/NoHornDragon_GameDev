@@ -35,9 +35,8 @@ public class GamePlayTimer : MonoBehaviour
         playTime += Time.deltaTime;
 
         // float materialValue = Mathf.Sin(playTime * 0.003f);
-        float materialValue = Mathf.Sin(playTime * 0.003f);
-        materialValue = Mathf.Abs(materialValue);
-        seasonMaterial.SetFloat("_SeasonValue", materialValue);
+        // materialValue = Mathf.Abs(materialValue);
+        seasonMaterial.SetFloat("_SeasonValue", playTime);
     }
 
 }
