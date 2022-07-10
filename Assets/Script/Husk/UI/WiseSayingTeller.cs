@@ -41,6 +41,7 @@ public class WiseSayingTeller : MonoBehaviour
     void Start()
     {
         wiseSayingUI.SetActive(false);
+        FindObjectOfType<PlayerCollider>().playerStunEvent += ShowWiseSayingOnScreen;
     }
 
 
@@ -64,10 +65,12 @@ public class WiseSayingTeller : MonoBehaviour
     }
 
     [ContextMenu("명언 UI ON")]
-    private void ShowWiseSayingOnScreen()
+    private void ShowWiseSayingOnScreen(bool isActive)
     {
         // Have a appear tweening wiseSayingUI's OnEnable()
         // And will disappear automatically
+        if(!isActive)   return;
+
         wiseSayingText.text = wiseSayingTexts.texts[Random.Range(0, wiseSayingTexts.texts.Count)].wiseSay[SettingsManager.instance.languageDropdown.value];
         wiseSayingUI.SetActive(true);
 
