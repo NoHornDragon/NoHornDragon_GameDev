@@ -22,6 +22,7 @@ public class FireingNPC : MonoBehaviour
         }
         if(Input.GetKeyDown(KeyCode.N))
         {
+            // TODO : 이후 돌아가는 로직을 화살에서 처리하기
             firePool.ReturnItem(curFiringObject);
             curFiringObject = null;
         }

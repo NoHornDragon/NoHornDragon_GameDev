@@ -11,6 +11,11 @@ public class FirePool : MonoBehaviour
     private Queue<FiringObject> fireItemPool = new Queue<FiringObject>();
 
 
+    private void Start()
+    {
+        AddFireItem(2);
+    }
+
     public FiringObject GetFireItem()
     {
         if(fireItemPool.Count <= 0) 
@@ -19,6 +24,7 @@ public class FirePool : MonoBehaviour
         }
 
         var item = fireItemPool.Dequeue();
+        item.transform.localPosition = Vector3.zero;
         item.transform.SetParent(null);
         item.gameObject.SetActive(true);
         item.Fire();
@@ -30,7 +36,7 @@ public class FirePool : MonoBehaviour
     {
         returnObj.gameObject.SetActive(false);
         returnObj.transform.SetParent(this.transform);
-        returnObj.transform.position = Vector3.zero;
+        returnObj.transform.localPosition = Vector3.zero;
 
         fireItemPool.Enqueue(returnObj);
     }
