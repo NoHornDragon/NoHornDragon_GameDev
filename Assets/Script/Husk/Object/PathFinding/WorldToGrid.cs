@@ -11,9 +11,17 @@ public class WorldToGrid : MonoBehaviour
     public float nodeRadius;
 
     private float nodeDiameter;
-    int gridSizeX, gridSizeY;
+    private int gridSizeX, gridSizeY;
+    
+    private List<Vector2> foundPath;
 
-    Node[,] grid;
+    private int[] moveX = { 0, 0, 1, -1 };
+    private int[] moveY = { 1, -1, 0, 0 };
+    private bool existPath;
+
+    public Vector2 test;
+
+    private Node[,] grid;
 
     private void Awake()
     {
@@ -33,11 +41,14 @@ public class WorldToGrid : MonoBehaviour
         if(grid == null)    return;
 
         Node targetNode = NodeFromWroldPosition(target.position);
+        Node thisNode = NodeFromWroldPosition(transform.position);
         foreach(Node n in grid)
         {
             Gizmos.color = (n.canWalk) ? Color.blue : Color.red; 
             if(n == targetNode)
                 Gizmos.color = Color.yellow;
+            if(n == thisNode)
+                Gizmos.color = Color.gray;
             Gizmos.DrawCube(n.worldPosition, Vector3.one * (nodeDiameter - 0.1f));
         }
     }
@@ -58,11 +69,12 @@ public class WorldToGrid : MonoBehaviour
 		return grid[x,y];
     }
 
+    [ContextMenu("Create Grid")]
     private void CreateGrid()
     {
         grid = new Node[gridSizeX, gridSizeY];
 
-        Vector2 bottomLeft = (Vector2)transform.position - (Vector2.right * gridWorldSize.x / 2) - (Vector2.up * gridWorldSize.y / 2);
+        Vector2 bottomLeft = (Vector2)transform.position - (Vector2.right * gridWorldSize.x / 2) - (Vector2.up * gridWorldSize.y / 2) + test;
 
         for(int x = 0; x < gridSizeX; x++)
         {
@@ -73,5 +85,104 @@ public class WorldToGrid : MonoBehaviour
                 grid[x, y] = new Node(canPass, worldPoint, x, y);
             }
         }
+    }
+
+    [ContextMenu("PathFinding")]
+    private void FindPath()
+    {
+        Debug.Log($"Pathfinding");
+        Node targetNode = NodeFromWroldPosition(target.position);
+        Node FromNode = NodeFromWroldPosition(transform.position);
+        Vector2 targetPos = new Vector2(targetNode.gridX, targetNode.gridY);
+
+        Queue<Node> q = new Queue<Node>();
+        bool[,] visit = new bool[gridSizeX, gridSizeY];
+        q.Enqueue(FromNode);
+
+        Node curNode, nextNode;
+        while(q.Count > 0)
+        {
+            curNode = q.Dequeue();
+
+            if(curNode == targetNode)
+            {
+                Debug.Log($"founded");
+                existPath = true;
+                return;
+            }
+            
+            for(int i = 0; i < 4; i++)
+            {
+                int nextX = curNode.gridX + moveX[i];
+                int nextY = curNode.gridY + moveY[i];
+                if(NotNPCRange(nextX, nextY))   continue;
+                
+                nextNode = grid[nextX, nextY];
+                if(nextNode.visit)      continue;
+                if(!nextNode.canWalk)   continue;
+
+                nextNode.visit = true;
+                nextNode.prevX = curNode.gridX;
+                nextNode.prevY = curNode.gridY;
+                q.Enqueue(nextNode);
+            }
+        }
+        Debug.Log($"not founded");
+        existPath = false;
+
+
+        // q.Enqueue(transform.position);
+        // NodeFromWroldPosition(transform.position).visit = true;
+
+        // Vector2 curPos, NextPos;
+
+        // while(q.Count > 0)
+        // {
+        //     curPos = q.Dequeue();
+            
+        //     if(NodeFromWroldPosition(curPos) == targetNode) 
+        //         break;
+
+        //     for(int i = 0; i < 4; i++)
+        //     {
+        //         NextPos.x = curPos.x + moveX[i];
+        //         NextPos.y = curPos.y + moveY[i];
+
+        //         if(NotNPCRange(NextPos))    continue;
+
+        //         Node nextNode = NodeFromWroldPosition(NextPos);
+        //         if(nextNode.visit)  continue;
+
+        //         nextNode.visit = true;
+        //         nextNode.SetPrevNode(curPos);
+        //         q.Enqueue(NextPos);
+
+        //     }
+        // }
+    }
+
+    [ContextMenu("print path")]
+    private void PrintPath()
+    {
+        if(!existPath)
+        {
+            Debug.Log($"no path");
+            return;
+        }
+
+        Node curNode = NodeFromWroldPosition(target.position);
+        Node originNode = NodeFromWroldPosition(transform.position);
+        while(true)
+        {
+            Debug.Log($"cur : {curNode.gridX}, {curNode.gridY}");
+            if(curNode == originNode)   break;
+
+            curNode = grid[curNode.prevX, curNode.prevY];
+        }
+    }
+
+    bool NotNPCRange(int x, int y)
+    {
+        return (x < 0 || y < 0 || x >= gridSizeX || y >= gridSizeY);
     }
 }
