@@ -15,8 +15,8 @@ public class WorldToGrid : MonoBehaviour
     
     private List<Vector2> foundPath;
 
-    private int[] moveX = { 0, 0, 1, -1 };
-    private int[] moveY = { 1, -1, 0, 0 };
+    private int[] moveX = { 0, 0, 1, -1, 1, 1, -1, -1 };
+    private int[] moveY = { 1, -1, 0, 0, 1, -1, 1, -1 };
     private bool existPath;
 
     public Vector2 test;
@@ -111,7 +111,7 @@ public class WorldToGrid : MonoBehaviour
                 return;
             }
             
-            for(int i = 0; i < 4; i++)
+            for(int i = 0; i < 8; i++)
             {
                 int nextX = curNode.gridX + moveX[i];
                 int nextY = curNode.gridY + moveY[i];
