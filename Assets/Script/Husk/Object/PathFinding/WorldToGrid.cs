@@ -124,9 +124,9 @@ public class WorldToGrid : MonoBehaviour
     }
 
     [ContextMenu("PathFinding")]
-    private void FindPath()
+    private void BFSFindPath()
     {
-        Debug.Log($"Pathfinding");
+        Debug.Log($"BFS Pathfinding");
         Node targetNode = NodeFromWroldPosition(target.position);
         Node FromNode = NodeFromWroldPosition(transform.position);
         Vector2 targetPos = new Vector2(targetNode.gridX, targetNode.gridY);
@@ -208,13 +208,21 @@ public class WorldToGrid : MonoBehaviour
 
         Node curNode = NodeFromWroldPosition(target.position);
         Node originNode = NodeFromWroldPosition(transform.position);
+
+        List<Node> pathWithBFS = new List<Node>();
+        pathWithBFS.Add(curNode);
         while(true)
         {
             Debug.Log($"cur : {curNode.gridX}, {curNode.gridY}");
             if(curNode == originNode)   break;
 
             curNode = grid[curNode.prevX, curNode.prevY];
+            pathWithBFS.Add(curNode);
         }
+
+        pathWithBFS.Reverse();
+
+        path = pathWithBFS;
     }
 
     bool NotNPCRange(int x, int y)
