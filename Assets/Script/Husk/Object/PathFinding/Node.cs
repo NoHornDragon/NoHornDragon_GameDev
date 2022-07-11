@@ -2,7 +2,7 @@
 using UnityEngine;
 
 
-public class Node
+public class Node : IHeapItem<Node>
 {
     public bool canWalk;
 
@@ -22,6 +22,9 @@ public class Node
     public int fCost { get {return gCost + hCost; } }
     public Node parent;
 
+    // heap
+    int heapIndex;
+
 
     public Node(bool inputCanWalk, Vector2 inputWorldPosition, int inputGridX, int inputGridY)
     {
@@ -34,5 +37,26 @@ public class Node
     public void SetPrevNode(Vector2 node)
     {
         prevNode = node;
+    }
+
+    public int HeapIndex
+    {
+        get
+        {
+            return heapIndex;
+        }
+        set
+        {
+            heapIndex = value;
+        }
+    }
+
+    public int CompareTo(Node node)
+    {
+        int compare = fCost.CompareTo(node.fCost);
+        if(compare == 0)
+            compare = hCost.CompareTo(node.hCost);
+        
+        return -compare;
     }
 }

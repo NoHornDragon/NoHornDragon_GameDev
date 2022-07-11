@@ -26,21 +26,23 @@ public class AStarPathFinding : MonoBehaviour
         Node startNode = grid.NodeFromWroldPosition(startPos);
         Node targetNode = grid.NodeFromWroldPosition(targetPos);
 
-        List<Node> openSet = new List<Node>();
+        // List<Node> openSet = new List<Node>();
+        Heap<Node> openSet = new Heap<Node>(grid.MaxSize);
         HashSet<Node> closedSet = new HashSet<Node>();
 
         openSet.Add(startNode);
 
         while(openSet.Count > 0)
         {
-            Node curNode = openSet[0];
-            for(int i = 0; i < openSet.Count; i++)
-            {
-                if(curNode.fCost > openSet[i].fCost || openSet[i].fCost == curNode.fCost && openSet[i].hCost < curNode.hCost)
-                    curNode = openSet[i];
-            }
+            // Node curNode = openSet[0];
+            // for(int i = 0; i < openSet.Count; i++)
+            // {
+            //     if(curNode.fCost > openSet[i].fCost || openSet[i].fCost == curNode.fCost && openSet[i].hCost < curNode.hCost)
+            //         curNode = openSet[i];
+            // }
 
-            openSet.Remove(curNode);
+            // openSet.Remove(curNode);
+            Node curNode = openSet.RemoveFirst();
             closedSet.Add(curNode);
 
             if(curNode == targetNode)
@@ -73,7 +75,6 @@ public class AStarPathFinding : MonoBehaviour
 
     public void TracePath(Node start, Node end)
     {
-        Debug.Log($"trace path");
         List<Node> path = new List<Node>();
         Node curNode = end;
 

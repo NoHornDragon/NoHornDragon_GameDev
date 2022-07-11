@@ -12,6 +12,11 @@ public class WorldToGrid : MonoBehaviour
 
     private float nodeDiameter;
     private int gridSizeX, gridSizeY;
+
+    public int MaxSize
+    {
+        get { return gridSizeX * gridSizeY; }
+    }
     
     private List<Vector2> foundPath;
 
