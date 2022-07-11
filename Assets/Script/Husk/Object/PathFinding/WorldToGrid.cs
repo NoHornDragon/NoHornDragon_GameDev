@@ -23,6 +23,9 @@ public class WorldToGrid : MonoBehaviour
 
     private Node[,] grid;
 
+    // from Astar
+    public List<Node> path;
+
     private void Awake()
     {
         target = GameObject.FindWithTag("Player").transform;
@@ -49,11 +52,16 @@ public class WorldToGrid : MonoBehaviour
                 Gizmos.color = Color.yellow;
             if(n == thisNode)
                 Gizmos.color = Color.gray;
+
+            // Draw Astar path
+            if(path != null && path.Contains(n))
+                Gizmos.color = Color.black;
+
             Gizmos.DrawCube(n.worldPosition, Vector3.one * (nodeDiameter - 0.1f));
         }
     }
 
-    private Node NodeFromWroldPosition(Vector2 WorldPos)
+    public Node NodeFromWroldPosition(Vector2 WorldPos)
     {
         WorldPos -= (Vector2)transform.position;
 		float percentX = (WorldPos.x + gridWorldSize.x / 2) / gridWorldSize.x;
@@ -68,6 +76,29 @@ public class WorldToGrid : MonoBehaviour
 
 		return grid[x,y];
     }
+
+    public List<Node> GetNodeNeighbours(Node node)
+    {
+        List<Node> neighbors = new List<Node>();
+
+        for(int x = -1; x <= 1; x++)
+        {
+            for(int y = -1; y <= 1; y++)
+            {
+                if(x == 0 && y == 0)    continue;
+
+                int nodeX = node.gridX + x;
+                int nodeY = node.gridY + y;
+
+                if(NotNPCRange(nodeX, nodeY))   continue;
+
+                neighbors.Add(grid[nodeX, nodeY]);
+            }
+        }
+
+        return neighbors;
+    }
+
 
     [ContextMenu("Create Grid")]
     private void CreateGrid()

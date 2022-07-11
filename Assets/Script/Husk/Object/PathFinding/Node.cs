@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
 
+
 public class Node
 {
     public bool canWalk;
@@ -14,6 +15,12 @@ public class Node
     public Vector2 prevNode;
 
     public int prevX, prevY;
+
+    // for AStar Algorithm
+    public int gCost;
+    public int hCost;
+    public int fCost { get {return gCost + hCost; } }
+    public Node parent;
 
 
     public Node(bool inputCanWalk, Vector2 inputWorldPosition, int inputGridX, int inputGridY)
