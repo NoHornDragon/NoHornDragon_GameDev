@@ -27,9 +27,8 @@ public class WorldToGrid : MonoBehaviour
     public Vector2 test;
 
     private Node[,] grid;
+    public bool drawGizmos;
 
-    // from Astar
-    public List<Node> path;
 
     private void Awake()
     {
@@ -44,6 +43,8 @@ public class WorldToGrid : MonoBehaviour
 
     private void OnDrawGizmos()
     {
+        if(!drawGizmos) return;
+        
         Gizmos.DrawWireCube(transform.position, new Vector2(gridWorldSize.x, gridWorldSize.y));
 
         if(grid == null)    return;
@@ -55,12 +56,6 @@ public class WorldToGrid : MonoBehaviour
             Gizmos.color = (n.canWalk) ? Color.blue : Color.red; 
             if(n == targetNode)
                 Gizmos.color = Color.yellow;
-            if(n == thisNode)
-                Gizmos.color = Color.gray;
-
-            // Draw Astar path
-            if(path != null && path.Contains(n))
-                Gizmos.color = Color.black;
 
             Gizmos.DrawCube(n.worldPosition, Vector3.one * (nodeDiameter - 0.1f));
         }
@@ -222,7 +217,7 @@ public class WorldToGrid : MonoBehaviour
 
         pathWithBFS.Reverse();
 
-        path = pathWithBFS;
+        // TODO : BFS 알고리즘 길을 사용하려면 아래 추가
     }
 
     bool NotNPCRange(int x, int y)
