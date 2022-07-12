@@ -33,7 +33,6 @@ public class AStarPathFinding : MonoBehaviour
 
         if(startNode.canWalk && targetNode.canWalk)
         {
-            // List<Node> openSet = new List<Node>();
             Heap<Node> openSet = new Heap<Node>(grid.MaxSize);
             HashSet<Node> closedSet = new HashSet<Node>();
 
@@ -41,20 +40,11 @@ public class AStarPathFinding : MonoBehaviour
 
             while(openSet.Count > 0)
             {
-                // Node curNode = openSet[0];
-                // for(int i = 0; i < openSet.Count; i++)
-                // {
-                //     if(curNode.fCost > openSet[i].fCost || openSet[i].fCost == curNode.fCost && openSet[i].hCost < curNode.hCost)
-                //         curNode = openSet[i];
-                // }
-
-                // openSet.Remove(curNode);
                 Node curNode = openSet.RemoveFirst();
                 closedSet.Add(curNode);
 
                 if(curNode == targetNode)
                 {
-                    // TracePath(startNode, targetNode); 
                     success = true;
                     break;
                 }

@@ -6,28 +6,27 @@ public class WorldToGrid : MonoBehaviour
 {
     public Transform target;
 
+    [Header("For Grid")]
     public LayerMask groundMask;
     public Vector2 gridWorldSize;
     public float nodeRadius;
 
     private float nodeDiameter;
     private int gridSizeX, gridSizeY;
+    private Node[,] grid;
+    [SerializeField]
+    private bool drawGizmos;
+    public Vector2 test;
 
     public int MaxSize
     {
         get { return gridSizeX * gridSizeY; }
     }
     
-    private List<Vector2> foundPath;
 
     private int[] moveX = { 0, 0, 1, -1, 1, 1, -1, -1 };
     private int[] moveY = { 1, -1, 0, 0, 1, -1, 1, -1 };
     private bool existPath;
-
-    public Vector2 test;
-
-    private Node[,] grid;
-    public bool drawGizmos;
 
 
     private void Awake()
@@ -44,7 +43,7 @@ public class WorldToGrid : MonoBehaviour
     private void OnDrawGizmos()
     {
         if(!drawGizmos) return;
-        
+
         Gizmos.DrawWireCube(transform.position, new Vector2(gridWorldSize.x, gridWorldSize.y));
 
         if(grid == null)    return;
@@ -160,36 +159,6 @@ public class WorldToGrid : MonoBehaviour
         }
         Debug.Log($"not founded");
         existPath = false;
-
-
-        // q.Enqueue(transform.position);
-        // NodeFromWroldPosition(transform.position).visit = true;
-
-        // Vector2 curPos, NextPos;
-
-        // while(q.Count > 0)
-        // {
-        //     curPos = q.Dequeue();
-            
-        //     if(NodeFromWroldPosition(curPos) == targetNode) 
-        //         break;
-
-        //     for(int i = 0; i < 4; i++)
-        //     {
-        //         NextPos.x = curPos.x + moveX[i];
-        //         NextPos.y = curPos.y + moveY[i];
-
-        //         if(NotNPCRange(NextPos))    continue;
-
-        //         Node nextNode = NodeFromWroldPosition(NextPos);
-        //         if(nextNode.visit)  continue;
-
-        //         nextNode.visit = true;
-        //         nextNode.SetPrevNode(curPos);
-        //         q.Enqueue(NextPos);
-
-        //     }
-        // }
     }
 
     [ContextMenu("print path")]

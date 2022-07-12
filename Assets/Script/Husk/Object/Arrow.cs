@@ -6,13 +6,16 @@ public class Arrow : FiringObject
 {
     public Transform target;
     public float speed = 5.0f;
-    Vector2[] path;
+    [SerializeField] Vector2[] path;
     int pathIndex;
 
+    private void Awake()
+    {
+        target = GameObject.FindWithTag("Player").transform;
+    }
 
     private void OnEnable()
     {
-        target = GameObject.FindWithTag("Player").transform;
         RequestAStarPath.RequestPath(transform.position, target.position, AfterFindPath);
     }
 
@@ -43,6 +46,9 @@ public class Arrow : FiringObject
             transform.position = Vector2.MoveTowards(transform.position, curPos, speed * Time.deltaTime);
             yield return null;
         }
+
+        // TODO : 화살 두번째 부터는 날아가다가 안 날아가는 오류 해결
+        // TODO : movetowards 끝날 때 방향을 기억해 처리
     }
 
     private void OnDrawGizmos()
@@ -59,5 +65,10 @@ public class Arrow : FiringObject
             else
                 Gizmos.DrawLine(path[i-1], path[i]);
         }
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        // TODO : 풀에 돌아가는 기능 구현
     }
 }
