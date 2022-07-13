@@ -13175,6 +13175,7 @@ GameObject:
   - component: {fileID: 2067167214}
   - component: {fileID: 2067167218}
   - component: {fileID: 2067167219}
+  - component: {fileID: 2067167220}
   m_Layer: 0
   m_Name: ArrowNPC
   m_TagString: Untagged
@@ -13289,8 +13290,9 @@ MonoBehaviour:
   groundMask:
     serializedVersion: 2
     m_Bits: 1024
-  gridWorldSize: {x: 12, y: 10}
+  gridWorldSize: {x: 15, y: 12}
   nodeRadius: 0.5
+  drawGizmos: 1
   test: {x: 0.05, y: 0.05}
 --- !u!114 &2067167219
 MonoBehaviour:
@@ -13304,8 +13306,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eed88ce8f55cd9a44add695ecb00fc08, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  finder: {fileID: 0}
-  target: {fileID: 750286835}
+--- !u!114 &2067167220
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2067167213}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 25883dfabf0bead4580c579d56e6663c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2085172319
 GameObject:
   m_ObjectHideFlags: 0

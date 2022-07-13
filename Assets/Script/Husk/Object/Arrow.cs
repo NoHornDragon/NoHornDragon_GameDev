@@ -71,4 +71,10 @@ public class Arrow : FiringObject
     {
         // TODO : 풀에 돌아가는 기능 구현
     }
+
+
+    private void OnDisable()
+    {
+        pathIndex = 0;
+    }
 }
