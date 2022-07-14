@@ -8976,7 +8976,7 @@ GameObject:
   - component: {fileID: 1617631862}
   m_Layer: 0
   m_Name: CameraConfiner
-  m_TagString: Untagged
+  m_TagString: Confiner
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -13292,7 +13292,7 @@ MonoBehaviour:
     m_Bits: 1024
   gridWorldSize: {x: 15, y: 12}
   nodeRadius: 0.5
-  drawGizmos: 1
+  drawGizmos: 0
   test: {x: 0.05, y: 0.05}
 --- !u!114 &2067167219
 MonoBehaviour:

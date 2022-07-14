@@ -6,15 +6,13 @@ public class FiringObject : MonoBehaviour
 {
     private Rigidbody2D rigid;
 
+    protected FirePool firePool;
+    public FirePool SetFirePool { set { firePool = value; } }
+
 
     private void Awake()
     {
         rigid = GetComponent<Rigidbody2D>();
-    }
-
-    public virtual void Fire()
-    {
-
     }
 
     public virtual void Stop()

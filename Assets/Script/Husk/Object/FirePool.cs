@@ -27,7 +27,6 @@ public class FirePool : MonoBehaviour
         item.transform.localPosition = Vector3.zero;
         item.transform.SetParent(null);
         item.gameObject.SetActive(true);
-        item.Fire();
 
         return item;
     }
@@ -46,6 +45,7 @@ public class FirePool : MonoBehaviour
         for(int i = 0; i < makecount; i++)
         {
             var item = GameObject.Instantiate(fireObjectPrefab).GetComponent<FiringObject>();
+            item.SetFirePool = this;
 
             ReturnItem(item);
         }
