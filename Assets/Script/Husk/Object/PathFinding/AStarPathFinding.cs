@@ -5,25 +5,13 @@ using System;
 
 public class AStarPathFinding : MonoBehaviour
 {
-    private WorldToGrid grid;
 
-    RequestAStarPath requestAStarPath;
-
-    private void Start()
+    public void TriggerPathFinding(WorldToGrid grid, Vector2 startPos, Vector2 endPos)
     {
-        grid = GetComponent<WorldToGrid>();
-
-        requestAStarPath = GetComponent<RequestAStarPath>();
+        StartCoroutine(PathFinding(grid, startPos, endPos));
     }
 
-
-
-    public void TriggerPathFinding(Vector2 startPos, Vector2 endPos)
-    {
-        StartCoroutine(PathFinding(startPos, endPos));
-    }
-
-    IEnumerator PathFinding(Vector2 startPos, Vector2 targetPos)
+    IEnumerator PathFinding(WorldToGrid grid, Vector2 startPos, Vector2 targetPos)
     {
         Vector2[] wayPoint = new Vector2[0];
         bool success = false;
@@ -76,11 +64,11 @@ public class AStarPathFinding : MonoBehaviour
         {
             wayPoint = TracePath(startNode, targetNode);
         }
-        requestAStarPath.FinishPathFinding(wayPoint, success);
+        RequestAStarPath.instance.FinishPathFinding(wayPoint, success);
     }
 
 
-    Vector2[] TracePath(Node start, Node end)
+    private Vector2[] TracePath(Node start, Node end)
     {
         List<Node> path = new List<Node>();
         Node curNode = end;
@@ -90,23 +78,23 @@ public class AStarPathFinding : MonoBehaviour
             path.Add(curNode);
             curNode = curNode.parent;
         }
-        Vector2[] wayPoints = ExplicitPath(path);
+        Vector2[] wayPoints = MakePathSimple(path);
         Array.Reverse(wayPoints);
-
+        
         return wayPoints;
     }
 
-    Vector2[] ExplicitPath(List<Node> path)
+    private Vector2[] MakePathSimple(List<Node> path)
     {
         List<Vector2> way = new List<Vector2>();
         Vector2 prevDir = Vector2.zero;
         way.Add(path[0].worldPosition);
+
         for(int i = 1; i < path.Count; i++)
         {   
             Vector2 newDir = new Vector2(path[i-1].gridX - path[i].gridX, path[i-1].gridY - path[i].gridY);
             if(prevDir != newDir)
             {
-                Debug.Log($"{i}");
                 way.Add(path[i].worldPosition);
                 prevDir = newDir;
             }

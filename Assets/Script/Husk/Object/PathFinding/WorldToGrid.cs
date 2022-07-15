@@ -44,6 +44,11 @@ public class WorldToGrid : MonoBehaviour
         CreateGrid();       
     }
 
+    private void OnEnable()
+    {
+        RequestAStarPath.instance.CurGrid = this;
+    }
+
     private void OnDrawGizmos()
     {
         if(!drawGizmos) return;
@@ -75,7 +80,6 @@ public class WorldToGrid : MonoBehaviour
 
 		int x = Mathf.RoundToInt((gridSizeX - 1) * percentX);
 		int y = Mathf.RoundToInt((gridSizeY - 1) * percentY);
-        
 
 		return grid[x,y];
     }

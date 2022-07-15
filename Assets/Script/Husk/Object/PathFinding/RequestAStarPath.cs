@@ -11,6 +11,8 @@ public class RequestAStarPath : MonoBehaviour
 
     public static RequestAStarPath instance;
     private AStarPathFinding aStarPathFinding;
+    private WorldToGrid grid;
+    public WorldToGrid CurGrid { set { grid = value; } }
 
 
 
@@ -42,7 +44,7 @@ public class RequestAStarPath : MonoBehaviour
 
         isProcessing = true;
         curPath = pathToProcess.Dequeue();
-        aStarPathFinding.TriggerPathFinding(curPath.startPos, curPath.endPos);
+        aStarPathFinding.TriggerPathFinding(grid, curPath.startPos, curPath.endPos);
     }
 
     public void FinishPathFinding(Vector2[] path, bool success)

@@ -12,8 +12,6 @@ public class Node : IHeapItem<Node>
 
     public bool visit = false;
 
-    public Vector2 prevNode;
-
     public int prevX, prevY;
 
     // for AStar Algorithm
@@ -32,11 +30,6 @@ public class Node : IHeapItem<Node>
         worldPosition = inputWorldPosition; 
         gridX = inputGridX;
         gridY = inputGridY;
-    }
-
-    public void SetPrevNode(Vector2 node)
-    {
-        prevNode = node;
     }
 
     public int HeapIndex
