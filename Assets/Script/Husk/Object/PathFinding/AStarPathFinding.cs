@@ -100,12 +100,14 @@ public class AStarPathFinding : MonoBehaviour
     {
         List<Vector2> way = new List<Vector2>();
         Vector2 prevDir = Vector2.zero;
-
+        way.Add(path[0].worldPosition);
         for(int i = 1; i < path.Count; i++)
-        {
+        {   
             Vector2 newDir = new Vector2(path[i-1].gridX - path[i].gridX, path[i-1].gridY - path[i].gridY);
+            // Debug.Log($"direction from ({path[i-1].gridX}, {path[i-1].gridY}) to ({path[i].gridX}, {path[i].gridY}) is : {newDir}");
             if(prevDir != newDir)
             {
+                Debug.Log($"{i}");
                 way.Add(path[i].worldPosition);
                 prevDir = newDir;
             }

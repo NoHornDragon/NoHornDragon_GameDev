@@ -8,6 +8,8 @@ public class Arrow : FiringObject
     public float speed = 5.0f;
     [SerializeField] Vector2[] path;
     [SerializeField] private int pathIndex;
+    [SerializeField]
+    private Vector2 moveDir;
 
     private void Awake()
     {
@@ -24,7 +26,7 @@ public class Arrow : FiringObject
         if(!success)    return;
 
         path = way;
-        StopCoroutine("MoveToTarget");
+        StopAllCoroutines();
 
         if(this.gameObject.activeInHierarchy)
             StartCoroutine("MoveToTarget");
@@ -33,7 +35,6 @@ public class Arrow : FiringObject
     IEnumerator MoveToTarget()
     {
         Vector2 curPos = path[0];
-        Vector2 moveDir;
         while(true)
         {
             if((Vector2)transform.position == curPos)
@@ -41,6 +42,7 @@ public class Arrow : FiringObject
                 pathIndex++;
                 if(pathIndex >= path.Length)
                 {
+                    StartCoroutine(MoveToEndPoint());
                     yield break;
                 }
                 curPos = path[pathIndex];
@@ -50,10 +52,16 @@ public class Arrow : FiringObject
             transform.position = Vector2.MoveTowards(transform.position, curPos, speed * Time.deltaTime);
             yield return null;
         }
+        
+    }
 
-        // TODO : movetowards 끝날 때 방향을 기억해 처리
-        transform.position = Vector2.MoveTowards(transform.position, moveDir, speed * Time.deltaTime);
-        Debug.Log($"가는중");
+    IEnumerator MoveToEndPoint()
+    {
+        while(true)
+        {
+            transform.position = Vector2.MoveTowards(transform.position, moveDir * 100, speed * Time.deltaTime);
+            yield return null;
+        }
     }
 
     private void OnDrawGizmos()
@@ -75,16 +83,9 @@ public class Arrow : FiringObject
     private void OnTriggerEnter2D(Collider2D other)
     {
         if(other.CompareTag("Confiner"))    return;
+        if(other.CompareTag("Room"))      return;
 
-        Debug.Log($"{other.gameObject.name}");
-        // TODO : 풀에 돌아가는 기능 구현
-        StopCoroutine("MoveToTarget");
-        firePool.ReturnItem(this);
-    }
-
-    private void OnCollisionEnter2D(Collision2D other)
-    {
-                Debug.Log($"{other.gameObject.name}");
+        Debug.Log($"trigger {other.gameObject.name}");
         // TODO : 풀에 돌아가는 기능 구현
         StopCoroutine("MoveToTarget");
         firePool.ReturnItem(this);
