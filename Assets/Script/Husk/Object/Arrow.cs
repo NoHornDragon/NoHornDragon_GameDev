@@ -86,7 +86,7 @@ public class Arrow : FiringObject
         if(other.CompareTag("Room"))      return;
 
         Debug.Log($"trigger {other.gameObject.name}");
-        // TODO : 풀에 돌아가는 기능 구현
+        // TODO : 마지막 화살 애니메이션
         StopCoroutine("MoveToTarget");
         firePool.ReturnItem(this);
     }

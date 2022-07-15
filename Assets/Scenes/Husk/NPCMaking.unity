@@ -13291,6 +13291,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1024
   gridWorldSize: {x: 15, y: 12}
+  gridOffset: {x: -1, y: 1}
   nodeRadius: 0.5
   drawGizmos: 1
   test: {x: 0.05, y: 0.05}

@@ -7,8 +7,12 @@ public class WorldToGrid : MonoBehaviour
     public Transform target;
 
     [Header("For Grid")]
-    public LayerMask groundMask;
-    public Vector2 gridWorldSize;
+    [SerializeField]
+    private LayerMask groundMask;
+    [SerializeField]
+    private Vector2 gridWorldSize;
+    [SerializeField]
+    private Vector2 gridOffset;
     public float nodeRadius;
 
     private float nodeDiameter;
@@ -44,7 +48,7 @@ public class WorldToGrid : MonoBehaviour
     {
         if(!drawGizmos) return;
 
-        Gizmos.DrawWireCube(transform.position, new Vector2(gridWorldSize.x, gridWorldSize.y));
+        Gizmos.DrawWireCube(transform.position + (Vector3)gridOffset, new Vector2(gridWorldSize.x, gridWorldSize.y));
 
         if(grid == null)    return;
 
@@ -62,7 +66,7 @@ public class WorldToGrid : MonoBehaviour
 
     public Node NodeFromWroldPosition(Vector2 WorldPos)
     {
-        WorldPos -= (Vector2)transform.position;
+        WorldPos -= (Vector2)transform.position + gridOffset;
 		float percentX = (WorldPos.x + gridWorldSize.x / 2) / gridWorldSize.x;
 		float percentY = (WorldPos.y + gridWorldSize.y / 2) / gridWorldSize.y;
 		
@@ -105,7 +109,8 @@ public class WorldToGrid : MonoBehaviour
         grid = new Node[gridSizeX, gridSizeY];
 
         Vector2 bottomLeft = (Vector2)transform.position - (Vector2.right * gridWorldSize.x / 2) - (Vector2.up * gridWorldSize.y / 2) + test;
-
+        bottomLeft += gridOffset;
+        
         for(int x = 0; x < gridSizeX; x++)
         {
             for(int y = 0; y < gridSizeY; y++)
