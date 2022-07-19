@@ -17,7 +17,9 @@ public class WorldToGrid : MonoBehaviour
 
     private float nodeDiameter;
     private int gridSizeX, gridSizeY;
-    private Node[,] grid;
+    public int GridSizeX { get { return gridSizeX; } }
+    public int GridSizeY { get { return gridSizeY; } }
+    public Node[,] grid;
     [SerializeField]
     private bool drawGizmos;
     public Vector2 test;
