@@ -5,6 +5,7 @@ using System;
 public class PlayerMovement : MonoBehaviour
 {
     public event Action<bool> PlayerRecoverEvent;
+    public event Action<bool> PlayerResetEvent;
     public event Action playerResetEvent;
     // another component
     private Rigidbody2D rigid;
@@ -37,6 +38,8 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private Vector2 bottomOffset;
     [SerializeField] private float collisionRadius;
     [SerializeField] private LayerMask groundLayer;
+
+
     void Start()
     {
         // init variable
@@ -129,12 +132,11 @@ public class PlayerMovement : MonoBehaviour
         // if hardmode, respawn at start point
         this.gameObject.transform.position = Vector3.zero;
         // SaveData.instance.userData.resetCount++;
-        HistoryDataManager.instance.AddRestartCount(1);
-        // TODO : 아래 멘트 인게임에 추가
-        /*
-        혹시나 저희 게임의 버그로 인해 이 버튼을 누르셨다면 정말 죄송합니다. 버그를 제보해주시면 감사합니다.
-        아님 실수로 누르셨다면... 그건 좀 안타깝군요.
-        */
+        
+        // TODO : 출시 전에는 이거 추가해야 함
+        // HistoryDataManager.instance.AddRestartCount(1);
+
+        PlayerResetEvent(true);
     }
 
     private void MakeJoint(Vector2 dummyInput)
