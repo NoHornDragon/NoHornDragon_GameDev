@@ -7,24 +7,28 @@ public class FireingNPC : MonoBehaviour
     [SerializeField]
     private FirePool firePool;
     private FiringObject curFiringObject;
+    private Transform player;
+    [SerializeField]
+    private Transform bone;
 
     private void Awake()
     {
         firePool = GetComponent<FirePool>();
+        player = GameObject.FindWithTag("Player").transform;
 
     }
 
     private void Update()
     {
-        if(Input.GetKeyDown(KeyCode.M))
-        {
-            curFiringObject = firePool.GetFireItem();
-        }
-        // if(Input.GetKeyDown(KeyCode.N))
+        var len = player.position - transform.position;
+        float angle = Mathf.Atan2(len.y, len.x) * Mathf.Rad2Deg;
+        bone.localRotation  = Quaternion.Euler(0, 0, angle);
+
+        Debug.Log($"angle : {angle} / bone : {bone.rotation.z}");
+        
+        // if(Input.GetKeyDown(KeyCode.M))
         // {
-        //     // TODO : 이후 돌아가는 로직을 화살에서 처리하기
-        //     firePool.ReturnItem(curFiringObject);
-        //     curFiringObject = null;
+        //     curFiringObject = firePool.GetFireItem();
         // }
     }
 }

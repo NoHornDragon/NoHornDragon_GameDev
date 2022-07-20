@@ -28,11 +28,6 @@ public class WorldToGrid : MonoBehaviour
     {
         get { return gridSizeX * gridSizeY; }
     }
-    
-
-    private int[] moveX = { 0, 0, 1, -1, 1, 1, -1, -1 };
-    private int[] moveY = { 1, -1, 0, 0, 1, -1, 1, -1 };
-    private bool existPath;
 
 
     private void Awake()
@@ -48,7 +43,7 @@ public class WorldToGrid : MonoBehaviour
 
     private void OnEnable()
     {
-        RequestAStarPath.instance.CurGrid = this;
+        
     }
 
     private void OnDrawGizmos()
@@ -126,78 +121,6 @@ public class WorldToGrid : MonoBehaviour
                 grid[x, y] = new Node(canPass, worldPoint, x, y);
             }
         }
-    }
-
-    [ContextMenu("PathFinding")]
-    private void BFSFindPath()
-    {
-        Debug.Log($"BFS Pathfinding");
-        Node targetNode = NodeFromWroldPosition(target.position);
-        Node FromNode = NodeFromWroldPosition(transform.position);
-        Vector2 targetPos = new Vector2(targetNode.gridX, targetNode.gridY);
-
-        Queue<Node> q = new Queue<Node>();
-        bool[,] visit = new bool[gridSizeX, gridSizeY];
-        q.Enqueue(FromNode);
-
-        Node curNode, nextNode;
-        while(q.Count > 0)
-        {
-            curNode = q.Dequeue();
-
-            if(curNode == targetNode)
-            {
-                Debug.Log($"founded");
-                existPath = true;
-                return;
-            }
-            
-            for(int i = 0; i < 8; i++)
-            {
-                int nextX = curNode.gridX + moveX[i];
-                int nextY = curNode.gridY + moveY[i];
-                if(NotNPCRange(nextX, nextY))   continue;
-                
-                nextNode = grid[nextX, nextY];
-                if(nextNode.visit)      continue;
-                if(!nextNode.canWalk)   continue;
-
-                nextNode.visit = true;
-                nextNode.prevX = curNode.gridX;
-                nextNode.prevY = curNode.gridY;
-                q.Enqueue(nextNode);
-            }
-        }
-        Debug.Log($"not founded");
-        existPath = false;
-    }
-
-    [ContextMenu("print path")]
-    private void PrintPath()
-    {
-        if(!existPath)
-        {
-            Debug.Log($"no path");
-            return;
-        }
-
-        Node curNode = NodeFromWroldPosition(target.position);
-        Node originNode = NodeFromWroldPosition(transform.position);
-
-        List<Node> pathWithBFS = new List<Node>();
-        pathWithBFS.Add(curNode);
-        while(true)
-        {
-            Debug.Log($"cur : {curNode.gridX}, {curNode.gridY}");
-            if(curNode == originNode)   break;
-
-            curNode = grid[curNode.prevX, curNode.prevY];
-            pathWithBFS.Add(curNode);
-        }
-
-        pathWithBFS.Reverse();
-
-        // TODO : BFS 알고리즘 길을 사용하려면 아래 추가
     }
 
     bool NotNPCRange(int x, int y)
