@@ -48,7 +48,8 @@ public class PaperSheet : MonoBehaviour
 
     private void PlayerGetPaper()
     {
-        HistoryDataManager.instance.SetPaperTrue(paperIndex);
+        // TODO : 플레이어 이후 수정
+        // HistoryDataManager.instance.SetPaperTrue(paperIndex);
 
         // 사라지는 애니메이션
         paperSequence.Kill();
