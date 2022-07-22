@@ -26,15 +26,20 @@ public class Arrow : FiringObject
         if(!success)    return;
 
         path = way;
+
         StopAllCoroutines();
 
         if(this.gameObject.activeInHierarchy)
             StartCoroutine("MoveToTarget");
     }
 
+
     IEnumerator MoveToTarget()
     {
         Vector2 curPos = path[0];
+        moveDir = curPos - (Vector2)transform.position;
+        transform.right = moveDir;
+
         while(true)
         {
             if((Vector2)transform.position == curPos)
@@ -47,6 +52,7 @@ public class Arrow : FiringObject
                 }
                 curPos = path[pathIndex];
                 moveDir = curPos - (Vector2)transform.position;
+                transform.right = moveDir;
             }
 
             transform.position = Vector2.MoveTowards(transform.position, curPos, speed * Time.deltaTime);
@@ -64,31 +70,20 @@ public class Arrow : FiringObject
         }
     }
 
-    private void OnDrawGizmos()
-    {
-        if(path == null)    return;
-
-        for(int i = pathIndex; i < path.Length; i++)
-        {
-            Gizmos.color = Color.black;
-            Gizmos.DrawCube(path[i], Vector2.one);
-
-            if(i == pathIndex)
-                Gizmos.DrawLine(transform.position, path[i]);
-            else
-                Gizmos.DrawLine(path[i-1], path[i]);
-        }
-    }
-
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if(other.CompareTag("Confiner"))    return;
-        if(other.CompareTag("Room"))      return;
+        switch(other.tag)
+        {
+            case "Player":
+                StopCoroutine("MoveToTarget");
+                firePool.ReturnItem(this);
+                break;
+            case "Ground":
+                StopCoroutine("MoveToTarget");
+                firePool.ReturnItem(this);
+                break;
+        }
 
-        Debug.Log($"trigger {other.gameObject.name}");
-        // TODO : 마지막 화살 애니메이션
-        StopCoroutine("MoveToTarget");
-        firePool.ReturnItem(this);
     }
 
 
