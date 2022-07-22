@@ -13,7 +13,6 @@ public class FireingNPC : MonoBehaviour
     private bool lookAtRight;
     [SerializeField]
     private float launchTime;
-    [SerializeField]
     private float curTime;
 
 
