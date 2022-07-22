@@ -16,7 +16,7 @@ public class FirePool : MonoBehaviour
         AddFireItem(2);
     }
 
-    public FiringObject GetFireItem()
+    public void GetFireItem()
     {
         if(fireItemPool.Count <= 0) 
         {
@@ -27,8 +27,6 @@ public class FirePool : MonoBehaviour
         item.transform.localPosition = Vector3.zero;
         item.transform.SetParent(null);
         item.gameObject.SetActive(true);
-
-        return item;
     }
 
     public void ReturnItem(FiringObject returnObj)

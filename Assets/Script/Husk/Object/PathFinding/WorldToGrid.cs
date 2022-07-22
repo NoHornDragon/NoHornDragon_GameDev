@@ -13,6 +13,7 @@ public class WorldToGrid : MonoBehaviour
     private Vector2 gridWorldSize;
     [SerializeField]
     private Vector2 gridOffset;
+    public Vector2 GridOffset { get { return gridOffset; } }
     public float nodeRadius;
 
     private float nodeDiameter;
@@ -43,7 +44,7 @@ public class WorldToGrid : MonoBehaviour
 
     private void OnEnable()
     {
-        
+        RequestAStarPath.instance.CurGrid = this;
     }
 
     private void OnDrawGizmos()
