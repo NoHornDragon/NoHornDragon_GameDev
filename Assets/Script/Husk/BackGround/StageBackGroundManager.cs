@@ -10,24 +10,23 @@ public class StageBackGroundManager : MonoBehaviour
 
     private void Start()
     {
-        bgImages = gameObject.GetComponentsInChildren<Transform>();
-    
+        // bgImages = gameObject.GetComponentsInChildren<Transform>();
+
         PlayerEnterConfiner[] confiners = FindObjectsOfType<PlayerEnterConfiner>();
-        foreach(PlayerEnterConfiner confiner in confiners)
+        foreach (PlayerEnterConfiner confiner in confiners)
         {
             confiner.ActiveRoomEvent += StageEvent;
         }
 
-        ActiveBG(false);
+        if(stageIndex != 1)
+            ActiveBG(false);
     }
 
+    /// <summary>
+    /// 활성화된 스테이지와 플레이어의 현재 스테이지가 맞지 않는 경우 배경 처리를 합니다.
+    /// </summary>
     private void StageEvent(uint playerStage, bool isIn)
     {
-        /*
-        현재 액티브가 아닌데 플레이어가 스테이지에 들어온 경우, 액티브인데 스테이지를 벗어난 경우 함수를 호출합니다.
-        그 외의 경우 SetActive 작업을 할 필요가 없습니다.
-        */
-
         if (playerStage != stageIndex) return;
 
         ActiveBG(isIn);
@@ -37,7 +36,7 @@ public class StageBackGroundManager : MonoBehaviour
     {
         if (nowActive == isActive) return;
 
-        for(int i = 1; i < bgImages.Length; i++)
+        for(int i = 0; i < bgImages.Length; i++)
         {
             bgImages[i].gameObject.SetActive(isActive);
         }

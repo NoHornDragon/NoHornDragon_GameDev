@@ -29,7 +29,7 @@ public class PlayerCollider : MonoBehaviour
             // if now not origin movement, first change to origin player
             PlayerChanged(true, null);
 
-            playerStunEvent?.Invoke(true);
+            PlayerStunEvent();
         }
         if(other.CompareTag("AnotherMovement"))
         {
@@ -64,6 +64,8 @@ public class PlayerCollider : MonoBehaviour
 
     public void PlayerStunEvent()
     {
+        if(player.stuned)   return;
+        
         playerStunEvent?.Invoke(true);
     }
 }

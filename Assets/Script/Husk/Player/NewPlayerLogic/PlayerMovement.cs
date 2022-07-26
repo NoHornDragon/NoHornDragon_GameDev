@@ -5,6 +5,7 @@ using System;
 public class PlayerMovement : MonoBehaviour
 {
     public event Action<bool> PlayerRecoverEvent;
+    public event Action<bool> PlayerResetEvent;
     public event Action playerResetEvent;
     // another component
     private Rigidbody2D rigid;
@@ -37,6 +38,8 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private Vector2 bottomOffset;
     [SerializeField] private float collisionRadius;
     [SerializeField] private LayerMask groundLayer;
+
+
     void Start()
     {
         // init variable
@@ -52,12 +55,13 @@ public class PlayerMovement : MonoBehaviour
         coll.playerChangeEvent += PlayerBecomeOrigin;
         FindObjectOfType<YeouijuLaunch>().disJointEvent += DeleteJoint;
 
-        usingEasyMode = SaveData.instance.userData.UseEasyMode;
-        if(usingEasyMode)
-        {
-            this.transform.position = SaveData.instance.userData.PlayerPos;
-            StartCoroutine(SavePlayerPosition());
-        }
+        // usingEasyMode = SaveData.instance.userData.UseEasyMode;
+        usingEasyMode = SettingsManager.instance.UseEasyMode;
+        // if(usingEasyMode)
+        // {
+        //     this.transform.position = SaveData.instance.userData.PlayerPos;
+        //     StartCoroutine(SavePlayerPosition());
+        // }
     }
 
     void Update()
@@ -117,22 +121,22 @@ public class PlayerMovement : MonoBehaviour
         // if now anothermovement, change to original
         playerResetEvent?.Invoke();
 
-        if(usingEasyMode)
-        {
-            // if using easymode, respawn at savepoint
-            this.gameObject.transform.position = SaveData.instance.userData.PlayerPos;
-            SaveData.instance.userData.resetCount++;
-            return;
-        }
+        // if(usingEasyMode)
+        // {
+        //     // if using easymode, respawn at savepoint
+        //     this.gameObject.transform.position = SaveData.instance.userData.PlayerPos;
+        //     SaveData.instance.userData.resetCount++;
+        //     return;
+        // }
 
         // if hardmode, respawn at start point
         this.gameObject.transform.position = Vector3.zero;
-        SaveData.instance.userData.resetCount++;
-        // TODO : 아래 멘트 인게임에 추가
-        /*
-        혹시나 저희 게임의 버그로 인해 이 버튼을 누르셨다면 정말 죄송합니다. 버그를 제보해주시면 감사합니다.
-        아님 실수로 누르셨다면... 그건 좀 안타깝군요.
-        */
+        // SaveData.instance.userData.resetCount++;
+        
+        // TODO : 출시 전에는 이거 추가해야 함
+        // HistoryDataManager.instance.AddRestartCount(1);
+
+        PlayerResetEvent(true);
     }
 
     private void MakeJoint(Vector2 dummyInput)
@@ -162,19 +166,19 @@ public class PlayerMovement : MonoBehaviour
     }
 
     // Now using easy mode, save player's position in 10s
-    WaitForSeconds saveCycle = new WaitForSeconds(10f);
-    IEnumerator SavePlayerPosition()
-    {
-        yield return saveCycle;
+    // WaitForSeconds saveCycle = new WaitForSeconds(10f);
+    // IEnumerator SavePlayerPosition()
+    // {
+    //     yield return saveCycle;
 
-        if(onGround)
-        {
-            SaveData.instance.userData.PlayerPos = this.transform.position;
-            SaveData.instance.SaveGame();
-        }
+    //     if(onGround)
+    //     {
+    //         SaveData.instance.userData.PlayerPos = this.transform.position;
+    //         SaveData.instance.SaveGame();
+    //     }
 
-        StartCoroutine(SavePlayerPosition());
-    }
+    //     StartCoroutine(SavePlayerPosition());
+    // }
 
     public void PlayerStuned(bool isStuned)
     {

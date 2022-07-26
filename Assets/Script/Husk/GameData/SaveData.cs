@@ -119,9 +119,6 @@ public class UserData{
         }
     }
 
-    [Header("종이조각 흭득 여부")]
-    public bool[] paperList;                // 플레이어의 종이조각 갯수
-
     public UserData()
     {
         backGroundsoundVolume = 0.5f;
@@ -133,7 +130,5 @@ public class UserData{
 
         easyMode = false;
         playerPos = Vector3.zero;
-
-        paperList = new bool[20];
     }
 };

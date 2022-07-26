@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 6
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Water Reflect Material
+  m_Shader: {fileID: -6465566751694194690, guid: 1602356567405e54898f102a07b5de4d,
+    type: 3}
+  m_ShaderKeywords: ETC1_EXTERNAL_ALPHA
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - Texture2D_9BA9072D:
+        m_Texture: {fileID: 2800000, guid: dcc2e9ec78e16a54b844d9e6067e8926, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - Texture2D_AE2F530F:
+        m_Texture: {fileID: 8400000, guid: a7ff25eb45790b64f80386a4c819b56c, type: 2}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Floats:
+    - Vector1_85185896: 1
+    - Vector1_F622450: 0.1
+    m_Colors:
+    - Color_E3D97E50: {r: 0.66202384, g: 0.77489424, b: 0.8207547, a: 1}

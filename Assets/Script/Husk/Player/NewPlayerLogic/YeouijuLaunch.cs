@@ -14,13 +14,15 @@ public class YeouijuLaunch : MonoBehaviour
     [SerializeField] private bool prepareYeouiju;
     private bool isYeouijuOn;
     private bool usingEasyMode;
+    private Vector2 shouldDrawPoint;
     
     private void Start()
     {
         predictionLayerMask = (1 << LayerMask.NameToLayer("Ground"));
 
         canLaunch = true;
-        usingEasyMode = SaveData.instance.userData.UseEasyMode;
+        // usingEasyMode = SaveData.instance.userData.UseEasyMode;
+        usingEasyMode = SettingsManager.instance.UseEasyMode;
         
         yeouiju = FindObjectOfType<YeouijuReflection>();
         predictionLine = GetComponent<LineRenderer>();
@@ -38,6 +40,7 @@ public class YeouijuLaunch : MonoBehaviour
         
         FindObjectOfType<YeouijuReflection>().yeouijuReturnEvent += ReturnYeouiju;
         FindObjectOfType<PlayerGrapher>().deleteJointEvent += ReturnYeouiju;
+        FindObjectOfType<MenuButtonManager>().menuButtonEvent += SetLaunchStatus;
     }
 
     private void Update()
@@ -55,7 +58,8 @@ public class YeouijuLaunch : MonoBehaviour
         transform.rotation  = Quaternion.Euler(0, 0, z);
 
         // before launch yeouiju, draw prediction line (only in easy mode)
-        if(!isYeouijuOn && prepareYeouiju && usingEasyMode)
+        // if(!isYeouijuOn && prepareYeouiju && usingEasyMode)
+        if(!isYeouijuOn && prepareYeouiju)
         {
             DrawPredictionLine();
         }
@@ -90,7 +94,8 @@ public class YeouijuLaunch : MonoBehaviour
         }
 
         // draw first collision point
-        predictionLine.SetPosition(1, predictionHit.point);
+        shouldDrawPoint = predictionHit.point;
+        predictionLine.SetPosition(1, shouldDrawPoint);
 
         // calculate second ray by Vector2.Reflect
         var inDirection = (predictionHit.point - (Vector2)transform.position).normalized;
@@ -100,9 +105,15 @@ public class YeouijuLaunch : MonoBehaviour
         predictionHit = Physics2D.Raycast(predictionHit.point + (reflectionDir * 0.001f), reflectionDir, Mathf.Infinity, predictionLayerMask);
 
         if(predictionHit.collider == null)
-            return;
+        {
+            shouldDrawPoint = (Vector2)predictionLine.GetPosition(1) + (reflectionDir * 15f);
+        }
+        else
+        {
+            shouldDrawPoint = predictionHit.point;
+        }
         
-        predictionLine.SetPosition(2, predictionHit.point);
+        predictionLine.SetPosition(2, shouldDrawPoint);
 
         // finally render linerenderer
         predictionLine.enabled = true;
@@ -116,7 +127,7 @@ public class YeouijuLaunch : MonoBehaviour
 
     public void SetLaunchStatus(bool isActive)
     {
-        this.canLaunch = isActive;
+        StartCoroutine(SetYeouijuStatueCourtine(isActive));
     }
 
     public void StunedYeouiju(bool isStuned)
@@ -128,6 +139,12 @@ public class YeouijuLaunch : MonoBehaviour
     private void ReturnYeouiju()
     {
         disJointEvent?.Invoke();
+    }
+
+    IEnumerator SetYeouijuStatueCourtine(bool isActive)
+    {
+        yield return null;
+        this.canLaunch = isActive;
     }
     
 }
