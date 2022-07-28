@@ -53,6 +53,24 @@ public class BFSPathFinding : MonoBehaviour
                     nextNode.parent = curNode;
                     q.Enqueue(nextNode);
                 }
+
+                if(!canDiagonalMove)    continue;
+                for(int i = 4; i < 8; i++)
+                {
+                    int nextX = curNode.gridX + moveX[i];
+                    int nextY = curNode.gridY + moveY[i];
+
+                    if(nextX < 0 || nextY < 0 || nextX >= grid.GridSizeX || nextY >= grid.GridSizeY)    continue;
+                    if(visit[nextX, nextY]) continue;
+                    nextNode = grid.grid[nextX, nextY];
+
+                    if(!nextNode.canWalk)   continue;
+
+                    visit[nextX, nextY] = true;
+                    nextNode.parent = curNode;
+                    q.Enqueue(nextNode);
+                }
+
             }
 
             yield return null;

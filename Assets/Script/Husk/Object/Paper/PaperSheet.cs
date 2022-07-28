@@ -2,9 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
+using System;
 
 public class PaperSheet : MonoBehaviour
 {
+    private event Action paperGetEvent;
+
     [Tooltip("종이조각의 번호이며 0번부터 시작합니다")]
     [SerializeField] private int paperIndex;
     [Tooltip("좌우 회전 여부")]
@@ -18,6 +21,7 @@ public class PaperSheet : MonoBehaviour
 
     void Start()
     {
+        // paperGetEvent += FindObjectOfType<PaperGetUI>().PaperGet;
 
         // if(HistoryDataManager.instance.GetPaperTrue(paperIndex))
         // {
@@ -48,6 +52,8 @@ public class PaperSheet : MonoBehaviour
 
     private void PlayerGetPaper()
     {
+        paperGetEvent?.Invoke();
+        
         // TODO : 플레이어 이후 수정
         // HistoryDataManager.instance.SetPaperTrue(paperIndex);
 
