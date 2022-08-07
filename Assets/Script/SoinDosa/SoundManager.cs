@@ -47,16 +47,12 @@ public class SoundManager : MonoBehaviour
 
     public void SetBGMVol()
     {
-        audioSourceBGM.volume = SettingsManager.instance.bgmSlider.value;
-        Debug.Log($"{SettingsManager.instance.bgmSlider.value}");
+        audioMixer.SetFloat("BGMVolume", Mathf.Log10(SettingsManager.instance.bgmSlider.value) * 20);
     }
 
     public void SetEffectVol()
     {
-        foreach(var audioSourceEffect in audioSourceEffects)
-        {
-            audioSourceEffect.volume = SettingsManager.instance.effectSlider.value;
-        }
+        audioMixer.SetFloat("SFXVolume", Mathf.Log10(SettingsManager.instance.effectSlider.value) * 20);
     }
 
     public void PlayBGM(int _index, bool _isFade = true)

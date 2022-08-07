@@ -100,15 +100,17 @@ public class SettingsManager : MonoBehaviour
 
     public void ChangeBGMVolume()
     {
-        sm.audioSourceBGM.volume = bgmSlider.value;
+        // sm.audioSourceBGM.volume = bgmSlider.value;
+        sm.SetBGMVol();
     }
 
     public void ChangeEffectVolume()
     {
-        foreach (var audioSourceEffect in sm.audioSourceEffects)
-        {
-            audioSourceEffect.volume = effectSlider.value;
-        }
+        // foreach (var audioSourceEffect in sm.audioSourceEffects)
+        // {
+        //     audioSourceEffect.volume = effectSlider.value;
+        // }
+        sm.SetEffectVol();
     }
 
     public void AutoSaveAsk()

@@ -47,6 +47,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   audioSourceBGM: {fileID: 8846802691311381285}
   audioSourceEffects: []
+  audioMixer: {fileID: 24100000, guid: 8b33f731dc376f243851ac436f2e1e01, type: 2}
   bgmSounds:
   - name: "\uBA54\uC778\uD14C\uB9C8\uACE1"
     clip: {fileID: 8300000, guid: c1af90cffaff6ac41b80421bb64e0551, type: 3}
