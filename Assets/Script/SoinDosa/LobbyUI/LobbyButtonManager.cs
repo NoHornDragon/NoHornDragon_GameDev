@@ -71,6 +71,7 @@ public class LobbyButtonManager : MonoBehaviour
     public void StartGame()
     {
         SceneChanger.instance.ChangeScene(gameSceneName);
+        SoundManager.instance.PlayBGM(1);
     }
 
 }

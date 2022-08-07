@@ -11,4 +11,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Husk/Tutorial.unity
     guid: 60d541a739a0a2d4e8b767b4ce6dcf52
+  - enabled: 1
+    path: Assets/Scenes/Husk/Dev_husk.unity
+    guid: d5675413c2aeb91468ed249a46a50a0b
   m_configObjects: {}
