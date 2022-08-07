@@ -182,9 +182,9 @@ public class PlayerMovement : MonoBehaviour
 
     public void PlayerStuned(bool isStuned)
     {
-
         canMove = !isStuned;
         stuned = isStuned;
+        SoundManager.instance.PlayRandomBGM();
 
         StartCoroutine(PlayerRecoverFromStun());
     }
