@@ -1245,7 +1245,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   firePool: {fileID: 0}
-  bone: {fileID: 0}
+  bone: {fileID: 251564631647313218}
   launchTime: 5
 --- !u!1 &6699253338365943053
 GameObject:
