@@ -18,6 +18,8 @@ public class Arrow : FiringObject
 
     private void OnEnable()
     {
+        if(RequestAStarPath.instance == null)   return;
+        
         RequestAStarPath.RequestPath(transform.position, target.position, AfterFindPath);
     }
 

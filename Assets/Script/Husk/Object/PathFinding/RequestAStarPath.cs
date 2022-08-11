@@ -11,6 +11,7 @@ public class RequestAStarPath : MonoBehaviour
 
     public static RequestAStarPath instance;
     private AStarPathFinding aStarPathFinding;
+    [SerializeField]
     private WorldToGrid grid;
     public WorldToGrid CurGrid { set { grid = value; } }
 
@@ -21,6 +22,7 @@ public class RequestAStarPath : MonoBehaviour
         if(instance == null)
         {
             instance = this;
+            
         }
         else
         {

@@ -39,12 +39,12 @@ public class WorldToGrid : MonoBehaviour
         gridSizeX = Mathf.RoundToInt((gridWorldSize.x / nodeDiameter));
         gridSizeY = Mathf.RoundToInt((gridWorldSize.y / nodeDiameter)); 
 
-        CreateGrid();       
+        CreateGrid();      
     }
 
     private void OnEnable()
     {
-        RequestAStarPath.instance.CurGrid = this;
+        RequestAStarPath.instance.CurGrid = this; 
     }
 
     private void OnDrawGizmos()

@@ -13,18 +13,16 @@ public class FireingNPC : MonoBehaviour
     private bool lookAtRight;
     [SerializeField]
     private float launchTime;
+    [SerializeField]
     private float curTime;
 
 
-    private void Start()
+    private void Awake()
     {
         firePool = GetComponent<FirePool>();
         player = GameObject.FindWithTag("Player").transform;
         
         BoxCollider2D collider = GetComponent<BoxCollider2D>();
-        WorldToGrid grid = GetComponent<WorldToGrid>();
-        collider.size = new Vector2(grid.GridSizeX, grid.GridSizeY);
-        collider.offset = grid.GridOffset;
     }
 
     private void OnTriggerEnter2D(Collider2D other)

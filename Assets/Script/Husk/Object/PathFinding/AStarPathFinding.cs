@@ -15,7 +15,7 @@ public class AStarPathFinding : MonoBehaviour
     {
         Vector2[] wayPoint = new Vector2[0];
         bool success = false;
-
+        
         Node startNode = grid.NodeFromWroldPosition(startPos);
         Node targetNode = grid.NodeFromWroldPosition(targetPos);
 
