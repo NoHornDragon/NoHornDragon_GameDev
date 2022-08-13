@@ -18,10 +18,11 @@ public class PaperSheet : MonoBehaviour
     private Sequence paperSequence;
     private Vector3 originPos;
     [SerializeField] private Ease ease;
+    private bool playerGetThis;
 
     void Start()
     {
-        // paperGetEvent += FindObjectOfType<PaperGetUI>().PaperGet;
+        paperGetEvent += FindObjectOfType<PaperGetUI>().PaperGet;
 
         // if(HistoryDataManager.instance.GetPaperTrue(paperIndex))
         // {
@@ -43,7 +44,7 @@ public class PaperSheet : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if(other.CompareTag("Player"))
+        if(other.CompareTag("Player") && !playerGetThis)
         {
             Debug.Log("플레이어가 이 종이조각을 먹었습니다");
             PlayerGetPaper();
@@ -52,6 +53,7 @@ public class PaperSheet : MonoBehaviour
 
     private void PlayerGetPaper()
     {
+        playerGetThis = true;
         paperGetEvent?.Invoke();
         
         // TODO : 플레이어 이후 수정
