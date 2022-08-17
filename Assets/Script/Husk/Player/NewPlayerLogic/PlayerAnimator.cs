@@ -6,7 +6,6 @@ public class PlayerAnimator : MonoBehaviour
 {
     [SerializeField] private PlayerMovement player;
     private Animator anim;
-    private Transform baseObject;
     Rigidbody2D rigid;
     private Vector3 rightScale = new Vector3(1, 1, 1);
     private Vector3 leftScale = new Vector3(-1, 1, 1);
@@ -14,9 +13,8 @@ public class PlayerAnimator : MonoBehaviour
     void Start()
     {
         anim = GetComponent<Animator>();
-        baseObject = transform.parent.transform;
         player = GetComponentInParent<PlayerMovement>();
-        rigid = baseObject.GetComponent<Rigidbody2D>();
+        rigid = transform.parent.GetComponent<Rigidbody2D>();
     }
 
     void Update()
@@ -33,11 +31,11 @@ public class PlayerAnimator : MonoBehaviour
         {
             if(Camera.main.ScreenToWorldPoint(Input.mousePosition).x > transform.position.x)
             {
-                baseObject.localScale = rightScale;
+                transform.localScale = rightScale;
             }
             else
             {
-                baseObject.localScale = leftScale;
+                transform.localScale = leftScale;
             }
             return;
         }
@@ -46,11 +44,11 @@ public class PlayerAnimator : MonoBehaviour
         if(player.onGround) return;
         if(rigid.velocity.x < 0)
         {
-            baseObject.localScale = leftScale;
+            transform.localScale = leftScale;
         }
         else
         {
-            baseObject.localScale = rightScale;
+            transform.localScale = rightScale;
         }
     }
 }
