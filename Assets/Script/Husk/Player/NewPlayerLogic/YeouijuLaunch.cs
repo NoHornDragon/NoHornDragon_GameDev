@@ -132,7 +132,8 @@ public class YeouijuLaunch : MonoBehaviour
 
     public void StunedYeouiju(bool isStuned)
     {
-        canLaunch = !isStuned;   
+        canLaunch = !isStuned;  
+        predictionLine.enabled = false; 
         ReturnYeouiju();
     }
 

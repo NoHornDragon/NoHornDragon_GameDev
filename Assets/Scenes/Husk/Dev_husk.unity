@@ -7389,6 +7389,11 @@ PrefabInstance:
       propertyPath: m_Color.r
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1342924503900790524, guid: a34a9267adff2a24f82998fe5d44c26b,
+        type: 3}
+      propertyPath: animationTime
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 7225334112493496561, guid: a34a9267adff2a24f82998fe5d44c26b,
         type: 3}
       propertyPath: m_SizeDelta.x

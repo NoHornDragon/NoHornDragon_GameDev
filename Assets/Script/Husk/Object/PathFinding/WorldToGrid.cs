@@ -44,7 +44,7 @@ public class WorldToGrid : MonoBehaviour
 
     private void OnEnable()
     {
-        RequestAStarPath.instance.CurGrid = this; 
+        RequestAStarPath.instance.CurGrid = this;
     }
 
     private void OnDrawGizmos()
