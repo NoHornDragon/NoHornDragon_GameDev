@@ -5,7 +5,7 @@ using System;
 
 public class ThreadManager : MonoBehaviour
 {
-private static readonly List<Action> executeOnMainThread = new List<Action>();
+    private static readonly List<Action> executeOnMainThread = new List<Action>();
     private static readonly List<Action> executeCopiedOnMainThread = new List<Action>();
     private static bool actionToExecuteOnMainThread = false;
 
