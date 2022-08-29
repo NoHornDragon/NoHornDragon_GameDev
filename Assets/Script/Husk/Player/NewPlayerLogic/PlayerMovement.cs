@@ -56,7 +56,8 @@ public class PlayerMovement : MonoBehaviour
         FindObjectOfType<YeouijuLaunch>().disJointEvent += DeleteJoint;
 
         // usingEasyMode = SaveData.instance.userData.UseEasyMode;
-        usingEasyMode = SettingsManager.instance.UseEasyMode;
+        // TODO : multiplayer
+        // usingEasyMode = SettingsManager.instance.UseEasyMode;
         // if(usingEasyMode)
         // {
         //     this.transform.position = SaveData.instance.userData.PlayerPos;
@@ -184,7 +185,8 @@ public class PlayerMovement : MonoBehaviour
     {
         canMove = !isStuned;
         stuned = isStuned;
-        SoundManager.instance.PlayRandomBGM();
+        // TODO : multiplayer
+        // SoundManager.instance.PlayRandomBGM();
 
         StartCoroutine(PlayerRecoverFromStun());
     }

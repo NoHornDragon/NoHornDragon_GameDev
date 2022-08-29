@@ -9,6 +9,7 @@ TagManager:
   - Room
   - AnotherMovement
   - Stage
+  - Other Player
   layers:
   - Default
   - TransparentFX

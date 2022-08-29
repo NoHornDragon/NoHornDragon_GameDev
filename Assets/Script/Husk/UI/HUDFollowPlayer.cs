@@ -10,8 +10,8 @@ public class HUDFollowPlayer : MonoBehaviour
     void Start()
     {   
         // if using easy mode, game don't need this hud
-        // if(SaveData.instance.userData.UseEasyMode)  Destroy(gameObject);
-        if(SettingsManager.instance.UseEasyMode)    Destroy(gameObject);
+        // TODO : multiplayer mode
+        // if(SettingsManager.instance.UseEasyMode)    Destroy(gameObject);
 
         playerPos = transform.parent.parent;
         cam = Camera.main;

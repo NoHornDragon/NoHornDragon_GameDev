@@ -22,7 +22,8 @@ public class YeouijuLaunch : MonoBehaviour
 
         canLaunch = true;
         // usingEasyMode = SaveData.instance.userData.UseEasyMode;
-        usingEasyMode = SettingsManager.instance.UseEasyMode;
+        // TODO : multiplayer mode
+        // usingEasyMode = SettingsManager.instance.UseEasyMode;
         
         yeouiju = FindObjectOfType<YeouijuReflection>();
         predictionLine = GetComponent<LineRenderer>();
@@ -40,7 +41,8 @@ public class YeouijuLaunch : MonoBehaviour
         
         FindObjectOfType<YeouijuReflection>().yeouijuReturnEvent += ReturnYeouiju;
         FindObjectOfType<PlayerGrapher>().deleteJointEvent += ReturnYeouiju;
-        FindObjectOfType<MenuButtonManager>().menuButtonEvent += SetLaunchStatus;
+        // TODO : multiplayer
+        // FindObjectOfType<MenuButtonManager>().menuButtonEvent += SetLaunchStatus;
     }
 
     private void Update()

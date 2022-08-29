@@ -30,14 +30,16 @@ public class ClientSend : MonoBehaviour
         }
     }
 
-    public static void UDPTestReceived()
+    public static void PlayerMovement(Vector3 position)
     {
-        using (Packet packet = new Packet((int)ClientPackets.udpTestReceived))
+        using (Packet packet = new Packet((int)ClientPackets.playerMovement))
         {
-            packet.Write("Received a UDP packet");
+            packet.Write(position);
+            packet.Write(MultiPlayerManager.players[Client.instance.myId].transform.rotation);
 
             SendUDPData(packet);
         }
+        
     }
 
     #endregion

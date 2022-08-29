@@ -5,16 +5,16 @@ using UnityEngine;
 public class PlayerAnimator : MonoBehaviour
 {
     [SerializeField] private PlayerMovement player;
-    private Animator anim;
-    Rigidbody2D rigid;
+    [SerializeField] private Animator anim;
+    [SerializeField] private Rigidbody2D rigid;
     private Vector3 rightScale = new Vector3(1, 1, 1);
     private Vector3 leftScale = new Vector3(-1, 1, 1);
     private bool isright;
-    void Start()
+    void Awake()
     {
-        anim = GetComponent<Animator>();
-        player = GetComponentInParent<PlayerMovement>();
-        rigid = transform.parent.GetComponent<Rigidbody2D>();
+        // anim = GetComponent<Animator>();
+        // player = GetComponentInParent<PlayerMovement>();
+        // rigid = transform.parent.GetComponent<Rigidbody2D>();
     }
 
     void Update()
