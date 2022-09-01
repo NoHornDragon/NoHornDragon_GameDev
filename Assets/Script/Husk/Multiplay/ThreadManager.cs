@@ -46,7 +46,8 @@ public class ThreadManager : MonoBehaviour
 
             for (int i = 0; i < executeCopiedOnMainThread.Count; i++)
             {
-                executeCopiedOnMainThread[i]();
+                // Debug.Log($"{executeCopiedOnMainThread.Count}");
+                executeCopiedOnMainThread[i]?.Invoke();
             }
         }
     }

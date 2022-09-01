@@ -15,6 +15,6 @@ EditorBuildSettings:
     path: Assets/Scenes/Husk/Dev_husk.unity
     guid: d5675413c2aeb91468ed249a46a50a0b
   - enabled: 1
-    path: Assets/Scenes/Husk/Network.unity
+    path: Assets/Scenes/Husk/Network_Client.unity
     guid: 467fe31e661574447b096b541966e606
   m_configObjects: {}
