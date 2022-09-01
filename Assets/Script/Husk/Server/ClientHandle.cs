@@ -48,4 +48,12 @@ public class ClientHandle : MonoBehaviour
         // TODO : chould be player rotation, not root rotation
         MultiPlayerManager.players[id].Player.rotation = rotation;
     }
+
+    public static void PlayerDisconnected(Packet _packet)
+    {
+        int id = _packet.ReadInt();
+
+        Destroy(MultiPlayerManager.players[id].gameObject);
+        MultiPlayerManager.players.Remove(id);
+    }
 }
