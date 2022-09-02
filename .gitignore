@@ -58,3 +58,9 @@ sysinfo.txt
 # Crashlytics generated file
 crashlytics-build.properties
 
+# Assets
+Assets/Plugins
+
+# Sound Files
+Assets/Sounds/BGM
+Assets/Sounds/SFX

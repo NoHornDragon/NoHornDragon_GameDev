@@ -3,7 +3,13 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Enemy
+  - Confiner
+  - Room
+  - AnotherMovement
+  - Stage
+  - Other Player
   layers:
   - Default
   - TransparentFX
@@ -15,8 +21,8 @@ TagManager:
   - 
   - Player
   - Yeouiju
-  - 
-  - 
+  - Ground
+  - Confiner
   - 
   - 
   - 
@@ -50,6 +56,12 @@ TagManager:
   - name: FG
     uniqueID: 2243400833
     locked: 0
+  - name: NPC
+    uniqueID: 1067758167
+    locked: 0
   - name: Player
     uniqueID: 2388519353
+    locked: 0
+  - name: TextBox
+    uniqueID: 2003232425
     locked: 0
