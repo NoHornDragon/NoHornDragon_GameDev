@@ -48,6 +48,8 @@ MonoBehaviour:
   id: 0
   username: 
   Player: {fileID: 5846218756930570552}
+  userNameText: {fileID: 0}
+  isHost: 1
 --- !u!114 &1070106636792765886
 MonoBehaviour:
   m_ObjectHideFlags: 0

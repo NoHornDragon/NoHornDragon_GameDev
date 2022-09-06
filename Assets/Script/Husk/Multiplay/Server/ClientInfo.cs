@@ -213,7 +213,6 @@ public class ClientInfo
             if (_client.player != null)
             {
                 ServerSend.SpawnPlayer(_client.id, player);
-                
             }
         }
     }

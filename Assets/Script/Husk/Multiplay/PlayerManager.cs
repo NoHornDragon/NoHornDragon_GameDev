@@ -11,9 +11,12 @@ public class PlayerManager : MonoBehaviour
 
     [SerializeField]
     private TextMeshPro userNameText;
+    [SerializeField]
+    private bool isHost;
 
     private void Start()
     {
-        userNameText.text = username;
+        if(!isHost)
+            userNameText.text = username;
     }
 }

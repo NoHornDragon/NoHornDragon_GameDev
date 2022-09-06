@@ -130,7 +130,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 68968865}
-  - component: {fileID: 68968864}
   - component: {fileID: 68968863}
   m_Layer: 0
   m_Name: NetworkManager
@@ -153,18 +152,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerPrefab: {fileID: 8390914418461839934, guid: 8ec992d10a6542748a429400ece26e48,
     type: 3}
---- !u!114 &68968864
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 68968862}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1b02ba2ef0eb411418463505dce75e06, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &68968865
 Transform:
   m_ObjectHideFlags: 0
@@ -177,7 +164,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &435314315
 GameObject:
@@ -261,7 +248,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &435314319
 MonoBehaviour:
@@ -626,7 +613,7 @@ GameObject:
   - component: {fileID: 714254423}
   - component: {fileID: 714254422}
   m_Layer: 5
-  m_Name: Menu
+  m_Name: ServerMenu
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -720,7 +707,7 @@ RectTransform:
   m_Children:
   - {fileID: 1953935168}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -745,7 +732,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &795499451
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1142,7 +1129,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b9098618ae2cb22459f12fa8e544d97c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ip: 192.168.0.3
+  ip: 127.0.0.1
   port: 26950
   myId: 0
 --- !u!4 &1178268882
@@ -1157,7 +1144,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1178268883
 MonoBehaviour:
@@ -1501,7 +1488,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1863840403
 GameObject:

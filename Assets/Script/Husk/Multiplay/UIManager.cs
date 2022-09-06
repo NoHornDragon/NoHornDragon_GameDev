@@ -19,7 +19,7 @@ public class UIManager : MonoBehaviour
         }
         else if(instance != this)
         {
-            Debug.Log($"indtance already exist, so destroy objec!");
+            Debug.Log($"indtance already exist, so destroy object!");
             Destroy(this);
         }
     }
@@ -28,11 +28,11 @@ public class UIManager : MonoBehaviour
     {
         startMenu.SetActive(false);
         userNameField.interactable = false;
+        ipAddressField.interactable = false;
 
         if(!isHost)
         {
             Debug.Log($"Client build!");
-            ipAddressField.interactable = false;
             Client.instance.ip = ipAddressField.text;
         }
 
