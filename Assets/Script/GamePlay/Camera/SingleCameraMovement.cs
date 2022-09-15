@@ -1,73 +1,75 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using Cinemachine;
+using NHD.Entity.Player;
 using UnityEngine;
-using Cinemachine;
 
-public class SingleCameraMovement : MonoBehaviour
+namespace NHD.GamePlay.Camera
 {
-    [Header("카메라 Zoom")]
-    [SerializeField] private float maxZoomTime;
-    public float zoomTimer;
-    [SerializeField] private float zoomCoolTime;
-    public float coolTimer;
-    [SerializeField] private float zoomSpeed;
-    [SerializeField] private float maxCameraSize;
-    public float initialLensSize;
-    public bool initialized = false;
-
-    private CinemachineVirtualCamera cam;
-    private CinemachineConfiner confiner;
-
-    private void Start()
+    public class SingleCameraMovement : MonoBehaviour
     {
-        cam = GetComponent<CinemachineVirtualCamera>();
-        confiner = GetComponent<CinemachineConfiner>();
-        
-        cam.Follow = FindObjectOfType<PlayerMovement>().gameObject.transform.GetChild(3);
-        initialLensSize = cam.m_Lens.OrthographicSize;
-    }
+        [Header("카메라 Zoom")]
+        [SerializeField] private float maxZoomTime;
+        public float zoomTimer;
+        [SerializeField] private float zoomCoolTime;
+        public float coolTimer;
+        [SerializeField] private float zoomSpeed;
+        [SerializeField] private float maxCameraSize;
+        public float initialLensSize;
+        public bool initialized = false;
 
-    
-    private void Update()
-    {
+        private CinemachineVirtualCamera cam;
+        private CinemachineConfiner confiner;
 
-        if(Input.GetKey(KeyCode.LeftShift) && coolTimer < 0)
+        private void Start()
         {
-            zoomCamera();
-            return;
+            cam = GetComponent<CinemachineVirtualCamera>();
+            confiner = GetComponent<CinemachineConfiner>();
+
+            cam.Follow = FindObjectOfType<PlayerMovement>().gameObject.transform.GetChild(3);
+            initialLensSize = cam.m_Lens.OrthographicSize;
         }
 
-        if(coolTimer > 0)
-            coolTimer -= Time.deltaTime;
 
-        if(initialized) return;
-        SetCameraInitial();
-    } 
-
-    private void zoomCamera()
-    {
-        if(zoomTimer > maxZoomTime)
+        private void Update()
         {
+
+            if (Input.GetKey(KeyCode.LeftShift) && coolTimer < 0)
+            {
+                zoomCamera();
+                return;
+            }
+
+            if (coolTimer > 0)
+                coolTimer -= Time.deltaTime;
+
+            if (initialized) return;
             SetCameraInitial();
-            return;
         }
 
-        initialized = false;
+        private void zoomCamera()
+        {
+            if (zoomTimer > maxZoomTime)
+            {
+                SetCameraInitial();
+                return;
+            }
 
-        // zoom out camera
-        if(cam.m_Lens.OrthographicSize < maxCameraSize)
-            cam.m_Lens.OrthographicSize += Time.deltaTime * zoomSpeed;
+            initialized = false;
 
-        zoomTimer += Time.deltaTime;
-    }
+            // zoom out camera
+            if (cam.m_Lens.OrthographicSize < maxCameraSize)
+                cam.m_Lens.OrthographicSize += Time.deltaTime * zoomSpeed;
 
-    private void SetCameraInitial()
-    {
-        coolTimer = zoomCoolTime;
+            zoomTimer += Time.deltaTime;
+        }
 
-        zoomTimer = 0;
-        cam.m_Lens.OrthographicSize = initialLensSize;
+        private void SetCameraInitial()
+        {
+            coolTimer = zoomCoolTime;
 
-        initialized = true;
+            zoomTimer = 0;
+            cam.m_Lens.OrthographicSize = initialLensSize;
+
+            initialized = true;
+        }
     }
 }

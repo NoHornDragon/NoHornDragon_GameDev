@@ -1,22 +1,24 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using NHD.Entity.NPC.AttackingNPC;
 using UnityEngine;
 
-public class FiringObject : MonoBehaviour
+namespace NHD.GamePlay.InteractionEntity.FiringObject
 {
-    private Rigidbody2D rigid;
-
-    protected FirePool firePool;
-    public FirePool SetFirePool { set { firePool = value; } }
-
-
-    private void Awake()
+    public class FiringObject : MonoBehaviour
     {
-        rigid = GetComponent<Rigidbody2D>();
-    }
+        private Rigidbody2D rigid;
 
-    public virtual void Stop()
-    {
-        rigid.velocity = Vector2.zero;
+        protected FirePool firePool;
+        public FirePool SetFirePool { set { firePool = value; } }
+
+
+        private void Awake()
+        {
+            rigid = GetComponent<Rigidbody2D>();
+        }
+
+        public virtual void Stop()
+        {
+            rigid.velocity = Vector2.zero;
+        }
     }
 }

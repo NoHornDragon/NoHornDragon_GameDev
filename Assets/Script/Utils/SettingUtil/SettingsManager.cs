@@ -1,184 +1,186 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using System.Text;
+﻿using NHD.Utils.SoundUtil;
 using System.IO;
+using System.Text;
 using UnityEngine;
 using UnityEngine.UI;
 
-[System.Serializable]
-public class SettingsValue
+namespace NHD.Utils.SettingUtil
 {
-    public SettingsValue(int _resolutionVal, float _bgmVal, float _effectVal, int _languageVal, bool _isAutoSave)
+    [System.Serializable]
+    public class SettingsValue
     {
-        this.resolutionVal = _resolutionVal;
-        this.bgmVal = _bgmVal;
-        this.effectVal = _effectVal;
-        this.languageVal = _languageVal;
-        this.isAutoSave = _isAutoSave;
-    }
-    public int resolutionVal;
-    public float bgmVal;
-    public float effectVal;
-    public int languageVal;
-    public bool isAutoSave;
-}
-public class SettingsManager : MonoBehaviour
-{
-    public static SettingsManager instance;
-
-    public delegate void LanguageDelegate(int _val);
-    public LanguageDelegate LanguageChangeEvent;
-
-    [SerializeField]
-    private Dropdown resolutionDropdown;
-    private bool isAutoSaving;
-
-    public bool UseEasyMode { get { return isAutoSaving; } }
-
-    public Dropdown languageDropdown;
-    public Slider bgmSlider;
-    public Slider effectSlider;
-    public Toggle autoSaveToggle;
-    public GameObject autoSavePanel;
-    public GameObject dataResetPanel;
-    // Start is called before the first frame update
-
-    private SoundManager sm;
-
-    private void Awake()
-    {
-        if (instance == null)
+        public SettingsValue(int _resolutionVal, float _bgmVal, float _effectVal, int _languageVal, bool _isAutoSave)
         {
-            instance = this;
+            this.resolutionVal = _resolutionVal;
+            this.bgmVal = _bgmVal;
+            this.effectVal = _effectVal;
+            this.languageVal = _languageVal;
+            this.isAutoSave = _isAutoSave;
         }
-        else
-            Destroy(this.gameObject);
-
-        
+        public int resolutionVal;
+        public float bgmVal;
+        public float effectVal;
+        public int languageVal;
+        public bool isAutoSave;
     }
-
-    private void Start()
+    public class SettingsManager : MonoBehaviour
     {
-        Debug.Log("SettingsManager Start!");
-        sm = FindObjectOfType<SoundManager>();
-        LoadSettingsValue();
-    }
+        public static SettingsManager instance;
 
-    public void ChangeResolution()
-    {
-        switch (resolutionDropdown.value)
+        public delegate void LanguageDelegate(int _val);
+        public LanguageDelegate LanguageChangeEvent;
+
+        [SerializeField]
+        private Dropdown resolutionDropdown;
+        private bool isAutoSaving;
+
+        public bool UseEasyMode { get { return isAutoSaving; } }
+
+        public Dropdown languageDropdown;
+        public Slider bgmSlider;
+        public Slider effectSlider;
+        public Toggle autoSaveToggle;
+        public GameObject autoSavePanel;
+        public GameObject dataResetPanel;
+        // Start is called before the first frame update
+
+        private SoundManager sm;
+
+        private void Awake()
         {
-            case 0:
-                Screen.SetResolution(1920, 1080, true);
-                Debug.Log("Resolution Changed to FHD");
-                break;
-            case 1:
-                Screen.SetResolution(1280, 720, true);
-                Debug.Log("Resolution Changed to HD");
-                break;
-            default:
-                break;
+            if (instance == null)
+            {
+                instance = this;
+            }
+            else
+                Destroy(this.gameObject);
+
+
         }
-    }
-    public void ChangeLanguage()
-    {
-        if(LanguageChangeEvent != null)
+
+        private void Start()
         {
-            switch (languageDropdown.value)
+            Debug.Log("SettingsManager Start!");
+            sm = FindObjectOfType<SoundManager>();
+            LoadSettingsValue();
+        }
+
+        public void ChangeResolution()
+        {
+            switch (resolutionDropdown.value)
             {
                 case 0:
-                    LanguageChangeEvent(0);
+                    Screen.SetResolution(1920, 1080, true);
+                    Debug.Log("Resolution Changed to FHD");
                     break;
                 case 1:
-                    LanguageChangeEvent(1);
+                    Screen.SetResolution(1280, 720, true);
+                    Debug.Log("Resolution Changed to HD");
                     break;
                 default:
                     break;
             }
         }
-    }
-
-    public void ChangeBGMVolume()
-    {
-        // sm.audioSourceBGM.volume = bgmSlider.value;
-        sm.SetBGMVol();
-    }
-
-    public void ChangeEffectVolume()
-    {
-        // foreach (var audioSourceEffect in sm.audioSourceEffects)
-        // {
-        //     audioSourceEffect.volume = effectSlider.value;
-        // }
-        sm.SetEffectVol();
-    }
-
-    public void AutoSaveAsk()
-    {
-        if (autoSaveToggle.isOn && !isAutoSaving)
+        public void ChangeLanguage()
         {
-            autoSavePanel.SetActive(true);
+            if (LanguageChangeEvent != null)
+            {
+                switch (languageDropdown.value)
+                {
+                    case 0:
+                        LanguageChangeEvent(0);
+                        break;
+                    case 1:
+                        LanguageChangeEvent(1);
+                        break;
+                    default:
+                        break;
+                }
+            }
         }
-        else if(!autoSaveToggle.isOn)
+
+        public void ChangeBGMVolume()
         {
-            isAutoSaving = false;
+            // sm.audioSourceBGM.volume = bgmSlider.value;
+            sm.SetBGMVol();
         }
-    }
 
-    public void AutoSaveSet(bool _val)
-    {
-        autoSavePanel.SetActive(false);
-        autoSaveToggle.isOn = _val;
-    }
-
-    public void DataResetAsk(bool _val)
-    {
-        dataResetPanel.SetActive(_val);
-    }
-
-    public void DataReset()
-    {
-        Debug.Log("Data reset!");
-        dataResetPanel.SetActive(false);
-    }
-
-    public void SaveSettingsValue()
-    {
-        SettingsValue saveData = new SettingsValue(resolutionDropdown.value, bgmSlider.value, effectSlider.value, languageDropdown.value, autoSaveToggle.isOn);
-
-        string jsonData = JsonUtility.ToJson(saveData);
-        byte[] data = Encoding.UTF8.GetBytes(jsonData);
-        FileStream fs = new FileStream(Application.persistentDataPath + "/SettingsValue.json", FileMode.Create);
-        fs.Write(data, 0, data.Length);
-        fs.Close();
-    }
-
-    public void LoadSettingsValue()
-    {
-        if (!File.Exists(Application.persistentDataPath + "/SettingsValue.json"))
+        public void ChangeEffectVolume()
         {
-            Debug.Log("No Settings Value!");
-            return;
+            // foreach (var audioSourceEffect in sm.audioSourceEffects)
+            // {
+            //     audioSourceEffect.volume = effectSlider.value;
+            // }
+            sm.SetEffectVol();
         }
-        FileStream fs = new FileStream(Application.persistentDataPath + "/SettingsValue.json", FileMode.Open);
 
-        byte[] data = new byte[fs.Length];
-        fs.Read(data, 0, data.Length);
-        fs.Close();
+        public void AutoSaveAsk()
+        {
+            if (autoSaveToggle.isOn && !isAutoSaving)
+            {
+                autoSavePanel.SetActive(true);
+            }
+            else if (!autoSaveToggle.isOn)
+            {
+                isAutoSaving = false;
+            }
+        }
 
-        string jsonData = Encoding.UTF8.GetString(data);
-        SettingsValue saveData = JsonUtility.FromJson<SettingsValue>(jsonData);
+        public void AutoSaveSet(bool _val)
+        {
+            autoSavePanel.SetActive(false);
+            autoSaveToggle.isOn = _val;
+        }
 
-        resolutionDropdown.value = saveData.resolutionVal;
-        bgmSlider.value = saveData.bgmVal;
-        effectSlider.value = saveData.effectVal;
-        languageDropdown.value = saveData.languageVal;
-        if (saveData.isAutoSave)
-            isAutoSaving = true;
-        autoSaveToggle.isOn = saveData.isAutoSave;
-        
+        public void DataResetAsk(bool _val)
+        {
+            dataResetPanel.SetActive(_val);
+        }
 
-        ChangeResolution();
-        ChangeLanguage();
+        public void DataReset()
+        {
+            Debug.Log("Data reset!");
+            dataResetPanel.SetActive(false);
+        }
+
+        public void SaveSettingsValue()
+        {
+            SettingsValue saveData = new SettingsValue(resolutionDropdown.value, bgmSlider.value, effectSlider.value, languageDropdown.value, autoSaveToggle.isOn);
+
+            string jsonData = JsonUtility.ToJson(saveData);
+            byte[] data = Encoding.UTF8.GetBytes(jsonData);
+            FileStream fs = new FileStream(Application.persistentDataPath + "/SettingsValue.json", FileMode.Create);
+            fs.Write(data, 0, data.Length);
+            fs.Close();
+        }
+
+        public void LoadSettingsValue()
+        {
+            if (!File.Exists(Application.persistentDataPath + "/SettingsValue.json"))
+            {
+                Debug.Log("No Settings Value!");
+                return;
+            }
+            FileStream fs = new FileStream(Application.persistentDataPath + "/SettingsValue.json", FileMode.Open);
+
+            byte[] data = new byte[fs.Length];
+            fs.Read(data, 0, data.Length);
+            fs.Close();
+
+            string jsonData = Encoding.UTF8.GetString(data);
+            SettingsValue saveData = JsonUtility.FromJson<SettingsValue>(jsonData);
+
+            resolutionDropdown.value = saveData.resolutionVal;
+            bgmSlider.value = saveData.bgmVal;
+            effectSlider.value = saveData.effectVal;
+            languageDropdown.value = saveData.languageVal;
+            if (saveData.isAutoSave)
+                isAutoSaving = true;
+            autoSaveToggle.isOn = saveData.isAutoSave;
+
+
+            ChangeResolution();
+            ChangeLanguage();
+        }
     }
 }

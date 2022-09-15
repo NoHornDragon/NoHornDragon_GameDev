@@ -1,10 +1,11 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class PlayerManager : MonoBehaviour
+namespace NHD.Multiplay
 {
-    public int id;
-    public string username;
-    public Transform Player;
+    public class PlayerManager : MonoBehaviour
+    {
+        public int id;
+        public string username;
+        public Transform Player;
+    }
 }

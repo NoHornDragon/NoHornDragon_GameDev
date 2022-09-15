@@ -1,27 +1,29 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using NHD.Entity.Player;
 using TMPro;
+using UnityEngine;
 
-public class ResetUI : MonoBehaviour
+namespace NHD.UI.InGameScene
 {
-    [SerializeField]
-    private GameObject wiseSayingUI;
-    [SerializeField]
-    private TextMeshProUGUI wiseSayingText;
-    [TextArea]
-    private string[] resetMessage;
-
-
-    private void Start()
+    public class ResetUI : MonoBehaviour
     {
-        FindObjectOfType<PlayerMovement>().PlayerResetEvent += ShowResetUI;
-    }
+        [SerializeField]
+        private GameObject wiseSayingUI;
+        [SerializeField]
+        private TextMeshProUGUI wiseSayingText;
+        [TextArea]
+        private string[] resetMessage;
 
-    private void ShowResetUI(bool isActive)
-    {
-        if(!isActive)   return;
 
-        wiseSayingUI.SetActive(true);
+        private void Start()
+        {
+            FindObjectOfType<PlayerMovement>().PlayerResetEvent += ShowResetUI;
+        }
+
+        private void ShowResetUI(bool isActive)
+        {
+            if (!isActive) return;
+
+            wiseSayingUI.SetActive(true);
+        }
     }
 }

@@ -1,41 +1,42 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class StageManager : MonoBehaviour
+namespace NHD.GamePlay.Camera
 {
-    [SerializeField] private GameObject[] stageList;
-    private uint stageNumber;
-
-    private void Awake()
+    public class StageManager : MonoBehaviour
     {
-        //for(int i = 0; i < stageList.Length; i++)
-        //{
-        //    stageList[i].SetActive(false);
-        //}
-    }
+        [SerializeField] private GameObject[] stageList;
+        private uint stageNumber;
 
-
-    /// <param name="inputStageNumber">스테이지 번호</param>
-    /// <param name="isIn">플레이어가 들어오면 true, 아니면 false</param>
-    public void StageChange(uint inputStageNumber, bool isIn)
-    {
-        if(isIn)
+        private void Awake()
         {
-            stageNumber = inputStageNumber;
-            return;
+            //for(int i = 0; i < stageList.Length; i++)
+            //{
+            //    stageList[i].SetActive(false);
+            //}
         }
 
-        if (inputStageNumber == stageNumber) return;
 
-        if (inputStageNumber > 1)
-            stageList[inputStageNumber - 2].SetActive(true);
-        if (inputStageNumber < stageList.Length)
-            stageList[inputStageNumber].SetActive(true);
+        /// <param name="inputStageNumber">스테이지 번호</param>
+        /// <param name="isIn">플레이어가 들어오면 true, 아니면 false</param>
+        public void StageChange(uint inputStageNumber, bool isIn)
+        {
+            if (isIn)
+            {
+                stageNumber = inputStageNumber;
+                return;
+            }
 
-        if (inputStageNumber >= 3)
-            stageList[inputStageNumber - 3].SetActive(false);
-        if (inputStageNumber + 1 < stageList.Length)
-            stageList[inputStageNumber + 1].SetActive(false);
+            if (inputStageNumber == stageNumber) return;
+
+            if (inputStageNumber > 1)
+                stageList[inputStageNumber - 2].SetActive(true);
+            if (inputStageNumber < stageList.Length)
+                stageList[inputStageNumber].SetActive(true);
+
+            if (inputStageNumber >= 3)
+                stageList[inputStageNumber - 3].SetActive(false);
+            if (inputStageNumber + 1 < stageList.Length)
+                stageList[inputStageNumber + 1].SetActive(false);
+        }
     }
 }

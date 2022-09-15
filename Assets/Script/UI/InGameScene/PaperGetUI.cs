@@ -1,31 +1,33 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class PaperGetUI : MonoBehaviour
+namespace NHD.UI.InGameScene
 {
-    [SerializeField]
-    private Animator anim;
-    [SerializeField]
-    private float animationTime;
-    WaitForSeconds seconds;
-
-    private void Start()
+    public class PaperGetUI : MonoBehaviour
     {
-        seconds = new WaitForSeconds(animationTime);
-    }
+        [SerializeField]
+        private Animator anim;
+        [SerializeField]
+        private float animationTime;
+        WaitForSeconds seconds;
 
-    public void PaperGet()
-    {
-        anim.SetTrigger("Get");
-        StartCoroutine(AfterPopup());
-    }
+        private void Start()
+        {
+            seconds = new WaitForSeconds(animationTime);
+        }
 
-    IEnumerator AfterPopup()
-    {
-        yield return seconds;
+        public void PaperGet()
+        {
+            anim.SetTrigger("Get");
+            StartCoroutine(AfterPopup());
+        }
 
-        anim.SetTrigger("Close");
+        IEnumerator AfterPopup()
+        {
+            yield return seconds;
 
+            anim.SetTrigger("Close");
+
+        }
     }
 }

@@ -1,41 +1,43 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using NHD.Multiplay.ClientSide;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class UIManager : MonoBehaviour
+namespace NHD.Multiplay
 {
-    public static UIManager instance;
-
-    public GameObject startMenu;
-    public InputField userNameField;
-    public InputField ipAddressField;
-
-    private void Awake()
+    public class UIManager : MonoBehaviour
     {
-        if(instance == null)
-        {
-            instance = this;
-        }
-        else if(instance != this)
-        {
-            Debug.Log($"indtance already exist, so destroy objec!");
-            Destroy(this);
-        }
-    }
+        public static UIManager instance;
 
-    public void ConnectToServer(bool isHost)
-    {
-        startMenu.SetActive(false);
-        userNameField.interactable = false;
+        public GameObject startMenu;
+        public InputField userNameField;
+        public InputField ipAddressField;
 
-        if(!isHost)
+        private void Awake()
         {
-            Debug.Log($"Client build!");
-            ipAddressField.interactable = false;
-            Client.instance.ip = ipAddressField.text;
+            if (instance == null)
+            {
+                instance = this;
+            }
+            else if (instance != this)
+            {
+                Debug.Log($"indtance already exist, so destroy objec!");
+                Destroy(this);
+            }
         }
 
-        Client.instance.ConnectToServer();
+        public void ConnectToServer(bool isHost)
+        {
+            startMenu.SetActive(false);
+            userNameField.interactable = false;
+
+            if (!isHost)
+            {
+                Debug.Log($"Client build!");
+                ipAddressField.interactable = false;
+                Client.instance.ip = ipAddressField.text;
+            }
+
+            Client.instance.ConnectToServer();
+        }
     }
 }

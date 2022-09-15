@@ -1,96 +1,100 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using NHD.Algorithm.PathFinding;
+using System.Collections;
 using UnityEngine;
 
-public class Arrow : FiringObject
+namespace NHD.GamePlay.InteractionEntity.FiringObject
 {
-    public Transform target;
-    public float speed = 5.0f;
-    [SerializeField] Vector2[] path;
-    [SerializeField] private int pathIndex;
-    [SerializeField]
-    private Vector2 moveDir;
-
-    private void Awake()
+    public class Arrow : FiringObject
     {
-        target = GameObject.FindWithTag("Player").transform;
-    }
+        public Transform target;
+        public float speed = 5.0f;
+        [SerializeField] Vector2[] path;
+        [SerializeField] private int pathIndex;
+        [SerializeField]
+        private Vector2 moveDir;
 
-    private void OnEnable()
-    {
-        if(RequestAStarPath.instance == null)   return;
-        
-        RequestAStarPath.RequestPath(transform.position, target.position, AfterFindPath);
-    }
-
-    private void AfterFindPath(Vector2[] way, bool success)
-    {
-        if(!success)    return;
-
-        path = way;
-
-        StopAllCoroutines();
-
-        if(this.gameObject.activeInHierarchy)
-            StartCoroutine("MoveToTarget");
-    }
-
-
-    IEnumerator MoveToTarget()
-    {
-        Vector2 curPos = path[0];
-        moveDir = curPos - (Vector2)transform.position;
-        transform.right = moveDir;
-
-        while(true)
+        private void Awake()
         {
-            if((Vector2)transform.position == curPos)
+            target = GameObject.FindWithTag("Player").transform;
+        }
+
+        private void OnEnable()
+        {
+            if (RequestAStarPath.instance == null) return;
+
+            RequestAStarPath.RequestPath(transform.position, target.position, AfterFindPath);
+        }
+
+        private void AfterFindPath(Vector2[] way, bool success)
+        {
+            if (!success) return;
+
+            path = way;
+
+            StopAllCoroutines();
+
+            if (this.gameObject.activeInHierarchy)
+                StartCoroutine("MoveToTarget");
+        }
+
+
+        IEnumerator MoveToTarget()
+        {
+            Vector2 curPos = path[0];
+            moveDir = curPos - (Vector2)transform.position;
+            transform.right = moveDir;
+
+            while (true)
             {
-                pathIndex++;
-                if(pathIndex >= path.Length)
+                if ((Vector2)transform.position == curPos)
                 {
-                    StartCoroutine(MoveToEndPoint());
-                    yield break;
+                    pathIndex++;
+                    if (pathIndex >= path.Length)
+                    {
+                        StartCoroutine(MoveToEndPoint());
+                        yield break;
+                    }
+                    curPos = path[pathIndex];
+                    moveDir = curPos - (Vector2)transform.position;
+                    transform.right = moveDir;
                 }
-                curPos = path[pathIndex];
-                moveDir = curPos - (Vector2)transform.position;
-                transform.right = moveDir;
+
+                transform.position = Vector2.MoveTowards(transform.position, curPos, speed * Time.deltaTime);
+                yield return null;
             }
 
-            transform.position = Vector2.MoveTowards(transform.position, curPos, speed * Time.deltaTime);
-            yield return null;
         }
-        
-    }
 
-    IEnumerator MoveToEndPoint()
-    {
-        while(true)
+        IEnumerator MoveToEndPoint()
         {
-            transform.position = Vector2.MoveTowards(transform.position, moveDir * 100, speed * Time.deltaTime);
-            yield return null;
+            while (true)
+            {
+                transform.position = Vector2.MoveTowards(transform.position, moveDir * 100, speed * Time.deltaTime);
+                yield return null;
+            }
         }
-    }
 
-    private void OnTriggerEnter2D(Collider2D other)
-    {
-        switch(other.tag)
+        private void OnTriggerEnter2D(Collider2D other)
         {
-            case "Player":
-                StopCoroutine("MoveToTarget");
-                firePool.ReturnItem(this);
-                break;
-            case "Ground":
-                StopCoroutine("MoveToTarget");
-                firePool.ReturnItem(this);
-                break;
+            switch (other.tag)
+            {
+                case "Player":
+                    StopCoroutine("MoveToTarget");
+                    firePool.ReturnItem(this);
+                    break;
+                case "Ground":
+                    StopCoroutine("MoveToTarget");
+                    firePool.ReturnItem(this);
+                    break;
+            }
+
         }
 
+
+        private void OnDisable()
+        {
+            pathIndex = 0;
+        }
     }
 
-
-    private void OnDisable()
-    {
-        pathIndex = 0;
-    }
 }

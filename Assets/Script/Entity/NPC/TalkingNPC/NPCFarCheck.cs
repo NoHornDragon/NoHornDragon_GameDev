@@ -1,21 +1,22 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class NPCFarCheck : MonoBehaviour
+namespace NHD.Entity.NPC.TalkingNPC
 {
-    public NPC currentNPC;
-
-    private void Awake()
+    public class NPCFarCheck : MonoBehaviour
     {
-        currentNPC = GetComponentInParent<NPC>();
-    }
+        public NPC currentNPC;
 
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if(collision.tag == "Player")
+        private void Awake()
         {
-            currentNPC.visitCount++;
+            currentNPC = GetComponentInParent<NPC>();
+        }
+
+        private void OnTriggerEnter2D(Collider2D collision)
+        {
+            if (collision.tag == "Player")
+            {
+                currentNPC.visitCount++;
+            }
         }
     }
 }

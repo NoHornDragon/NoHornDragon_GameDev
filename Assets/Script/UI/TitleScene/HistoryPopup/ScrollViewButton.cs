@@ -1,69 +1,70 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
-public class ScrollViewButton : MonoBehaviour
+namespace NHD.UI.TitleScene.HistoryPopup
 {
-    [SerializeField]
-    private int MAX_PAGE; // 최대 페이지
-    [SerializeField]
-    private RectTransform contentPanel;
-
-    [SerializeField]
-    private float nodeWidth; // 한 노드의 너비(간격 포함)
-    [SerializeField]
-    private int moveVal; // 한 번에 몇칸을 움직일 건지
-    private int currentPage = 1; // 현재 페이지가 어디인지
-
-    private float pos;
-    private float movePos;
-
-    // Start is called before the first frame update
-    void Start()
+    public class ScrollViewButton : MonoBehaviour
     {
-        pos = contentPanel.localPosition.x;
-        movePos = nodeWidth * moveVal;
-    }
+        [SerializeField]
+        private int MAX_PAGE; // 최대 페이지
+        [SerializeField]
+        private RectTransform contentPanel;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+        [SerializeField]
+        private float nodeWidth; // 한 노드의 너비(간격 포함)
+        [SerializeField]
+        private int moveVal; // 한 번에 몇칸을 움직일 건지
+        private int currentPage = 1; // 현재 페이지가 어디인지
 
-    public void Right()
-    {
-        if(currentPage < MAX_PAGE)
+        private float pos;
+        private float movePos;
+
+        // Start is called before the first frame update
+        void Start()
         {
-            movePos = pos - nodeWidth * moveVal;
-            pos = movePos;
-            StartCoroutine(ScrollMoving());
-            currentPage++;
+            pos = contentPanel.localPosition.x;
+            movePos = nodeWidth * moveVal;
         }
 
-        
-    }
-
-    public void Left()
-    {
-        if (currentPage > 1)
+        // Update is called once per frame
+        void Update()
         {
-            movePos = pos + nodeWidth * moveVal;
-            pos = movePos;
-            StartCoroutine(ScrollMoving());
-            currentPage--;
-        }
-    }
 
-    IEnumerator ScrollMoving()
-    {
-        float currentPositionX = contentPanel.localPosition.x;
-        for (int i = 0; i < 100; i++)
-        {
-            contentPanel.localPosition = new Vector2(Mathf.Lerp(contentPanel.localPosition.x, movePos, 0.1f), contentPanel.localPosition.y);
-            yield return null;
         }
-        contentPanel.localPosition = new Vector2(movePos, contentPanel.localPosition.y);
+
+        public void Right()
+        {
+            if (currentPage < MAX_PAGE)
+            {
+                movePos = pos - nodeWidth * moveVal;
+                pos = movePos;
+                StartCoroutine(ScrollMoving());
+                currentPage++;
+            }
+
+
+        }
+
+        public void Left()
+        {
+            if (currentPage > 1)
+            {
+                movePos = pos + nodeWidth * moveVal;
+                pos = movePos;
+                StartCoroutine(ScrollMoving());
+                currentPage--;
+            }
+        }
+
+        IEnumerator ScrollMoving()
+        {
+            float currentPositionX = contentPanel.localPosition.x;
+            for (int i = 0; i < 100; i++)
+            {
+                contentPanel.localPosition = new Vector2(Mathf.Lerp(contentPanel.localPosition.x, movePos, 0.1f), contentPanel.localPosition.y);
+                yield return null;
+            }
+            contentPanel.localPosition = new Vector2(movePos, contentPanel.localPosition.y);
+        }
     }
 }

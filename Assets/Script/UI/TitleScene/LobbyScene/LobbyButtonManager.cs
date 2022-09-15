@@ -1,77 +1,81 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using NHD.UI.TitleScene.HistoryPopup;
+using NHD.Utils.SceneUtil;
+using NHD.Utils.SoundUtil;
 using UnityEngine;
 
-public class LobbyButtonManager : MonoBehaviour
+namespace NHD.UI.TitleScene.LobbyScene
 {
-    public string gameSceneName;
-
-    [SerializeField]
-    private GameObject historyPanel;
-    [SerializeField]
-    private GameObject settingsPanel;
-    [SerializeField]
-    private GameObject exitPanel;
-
-    private bool isOnePanelOpen = false;
-
-
-    public void Update()
+    public class LobbyButtonManager : MonoBehaviour
     {
-        if (Input.GetKeyDown(KeyCode.Escape) && isOnePanelOpen && !HistoryManager.isDescriptionOpen && !HistoryManager.isDescriptionMoving)
-            AllPanelClose();
-        else if (Input.GetKeyDown(KeyCode.Escape) && !isOnePanelOpen && !HistoryManager.isDescriptionOpen && !HistoryManager.isDescriptionMoving)
-            ExitPanelOpen();
-    }
-    public void historyPanelOpen()
-    {
-        if (!isOnePanelOpen)
+        public string gameSceneName;
+
+        [SerializeField]
+        private GameObject historyPanel;
+        [SerializeField]
+        private GameObject settingsPanel;
+        [SerializeField]
+        private GameObject exitPanel;
+
+        private bool isOnePanelOpen = false;
+
+
+        public void Update()
         {
-            isOnePanelOpen = true;
-            historyPanel.SetActive(true);
+            if (Input.GetKeyDown(KeyCode.Escape) && isOnePanelOpen && !HistoryManager.isDescriptionOpen && !HistoryManager.isDescriptionMoving)
+                AllPanelClose();
+            else if (Input.GetKeyDown(KeyCode.Escape) && !isOnePanelOpen && !HistoryManager.isDescriptionOpen && !HistoryManager.isDescriptionMoving)
+                ExitPanelOpen();
         }
-    }
-
-    public void settingsPanelOpen()
-    {
-        if (!isOnePanelOpen)
+        public void historyPanelOpen()
         {
-            isOnePanelOpen = true;
-            settingsPanel.SetActive(true);
+            if (!isOnePanelOpen)
+            {
+                isOnePanelOpen = true;
+                historyPanel.SetActive(true);
+            }
         }
-    }
 
-    public void ExitPanelOpen()
-    {
-        if (!isOnePanelOpen)
+        public void settingsPanelOpen()
         {
-            isOnePanelOpen = true;
-            exitPanel.SetActive(true);
+            if (!isOnePanelOpen)
+            {
+                isOnePanelOpen = true;
+                settingsPanel.SetActive(true);
+            }
         }
-    }
 
-    public void AllPanelClose()
-    {
-        isOnePanelOpen = false;
+        public void ExitPanelOpen()
+        {
+            if (!isOnePanelOpen)
+            {
+                isOnePanelOpen = true;
+                exitPanel.SetActive(true);
+            }
+        }
 
-        historyPanel.SetActive(false);
-        settingsPanel.SetActive(false);
-        exitPanel.SetActive(false);
-    }
+        public void AllPanelClose()
+        {
+            isOnePanelOpen = false;
 
-    public void GameQuit()
-    {
+            historyPanel.SetActive(false);
+            settingsPanel.SetActive(false);
+            exitPanel.SetActive(false);
+        }
+
+        public void GameQuit()
+        {
 #if UNITY_EDITOR
-        UnityEditor.EditorApplication.isPlaying = false;
+            UnityEditor.EditorApplication.isPlaying = false;
 #else
         Application.Quit();
 #endif
-    }
+        }
 
-    public void StartGame()
-    {
-        SceneChanger.instance.ChangeScene(gameSceneName);
-        SoundManager.instance.PlayBGM(1);
-    }
+        public void StartGame()
+        {
+            SceneChanger.instance.ChangeScene(gameSceneName);
+            SoundManager.instance.PlayBGM(1);
+        }
 
+    }
 }

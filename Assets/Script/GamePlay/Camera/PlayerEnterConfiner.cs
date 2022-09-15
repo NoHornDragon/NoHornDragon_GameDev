@@ -1,34 +1,36 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using NHD.GamePlay.BackGroundEffect;
 using System;
+using UnityEngine;
 
-public class PlayerEnterConfiner : MonoBehaviour
+namespace NHD.GamePlay.Camera
 {
-    public event Action<uint, bool> ActiveRoomEvent;
-    // [SerializeField] private float lensSize;
-    [SerializeField] private uint stageIndex;
-    private void Start()
+    public class PlayerEnterConfiner : MonoBehaviour
     {
-        ActiveRoomEvent += FindObjectOfType<BackGroundScroller>().ChangeCameraPos;
-        ActiveRoomEvent += FindObjectOfType<StageManager>().StageChange;
-    }
-
-    private void OnTriggerEnter2D(Collider2D other)
-    {
-        if(other.CompareTag("Player"))
+        public event Action<uint, bool> ActiveRoomEvent;
+        // [SerializeField] private float lensSize;
+        [SerializeField] private uint stageIndex;
+        private void Start()
         {
-            Debug.Log($"stage {stageIndex} - Enter");
-            ActiveRoomEvent?.Invoke(stageIndex, true);
+            ActiveRoomEvent += FindObjectOfType<BackGroundScroller>().ChangeCameraPos;
+            ActiveRoomEvent += FindObjectOfType<StageManager>().StageChange;
         }
-    }
 
-    private void OnTriggerExit2D(Collider2D other)
-    {
-        if(other.CompareTag("Player"))
+        private void OnTriggerEnter2D(Collider2D other)
         {
-            // Debug.Log($"stage {stageIndex} - Exit");
-            ActiveRoomEvent?.Invoke(stageIndex, false);
+            if (other.CompareTag("Player"))
+            {
+                Debug.Log($"stage {stageIndex} - Enter");
+                ActiveRoomEvent?.Invoke(stageIndex, true);
+            }
+        }
+
+        private void OnTriggerExit2D(Collider2D other)
+        {
+            if (other.CompareTag("Player"))
+            {
+                // Debug.Log($"stage {stageIndex} - Exit");
+                ActiveRoomEvent?.Invoke(stageIndex, false);
+            }
         }
     }
 }

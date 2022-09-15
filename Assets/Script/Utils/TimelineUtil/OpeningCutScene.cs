@@ -1,26 +1,27 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.Playables;
 using UnityEngine.SceneManagement;
 
-public class OpeningCutScene : MonoBehaviour
+namespace NHD.Utils.TimeLineUtil
 {
-    [SerializeField]
-    private PlayableDirector playableDirector;
-
-    private bool skipped = false;
-
-    public void SkipButtonPressed(float skipTime)
+    public class OpeningCutScene : MonoBehaviour
     {
-        if(skipped) return;
+        [SerializeField]
+        private PlayableDirector playableDirector;
 
-        playableDirector.time = skipTime;
-        skipped = true;
-    }
+        private bool skipped = false;
 
-    public void AfterTimeline()
-    {
-        SceneManager.LoadSceneAsync("Dev_husk");
+        public void SkipButtonPressed(float skipTime)
+        {
+            if (skipped) return;
+
+            playableDirector.time = skipTime;
+            skipped = true;
+        }
+
+        public void AfterTimeline()
+        {
+            SceneManager.LoadSceneAsync("Dev_husk");
+        }
     }
 }
