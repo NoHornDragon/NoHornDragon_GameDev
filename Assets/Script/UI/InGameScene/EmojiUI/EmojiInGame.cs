@@ -8,22 +8,20 @@ namespace NHD.UI.EmojiUI
     public class EmojiInGame : MonoBehaviour
     {
         private Sequence _popupSequence;
-        private Color _startColor;
-
         public event Action _returnCallbackEvent;
 
         void Start()
         {
             transform.localScale = Vector3.zero;
-            _startColor = GetComponent<SpriteRenderer>().color;
-            _startColor.a = 0;
+            Color startColor = GetComponent<SpriteRenderer>().color;
+            startColor.a = 0;
 
             // make Tweening
             _popupSequence = DOTween.Sequence()
             .SetAutoKill(false)
             .OnStart(() => {
                 transform.localScale = Vector3.zero;
-                GetComponent<SpriteRenderer>().color = _startColor;
+                GetComponent<SpriteRenderer>().color = startColor;
             })
             .Append(transform.DOScale(1, 1).SetEase(Ease.OutBounce))
             .Join(GetComponent<SpriteRenderer>().DOFade(1, 1))
