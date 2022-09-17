@@ -8,13 +8,20 @@ namespace NHD.UI.EmojiUI
         public List<EmojiInGame> _emojiList;
 
         private bool _mouseButtonDown;
-        [SerializeField] private int _emojiIndexToPopup = -1;
+        private int _emojiIndexToPopup = -1;
+        private int _curEmojiIndex = -1;
         public int _pingIndex { set{ _emojiIndexToPopup = value; } }
         // should target to PingUI in inspector
         [SerializeField] private GameObject _pingInterface;
         // Should target to player in inspector
         [SerializeField] private Transform _targetToPopup;
+        [SerializeField] private Transform _emojiPool;
         [SerializeField] private Vector2 _emojiInGameOffset;
+
+        private void Start()
+        {
+            SetEmojiReturnEvent();
+        }
 
         private void Update()
         {
@@ -30,15 +37,26 @@ namespace NHD.UI.EmojiUI
         public void PopupEmoji()
         {
             if(_emojiIndexToPopup == -1)  return;
+            
+            ReturnEmojiObjectToPool();
 
-            // TODO : 여기서 인덱스를 받아 whereToTaret 에 처리
-            Debug.Log($"{_emojiIndexToPopup}");
-
-            var emoji = Instantiate(_emojiList[_emojiIndexToPopup]);
+            // Active and Popup emoji 
+            var emoji = _emojiList[_emojiIndexToPopup];
             emoji.transform.SetParent(_targetToPopup);
             emoji.transform.localPosition = _emojiInGameOffset;
+            emoji.gameObject.SetActive(true);
 
+            _curEmojiIndex = _emojiIndexToPopup;
             _emojiIndexToPopup = -1;
+        }
+
+        private void ReturnEmojiObjectToPool()
+        {
+            if(_curEmojiIndex == -1)    return;
+            
+            _emojiList[_curEmojiIndex].transform.SetParent(_emojiPool);
+            _emojiList[_curEmojiIndex].gameObject.SetActive(false);
+            _curEmojiIndex = -1;
         }
 
 
@@ -48,6 +66,14 @@ namespace NHD.UI.EmojiUI
 
             if(!isActive)
                 PopupEmoji();
+        }
+
+        private void SetEmojiReturnEvent()
+        {
+            for(int i = 0; i < _emojiList.Count; i++)
+            {
+                _emojiList[i]._returnCallbackEvent += ReturnEmojiObjectToPool;
+            }
         }
     }
 }
