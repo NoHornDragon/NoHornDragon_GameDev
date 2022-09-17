@@ -31,7 +31,6 @@ namespace NHD.UI.EmojiUI
             .AppendInterval(2f)
             .OnComplete(()=>{
                 // Callback이 더 나은 방식으로 될 수 있는가?
-                Debug.Log($"End {this.gameObject.name}");
                 _returnCallbackEvent?.Invoke();
             });
         }
@@ -40,6 +39,11 @@ namespace NHD.UI.EmojiUI
         private void OnEnable()
         {
             _popupSequence.Restart();
+        }
+
+        private void OnDisable()
+        {
+            _popupSequence.Pause();
         }
     }
 }
