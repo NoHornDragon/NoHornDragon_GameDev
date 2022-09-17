@@ -6,8 +6,6 @@ namespace NHD.UI.EmojiUI
     public class EmojiUIManager : MonoBehaviour
     {
         public List<EmojiInGame> _emojiList;
-
-        private bool _mouseButtonDown;
         private int _emojiIndexToPopup = -1;
         private int _curEmojiIndex = -1;
         public int _pingIndex { set{ _emojiIndexToPopup = value; } }
@@ -16,7 +14,7 @@ namespace NHD.UI.EmojiUI
         // Should target to player in inspector
         [SerializeField] private Transform _targetToPopup;
         [SerializeField] private Transform _emojiPool;
-        [SerializeField] private Vector2 _emojiInGameOffset;
+        [SerializeField] private Vector2 _emojiOffsetInGame;
 
         private void Start()
         {
@@ -26,9 +24,9 @@ namespace NHD.UI.EmojiUI
         private void Update()
         {
             if(Input.GetMouseButtonDown(2))
-                SetPingUI(true);
+                SetPingUIActive(true);
             if(Input.GetMouseButtonUp(2))
-                SetPingUI(false);                
+                SetPingUIActive(false);                
         }
 
         /// <summary>
@@ -40,11 +38,7 @@ namespace NHD.UI.EmojiUI
             
             ReturnEmojiObjectToPool();
 
-            // Active and Popup emoji 
-            var emoji = _emojiList[_emojiIndexToPopup];
-            emoji.transform.SetParent(_targetToPopup);
-            emoji.transform.localPosition = _emojiInGameOffset;
-            emoji.gameObject.SetActive(true);
+            SetEmojiState(_emojiList[_emojiIndexToPopup], true);
 
             _curEmojiIndex = _emojiIndexToPopup;
             _emojiIndexToPopup = -1;
@@ -53,14 +47,27 @@ namespace NHD.UI.EmojiUI
         private void ReturnEmojiObjectToPool()
         {
             if(_curEmojiIndex == -1)    return;
-            
-            _emojiList[_curEmojiIndex].transform.SetParent(_emojiPool);
-            _emojiList[_curEmojiIndex].gameObject.SetActive(false);
+
+            SetEmojiState(_emojiList[_curEmojiIndex], false);
             _curEmojiIndex = -1;
         }
 
 
-        private void SetPingUI(bool isActive)
+        private void SetEmojiState(EmojiInGame emoji, bool isActive)
+        {
+            if(isActive)
+            {
+                emoji.transform.SetParent(_targetToPopup);
+                emoji.transform.localPosition = _emojiOffsetInGame;
+                emoji.gameObject.SetActive(true);
+                return;
+            }
+
+            emoji.transform.SetParent(_emojiPool);
+            emoji.gameObject.SetActive(false);
+        }
+
+        private void SetPingUIActive(bool isActive)
         {
             _pingInterface.SetActive(isActive);
 

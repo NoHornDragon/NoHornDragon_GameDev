@@ -18,6 +18,7 @@ namespace NHD.UI.EmojiUI
             _startColor = GetComponent<SpriteRenderer>().color;
             _startColor.a = 0;
 
+            // make Tweening
             _popupSequence = DOTween.Sequence()
             .SetAutoKill(false)
             .OnStart(() => {
@@ -29,7 +30,8 @@ namespace NHD.UI.EmojiUI
             .SetDelay(0.5f)
             .AppendInterval(2f)
             .OnComplete(()=>{
-                // TODO : Callback이 더 나은 방식으로 될 수 있는가?
+                // Callback이 더 나은 방식으로 될 수 있는가?
+                Debug.Log($"End {this.gameObject.name}");
                 _returnCallbackEvent?.Invoke();
             });
         }
