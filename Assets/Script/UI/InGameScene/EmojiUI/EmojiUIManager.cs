@@ -79,7 +79,7 @@ namespace NHD.UI.EmojiUI
         {
             for(int i = 0; i < _emojiList.Count; i++)
             {
-                _emojiList[i]._returnCallbackEvent += ReturnEmojiObjectToPool;
+                _emojiList[i]._returnToPoolCallbackEvent += ReturnEmojiObjectToPool;
             }
         }
     }

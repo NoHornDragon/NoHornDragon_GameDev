@@ -8,7 +8,7 @@ namespace NHD.UI.EmojiUI
     public class EmojiInGame : MonoBehaviour
     {
         private Sequence _popupSequence;
-        public event Action _returnCallbackEvent;
+        public event Action _returnToPoolCallbackEvent;
 
         void Start()
         {
@@ -29,7 +29,7 @@ namespace NHD.UI.EmojiUI
             .AppendInterval(2f)
             .OnComplete(()=>{
                 // Callback이 더 나은 방식으로 될 수 있는가?
-                _returnCallbackEvent?.Invoke();
+                _returnToPoolCallbackEvent?.Invoke();
             });
         }
 
