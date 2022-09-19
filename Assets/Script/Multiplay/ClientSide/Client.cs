@@ -276,6 +276,7 @@ namespace NHD.Multiplay.ClientSide
             { (int)ServerPackets.welcome, ClientHandle.Welcome },
             { (int)ServerPackets.spawnPlayer, ClientHandle.SpawnPlayer },
             { (int)ServerPackets.playerPosition, ClientHandle.PlayerPosition },
+            { (int)ServerPackets.playerEmoji, ClientHandle.PlayerEmoji },
             { (int)ServerPackets.playerDisconnected, ClientHandle.PlayerDisconnected }
         };
 

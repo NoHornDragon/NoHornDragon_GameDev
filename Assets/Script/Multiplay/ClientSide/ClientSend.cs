@@ -41,6 +41,16 @@ namespace NHD.Multiplay.ClientSide
 
         }
 
+        public static void PlayerSendEmoji(int emojiIndex)
+        {
+            using (Packet packet = new Packet((int)ClientPackets.playerEmoji))
+            {
+                packet.Write(emojiIndex);
+                Debug.Log($"[{emojiIndex}] : Send Emoji to server");
+                SendUDPData(packet);
+            }
+        }
+
         #endregion
     }
 }

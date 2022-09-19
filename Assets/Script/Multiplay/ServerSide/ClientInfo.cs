@@ -10,7 +10,7 @@ namespace NHD.Multiplay.ServerSide
         public static int dataBuferSize = 4096;
         public int id;
 
-        public Player player;
+        public PlayerInfo player;
 
         public TCP tcp;
         public UDP udp;

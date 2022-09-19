@@ -119,7 +119,8 @@ namespace NHD.Multiplay.ServerSide
             packetHandlers = new Dictionary<int, PacketHandler>()
         {
             {(int)ClientPackets.welcomeReceived, ServerHandle.WelcomeReceived },
-            {(int)ClientPackets.playerMovement, ServerHandle.PlayerMovement }
+            {(int)ClientPackets.playerMovement, ServerHandle.PlayerMovement },
+            {(int)ClientPackets.playerEmoji, ServerHandle.PlayerEmoji }
         };
             Debug.Log($"Initialize packets");
         }

@@ -66,46 +66,57 @@
             }
         }
 
-        public static void SpawnPlayer(int _toClient, Player _player)
+        public static void SpawnPlayer(int _toClient, PlayerInfo player)
         {
             using (Packet packet = new Packet((int)ServerPackets.spawnPlayer))
             {
-                packet.Write(_player.id);
-                packet.Write(_player.username);
-                packet.Write(_player.position);
-                packet.Write(_player.rotation);
+                packet.Write(player._id);
+                packet.Write(player._username);
+                packet.Write(player._position);
+                packet.Write(player._rotation);
 
                 SendTCPData(_toClient, packet);
             }
         }
 
-        public static void PlayerPosition(Player _player)
+        public static void PlayerPosition(PlayerInfo player)
         {
             using (Packet packet = new Packet((int)ServerPackets.playerPosition))
             {
-                packet.Write(_player.id);
-                packet.Write(_player.position);
+                packet.Write(player._id);
+                packet.Write(player._position);
 
                 SendUDPDataToAll(packet);
             }
         }
 
-        public static void PlayerRotation(Player _player)
+        public static void PlayerRotation(PlayerInfo player)
         {
             using (Packet packet = new Packet((int)ServerPackets.playerPosition))
             {
-                packet.Write(_player.id);
-                packet.Write(_player.rotation);
+                packet.Write(player._id);
+                packet.Write(player._rotation);
 
-                SendUDPDataToAll(_player.id, packet);
+                SendUDPDataToAll(player._id, packet);
             }
         }
 
-        public static void PlayerDisconnected(int _playerId)
+        public static void PlayerEmojied(PlayerInfo player)
+        {
+            using (Packet packet = new Packet((int)ServerPackets.playerEmoji))
+            {
+                packet.Write(player._id);
+                packet.Write(player._emojiIndex);
+
+                SendUDPDataToAll(player._id, packet);
+            }
+        }
+
+        public static void PlayerDisconnected(int playerId)
         {
             using (Packet packet = new Packet((int)ServerPackets.playerDisconnected))
             {
-                packet.Write(_playerId);
+                packet.Write(playerId);
 
                 SendTCPDataToAll(packet);
             }

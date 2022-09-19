@@ -1,5 +1,5 @@
-﻿using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
+using System;
 
 namespace NHD.UI.EmojiUI
 {
@@ -13,6 +13,8 @@ namespace NHD.UI.EmojiUI
         // Should target to player in inspector
         [SerializeField] private Transform _targetToPopup;
         [SerializeField] private EmojiSpawner _emojiSpawner;
+        private bool _isServerMap;
+        public event Action<int> _serverEmojiEvent;
 
         private void Update()
         {
@@ -35,8 +37,16 @@ namespace NHD.UI.EmojiUI
             if(_emojiIndexToPopup == -1)  return;
 
             _emojiSpawner.SpawnEmoji(_emojiIndexToPopup, _targetToPopup);
+            _serverEmojiEvent?.Invoke(_emojiIndexToPopup);
 
             _emojiIndexToPopup = -1;
+        }
+
+        // For server-side code
+        public void SetEmojiUITarget(Transform target)
+        {
+            _targetToPopup = target;
+            _isServerMap = true;
         }
     }
 }

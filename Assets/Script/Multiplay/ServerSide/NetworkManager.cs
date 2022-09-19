@@ -34,9 +34,9 @@ namespace NHD.Multiplay.ServerSide
             Server.Stop();
         }
 
-        public Player InstantiatePlayer()
+        public PlayerInfo InstantiatePlayer()
         {
-            return Instantiate(playerPrefab, Vector3.zero, Quaternion.identity).GetComponent<Player>();
+            return Instantiate(playerPrefab, Vector3.zero, Quaternion.identity).GetComponent<PlayerInfo>();
         }
     }
 }

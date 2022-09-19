@@ -4,27 +4,34 @@ namespace NHD.Multiplay.ServerSide
 {
     public class ServerHandle
     {
-        public static void WelcomeReceived(int _fromClient, Packet _packet)
+        public static void WelcomeReceived(int fromClient, Packet packet)
         {
-            int clientIdCheck = _packet.ReadInt();
-            string username = _packet.ReadString();
+            int clientIdCheck = packet.ReadInt();
+            string username = packet.ReadString();
 
-            Debug.Log($"{Server.clients[_fromClient].tcp.socket.Client.RemoteEndPoint} connected success" +
-            $"and now player is {_fromClient}");
-            if (_fromClient != clientIdCheck)
+            Debug.Log($"{Server.clients[fromClient].tcp.socket.Client.RemoteEndPoint} connected success" +
+            $"and now player is {fromClient}");
+            if (fromClient != clientIdCheck)
             {
-                Debug.Log($"Player \"{username}\" (ID: {_fromClient}) has assumed the wrong client id {clientIdCheck}!");
+                Debug.Log($"Player \"{username}\" (ID: {fromClient}) has assumed the wrong client id {clientIdCheck}!");
             }
 
-            Server.clients[_fromClient].SendIntoGame(username);
+            Server.clients[fromClient].SendIntoGame(username);
         }
 
-        public static void PlayerMovement(int _fromClient, Packet _packet)
+        public static void PlayerMovement(int fromClient, Packet packet)
         {
-            Vector3 position = _packet.ReadVector3();
-            Quaternion rotation = _packet.ReadQuaternion();
+            Vector3 position = packet.ReadVector3();
+            Quaternion rotation = packet.ReadQuaternion();
 
-            Server.clients[_fromClient].player.SetPosition(position, rotation);
+            Server.clients[fromClient].player.SetPosition(position, rotation);
+        }
+
+        public static void PlayerEmoji(int fromClient, Packet packet)
+        {
+            int emojiIndex = packet.ReadInt();
+            Debug.Log($"[{emojiIndex}] : Emoji Get from client to server");
+            Server.clients[fromClient].player.TriggerEmoji(emojiIndex);
         }
     }
 }
