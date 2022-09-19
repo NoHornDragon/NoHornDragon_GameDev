@@ -24,11 +24,18 @@ namespace NHD.UI.EmojiUI
 
         public void SpawnEmoji(int index, Transform target)
         {
+            if(target == _prevTarget)
+            {
+                _prevEmoji.StopEmoji();
+            }
             var emoji = GetEmojiFromPool(index);
 
             emoji.transform.SetParent(target);
             emoji.gameObject.SetActive(true);
             emoji.transform.localPosition = _emojiOffsetInGame;
+
+            _prevTarget = target;
+            _prevEmoji = emoji;
         }
 
         private EmojiInGame GetEmojiFromPool(int index)

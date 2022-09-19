@@ -45,5 +45,10 @@ namespace NHD.UI.EmojiUI
         {
             _popupSequence.Pause();
         }
+
+        public void StopEmoji()
+        {
+            _returnToPoolCallbackEvent?.Invoke(this);
+        }
     }
 }
