@@ -21,7 +21,7 @@ namespace NHD.Multiplay
 
         public void SendEmojiInfoToServer(int emojiIndex)
         {
-            Debug.Log($"[{emojiIndex}] : Send Emoji from local player");
+            // Debug.Log($"[{emojiIndex}] : Send Emoji from local player");
             ClientSend.PlayerSendEmoji(emojiIndex);
         }
     }

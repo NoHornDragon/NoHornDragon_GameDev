@@ -11,10 +11,16 @@ namespace NHD.Multiplay
         public int _id;
         public string _username;
         public Transform _Player;
+        public EmojiSpawner _emojiSpawner;
+
+        private void Start()
+        {
+            _emojiSpawner = FindObjectOfType<EmojiSpawner>();
+        }
 
         public void SetEmoji(int emojiIndex)
         {
-            FindObjectOfType<EmojiSpawner>().SpawnEmoji(emojiIndex, this.transform);
+            _emojiSpawner.SpawnEmoji(emojiIndex, this.transform);
         }
     }
 }

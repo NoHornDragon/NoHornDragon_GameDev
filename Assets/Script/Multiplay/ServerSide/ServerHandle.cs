@@ -30,7 +30,7 @@ namespace NHD.Multiplay.ServerSide
         public static void PlayerEmoji(int fromClient, Packet packet)
         {
             int emojiIndex = packet.ReadInt();
-            Debug.Log($"[{emojiIndex}] : Emoji Get from client to server");
+            // Debug.Log($"[{emojiIndex}] : Emoji Get from client to server");
             Server._clients[fromClient]._player.TriggerEmoji(emojiIndex);
         }
     }

@@ -21,12 +21,6 @@ namespace NHD.Multiplay.ServerSide
         public void Update()
         {
             Move(_position);
-
-            if(_emojiIndex != -1)
-            {
-                ServerSend.PlayerEmojied(this);
-                _emojiIndex = -1;
-            }
         }
 
         private void Move(Vector3 nextPosition)
@@ -42,8 +36,10 @@ namespace NHD.Multiplay.ServerSide
 
         public void TriggerEmoji(int emojiIndex)
         {
-            Debug.Log($"[{emojiIndex}] : Trigger Emoji");
+            // Debug.Log($"[{emojiIndex}] : Trigger Emoji");
             _emojiIndex = emojiIndex;
+            ServerSend.PlayerEmojied(this);
+            _emojiIndex = -1;
         }
     }
 }

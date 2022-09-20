@@ -57,7 +57,7 @@ namespace NHD.Multiplay.ClientSide
             
             if (id != Client._instance._myId)
             {
-                Debug.Log($"[{emojiIndex}] : receieve emoji from server");
+                // Debug.Log($"[{emojiIndex}] : receieve emoji from server");
                 MultiPlayerManager._players[id].SetEmoji(emojiIndex);
             }
         }
