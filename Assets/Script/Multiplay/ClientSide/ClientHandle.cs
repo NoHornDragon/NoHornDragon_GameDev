@@ -3,8 +3,9 @@ using UnityEngine;
 
 namespace NHD.Multiplay.ClientSide
 {
-    // Server에서 받은 패킷을 처리하는 곳
-    // Server에서 보낸 패킷 형태와 같은지 확인합시당
+    ///<summary>
+    /// 서버에서 받은 패킷을 처리하는 클래스. 이곳에서 Multiplayer의 함수를 이용합니다.
+    ///</summary>
     public class ClientHandle : MonoBehaviour
     {
         public static void Welcome(Packet pakcet)
@@ -13,12 +14,12 @@ namespace NHD.Multiplay.ClientSide
             int myId = pakcet.ReadInt();
 
             Debug.Log($"Message from server : {msg}");
-            Client.instance.myId = myId;
+            Client._instance._myId = myId;
 
             // send welcome received packet
             ClientSend.WelcomeReceived();
 
-            Client.instance.udp.Connect(((IPEndPoint)Client.instance.tcp.socket.Client.LocalEndPoint).Port);
+            Client._instance._udp.Connect(((IPEndPoint)Client._instance._tcp.socket.Client.LocalEndPoint).Port);
         }
 
         public static void SpawnPlayer(Packet pakcet)
@@ -37,8 +38,8 @@ namespace NHD.Multiplay.ClientSide
             Vector3 position = pakcet.ReadVector3();
 
             // Debug.Log($"Receive {id}'s position from server : {position}");
-            if (id != Client.instance.myId)
-                MultiPlayerManager.players[id].Player.position = position;
+            if (id != Client._instance._myId)
+                MultiPlayerManager._players[id]._Player.position = position;
         }
 
         public static void PlayerRotation(Packet pakcet)
@@ -46,7 +47,7 @@ namespace NHD.Multiplay.ClientSide
             int id = pakcet.ReadInt();
             Quaternion rotation = pakcet.ReadQuaternion();
 
-            MultiPlayerManager.players[id].Player.rotation = rotation;
+            MultiPlayerManager._players[id]._Player.rotation = rotation;
         }
 
         public static void PlayerEmoji(Packet pakcet)
@@ -54,10 +55,10 @@ namespace NHD.Multiplay.ClientSide
             int id = pakcet.ReadInt();
             int emojiIndex = pakcet.ReadInt();
             
-            if (id != Client.instance.myId)
+            if (id != Client._instance._myId)
             {
                 Debug.Log($"[{emojiIndex}] : receieve emoji from server");
-                MultiPlayerManager.players[id].SetEmoji(emojiIndex);
+                MultiPlayerManager._players[id].SetEmoji(emojiIndex);
             }
         }
 
@@ -65,8 +66,8 @@ namespace NHD.Multiplay.ClientSide
         {
             int id = pakcet.ReadInt();
 
-            Destroy(MultiPlayerManager.players[id].gameObject);
-            MultiPlayerManager.players.Remove(id);
+            Destroy(MultiPlayerManager._players[id].gameObject);
+            MultiPlayerManager._players.Remove(id);
         }
     }
 }

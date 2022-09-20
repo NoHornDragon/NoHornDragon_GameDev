@@ -2,7 +2,7 @@
 
 namespace NHD.Multiplay.ServerSide
 {
-    public class PlayerInfo : MonoBehaviour
+    public class PlayerTrackerInServer : MonoBehaviour
     {
         public int _id;
         public string _username;

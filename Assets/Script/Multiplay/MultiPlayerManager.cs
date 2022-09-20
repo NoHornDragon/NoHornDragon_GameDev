@@ -10,7 +10,7 @@ namespace NHD.Multiplay
     {
         public static MultiPlayerManager _instance;
         // ClientHandle에서 이 Dictionary를 활용해 각종 정보 처리를 합니다.
-        public static Dictionary<int, PlayerManager> players = new Dictionary<int, PlayerManager>();
+        public static Dictionary<int, MultiPlayPlayerInfo> _players = new Dictionary<int, MultiPlayPlayerInfo>();
 
         public GameObject _localPlayerPrefab;
         public GameObject _playerPrefab;
@@ -29,21 +29,21 @@ namespace NHD.Multiplay
 
         public void SpawnPlayer(int id, string username, Vector3 position, Quaternion rotation)
         {
-            GameObject _player;
-            if (id == Client.instance.myId)
+            GameObject player;
+            if (id == Client._instance._myId)
             {
-                _player = Instantiate(_localPlayerPrefab, position, rotation);
-                FindObjectOfType<EmojiUIManager>().SetEmojiUITarget(_player.transform.GetChild(0));
-                FindObjectOfType<EmojiUIManager>()._serverEmojiEvent += _player.transform.GetChild(0).GetComponent<LocalPlayerController>().SendEmojiInfoToServer;
+                player = Instantiate(_localPlayerPrefab, position, rotation);
+                FindObjectOfType<EmojiUIManager>().SetEmojiUITarget(player.transform.GetChild(0));
+                FindObjectOfType<EmojiUIManager>()._serverEmojiEvent += player.transform.GetChild(0).GetComponent<LocalPlayerController>().SendEmojiInfoToServer;
             }
             else
             {
-                _player = Instantiate(_playerPrefab, position, rotation);
+                player = Instantiate(_playerPrefab, position, rotation);
             }
 
-            _player.GetComponent<PlayerManager>().id = id;
-            _player.GetComponent<PlayerManager>().username = username;
-            players.Add(id, _player.GetComponent<PlayerManager>());
+            player.GetComponent<MultiPlayPlayerInfo>()._id = id;
+            player.GetComponent<MultiPlayPlayerInfo>()._username = username;
+            _players.Add(id, player.GetComponent<MultiPlayPlayerInfo>());
         }
     }
 }

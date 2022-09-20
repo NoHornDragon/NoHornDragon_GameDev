@@ -151,7 +151,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 26b395402081d274fa7d1c480aa10ec4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerPrefab: {fileID: 8390914418461839934, guid: 8ec992d10a6542748a429400ece26e48,
+  _playerPrefab: {fileID: 8390914418461839934, guid: 8ec992d10a6542748a429400ece26e48,
     type: 3}
 --- !u!114 &68968864
 MonoBehaviour:
@@ -849,9 +849,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5dcac60aa775b164e92ac8480700ebce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startMenu: {fileID: 1953935167}
-  userNameField: {fileID: 1534474858}
-  ipAddressField: {fileID: 470110354}
+  _startMenu: {fileID: 1953935167}
+  _userNameField: {fileID: 1534474858}
+  _ipAddressField: {fileID: 470110354}
 --- !u!114 &714254423
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1322,9 +1322,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b9098618ae2cb22459f12fa8e544d97c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ip: 192.168.0.3
-  port: 26950
-  myId: 0
+  _ip: 127.0.0.1
+  _port: 26950
+  _myId: 0
 --- !u!4 &1178268882
 Transform:
   m_ObjectHideFlags: 0
