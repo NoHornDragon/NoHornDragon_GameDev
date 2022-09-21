@@ -46,7 +46,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _id: 0
   _username: 
-  _Player: {fileID: 6619338809107539321}
+  _player: {fileID: 6619338809107539321}
+  _emojiSpawner: {fileID: 0}
 --- !u!95 &7865886426785988738
 Animator:
   serializedVersion: 3

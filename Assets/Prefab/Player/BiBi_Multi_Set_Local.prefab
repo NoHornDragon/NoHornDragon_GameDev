@@ -47,7 +47,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _id: 0
   _username: 
-  _Player: {fileID: 5846218756930570552}
+  _player: {fileID: 5846218756930570552}
+  _emojiSpawner: {fileID: 0}
 --- !u!114 &1070106636792765886
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -10,7 +10,7 @@ namespace NHD.Multiplay
     {
         public int _id;
         public string _username;
-        public Transform _Player;
+        public Transform _player;
         public EmojiSpawner _emojiSpawner;
 
         private void Start()

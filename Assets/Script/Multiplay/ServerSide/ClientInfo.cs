@@ -2,12 +2,13 @@
 using System.Net;
 using System.Net.Sockets;
 using UnityEngine;
+using NHD.Multiplay.Common;
 
 namespace NHD.Multiplay.ServerSide
 {
     public class ClientInfo
     {
-        public static int _dataBuferSize = 4096;
+        // public static int _dataBuferSize = 4096;
         public int _id;
 
         public PlayerTrackerInServer _player;
@@ -39,15 +40,19 @@ namespace NHD.Multiplay.ServerSide
             public void Connect(TcpClient inputSocket)
             {
                 socket = inputSocket;
-                socket.ReceiveBufferSize = _dataBuferSize;
-                socket.SendBufferSize = _dataBuferSize;
+                // socket.ReceiveBufferSize = _dataBuferSize;
+                socket.ReceiveBufferSize = Constants.DATABUFFERSIZE;
+                // socket.SendBufferSize = _dataBuferSize;
+                socket.SendBufferSize = Constants.DATABUFFERSIZE;
 
                 stream = socket.GetStream();
 
                 receivedData = new Packet();
-                receiveBuffer = new byte[_dataBuferSize];
+                // receiveBuffer = new byte[_dataBuferSize];
+                receiveBuffer = new byte[Constants.DATABUFFERSIZE];
 
-                stream.BeginRead(receiveBuffer, 0, _dataBuferSize, ReceiveCallback, null);
+                // stream.BeginRead(receiveBuffer, 0, _dataBuferSize, ReceiveCallback, null);
+                stream.BeginRead(receiveBuffer, 0, Constants.DATABUFFERSIZE, ReceiveCallback, null);
 
                 // send welcome packet
                 ServerSend.Welcome(id, "Welcome to NoHornDragon server");
@@ -86,7 +91,8 @@ namespace NHD.Multiplay.ServerSide
 
                     // handle data
                     receivedData.Reset(HandleData(data));
-                    stream.BeginRead(receiveBuffer, 0, _dataBuferSize, ReceiveCallback, null);
+                    // stream.BeginRead(receiveBuffer, 0, _dataBuferSize, ReceiveCallback, null);
+                    stream.BeginRead(receiveBuffer, 0, Constants.DATABUFFERSIZE, ReceiveCallback, null);
                 }
                 catch (Exception ex)
                 {

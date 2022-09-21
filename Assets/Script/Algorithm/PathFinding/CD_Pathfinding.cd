@@ -1,0 +1,75 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="NHD.Algorithm.PathFinding.AStarPathFinding">
+    <Position X="0.75" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAABAAAAAAAAAAQAAAAAAAAAAAQAAAAAAQAAAAAA=</HashCode>
+      <FileName>Assets\Script\Algorithm\PathFinding\AStarPathFinding.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NHD.Algorithm.PathFinding.BFSPathFinding">
+    <Position X="3.25" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAAAgARAAAAAAAAAAAQAAAAAAQAAAAAI=</HashCode>
+      <FileName>Assets\Script\Algorithm\PathFinding\BFSPathFinding.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NHD.Algorithm.PathFinding.Heap&lt;T&gt;">
+    <Position X="2.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIAQAAAACAAAAAAAAgAAAQAAAARCAAABAAAAAAQAAA=</HashCode>
+      <FileName>Assets\Script\Algorithm\PathFinding\Heap.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NHD.Algorithm.PathFinding.Node">
+    <Position X="9.75" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AACAAACECAAASARAAAAEAAAIAAAACBIAAAAAAAAAAAE=</HashCode>
+      <FileName>Assets\Script\Algorithm\PathFinding\Node.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="NHD.Algorithm.PathFinding.RequestAStarPath">
+    <Position X="0.75" Y="4" Width="1.5" />
+    <NestedTypes>
+      <Struct Name="NHD.Algorithm.PathFinding.RequestAStarPath.PathInfo" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Assets\Script\Algorithm\PathFinding\RequestAStarPath.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Struct>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AAAAAIAAAgIAAAAIAAAAAAAAAABBIAIAAAAIAEAAAEA=</HashCode>
+      <FileName>Assets\Script\Algorithm\PathFinding\RequestAStarPath.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NHD.Algorithm.PathFinding.RequestBFSPathfinding">
+    <Position X="3.25" Y="4" Width="1.5" />
+    <NestedTypes>
+      <Struct Name="NHD.Algorithm.PathFinding.RequestBFSPathfinding.PathInfo" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Assets\Script\Algorithm\PathFinding\RequestBFSPathfinding.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Struct>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AAAAAIAAAAIAAAAIAAAAQAAAAABBIAIAAAAIAEAAAEA=</HashCode>
+      <FileName>Assets\Script\Algorithm\PathFinding\RequestBFSPathfinding.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NHD.Algorithm.PathFinding.WorldToGrid">
+    <Position X="5.25" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAgEAGBAAQIAAAAAIAAAAgBAAAAAAAAKAgCACAIICEA=</HashCode>
+      <FileName>Assets\Script\Algorithm\PathFinding\WorldToGrid.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Interface Name="NHD.Algorithm.PathFinding.IHeapItem&lt;T&gt;">
+    <Position X="5.5" Y="1" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Script\Algorithm\PathFinding\Heap.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Font Name="Malgun Gothic" Size="9" />
+</ClassDiagram>

@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using System.Net;
 using System.Net.Sockets;
 using UnityEngine;
+using NHD.Multiplay.Common;
 
 namespace NHD.Multiplay.ClientSide
 {
     public class Client : MonoBehaviour
     {
         public static Client _instance;
-        public static int _dataBufferSize = 4096;
+        // public static int _dataBufferSize = 4096;
 
         public string _ip = "127.0.0.1";
         public int _port = 26950;
@@ -64,11 +65,13 @@ namespace NHD.Multiplay.ClientSide
             {
                 socket = new TcpClient
                 {
-                    ReceiveBufferSize = _dataBufferSize,
-                    SendBufferSize = _dataBufferSize
+                    // ReceiveBufferSize = _dataBufferSize,
+                    // SendBufferSize = _dataBufferSize
+                    ReceiveBufferSize = Constants.DATABUFFERSIZE,
+                    SendBufferSize = Constants.DATABUFFERSIZE
                 };
 
-                receiveBuffer = new byte[_dataBufferSize];
+                receiveBuffer = new byte[Constants.DATABUFFERSIZE];
                 socket.BeginConnect(_instance._ip, _instance._port, ConnectCallback, socket);
             }
 
@@ -85,7 +88,8 @@ namespace NHD.Multiplay.ClientSide
 
                 receivedData = new Packet();
 
-                stream.BeginRead(receiveBuffer, 0, _dataBufferSize, ReceiveCallback, null);
+                // stream.BeginRead(receiveBuffer, 0, _dataBufferSize, ReceiveCallback, null);
+                stream.BeginRead(receiveBuffer, 0, Constants.DATABUFFERSIZE, ReceiveCallback, null);
             }
 
             private void ReceiveCallback(IAsyncResult result)
@@ -103,7 +107,8 @@ namespace NHD.Multiplay.ClientSide
                     Array.Copy(receiveBuffer, data, byteLength);
 
                     receivedData.Reset(HandleData(data));
-                    stream.BeginRead(receiveBuffer, 0, _dataBufferSize, ReceiveCallback, null);
+                    // stream.BeginRead(receiveBuffer, 0, _dataBufferSize, ReceiveCallback, null);
+                    stream.BeginRead(receiveBuffer, 0, Constants.DATABUFFERSIZE, ReceiveCallback, null);
                 }
                 catch
                 {

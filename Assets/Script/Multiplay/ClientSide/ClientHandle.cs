@@ -39,7 +39,7 @@ namespace NHD.Multiplay.ClientSide
 
             // Debug.Log($"Receive {id}'s position from server : {position}");
             if (id != Client._instance._myId)
-                MultiPlayerManager._players[id]._Player.position = position;
+                MultiPlayerManager._players[id]._player.position = position;
         }
 
         public static void PlayerRotation(Packet pakcet)
@@ -47,7 +47,7 @@ namespace NHD.Multiplay.ClientSide
             int id = pakcet.ReadInt();
             Quaternion rotation = pakcet.ReadQuaternion();
 
-            MultiPlayerManager._players[id]._Player.rotation = rotation;
+            MultiPlayerManager._players[id]._player.rotation = rotation;
         }
 
         public static void PlayerEmoji(Packet pakcet)
