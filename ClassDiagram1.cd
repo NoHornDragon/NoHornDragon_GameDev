@@ -1,0 +1,137 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="NHD.Entity.NPC.Common.NPCText">
+    <Position X="11.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Script\Entity\NPC\Common\NPCText.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NHD.Entity.NPC.TalkingNPC.NPCTalks">
+    <Position X="9" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAABAAAA=</HashCode>
+      <FileName>Assets\Script\Entity\NPC\TalkingNPC\NPC.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NHD.Entity.NPC.TalkingNPC.NPCTalksData">
+    <Position X="9.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAA=</HashCode>
+      <FileName>Assets\Script\Entity\NPC\TalkingNPC\NPC.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NHD.Entity.NPC.TalkingNPC.NPC">
+    <Position X="20" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAQQiAACAMAEACAAAAAAAAAEACAkAAIgAAAAAAAEA=</HashCode>
+      <FileName>Assets\Script\Entity\NPC\TalkingNPC\NPC.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NHD.Entity.NPC.TalkingNPC.NPCFarCheck">
+    <Position X="7.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAEAEA=</HashCode>
+      <FileName>Assets\Script\Entity\NPC\TalkingNPC\NPCFarCheck.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NHD.UI.Common.UIText">
+    <Position X="11" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAABABAAACAAAIAAAAAAAAAAAAAAAAAAgAAAAAAAAEA=</HashCode>
+      <FileName>Assets\Script\UI\Common\UIText.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NHD.UI.InGameScene.MenuPopup.MenuButtonManager">
+    <Position X="13" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQACAAACAAAAAAAAgAQAAAkAAAAAAAAAAAAAAAAAAg=</HashCode>
+      <FileName>Assets\Script\UI\InGameScene\MenuPopup\MenuButtonManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NHD.UI.TitleScene.HistoryPopup.HistoryData">
+    <Position X="17.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAAAQAAAAAAEAACAAAAAAAAAAAAAAAAAAAAAAIAAAAA=</HashCode>
+      <FileName>Assets\Script\UI\TitleScene\HistoryPopup\HistoryData.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NHD.UI.TitleScene.HistoryPopup.HistoryDataManager">
+    <Position X="21.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CAgQUAAAACAAAAAAABAAAACAAABQQAAAAAAAAAAAAEA=</HashCode>
+      <FileName>Assets\Script\UI\TitleScene\HistoryPopup\HistoryDataManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NHD.UI.TitleScene.HistoryPopup.HistoryManager">
+    <Position X="5.5" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAQBgACAAAAAAAAIAAYBAAAAQQAABDAAgBAQAMAA=</HashCode>
+      <FileName>Assets\Script\UI\TitleScene\HistoryPopup\HistoryManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NHD.UI.TitleScene.HistoryPopup.HistoryNode">
+    <Position X="15.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAQAAAAAAAIAAAAAAAEAAABAAAAAAAAAAAAEA=</HashCode>
+      <FileName>Assets\Script\UI\TitleScene\HistoryPopup\HistoryNode.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NHD.UI.TitleScene.HistoryPopup.ScrollViewButton">
+    <Position X="17.25" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAEECABAAAAACAAAIACAAAAAAAACACAAiAAAAA=</HashCode>
+      <FileName>Assets\Script\UI\TitleScene\HistoryPopup\ScrollViewButton.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NHD.UI.TitleScene.LobbyScene.LobbyButtonManager">
+    <Position X="5.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AgQIAAAACAAAAAAAAAAAAAAgAAAEgEAAABAAABAEAAA=</HashCode>
+      <FileName>Assets\Script\UI\TitleScene\LobbyScene\LobbyButtonManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NHD.Utils.SceneUtil.SceneChanger">
+    <Position X="15.5" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAECCAAAAAQAAAAAEAAABAAAAAAAAAAIAAAkA=</HashCode>
+      <FileName>Assets\Script\Utils\SceneUtil\SceneChanger.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NHD.Utils.SettingUtil.SettingsValue">
+    <Position X="11.75" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQAAAAAAAAAAAAAABAAIAAAAAAABAAAAAAAAAAABAAA=</HashCode>
+      <FileName>Assets\Script\Utils\SettingUtil\SettingsManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NHD.Utils.SettingUtil.SettingsManager">
+    <Position X="7.75" Y="6.75" Width="1.5" />
+    <NestedTypes>
+      <Delegate Name="NHD.Utils.SettingUtil.SettingsManager.LanguageDelegate" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Assets\Script\Utils\SettingUtil\SettingsManager.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Delegate>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>EggUAAApACAGRAACAEAABACAABBBAAAAABAAIAAAAEA=</HashCode>
+      <FileName>Assets\Script\Utils\SettingUtil\SettingsManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NHD.Utils.SoundUtil.Sound">
+    <Position X="13.75" Y="8.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAgAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Script\Utils\SoundUtil\SoundManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NHD.Utils.SoundUtil.SoundManager">
+    <Position X="18.75" Y="8" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAICAARAQAAAUBAoEAAABAAAgAAAAAAAAAgEA=</HashCode>
+      <FileName>Assets\Script\Utils\SoundUtil\SoundManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="맑은 고딕" Size="9" />
+</ClassDiagram>
