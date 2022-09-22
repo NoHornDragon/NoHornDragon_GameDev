@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace NHD.Multiplay
 {
-    public class PlayerController : MonoBehaviour
+    public class LocalPlayerController : MonoBehaviour
     {
         [SerializeField] private Transform Player;
         private void FixedUpdate()
@@ -17,6 +17,12 @@ namespace NHD.Multiplay
 
             // Debug.Log($"send local position {position}");
             ClientSend.PlayerMovement(position);
+        }
+
+        public void SendEmojiInfoToServer(int emojiIndex)
+        {
+            // Debug.Log($"[{emojiIndex}] : Send Emoji from local player");
+            ClientSend.PlayerSendEmoji(emojiIndex);
         }
     }
 }

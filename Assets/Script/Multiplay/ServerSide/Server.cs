@@ -8,47 +8,47 @@ namespace NHD.Multiplay.ServerSide
 {
     public class Server
     {
-        public static int MaxPlayers { get; private set; }
-        public static int Port { get; private set; }
+        public static int _maxPlayers { get; private set; }
+        public static int _port { get; private set; }
 
-        public static Dictionary<int, ClientInfo> clients = new Dictionary<int, ClientInfo>();
+        public static Dictionary<int, ClientInfo> _clients = new Dictionary<int, ClientInfo>();
 
         public delegate void PacketHandler(int fromClient, Packet packet);
-        public static Dictionary<int, PacketHandler> packetHandlers;
+        public static Dictionary<int, PacketHandler> _packetHandlers;
 
-        public static TcpListener tcpListener;
-        public static UdpClient udpListener;
+        public static TcpListener _tcpListener;
+        public static UdpClient _udpListener;
 
         public static void Start(int maxPlayer, int port)
         {
-            MaxPlayers = maxPlayer;
-            Port = port;
+            _maxPlayers = maxPlayer;
+            _port = port;
 
             Debug.Log($"Starting server...");
 
             InitializeServerData();
 
-            tcpListener = new TcpListener(IPAddress.Any, Port);
-            tcpListener.Start();
-            tcpListener.BeginAcceptTcpClient(new AsyncCallback(TCPConnectCallback), null);
+            _tcpListener = new TcpListener(IPAddress.Any, _port);
+            _tcpListener.Start();
+            _tcpListener.BeginAcceptTcpClient(new AsyncCallback(TCPConnectCallback), null);
 
-            udpListener = new UdpClient(Port);
-            udpListener.BeginReceive(UDPReceiveCallback, null);
+            _udpListener = new UdpClient(_port);
+            _udpListener.BeginReceive(UDPReceiveCallback, null);
 
-            Debug.Log($"Server started on {Port}");
+            Debug.Log($"Server started on {_port}");
         }
 
         private static void TCPConnectCallback(IAsyncResult result)
         {
-            TcpClient client = tcpListener.EndAcceptTcpClient(result);
-            tcpListener.BeginAcceptTcpClient(new AsyncCallback(TCPConnectCallback), null);
+            TcpClient client = _tcpListener.EndAcceptTcpClient(result);
+            _tcpListener.BeginAcceptTcpClient(new AsyncCallback(TCPConnectCallback), null);
 
             Debug.Log($"Incoming connection from {client.Client.RemoteEndPoint}...");
-            for (int i = 1; i <= MaxPlayers; i++)
+            for (int i = 1; i <= _maxPlayers; i++)
             {
-                if (clients[i].tcp.socket == null)
+                if (_clients[i]._tcp.socket == null)
                 {
-                    clients[i].tcp.Connect(client);
+                    _clients[i]._tcp.Connect(client);
                     return;
                 }
             }
@@ -62,8 +62,8 @@ namespace NHD.Multiplay.ServerSide
             try
             {
                 IPEndPoint clientEndPoint = new IPEndPoint(IPAddress.Any, 0);
-                byte[] data = udpListener.EndReceive(result, ref clientEndPoint);
-                udpListener.BeginReceive(UDPReceiveCallback, null);
+                byte[] data = _udpListener.EndReceive(result, ref clientEndPoint);
+                _udpListener.BeginReceive(UDPReceiveCallback, null);
 
                 if (data.Length < 4)
                 {
@@ -76,15 +76,15 @@ namespace NHD.Multiplay.ServerSide
 
                     if (clientId == 0) return;
 
-                    if (clients[clientId].udp.endPoint == null)
+                    if (_clients[clientId]._udp.endPoint == null)
                     {
-                        clients[clientId].udp.Connect(clientEndPoint);
+                        _clients[clientId]._udp.Connect(clientEndPoint);
                         return;
                     }
 
-                    if (clients[clientId].udp.endPoint.ToString() == clientEndPoint.ToString())
+                    if (_clients[clientId]._udp.endPoint.ToString() == clientEndPoint.ToString())
                     {
-                        clients[clientId].udp.HandleData(packet);
+                        _clients[clientId]._udp.HandleData(packet);
                     }
                 }
             }
@@ -100,7 +100,7 @@ namespace NHD.Multiplay.ServerSide
             {
                 if (clientEndPoint != null)
                 {
-                    udpListener.BeginSend(packet.ToArray(), packet.Length(), clientEndPoint, null, null);
+                    _udpListener.BeginSend(packet.ToArray(), packet.Length(), clientEndPoint, null, null);
                 }
             }
             catch (Exception ex)
@@ -111,23 +111,24 @@ namespace NHD.Multiplay.ServerSide
 
         private static void InitializeServerData()
         {
-            for (int i = 1; i <= MaxPlayers; i++)
+            for (int i = 1; i <= _maxPlayers; i++)
             {
-                clients.Add(i, new ClientInfo(i));
+                _clients.Add(i, new ClientInfo(i));
             }
 
-            packetHandlers = new Dictionary<int, PacketHandler>()
+            _packetHandlers = new Dictionary<int, PacketHandler>()
         {
             {(int)ClientPackets.welcomeReceived, ServerHandle.WelcomeReceived },
-            {(int)ClientPackets.playerMovement, ServerHandle.PlayerMovement }
+            {(int)ClientPackets.playerMovement, ServerHandle.PlayerMovement },
+            {(int)ClientPackets.playerEmoji, ServerHandle.PlayerEmoji }
         };
             Debug.Log($"Initialize packets");
         }
 
         public static void Stop()
         {
-            tcpListener.Stop();
-            udpListener.Close();
+            _tcpListener.Stop();
+            _udpListener.Close();
         }
     }
 }

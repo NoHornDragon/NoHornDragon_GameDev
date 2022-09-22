@@ -2,24 +2,25 @@
 using System.Net;
 using System.Net.Sockets;
 using UnityEngine;
+using NHD.Multiplay.Common;
 
 namespace NHD.Multiplay.ServerSide
 {
     public class ClientInfo
     {
-        public static int dataBuferSize = 4096;
-        public int id;
+        // public static int _dataBuferSize = 4096;
+        public int _id;
 
-        public Player player;
+        public PlayerTrackerInServer _player;
 
-        public TCP tcp;
-        public UDP udp;
+        public TCP _tcp;
+        public UDP _udp;
 
         public ClientInfo(int clientId)
         {
-            id = clientId;
-            tcp = new TCP(id);
-            udp = new UDP(id);
+            _id = clientId;
+            _tcp = new TCP(_id);
+            _udp = new UDP(_id);
         }
 
         public class TCP
@@ -39,15 +40,19 @@ namespace NHD.Multiplay.ServerSide
             public void Connect(TcpClient inputSocket)
             {
                 socket = inputSocket;
-                socket.ReceiveBufferSize = dataBuferSize;
-                socket.SendBufferSize = dataBuferSize;
+                // socket.ReceiveBufferSize = _dataBuferSize;
+                socket.ReceiveBufferSize = Constants.DATABUFFERSIZE;
+                // socket.SendBufferSize = _dataBuferSize;
+                socket.SendBufferSize = Constants.DATABUFFERSIZE;
 
                 stream = socket.GetStream();
 
                 receivedData = new Packet();
-                receiveBuffer = new byte[dataBuferSize];
+                // receiveBuffer = new byte[_dataBuferSize];
+                receiveBuffer = new byte[Constants.DATABUFFERSIZE];
 
-                stream.BeginRead(receiveBuffer, 0, dataBuferSize, ReceiveCallback, null);
+                // stream.BeginRead(receiveBuffer, 0, _dataBuferSize, ReceiveCallback, null);
+                stream.BeginRead(receiveBuffer, 0, Constants.DATABUFFERSIZE, ReceiveCallback, null);
 
                 // send welcome packet
                 ServerSend.Welcome(id, "Welcome to NoHornDragon server");
@@ -77,7 +82,7 @@ namespace NHD.Multiplay.ServerSide
                     int byteLength = stream.EndRead(result);
                     if (byteLength <= 0)
                     {
-                        Server.clients[id].Disconnect();
+                        Server._clients[id].Disconnect();
                         return;
                     }
 
@@ -86,12 +91,13 @@ namespace NHD.Multiplay.ServerSide
 
                     // handle data
                     receivedData.Reset(HandleData(data));
-                    stream.BeginRead(receiveBuffer, 0, dataBuferSize, ReceiveCallback, null);
+                    // stream.BeginRead(receiveBuffer, 0, _dataBuferSize, ReceiveCallback, null);
+                    stream.BeginRead(receiveBuffer, 0, Constants.DATABUFFERSIZE, ReceiveCallback, null);
                 }
                 catch (Exception ex)
                 {
                     Debug.Log($"Error receiving TCP data : {ex}");
-                    Server.clients[id].Disconnect();
+                    Server._clients[id].Disconnect();
 
                 }
             }
@@ -119,7 +125,7 @@ namespace NHD.Multiplay.ServerSide
                         using (Packet packet = new Packet(packetBytes))
                         {
                             int packetId = packet.ReadInt();
-                            Server.packetHandlers[packetId](id, packet);
+                            Server._packetHandlers[packetId](id, packet);
                         }
                     });
 
@@ -180,7 +186,7 @@ namespace NHD.Multiplay.ServerSide
                     using (Packet packet = new Packet(packetBytes))
                     {
                         int packetId = packet.ReadInt();
-                        Server.packetHandlers[packetId](id, packet);
+                        Server._packetHandlers[packetId](id, packet);
                     }
                 });
             }
@@ -193,26 +199,26 @@ namespace NHD.Multiplay.ServerSide
 
         public void SendIntoGame(string _playerName)
         {
-            player = NetworkManager.instance.InstantiatePlayer();
-            player.Initialize(id, _playerName);
+            _player = NetworkManager._instance.InstantiatePlayer();
+            _player.Initialize(_id, _playerName);
 
-            foreach (ClientInfo _client in Server.clients.Values)
+            foreach (ClientInfo _client in Server._clients.Values)
             {
-                if (_client.player != null)
+                if (_client._player != null)
                 {
-                    if (_client.id != id)
+                    if (_client._id != _id)
                     {
-                        ServerSend.SpawnPlayer(id, _client.player);
+                        ServerSend.SpawnPlayer(_id, _client._player);
                     }
                 }
             }
 
             // send new player info to all the other player
-            foreach (ClientInfo _client in Server.clients.Values)
+            foreach (ClientInfo _client in Server._clients.Values)
             {
-                if (_client.player != null)
+                if (_client._player != null)
                 {
-                    ServerSend.SpawnPlayer(_client.id, player);
+                    ServerSend.SpawnPlayer(_client._id, _player);
 
                 }
             }
@@ -220,18 +226,18 @@ namespace NHD.Multiplay.ServerSide
 
         private void Disconnect()
         {
-            Debug.Log($"{tcp.socket.Client.RemoteEndPoint} has disconnected");
+            Debug.Log($"{_tcp.socket.Client.RemoteEndPoint} has disconnected");
 
             ThreadManager.ExecuteOnMainThread(() =>
             {
-                UnityEngine.Object.Destroy(player.gameObject);
-                player = null;
+                UnityEngine.Object.Destroy(_player.gameObject);
+                _player = null;
             });
 
-            tcp.Disconnect();
-            udp.Disconnect();
+            _tcp.Disconnect();
+            _udp.Disconnect();
 
-            ServerSend.PlayerDisconnected(id);
+            ServerSend.PlayerDisconnected(_id);
         }
 
     }

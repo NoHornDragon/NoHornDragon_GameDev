@@ -3,58 +3,71 @@ using UnityEngine;
 
 namespace NHD.Multiplay.ClientSide
 {
+    ///<summary>
+    /// 서버에서 받은 패킷을 처리하는 클래스. 이곳에서 Multiplayer의 함수를 이용합니다.
+    ///</summary>
     public class ClientHandle : MonoBehaviour
     {
-        public static void Welcome(Packet _packet)
+        public static void Welcome(Packet pakcet)
         {
-            string msg = _packet.ReadString();
-            int myId = _packet.ReadInt();
+            string msg = pakcet.ReadString();
+            int myId = pakcet.ReadInt();
 
             Debug.Log($"Message from server : {msg}");
-            Client.instance.myId = myId;
+            Client._instance._myId = myId;
 
             // send welcome received packet
             ClientSend.WelcomeReceived();
 
-            Client.instance.udp.Connect(((IPEndPoint)Client.instance.tcp.socket.Client.LocalEndPoint).Port);
+            Client._instance._udp.Connect(((IPEndPoint)Client._instance._tcp.socket.Client.LocalEndPoint).Port);
         }
 
-        public static void SpawnPlayer(Packet _packet)
+        public static void SpawnPlayer(Packet pakcet)
         {
-            int id = _packet.ReadInt();
-            string username = _packet.ReadString();
-            Vector3 position = _packet.ReadVector3();
-            Quaternion rotation = _packet.ReadQuaternion();
+            int id = pakcet.ReadInt();
+            string username = pakcet.ReadString();
+            Vector3 position = pakcet.ReadVector3();
+            Quaternion rotation = pakcet.ReadQuaternion();
 
-            MultiPlayerManager.instance.SpawnPlayer(id, username, position, rotation);
+            MultiPlayerManager._instance.SpawnPlayer(id, username, position, rotation);
         }
 
-        public static void PlayerPosition(Packet _packet)
+        public static void PlayerPosition(Packet pakcet)
         {
-            int id = _packet.ReadInt();
-            Vector3 position = _packet.ReadVector3();
+            int id = pakcet.ReadInt();
+            Vector3 position = pakcet.ReadVector3();
 
             // Debug.Log($"Receive {id}'s position from server : {position}");
-            // TODO : chould be player position, not root position
-            if (id != Client.instance.myId)
-                MultiPlayerManager.players[id].Player.position = position;
+            if (id != Client._instance._myId)
+                MultiPlayerManager._players[id]._player.position = position;
         }
 
-        public static void PlayerRotation(Packet _packet)
+        public static void PlayerRotation(Packet pakcet)
         {
-            int id = _packet.ReadInt();
-            Quaternion rotation = _packet.ReadQuaternion();
+            int id = pakcet.ReadInt();
+            Quaternion rotation = pakcet.ReadQuaternion();
 
-            // TODO : chould be player rotation, not root rotation
-            MultiPlayerManager.players[id].Player.rotation = rotation;
+            MultiPlayerManager._players[id]._player.rotation = rotation;
         }
 
-        public static void PlayerDisconnected(Packet _packet)
+        public static void PlayerEmoji(Packet pakcet)
         {
-            int id = _packet.ReadInt();
+            int id = pakcet.ReadInt();
+            int emojiIndex = pakcet.ReadInt();
+            
+            if (id != Client._instance._myId)
+            {
+                // Debug.Log($"[{emojiIndex}] : receieve emoji from server");
+                MultiPlayerManager._players[id].SetEmoji(emojiIndex);
+            }
+        }
 
-            Destroy(MultiPlayerManager.players[id].gameObject);
-            MultiPlayerManager.players.Remove(id);
+        public static void PlayerDisconnected(Packet pakcet)
+        {
+            int id = pakcet.ReadInt();
+
+            Destroy(MultiPlayerManager._players[id].gameObject);
+            MultiPlayerManager._players.Remove(id);
         }
     }
 }

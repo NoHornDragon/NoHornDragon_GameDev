@@ -94,3 +94,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b1dbc9a9505dd524d920b7d9dc86e9a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _emojiIndexInBackGround: 1

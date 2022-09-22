@@ -4,17 +4,16 @@ namespace NHD.Multiplay.ServerSide
 {
     public class NetworkManager : MonoBehaviour
     {
-        public static NetworkManager instance;
-
-        public GameObject playerPrefab;
+        public static NetworkManager _instance;
+        public GameObject _playerPrefab;
 
         private void Awake()
         {
-            if (instance == null)
+            if (_instance == null)
             {
-                instance = this;
+                _instance = this;
             }
-            else if (instance != this)
+            else if (_instance != this)
             {
                 Debug.Log($"instance is already exist");
                 Destroy(gameObject);
@@ -34,9 +33,9 @@ namespace NHD.Multiplay.ServerSide
             Server.Stop();
         }
 
-        public Player InstantiatePlayer()
+        public PlayerTrackerInServer InstantiatePlayer()
         {
-            return Instantiate(playerPrefab, Vector3.zero, Quaternion.identity).GetComponent<Player>();
+            return Instantiate(_playerPrefab, Vector3.zero, Quaternion.identity).GetComponent<PlayerTrackerInServer>();
         }
     }
 }

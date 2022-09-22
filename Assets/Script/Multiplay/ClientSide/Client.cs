@@ -3,32 +3,32 @@ using System.Collections.Generic;
 using System.Net;
 using System.Net.Sockets;
 using UnityEngine;
+using NHD.Multiplay.Common;
 
 namespace NHD.Multiplay.ClientSide
 {
     public class Client : MonoBehaviour
     {
-        public static Client instance;
-        public static int dataBufferSize = 4096;
+        public static Client _instance;
+        // public static int _dataBufferSize = 4096;
 
-        public string ip = "127.0.0.1";
-        public int port = 26950;
-        public int myId = 0;
-        public TCP tcp;
-        public UDP udp;
-
-        private bool isConnected = false;
+        public string _ip = "127.0.0.1";
+        public int _port = 26950;
+        public int _myId = 0;
+        public TCP _tcp;
+        public UDP _udp;
+        private bool _isConnected = false;
 
         private delegate void PacketHandler(Packet packet);
-        private static Dictionary<int, PacketHandler> packetHandlers;
+        private static Dictionary<int, PacketHandler> _packetHandlers;
 
         private void Awake()
         {
-            if (instance == null)
+            if (_instance == null)
             {
-                instance = this;
+                _instance = this;
             }
-            else if (instance != this)
+            else if (_instance != this)
             {
                 Debug.Log($"instance already exist, so destroy object!");
                 Destroy(this);
@@ -42,16 +42,16 @@ namespace NHD.Multiplay.ClientSide
 
         private void Start()
         {
-            tcp = new TCP();
-            udp = new UDP();
+            _tcp = new TCP();
+            _udp = new UDP();
         }
 
         public void ConnectToServer()
         {
             InitializeClientData();
 
-            isConnected = true;
-            tcp.Connect();
+            _isConnected = true;
+            _tcp.Connect();
         }
 
         public class TCP
@@ -65,12 +65,14 @@ namespace NHD.Multiplay.ClientSide
             {
                 socket = new TcpClient
                 {
-                    ReceiveBufferSize = dataBufferSize,
-                    SendBufferSize = dataBufferSize
+                    // ReceiveBufferSize = _dataBufferSize,
+                    // SendBufferSize = _dataBufferSize
+                    ReceiveBufferSize = Constants.DATABUFFERSIZE,
+                    SendBufferSize = Constants.DATABUFFERSIZE
                 };
 
-                receiveBuffer = new byte[dataBufferSize];
-                socket.BeginConnect(instance.ip, instance.port, ConnectCallback, socket);
+                receiveBuffer = new byte[Constants.DATABUFFERSIZE];
+                socket.BeginConnect(_instance._ip, _instance._port, ConnectCallback, socket);
             }
 
             private void ConnectCallback(IAsyncResult result)
@@ -86,7 +88,8 @@ namespace NHD.Multiplay.ClientSide
 
                 receivedData = new Packet();
 
-                stream.BeginRead(receiveBuffer, 0, dataBufferSize, ReceiveCallback, null);
+                // stream.BeginRead(receiveBuffer, 0, _dataBufferSize, ReceiveCallback, null);
+                stream.BeginRead(receiveBuffer, 0, Constants.DATABUFFERSIZE, ReceiveCallback, null);
             }
 
             private void ReceiveCallback(IAsyncResult result)
@@ -96,7 +99,7 @@ namespace NHD.Multiplay.ClientSide
                     int byteLength = stream.EndRead(result);
                     if (byteLength <= 0)
                     {
-                        instance.Disconnect();
+                        _instance.Disconnect();
                         return;
                     }
 
@@ -104,7 +107,8 @@ namespace NHD.Multiplay.ClientSide
                     Array.Copy(receiveBuffer, data, byteLength);
 
                     receivedData.Reset(HandleData(data));
-                    stream.BeginRead(receiveBuffer, 0, dataBufferSize, ReceiveCallback, null);
+                    // stream.BeginRead(receiveBuffer, 0, _dataBufferSize, ReceiveCallback, null);
+                    stream.BeginRead(receiveBuffer, 0, Constants.DATABUFFERSIZE, ReceiveCallback, null);
                 }
                 catch
                 {
@@ -150,7 +154,7 @@ namespace NHD.Multiplay.ClientSide
                         using (Packet packet = new Packet(packetBytes))
                         {
                             int packetId = packet.ReadInt();
-                            packetHandlers[packetId](packet);
+                            _packetHandlers[packetId](packet);
                         }
                     });
 
@@ -172,7 +176,7 @@ namespace NHD.Multiplay.ClientSide
 
             private void Disconnected()
             {
-                instance.Disconnect();
+                _instance.Disconnect();
 
                 stream = null;
                 receiveBuffer = null;
@@ -189,7 +193,7 @@ namespace NHD.Multiplay.ClientSide
 
             public UDP()
             {
-                endPoint = new IPEndPoint(IPAddress.Parse(instance.ip), instance.port);
+                endPoint = new IPEndPoint(IPAddress.Parse(_instance._ip), _instance._port);
             }
 
             public void Connect(int localPort)
@@ -209,7 +213,7 @@ namespace NHD.Multiplay.ClientSide
             {
                 try
                 {
-                    packet.InsertInt(instance.myId);
+                    packet.InsertInt(_instance._myId);
                     if (socket != null)
                     {
                         socket.BeginSend(packet.ToArray(), packet.Length(), null, null);
@@ -230,7 +234,7 @@ namespace NHD.Multiplay.ClientSide
 
                     if (data.Length < 4)
                     {
-                        instance.Disconnect();
+                        _instance.Disconnect();
                         return;
                     }
 
@@ -255,14 +259,14 @@ namespace NHD.Multiplay.ClientSide
                     using (Packet packet = new Packet(data))
                     {
                         int packetId = packet.ReadInt();
-                        packetHandlers[packetId](packet);
+                        _packetHandlers[packetId](packet);
                     }
                 });
             }
 
             private void Disconnect()
             {
-                instance.Disconnect();
+                _instance.Disconnect();
 
                 endPoint = null;
                 socket = null;
@@ -271,11 +275,12 @@ namespace NHD.Multiplay.ClientSide
 
         private void InitializeClientData()
         {
-            packetHandlers = new Dictionary<int, PacketHandler>()
+            _packetHandlers = new Dictionary<int, PacketHandler>()
         {
             { (int)ServerPackets.welcome, ClientHandle.Welcome },
             { (int)ServerPackets.spawnPlayer, ClientHandle.SpawnPlayer },
             { (int)ServerPackets.playerPosition, ClientHandle.PlayerPosition },
+            { (int)ServerPackets.playerEmoji, ClientHandle.PlayerEmoji },
             { (int)ServerPackets.playerDisconnected, ClientHandle.PlayerDisconnected }
         };
 
@@ -284,11 +289,11 @@ namespace NHD.Multiplay.ClientSide
 
         private void Disconnect()
         {
-            if (!isConnected) return;
+            if (!_isConnected) return;
 
-            isConnected = false;
-            tcp.socket.Close();
-            udp.socket.Close();
+            _isConnected = false;
+            _tcp.socket.Close();
+            _udp.socket.Close();
 
             Debug.Log($"Disconnected from server");
         }
