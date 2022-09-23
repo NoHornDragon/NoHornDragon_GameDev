@@ -13701,14 +13701,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc025e964be3a324da5714665858a51c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  userData:
-    backGroundsoundVolume: 0.5
-    effectSoundVolume: 0.5
-    clearCount: 0
-    resetCount: 0
-    stunedCount: 0
-    easyMode: 0
-    playerPos: {x: 0, y: 0, z: 0}
 --- !u!4 &1500971434
 Transform:
   m_ObjectHideFlags: 0
