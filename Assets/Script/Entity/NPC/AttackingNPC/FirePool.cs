@@ -1,54 +1,50 @@
-﻿using NHD.GamePlay.InteractionEntity.FiringObject;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
+using NHD.GamePlay.ObjectPool;
 
 namespace NHD.Entity.NPC.AttackingNPC
 {
-    public class FirePool : MonoBehaviour
+    public class FirePool : MonoBehaviour, IObjectPool
     {
-        [SerializeField]
-        private GameObject fireObjectPrefab;
-
-        [SerializeField]
-        private Queue<FiringObject> fireItemPool = new Queue<FiringObject>();
-
+        [SerializeField] private IPoolableObject _fireObjectPrefab;
+        private Queue<IPoolableObject> _fireItemPool = new Queue<IPoolableObject>();
 
         private void Start()
         {
-            AddFireItem(2);
+            SupplyObjectPool();
+            SupplyObjectPool();
         }
 
-        public void GetFireItem()
+        public IPoolableObject GetObjectFromPool()
         {
-            if (fireItemPool.Count <= 0)
+            if (_fireItemPool.Count <= 0)
             {
-                AddFireItem(2);
+                SupplyObjectPool();
             }
 
-            var item = fireItemPool.Dequeue();
+            var item = _fireItemPool.Dequeue();
             item.transform.localPosition = Vector3.zero;
             item.transform.SetParent(null);
             item.gameObject.SetActive(true);
+
+            return item;
         }
 
-        public void ReturnItem(FiringObject returnObj)
+        public void ReturnObjectToPool(IPoolableObject returnObj)
         {
             returnObj.gameObject.SetActive(false);
             returnObj.transform.SetParent(this.transform);
             returnObj.transform.localPosition = Vector3.zero;
 
-            fireItemPool.Enqueue(returnObj);
+            _fireItemPool.Enqueue(returnObj);
         }
 
-        private void AddFireItem(int makecount)
+        public void SupplyObjectPool()
         {
-            for (int i = 0; i < makecount; i++)
-            {
-                var item = GameObject.Instantiate(fireObjectPrefab).GetComponent<FiringObject>();
-                item.SetFirePool = this;
+            var item = GameObject.Instantiate(_fireObjectPrefab).GetComponent<IPoolableObject>();
+            item._returnToPoolCallbackEvent += ReturnObjectToPool;
 
-                ReturnItem(item);
-            }
+            ReturnObjectToPool(item);
         }
     }
 }
