@@ -7,7 +7,6 @@ namespace NHD.GamePlay.InteractionEntity.FiringObject
 {
     public class Arrow : IPoolableObject
     {
-        private Rigidbody2D _rigid;
         public Transform _target;
         public float _speed = 5.0f;
         [SerializeField] Vector2[] _path;
@@ -17,7 +16,6 @@ namespace NHD.GamePlay.InteractionEntity.FiringObject
         private void Awake()
         {
             _target = GameObject.FindWithTag("Player").transform;
-            _rigid = GetComponent<Rigidbody2D>();
         }
 
         private void OnEnable()

@@ -6,14 +6,12 @@ namespace NHD.UI.EmojiUI
     public class EmojiUIManager : MonoBehaviour
     {
         private int _emojiIndexToPopup = -1;
-        private int _curEmojiIndex = -1;
         public int _pingIndex { set{ _emojiIndexToPopup = value; } }
         // should target to PingUI in inspector
         [SerializeField] private GameObject _pingInterface;
         // Should target to player in inspector
         [SerializeField] private Transform _targetToPopup;
         [SerializeField] private EmojiSpawner _emojiSpawner;
-        private bool _isServerMap;
         public event Action<int> _serverEmojiEvent;
 
         private void Update()
@@ -46,7 +44,6 @@ namespace NHD.UI.EmojiUI
         public void SetEmojiUITarget(Transform target)
         {
             _targetToPopup = target;
-            _isServerMap = true;
         }
     }
 }

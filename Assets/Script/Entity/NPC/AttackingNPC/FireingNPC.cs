@@ -1,5 +1,4 @@
-﻿using NHD.GamePlay.InteractionEntity.FiringObject;
-using System.Collections;
+﻿using System.Collections;
 using UnityEngine;
 using NHD.GamePlay.ObjectPool;
 

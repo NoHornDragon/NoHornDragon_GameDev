@@ -1245,7 +1245,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _bone: {fileID: 251564631647313218}
-  _launchTime: 0
+  _launchTime: 1
 --- !u!1 &6699253338365943053
 GameObject:
   m_ObjectHideFlags: 0
