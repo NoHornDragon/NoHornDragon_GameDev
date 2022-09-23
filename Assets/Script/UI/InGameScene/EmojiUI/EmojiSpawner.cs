@@ -6,8 +6,8 @@ namespace NHD.UI.EmojiUI
 {
     public class EmojiSpawner : MonoBehaviour, IObjectPool
     {
-        [SerializeField] private List<IPoolableObject> _emojiPrefab;
-        private List<Queue<IPoolableObject>> _emojiPool = new List<Queue<IPoolableObject>>();
+        [SerializeField] private List<PoolableObjectBase> _emojiPrefab;
+        private List<Queue<PoolableObjectBase>> _emojiPool = new List<Queue<PoolableObjectBase>>();
         [SerializeField] private Vector2 _emojiOffsetInGame;
         private Transform _prevTarget;
         private EmojiInGame _prevEmoji;
@@ -18,7 +18,7 @@ namespace NHD.UI.EmojiUI
         {
             for(int i = 0; i < _emojiPrefab.Count; i++)
             {
-                _emojiPool.Add(new Queue<IPoolableObject>());
+                _emojiPool.Add(new Queue<PoolableObjectBase>());
             }
         }
 
@@ -40,7 +40,7 @@ namespace NHD.UI.EmojiUI
             _prevEmoji = emoji.GetComponent<EmojiInGame>();
         }
 
-        public IPoolableObject GetObjectFromPool()
+        public PoolableObjectBase GetObjectFromPool()
         {
             if(_emojiPool[_curIndex].Count <= 0)
                 SupplyObjectPool();
@@ -48,7 +48,7 @@ namespace NHD.UI.EmojiUI
             return _emojiPool[_curIndex].Dequeue();
         }
 
-        public void ReturnObjectToPool(IPoolableObject emoji)
+        public void ReturnObjectToPool(PoolableObjectBase emoji)
         {
             var emojiIndex = emoji.GetComponent<EmojiInGame>()._emojiIndex;
             _emojiPool[emojiIndex].Enqueue(emoji);

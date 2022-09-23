@@ -5,7 +5,7 @@ using NHD.GamePlay.ObjectPool;
 
 namespace NHD.GamePlay.InteractionEntity.FiringObject
 {
-    public class Arrow : IPoolableObject
+    public class Arrow : PoolableObjectBase
     {
         public Transform _target;
         public float _speed = 5.0f;

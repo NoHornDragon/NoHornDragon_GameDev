@@ -4,7 +4,7 @@ using DG.Tweening;
 
 namespace NHD.UI.EmojiUI
 {
-    public class EmojiInGame : IPoolableObject
+    public class EmojiInGame : PoolableObjectBase
     {
         private Sequence _popupSequence;
         [SerializeField] private int _emojiIndexInBackGround;

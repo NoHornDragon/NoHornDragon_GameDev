@@ -2,9 +2,9 @@
 using System;
 namespace NHD.GamePlay.ObjectPool
 {
-    public abstract class IPoolableObject : MonoBehaviour
+    public abstract class PoolableObjectBase : MonoBehaviour
     {
-        public event Action<IPoolableObject> _returnToPoolCallbackEvent;
+        public event Action<PoolableObjectBase> _returnToPoolCallbackEvent;
 
         public void InvokeReturnCall()
         {

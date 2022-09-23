@@ -2,8 +2,8 @@
 {
     public interface IObjectPool
     {
-        IPoolableObject GetObjectFromPool();
-        void ReturnObjectToPool(IPoolableObject obj);
+        PoolableObjectBase GetObjectFromPool();
+        void ReturnObjectToPool(PoolableObjectBase obj);
         void SupplyObjectPool();
     }
 }

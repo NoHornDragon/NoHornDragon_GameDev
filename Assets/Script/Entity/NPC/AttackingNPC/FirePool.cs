@@ -6,8 +6,8 @@ namespace NHD.Entity.NPC.AttackingNPC
 {
     public class FirePool : MonoBehaviour, IObjectPool
     {
-        [SerializeField] private IPoolableObject _fireObjectPrefab;
-        private Queue<IPoolableObject> _fireItemPool = new Queue<IPoolableObject>();
+        [SerializeField] private PoolableObjectBase _fireObjectPrefab;
+        private Queue<PoolableObjectBase> _fireItemPool = new Queue<PoolableObjectBase>();
 
         private void Start()
         {
@@ -15,7 +15,7 @@ namespace NHD.Entity.NPC.AttackingNPC
             SupplyObjectPool();
         }
 
-        public IPoolableObject GetObjectFromPool()
+        public PoolableObjectBase GetObjectFromPool()
         {
             if (_fireItemPool.Count <= 0)
             {
@@ -30,7 +30,7 @@ namespace NHD.Entity.NPC.AttackingNPC
             return item;
         }
 
-        public void ReturnObjectToPool(IPoolableObject returnObj)
+        public void ReturnObjectToPool(PoolableObjectBase returnObj)
         {
             returnObj.gameObject.SetActive(false);
             returnObj.transform.SetParent(this.transform);
@@ -41,7 +41,7 @@ namespace NHD.Entity.NPC.AttackingNPC
 
         public void SupplyObjectPool()
         {
-            var item = GameObject.Instantiate(_fireObjectPrefab).GetComponent<IPoolableObject>();
+            var item = GameObject.Instantiate(_fireObjectPrefab).GetComponent<PoolableObjectBase>();
             item._returnToPoolCallbackEvent += ReturnObjectToPool;
 
             ReturnObjectToPool(item);
