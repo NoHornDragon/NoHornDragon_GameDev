@@ -48,7 +48,7 @@ namespace NHD.UI.EmojiUI
             return _emojiPool[_curIndex].Dequeue();
         }
 
-        public void ReturnObjectToPool(PoolableObjectBase emoji)
+        public void InsertObjectToPool(PoolableObjectBase emoji)
         {
             var emojiIndex = emoji.GetComponent<EmojiInGame>()._emojiIndex;
             _emojiPool[emojiIndex].Enqueue(emoji);
@@ -59,9 +59,9 @@ namespace NHD.UI.EmojiUI
         public void SupplyObjectPool()
         {
             var emoji = Instantiate(_emojiPrefab[_curIndex]);
-            emoji.ReturnToPoolCallbackEvent += ReturnObjectToPool;
+            emoji.ReturnToPoolCallbackEvent += InsertObjectToPool;
             
-            ReturnObjectToPool(emoji);
+            InsertObjectToPool(emoji);
         }
     }
 }

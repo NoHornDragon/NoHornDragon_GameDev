@@ -30,7 +30,7 @@ namespace NHD.Entity.NPC.AttackingNPC
             return item;
         }
 
-        public void ReturnObjectToPool(PoolableObjectBase returnObj)
+        public void InsertObjectToPool(PoolableObjectBase returnObj)
         {
             returnObj.gameObject.SetActive(false);
             returnObj.transform.SetParent(this.transform);
@@ -42,9 +42,9 @@ namespace NHD.Entity.NPC.AttackingNPC
         public void SupplyObjectPool()
         {
             var item = GameObject.Instantiate(_fireObjectPrefab).GetComponent<PoolableObjectBase>();
-            item.ReturnToPoolCallbackEvent += ReturnObjectToPool;
+            item.ReturnToPoolCallbackEvent += InsertObjectToPool;
 
-            ReturnObjectToPool(item);
+            InsertObjectToPool(item);
         }
     }
 }
