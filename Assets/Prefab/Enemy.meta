@@ -1,5 +1,9 @@
 fileFormatVersion: 2
-guid: 0b23bb489ca792445aaf94f47693030b
+<<<<<<<< HEAD:Assets/Prefab/Enemy.meta
+guid: 3de3d03b5ab0bd14eb386a8263b49f28
+========
+guid: bcdac8c558623794aa5387ad40f74e86
+>>>>>>>> dev_husk:Assets/Resources/NPC.meta
 folderAsset: yes
 DefaultImporter:
   externalObjects: {}

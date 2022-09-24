@@ -1,0 +1,12 @@
+fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/Script/Entity.meta
+guid: 60c779ec6345eea498b8cae5203b0da8
+========
+guid: 7ef27d80957c88f4d8614b1f2fa7cb86
+>>>>>>>> dev_husk:Assets/Script/UI/InGameScene/PingUI.meta
+folderAsset: yes
+DefaultImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

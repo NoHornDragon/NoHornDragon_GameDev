@@ -1,5 +1,9 @@
 fileFormatVersion: 2
-guid: 6864fbce07d8d5746a2c5e5c4d97b424
+<<<<<<<< HEAD:Assets/Script/Algorithm.meta
+guid: 9c62595ef55432c4cb03e23ead9589d7
+========
+guid: e9d971a89a1537445bb4477e1399da92
+>>>>>>>> dev_husk:Assets/Resources/Shader/Grass.meta
 folderAsset: yes
 DefaultImporter:
   externalObjects: {}

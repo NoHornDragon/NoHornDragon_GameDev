@@ -1,6 +1,10 @@
 fileFormatVersion: 2
-guid: 9cbe12675d4cf3c4c9c8f74db9305615
+<<<<<<<< HEAD:Assets/Script/GamePlay.meta
+guid: 73e106d4fecdec3438247a148b2ccbde
 folderAsset: yes
+========
+guid: e9fd2b44b9a68514d979d922adb0483c
+>>>>>>>> dev_husk:Assets/Scenes/Husk/Ping.unity.meta
 DefaultImporter:
   externalObjects: {}
   userData: 
