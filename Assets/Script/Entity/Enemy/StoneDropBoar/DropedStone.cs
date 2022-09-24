@@ -1,11 +1,10 @@
-﻿using UnityEngine;
+﻿using NHD.GamePlay.ObjectPool;
+using UnityEngine;
 
 namespace NHD.Entity.Enemy.stoneDropBoar
 {
-    public class DropedStone : MonoBehaviour
+    public class DropedStone : PoolableObjectBase
     {
-        public StonesPool _stonesPool;
-
         private void Start()
         {
             Invoke("DestroyStone", 10f);
@@ -13,7 +12,7 @@ namespace NHD.Entity.Enemy.stoneDropBoar
 
         public void DestroyStone()
         {
-            _stonesPool.ReturnObject(this);
+            InvokeReturnCall();
         }
     }
 }

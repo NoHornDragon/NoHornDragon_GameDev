@@ -6,21 +6,27 @@ namespace NHD.Entity.Enemy.stoneDropBoar
 {
     public class StoneDropBoar : MonoBehaviour, IEnemy
     {
-        private const int ATTACK_DELAY_SEC = 5;
+        private const float WAIT_ATTACK = 0.5f;
+        private const float ATTACK_DELAY_SEC = 4.5f;
 
-        [SerializeField] private StonesPool _stonesPool;
+        private StonesPool _stonesPool;
+        private EnemyState _state;
         private GameObject _stone;
         private Vector3 _instantStonePos;
-        private EnemyState _state;
         private bool _isAttackAble;
+        private WaitForSeconds _waitAttack;
         private WaitForSeconds _attackDelay;
+        private Animator _animator;
 
         void Start()
         {
+            _stonesPool = FindObjectOfType<StonesPool>();
             _state = EnemyState.IDLE;
             _isAttackAble = true;
+            _waitAttack = new WaitForSeconds(WAIT_ATTACK);
             _attackDelay = new WaitForSeconds(ATTACK_DELAY_SEC);
-            _instantStonePos = new Vector3(transform.position.x - 1, transform.position.y + 1, transform.position.z);
+            _instantStonePos = transform.position + new Vector3(-1.75f, 1, 0);
+            _animator = GetComponent<Animator>();
         }
 
         void Update()
@@ -37,18 +43,30 @@ namespace NHD.Entity.Enemy.stoneDropBoar
         public void Attack()
         {
             _isAttackAble = false;
+            _animator.Play("Boar_RollingMotion");
+            _animator.SetTrigger("GoToIDLE");
             StartCoroutine(AttackCoroutine());
         }
 
         IEnumerator AttackCoroutine()
         {
-            _stone = _stonesPool.GetObject().gameObject;
-            _stone.transform.SetParent(transform);
-            _stone.transform.position = _instantStonePos;
-            _stone.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+            _stone = CreateStone();
+            yield return _waitAttack;
+
             _stone.GetComponent<Rigidbody2D>().AddForce(new Vector2(-1000f, 1000f));
             yield return _attackDelay;
+
             _isAttackAble = true;
+        }
+
+        private GameObject CreateStone()
+        {
+            var stone = _stonesPool.GetObjectFromPool().gameObject;
+            stone.transform.SetParent(transform);
+            stone.transform.position = _instantStonePos;
+            stone.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+
+            return stone;
         }
 
         public void Move() { }
