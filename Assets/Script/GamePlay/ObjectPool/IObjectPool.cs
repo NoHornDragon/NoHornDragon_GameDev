@@ -3,7 +3,7 @@
     public interface IObjectPool
     {
         PoolableObjectBase GetObjectFromPool();
-        void ReturnObjectToPool(PoolableObjectBase obj);
+        void InsertObjectToPool(PoolableObjectBase obj);
         void SupplyObjectPool();
     }
 }

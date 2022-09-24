@@ -30,7 +30,7 @@ namespace NHD.Entity.Enemy.stoneDropBoar
             return obj;
         }
 
-        public void ReturnObjectToPool(PoolableObjectBase obj)
+        public void InsertObjectToPool(PoolableObjectBase obj)
         {
             obj.gameObject.SetActive(false);
             obj.transform.SetParent(transform);
@@ -40,10 +40,9 @@ namespace NHD.Entity.Enemy.stoneDropBoar
         public void SupplyObjectPool()
         {
             var newObject = Instantiate(_stonePrefab).GetComponent<PoolableObjectBase>();
-            newObject.gameObject.SetActive(false);
-            newObject.transform.SetParent(transform);
-            newObject._returnToPoolCallbackEvent += ReturnObjectToPool;
-            _stonesPoolQueue.Enqueue(newObject);
+            newObject.ReturnToPoolCallbackEvent += InsertObjectToPool;
+
+            InsertObjectToPool(newObject);
         }
     }
 }
