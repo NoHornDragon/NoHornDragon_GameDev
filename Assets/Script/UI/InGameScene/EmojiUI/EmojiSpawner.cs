@@ -59,7 +59,7 @@ namespace NHD.UI.EmojiUI
         public void SupplyObjectPool()
         {
             var emoji = Instantiate(_emojiPrefab[_curIndex]);
-            emoji._returnToPoolCallbackEvent += ReturnObjectToPool;
+            emoji.ReturnToPoolCallbackEvent += ReturnObjectToPool;
             
             ReturnObjectToPool(emoji);
         }

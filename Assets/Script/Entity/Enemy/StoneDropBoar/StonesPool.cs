@@ -42,7 +42,7 @@ namespace NHD.Entity.Enemy.stoneDropBoar
             var newObject = Instantiate(_stonePrefab).GetComponent<PoolableObjectBase>();
             newObject.gameObject.SetActive(false);
             newObject.transform.SetParent(transform);
-            newObject._returnToPoolCallbackEvent += ReturnObjectToPool;
+            newObject.ReturnToPoolCallbackEvent += ReturnObjectToPool;
             _stonesPoolQueue.Enqueue(newObject);
         }
     }

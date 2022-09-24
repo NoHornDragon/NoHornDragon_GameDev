@@ -42,7 +42,7 @@ namespace NHD.Entity.NPC.AttackingNPC
         public void SupplyObjectPool()
         {
             var item = GameObject.Instantiate(_fireObjectPrefab).GetComponent<PoolableObjectBase>();
-            item._returnToPoolCallbackEvent += ReturnObjectToPool;
+            item.ReturnToPoolCallbackEvent += ReturnObjectToPool;
 
             ReturnObjectToPool(item);
         }
