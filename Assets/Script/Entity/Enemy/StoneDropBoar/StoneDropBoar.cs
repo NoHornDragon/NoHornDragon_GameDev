@@ -9,7 +9,7 @@ namespace NHD.Entity.Enemy.stoneDropBoar
         private const float WAIT_ATTACK = 0.5f;
         private const float ATTACK_DELAY_SEC = 4.5f;
 
-        [SerializeField] private StonesPool _stonesPool;
+        private StonesPool _stonesPool;
         private EnemyState _state;
         private GameObject _stone;
         private Vector3 _instantStonePos;
@@ -20,6 +20,7 @@ namespace NHD.Entity.Enemy.stoneDropBoar
 
         void Start()
         {
+            _stonesPool = FindObjectOfType<StonesPool>();
             _state = EnemyState.IDLE;
             _isAttackAble = true;
             _waitAttack = new WaitForSeconds(WAIT_ATTACK);
