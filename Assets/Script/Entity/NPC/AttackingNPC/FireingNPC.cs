@@ -1,28 +1,24 @@
-﻿using NHD.GamePlay.InteractionEntity.FiringObject;
-using System.Collections;
+﻿using System.Collections;
 using UnityEngine;
+using NHD.GamePlay.ObjectPool;
 
 namespace NHD.Entity.NPC.AttackingNPC
 {
     public class FireingNPC : MonoBehaviour
     {
-        [SerializeField]
-        private FirePool firePool;
-        private FiringObject curFiringObject;
-        private Transform player;
-        [SerializeField]
-        private Transform bone;
-        private bool lookAtRight;
-        [SerializeField]
-        private float launchTime;
-        [SerializeField]
-        private float curTime;
+        private IObjectPool _firePool;
+        private Transform _player;
+        [SerializeField] private Transform _bone;
+        private bool _lookAtRight;
+        [SerializeField] private float _launchTime;
+        private float _curTime;
 
 
         private void Awake()
         {
-            firePool = GetComponent<FirePool>();
-            player = GameObject.FindWithTag("Player").transform;
+            _firePool = GetComponent<IObjectPool>();
+            // TODO : in multiplayer
+            _player = GameObject.FindWithTag("Player").transform;
 
             BoxCollider2D collider = GetComponent<BoxCollider2D>();
         }
@@ -52,25 +48,25 @@ namespace NHD.Entity.NPC.AttackingNPC
         {
             while (true)
             {
-                curTime += Time.deltaTime;
-                if (curTime >= launchTime)
+                _curTime += Time.deltaTime;
+                if (_curTime >= _launchTime)
                 {
-                    firePool.GetFireItem();
-                    curTime = 0;
+                    _firePool.GetObjectFromPool();
+                    _curTime = 0;
                 }
 
 
-                var len = player.position - transform.position;
+                var len = _player.position - transform.position;
                 // TODO : sprite.splitx
-                if ((len.x > 0) != lookAtRight)
+                if ((len.x > 0) != _lookAtRight)
                 {
-                    lookAtRight = (len.x > 0);
-                    transform.localScale = (lookAtRight) ? new Vector3(1, 1, 1) : new Vector3(-1, 1, 1);
+                    _lookAtRight = (len.x > 0);
+                    transform.localScale = (_lookAtRight) ? new Vector3(1, 1, 1) : new Vector3(-1, 1, 1);
                 }
 
                 float angle = Mathf.Atan2(len.y, len.x) * Mathf.Rad2Deg;
                 angle = Mathf.Clamp(angle, -50, 50);
-                bone.localRotation = Quaternion.Euler(0, 0, angle);
+                _bone.localRotation = Quaternion.Euler(0, 0, angle);
 
                 yield return null;
             }

@@ -1,35 +1,35 @@
 ﻿using NHD.Algorithm.PathFinding;
 using System.Collections;
 using UnityEngine;
+using NHD.GamePlay.ObjectPool;
 
 namespace NHD.GamePlay.InteractionEntity.FiringObject
 {
-    public class Arrow : FiringObject
+    public class Arrow : PoolableObjectBase
     {
-        public Transform target;
-        public float speed = 5.0f;
-        [SerializeField] Vector2[] path;
-        [SerializeField] private int pathIndex;
-        [SerializeField]
-        private Vector2 moveDir;
+        public Transform _target;
+        public float _speed = 5.0f;
+        [SerializeField] Vector2[] _path;
+        [SerializeField] private int _pathIndex;
+        [SerializeField] private Vector2 _moveDir;
 
         private void Awake()
         {
-            target = GameObject.FindWithTag("Player").transform;
+            _target = GameObject.FindWithTag("Player").transform;
         }
 
         private void OnEnable()
         {
             if (RequestAStarPath.instance == null) return;
 
-            RequestAStarPath.RequestPath(transform.position, target.position, AfterFindPath);
+            RequestAStarPath.RequestPath(transform.position, _target.position, AfterFindPath);
         }
 
         private void AfterFindPath(Vector2[] way, bool success)
         {
             if (!success) return;
 
-            path = way;
+            _path = way;
 
             StopAllCoroutines();
 
@@ -40,26 +40,26 @@ namespace NHD.GamePlay.InteractionEntity.FiringObject
 
         IEnumerator MoveToTarget()
         {
-            Vector2 curPos = path[0];
-            moveDir = curPos - (Vector2)transform.position;
-            transform.right = moveDir;
+            Vector2 curPos = _path[0];
+            _moveDir = curPos - (Vector2)transform.position;
+            transform.right = _moveDir;
 
             while (true)
             {
                 if ((Vector2)transform.position == curPos)
                 {
-                    pathIndex++;
-                    if (pathIndex >= path.Length)
+                    _pathIndex++;
+                    if (_pathIndex >= _path.Length)
                     {
                         StartCoroutine(MoveToEndPoint());
                         yield break;
                     }
-                    curPos = path[pathIndex];
-                    moveDir = curPos - (Vector2)transform.position;
-                    transform.right = moveDir;
+                    curPos = _path[_pathIndex];
+                    _moveDir = curPos - (Vector2)transform.position;
+                    transform.right = _moveDir;
                 }
 
-                transform.position = Vector2.MoveTowards(transform.position, curPos, speed * Time.deltaTime);
+                transform.position = Vector2.MoveTowards(transform.position, curPos, _speed * Time.deltaTime);
                 yield return null;
             }
 
@@ -69,7 +69,7 @@ namespace NHD.GamePlay.InteractionEntity.FiringObject
         {
             while (true)
             {
-                transform.position = Vector2.MoveTowards(transform.position, moveDir * 100, speed * Time.deltaTime);
+                transform.position = Vector2.MoveTowards(transform.position, _moveDir * 100, _speed * Time.deltaTime);
                 yield return null;
             }
         }
@@ -80,20 +80,19 @@ namespace NHD.GamePlay.InteractionEntity.FiringObject
             {
                 case "Player":
                     StopCoroutine("MoveToTarget");
-                    firePool.ReturnItem(this);
+                    InvokeReturnCall();
                     break;
                 case "Ground":
                     StopCoroutine("MoveToTarget");
-                    firePool.ReturnItem(this);
+                    InvokeReturnCall();
                     break;
             }
-
         }
 
 
         private void OnDisable()
         {
-            pathIndex = 0;
+            _pathIndex = 0;
         }
     }
 

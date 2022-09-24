@@ -1230,7 +1230,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 694177470edc9944795a4968ca63d196, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fireObjectPrefab: {fileID: 9218218575026779571, guid: 6927654df2e1d714d888dc748b76a6ac,
+  _fireObjectPrefab: {fileID: 9218218575026779568, guid: 6927654df2e1d714d888dc748b76a6ac,
     type: 3}
 --- !u!114 &4524641128926822513
 MonoBehaviour:
@@ -1244,9 +1244,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 368038baa7890a040a59c37047c23097, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  firePool: {fileID: 0}
-  bone: {fileID: 251564631647313218}
-  launchTime: 5
+  _bone: {fileID: 251564631647313218}
+  _launchTime: 1
 --- !u!1 &6699253338365943053
 GameObject:
   m_ObjectHideFlags: 0

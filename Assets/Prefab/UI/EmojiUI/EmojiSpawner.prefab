@@ -44,6 +44,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _emojiPrefab:
-  - {fileID: 4163994505233057908, guid: 5d73deda9aa30634aa67e1dc8b68a9a6, type: 3}
-  - {fileID: 4163994505233057908, guid: 81e10cc3e63341f47996cd74f0303e1a, type: 3}
+  - {fileID: 4163994505233057908, guid: eaef9351e7eb7e04180662c85d8eede7, type: 3}
+  - {fileID: 4163994505233057908, guid: bfd51c3741f280c4988f4af0177d5b80, type: 3}
+  - {fileID: 4163994505233057908, guid: 0285a44cf54c40545bfc9dba1eee31ba, type: 3}
+  - {fileID: 4163994505233057908, guid: ec02e7c9628eabd45b09ce7fa40e03e1, type: 3}
+  - {fileID: 4163994505233057908, guid: aa22d1388185c1a40a2462700ca2e591, type: 3}
+  - {fileID: 4163994505233057908, guid: df54fb036f43d6946a5f493232661daa, type: 3}
+  - {fileID: 4163994505233057908, guid: d6efbcd389705134495e9dcefdadcb6f, type: 3}
   _emojiOffsetInGame: {x: 1, y: 1}

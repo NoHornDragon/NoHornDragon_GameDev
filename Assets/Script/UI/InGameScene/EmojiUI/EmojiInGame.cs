@@ -1,14 +1,12 @@
 ﻿using UnityEngine;
-using System.Collections;
-using System;
+using NHD.GamePlay.ObjectPool;
 using DG.Tweening;
 
 namespace NHD.UI.EmojiUI
 {
-    public class EmojiInGame : MonoBehaviour
+    public class EmojiInGame : PoolableObjectBase
     {
         private Sequence _popupSequence;
-        public event Action<EmojiInGame> _returnToPoolCallbackEvent;
         [SerializeField] private int _emojiIndexInBackGround;
         public int _emojiIndex { get{ return _emojiIndexInBackGround; } }
 
@@ -30,8 +28,7 @@ namespace NHD.UI.EmojiUI
             .SetDelay(0.5f)
             .AppendInterval(2f)
             .OnComplete(()=>{
-                // Callback이 더 나은 방식으로 될 수 있는가?
-                _returnToPoolCallbackEvent?.Invoke(this);
+                InvokeReturnCall();
             });
         }
 
@@ -48,7 +45,7 @@ namespace NHD.UI.EmojiUI
 
         public void StopEmoji()
         {
-            _returnToPoolCallbackEvent?.Invoke(this);
+            InvokeReturnCall();
         }
     }
 }
