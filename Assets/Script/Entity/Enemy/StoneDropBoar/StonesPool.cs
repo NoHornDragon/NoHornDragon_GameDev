@@ -1,12 +1,13 @@
-﻿using System.Collections.Generic;
+﻿using NHD.GamePlay.ObjectPool;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace NHD.Entity.Enemy.stoneDropBoar
 {
-    public class StonesPool : MonoBehaviour
+    public class StonesPool : MonoBehaviour, IObjectPool
     {
         [SerializeField] private GameObject _stonePrefab;
-        public Queue<DropedStone> _stonesPoolQueue = new Queue<DropedStone>();
+        public Queue<PoolableObjectBase> _stonesPoolQueue = new Queue<PoolableObjectBase>();
 
         private void Awake()
         {
@@ -17,20 +18,11 @@ namespace NHD.Entity.Enemy.stoneDropBoar
         {
             for(int i = 0; i < initCount; i++)
             {
-                _stonesPoolQueue.Enqueue(CreateNewObject());
+                SupplyObjectPool();
             }
         }
 
-        private DropedStone CreateNewObject()
-        {
-            var newObject = Instantiate(_stonePrefab).GetComponent<DropedStone>();
-            newObject.gameObject.SetActive(false);
-            newObject.transform.SetParent(transform);
-            newObject._stonesPool = this;
-            return newObject;
-        }
-
-        public DropedStone GetObject()
+        public PoolableObjectBase GetObjectFromPool()
         {
             var obj = _stonesPoolQueue.Dequeue();
             obj.transform.SetParent(null);
@@ -38,11 +30,20 @@ namespace NHD.Entity.Enemy.stoneDropBoar
             return obj;
         }
 
-        public void ReturnObject(DropedStone obj)
+        public void ReturnObjectToPool(PoolableObjectBase obj)
         {
             obj.gameObject.SetActive(false);
             obj.transform.SetParent(transform);
             _stonesPoolQueue.Enqueue(obj);
+        }
+
+        public void SupplyObjectPool()
+        {
+            var newObject = Instantiate(_stonePrefab).GetComponent<PoolableObjectBase>();
+            newObject.gameObject.SetActive(false);
+            newObject.transform.SetParent(transform);
+            newObject._returnToPoolCallbackEvent += ReturnObjectToPool;
+            _stonesPoolQueue.Enqueue(newObject);
         }
     }
 }
