@@ -5,13 +5,12 @@ namespace NHD.GamePlay.BackGroundEffect
 {
     public class StageBackGroundManager : MonoBehaviour
     {
-        [SerializeField] private uint stageIndex;
-        private bool nowActive = true;
-        [SerializeField] Transform[] bgImages;
+        [SerializeField] private uint _stageIndex;
+        private bool _nowActive = true;
+        [SerializeField] private Transform[] _bgImages;
 
         private void Start()
         {
-            // bgImages = gameObject.GetComponentsInChildren<Transform>();
 
             PlayerEnterConfiner[] confiners = FindObjectsOfType<PlayerEnterConfiner>();
             foreach (PlayerEnterConfiner confiner in confiners)
@@ -19,7 +18,7 @@ namespace NHD.GamePlay.BackGroundEffect
                 confiner.ActiveRoomEvent += StageEvent;
             }
 
-            if (stageIndex != 1)
+            if (_stageIndex != 1)
                 ActiveBG(false);
         }
 
@@ -28,21 +27,21 @@ namespace NHD.GamePlay.BackGroundEffect
         /// </summary>
         private void StageEvent(uint playerStage, bool isIn)
         {
-            if (playerStage != stageIndex) return;
+            if (playerStage != _stageIndex) return;
 
             ActiveBG(isIn);
         }
 
         private void ActiveBG(bool isActive)
         {
-            if (nowActive == isActive) return;
+            if (_nowActive == isActive) return;
 
-            for (int i = 0; i < bgImages.Length; i++)
+            for (int i = 0; i < _bgImages.Length; i++)
             {
-                bgImages[i].gameObject.SetActive(isActive);
+                _bgImages[i].gameObject.SetActive(isActive);
             }
 
-            nowActive = isActive;
+            _nowActive = isActive;
         }
     }
 }
