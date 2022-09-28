@@ -12,11 +12,9 @@ namespace NHD.DataController.Loaders
     public class UIStringLoader : MonoBehaviour, IDataLoader
     {
         private string PATH;
-        private Encoding encode;
 
         private void Awake()
         {
-            Debug.Log(StaticSettingsData._languageIndex);
             CheckLanguage();
             LoadData();
         }
@@ -26,11 +24,9 @@ namespace NHD.DataController.Loaders
             switch (StaticSettingsData._languageIndex)
             {
                 case 0:
-                    encode = Encoding.GetEncoding("ks_c_5601-1987");
                     PATH = $"{Application.dataPath}/Resources/StaticData/UIStringData/STATIC_UI_STRING_KOR.json";
                     break;
                 case 1:
-                    encode = Encoding.UTF8;
                     PATH = $"{Application.dataPath}/Resources/StaticData/UIStringData/STATIC_UI_STRING_ENG.json";
                     break;
             }
@@ -39,7 +35,7 @@ namespace NHD.DataController.Loaders
         public void LoadData()
         {
             FileStream fs = new FileStream(PATH, FileMode.Open);
-            StreamReader sr = new StreamReader(fs, encode);
+            StreamReader sr = new StreamReader(fs, Encoding.UTF8);
             string stringData = sr.ReadToEnd();
 
             fs.Close();
