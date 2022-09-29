@@ -4918,12 +4918,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a237e4ed10c37384fb904f9c022d17c5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveAmount: 0.3
-  lockHorizontal: 0
-  lockVertical: 0
-  initialPos:
-    pos: {x: 0, y: 0, z: 0}
-  newPos: {x: 0, y: 0, z: 0}
+  _moveAmount: 0.3
+  _lockHorizontal: 0
+  _lockVertical: 0
 --- !u!212 &7409775
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -11843,7 +11840,6 @@ GameObject:
   m_Component:
   - component: {fileID: 26108974}
   - component: {fileID: 26108976}
-  - component: {fileID: 26108975}
   m_Layer: 0
   m_Name: 6
   m_TagString: Untagged
@@ -11865,24 +11861,6 @@ Transform:
   m_Father: {fileID: 849507053}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &26108975
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 26108973}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a237e4ed10c37384fb904f9c022d17c5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  moveAmount: 0
-  lockHorizontal: 0
-  lockVertical: 0
-  initialPos:
-    pos: {x: 0, y: 0, z: 0}
-  newPos: {x: 0, y: 0, z: 0}
 --- !u!212 &26108976
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -11977,12 +11955,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a237e4ed10c37384fb904f9c022d17c5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveAmount: 0.1
-  lockHorizontal: 0
-  lockVertical: 0
-  initialPos:
-    pos: {x: 0, y: 0, z: 0}
-  newPos: {x: 0, y: 0, z: 0}
+  _moveAmount: 0.1
+  _lockHorizontal: 0
+  _lockVertical: 0
 --- !u!212 &27744661
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -12513,7 +12488,6 @@ GameObject:
   m_Component:
   - component: {fileID: 568580034}
   - component: {fileID: 568580036}
-  - component: {fileID: 568580035}
   m_Layer: 0
   m_Name: 2
   m_TagString: Untagged
@@ -12535,24 +12509,6 @@ Transform:
   m_Father: {fileID: 849507053}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &568580035
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 568580033}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a237e4ed10c37384fb904f9c022d17c5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  moveAmount: 0
-  lockHorizontal: 0
-  lockVertical: 0
-  initialPos:
-    pos: {x: 0, y: 0, z: 0}
-  newPos: {x: 0, y: 0, z: 0}
 --- !u!212 &568580036
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -12647,12 +12603,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a237e4ed10c37384fb904f9c022d17c5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveAmount: 0.3
-  lockHorizontal: 0
-  lockVertical: 0
-  initialPos:
-    pos: {x: 0, y: 0, z: 0}
-  newPos: {x: 0, y: 0, z: 0}
+  _moveAmount: 0.3
+  _lockHorizontal: 0
+  _lockVertical: 0
 --- !u!212 &591913719
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -12880,8 +12833,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 461483d846a2065449c889a9505f4bd2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stageIndex: 1
-  bgImages:
+  _stageIndex: 1
+  _bgImages:
   - {fileID: 1699644850}
   - {fileID: 568580034}
   - {fileID: 1045098051}
@@ -13110,12 +13063,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a237e4ed10c37384fb904f9c022d17c5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveAmount: 0.2
-  lockHorizontal: 0
-  lockVertical: 0
-  initialPos:
-    pos: {x: 0, y: 0, z: 0}
-  newPos: {x: 0, y: 0, z: 0}
+  _moveAmount: 0.2
+  _lockHorizontal: 0
+  _lockVertical: 0
 --- !u!212 &1045098053
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -13902,7 +13852,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1699644850}
   - component: {fileID: 1699644852}
-  - component: {fileID: 1699644851}
   m_Layer: 0
   m_Name: 1
   m_TagString: Untagged
@@ -13924,24 +13873,6 @@ Transform:
   m_Father: {fileID: 849507053}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1699644851
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1699644849}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a237e4ed10c37384fb904f9c022d17c5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  moveAmount: 0
-  lockHorizontal: 0
-  lockVertical: 0
-  initialPos:
-    pos: {x: 0, y: 0, z: 0}
-  newPos: {x: 0, y: 0, z: 0}
 --- !u!212 &1699644852
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -22964,12 +22895,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a237e4ed10c37384fb904f9c022d17c5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveAmount: 0.5
-  lockHorizontal: 0
-  lockVertical: 0
-  initialPos:
-    pos: {x: 0, y: 0, z: 0}
-  newPos: {x: 0, y: 0, z: 0}
+  _moveAmount: 0.5
+  _lockHorizontal: 0
+  _lockVertical: 0
 --- !u!212 &2024294215
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -23064,12 +22992,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a237e4ed10c37384fb904f9c022d17c5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveAmount: 0.5
-  lockHorizontal: 0
-  lockVertical: 0
-  initialPos:
-    pos: {x: 0, y: 0, z: 0}
-  newPos: {x: 0, y: 0, z: 0}
+  _moveAmount: 0.5
+  _lockHorizontal: 0
+  _lockVertical: 0
 --- !u!212 &2085172322
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -23252,7 +23177,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e551121744e6d134592f86d4c5281c3e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
+  _player: {fileID: 0}
 --- !u!114 &2113049484
 MonoBehaviour:
   m_ObjectHideFlags: 0
