@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="NHD.Entity.Player.PlayerMovement">
+    <Position X="3.5" Y="0.75" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>ACREUAAAYiAoICIAUIAAEQAAERBQAEAACAAAEAAAAIQ=</HashCode>
+      <FileName>Assets\Script\Entity\Player\PlayerMovement.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NHD.Entity.Player.PlayerGrapher">
+    <Position X="1" Y="0.75" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAwAEAQEACCBADAAEAAAEAAKAIAUgIACAAAAAAMAEAA=</HashCode>
+      <FileName>Assets\Script\Entity\Player\PlayerGrapher.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NHD.Entity.Player.PlayerCollider">
+    <Position X="11.5" Y="0.75" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAIAAACiAAhAAAABAAAAAAGEAAAAABAAAAAACAAAA=</HashCode>
+      <FileName>Assets\Script\Entity\Player\PlayerCollider.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NHD.Entity.Player.PlayerAnimator">
+    <Position X="8.25" Y="0.75" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAAAAAAAAAAAAAABABAABQQAAAAACAEA=</HashCode>
+      <FileName>Assets\Script\Entity\Player\PlayerAnimator.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Malgun Gothic" Size="9" />
+</ClassDiagram>
