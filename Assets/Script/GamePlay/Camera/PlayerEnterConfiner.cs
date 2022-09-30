@@ -7,8 +7,8 @@ namespace NHD.GamePlay.Camera
     public class PlayerEnterConfiner : MonoBehaviour
     {
         public event Action<uint, bool> ActiveRoomEvent;
-        // [SerializeField] private float lensSize;
-        [SerializeField] private uint stageIndex;
+        [SerializeField] private uint _stageIndex;
+
         private void Start()
         {
             ActiveRoomEvent += FindObjectOfType<BackGroundScroller>().ChangeCameraPos;
@@ -19,8 +19,8 @@ namespace NHD.GamePlay.Camera
         {
             if (other.CompareTag("Player"))
             {
-                Debug.Log($"stage {stageIndex} - Enter");
-                ActiveRoomEvent?.Invoke(stageIndex, true);
+                // Debug.Log($"stage {stageIndex} - Enter");
+                ActiveRoomEvent?.Invoke(_stageIndex, true);
             }
         }
 
@@ -29,7 +29,7 @@ namespace NHD.GamePlay.Camera
             if (other.CompareTag("Player"))
             {
                 // Debug.Log($"stage {stageIndex} - Exit");
-                ActiveRoomEvent?.Invoke(stageIndex, false);
+                ActiveRoomEvent?.Invoke(_stageIndex, false);
             }
         }
     }
