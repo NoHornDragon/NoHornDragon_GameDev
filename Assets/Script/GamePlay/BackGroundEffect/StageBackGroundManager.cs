@@ -15,7 +15,7 @@ namespace NHD.GamePlay.BackGroundEffect
             PlayerEnterConfiner[] confiners = FindObjectsOfType<PlayerEnterConfiner>();
             foreach (PlayerEnterConfiner confiner in confiners)
             {
-                confiner.ActiveRoomEvent += StageEvent;
+                confiner._activeRoomEvent += StageEvent;
             }
 
             if (_stageIndex != 1)
