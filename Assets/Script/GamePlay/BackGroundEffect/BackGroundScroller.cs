@@ -27,7 +27,7 @@ namespace NHD.GamePlay.BackGroundEffect
             _playerMoveEvent?.Invoke(_initialPos.x - transform.position.x, _initialPos.y - transform.position.y);
         }
 
-        public void ChangeCameraPos(uint d, bool input)
+        public void ChangeCameraPos(int d, bool input)
         {
             // if(!input)  return;
 
