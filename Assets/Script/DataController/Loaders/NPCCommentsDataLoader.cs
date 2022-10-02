@@ -9,17 +9,17 @@ using UnityEngine;
 
 namespace NHD.DataController.Loaders
 {
-    public class NPCCommentsDataLoader : MonoBehaviour, IDataLoader
+    public class NPCCommentsDataLoader
     {
-        private string PATH;
+        private static string PATH;
 
-        private void Awake()
+        public static void SetupData()
         {
             CheckLanguage();
             LoadData();
         }
 
-        private void CheckLanguage()
+        private static void CheckLanguage()
         {
             switch (StaticSettingsData._languageIndex)
             {
@@ -32,7 +32,7 @@ namespace NHD.DataController.Loaders
             }
         }
 
-        public void LoadData()
+        private static void LoadData()
         {
             FileStream fs = new FileStream(PATH, FileMode.Open);
             StreamReader sr = new StreamReader(fs, Encoding.UTF8);
@@ -40,7 +40,7 @@ namespace NHD.DataController.Loaders
 
             fs.Close();
             sr.Close();
-            StaticNPCCommentData._staticNPCCommentData = JsonConvert.DeserializeObject<Dictionary<string, string>>(stringData);
+            StaticNPCCommentsData._staticNPCCommentsData = JsonConvert.DeserializeObject<Dictionary<string, string>>(stringData);
         }
     }
 }

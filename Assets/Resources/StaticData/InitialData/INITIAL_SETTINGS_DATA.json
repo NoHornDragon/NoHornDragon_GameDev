@@ -4,5 +4,5 @@
 	"bgm_volume":0.5,
 	"effect_volume":0.5,
 	"is_auto_save":false,
-	"is_easy_mode":true
+	"is_hard_mode":false
 }

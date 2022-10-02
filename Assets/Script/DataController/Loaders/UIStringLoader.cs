@@ -1,7 +1,7 @@
 ﻿using Newtonsoft.Json;
-using NHD.DataController.Common;
 using NHD.StaticData.Settings;
 using NHD.StaticData.UIString;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
@@ -9,17 +9,19 @@ using UnityEngine;
 
 namespace NHD.DataController.Loaders
 {
-    public class UIStringLoader : MonoBehaviour, IDataLoader
+    public class UIStringLoader
     {
-        private string PATH;
+        private static string PATH;
+        public static Action LanguageChangeAction;
 
-        private void Awake()
+        public static void SetupData()
         {
             CheckLanguage();
             LoadData();
+            LanguageChangeAction();
         }
 
-        private void CheckLanguage()
+        private static void CheckLanguage()
         {
             switch (StaticSettingsData._languageIndex)
             {
@@ -32,7 +34,7 @@ namespace NHD.DataController.Loaders
             }
         }
 
-        public void LoadData()
+        private static void LoadData()
         {
             FileStream fs = new FileStream(PATH, FileMode.Open);
             StreamReader sr = new StreamReader(fs, Encoding.UTF8);

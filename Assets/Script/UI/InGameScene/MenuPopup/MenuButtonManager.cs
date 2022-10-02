@@ -1,4 +1,4 @@
-﻿using NHD.UI.TitleScene.HistoryPopup;
+﻿using NHD.DataController.Savers;
 using NHD.Utils.SceneUtil;
 using System;
 using UnityEngine;
@@ -11,7 +11,6 @@ namespace NHD.UI.InGameScene.MenuPopup
         [SerializeField]
         private GameObject pausePanel;
         private bool isPausePanelOpen = false;
-
 
         public void Update()
         {
@@ -44,7 +43,7 @@ namespace NHD.UI.InGameScene.MenuPopup
         public void GameQuit()
         {
             Time.timeScale = 1.0f;
-            HistoryDataManager.instance.SaveHistoryData();
+            PlayHistoryDataSaver.SaveData();
 #if UNITY_EDITOR
             UnityEditor.EditorApplication.isPlaying = false;
 #else
@@ -54,8 +53,8 @@ namespace NHD.UI.InGameScene.MenuPopup
         public void GoToLobbyYes()
         {
             Time.timeScale = 1.0f;
-            HistoryDataManager.instance.SaveHistoryData();
-            SceneChanger.instance.ChangeScene("LobbyScene");
+            PlayHistoryDataSaver.SaveData();
+            SceneChanger._instance.ChangeScene("LobbyScene");
 
         }
     }

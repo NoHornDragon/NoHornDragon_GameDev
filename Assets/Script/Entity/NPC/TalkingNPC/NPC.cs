@@ -1,4 +1,4 @@
-﻿using NHD.Utils.SettingUtil;
+﻿using NHD.StaticData.Settings;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
@@ -112,12 +112,12 @@ namespace NHD.Entity.NPC.TalkingNPC
             {
                 if (visitCount >= npcTalks.npcTalksList[i].count)
                 {
-                    for (int j = 0; j < npcTalks.npcTalksList[i].talk[SettingsManager.instance.languageDropdown.value].Length; j++)
+                    for (int j = 0; j < npcTalks.npcTalksList[i].talk[StaticSettingsData._languageIndex].Length; j++)
                     {
-                        visitText.GetComponent<TextMeshPro>().text = npcTalks.npcTalksList[i].talk[SettingsManager.instance.languageDropdown.value].Substring(0, j);
+                        visitText.GetComponent<TextMeshPro>().text = npcTalks.npcTalksList[i].talk[StaticSettingsData._languageIndex].Substring(0, j);
                         yield return new WaitForSeconds(0.05f);
                     }
-                    visitText.GetComponent<TextMeshPro>().text = npcTalks.npcTalksList[i].talk[SettingsManager.instance.languageDropdown.value];
+                    visitText.GetComponent<TextMeshPro>().text = npcTalks.npcTalksList[i].talk[StaticSettingsData._languageIndex];
                     break;
                 }
             }

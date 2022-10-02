@@ -1,6 +1,5 @@
-﻿using NHD.StaticData.UIString;
-using System.Collections;
-using System.Collections.Generic;
+﻿using NHD.DataController.Loaders;
+using NHD.StaticData.UIString;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -10,15 +9,23 @@ public class UIString : MonoBehaviour
     private Text _uiText;
     
     // Start is called before the first frame update
-    void Start()
+    private void Awake()
     {
         _uiText = GetComponent<Text>();
-        _uiText.text = StaticUIString._staticUIString[_stringKey];
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Start()
     {
-        
+        SetText();
+    }
+
+    private void OnEnable()
+    {
+        UIStringLoader.LanguageChangeAction += SetText;
+    }
+
+    public void SetText()
+    {
+        _uiText.text = StaticUIString._staticUIString[_stringKey];
     }
 }

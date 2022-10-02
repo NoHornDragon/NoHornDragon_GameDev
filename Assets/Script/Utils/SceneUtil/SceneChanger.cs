@@ -7,65 +7,86 @@ namespace NHD.Utils.SceneUtil
 {
     public class SceneChanger : MonoBehaviour
     {
-        public static SceneChanger instance;
+        public static SceneChanger _instance;
 
-        [SerializeField]
-        private Image fadeImage;
+        [SerializeField] private Image _fadeImage;
 
-
-        private float tempA;
+        private Vector4 _destColor = new Vector4();
+        private float _tempA;
 
         public void Awake()
         {
-            if (instance == null)
+            if (_instance == null)
             {
-                instance = this;
+                _instance = this;
                 DontDestroyOnLoad(this.gameObject);
             }
             else
                 Destroy(this.gameObject);
         }
+
         public void Start()
         {
             FadeIn();
         }
+
         public void FadeIn()
         {
-            fadeImage.gameObject.SetActive(true);
+            _fadeImage.gameObject.SetActive(true);
             StartCoroutine(FadeInCoroutine());
         }
 
         IEnumerator FadeInCoroutine()
         {
-            tempA = 1.0f;
+            _tempA = 1.0f;
+
             for (int i = 0; i < 50; i++)
             {
-                tempA -= 0.02f;
-                fadeImage.color = new Vector4(0, 0, 0, tempA);
+                _tempA -= 0.02f;
+                _destColor.x = 0;
+                _destColor.y = 0;
+                _destColor.z = 0;
+                _destColor.w = _tempA;
+                _fadeImage.color = _destColor;
                 yield return null;
             }
-            fadeImage.color = new Vector4(0, 0, 0, 0);
-            fadeImage.gameObject.SetActive(false);
+
+            _destColor.x = 0;
+            _destColor.y = 0;
+            _destColor.z = 0;
+            _destColor.w = 0;
+            _fadeImage.color = _destColor;
+            _fadeImage.gameObject.SetActive(false);
         }
 
-        public void ChangeScene(string _sceneName)
+        public void ChangeScene(string sceneName)
         {
-            fadeImage.gameObject.SetActive(true);
-            StartCoroutine(ChangeSceneCoroutine(_sceneName));
+            _fadeImage.gameObject.SetActive(true);
+            StartCoroutine(ChangeSceneCoroutine(sceneName));
         }
 
-        IEnumerator ChangeSceneCoroutine(string _sceneName) // 페이드아웃과 씬 로드가 끝나면 페이드인
+        IEnumerator ChangeSceneCoroutine(string sceneName) // 페이드아웃과 씬 로드가 끝나면 페이드인
         {
-            tempA = 0.0f;
+            _tempA = 0.0f;
+
             for (int i = 0; i < 50; i++)
             {
-                tempA += 0.02f;
-                fadeImage.color = new Vector4(0, 0, 0, tempA);
+                _tempA += 0.02f;
+                _destColor.x = 0;
+                _destColor.y = 0;
+                _destColor.z = 0;
+                _destColor.w = _tempA;
+                _fadeImage.color = new Vector4(0, 0, 0, _tempA);
                 yield return null;
             }
-            fadeImage.color = new Vector4(0, 0, 0, 1);
-            fadeImage.gameObject.SetActive(false);
-            SceneManager.LoadScene(_sceneName);
+
+            _destColor.x = 0;
+            _destColor.y = 0;
+            _destColor.z = 0;
+            _destColor.w = 1;
+            _fadeImage.color = _destColor;
+            _fadeImage.gameObject.SetActive(false);
+            SceneManager.LoadScene(sceneName);
 
             FadeIn();
         }

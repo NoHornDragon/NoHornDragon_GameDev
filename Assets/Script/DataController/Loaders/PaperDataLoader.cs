@@ -7,17 +7,17 @@ using UnityEngine;
 
 namespace NHD.DataController.Loaders
 {
-    public class PaperDataLoader : MonoBehaviour, IDataLoader
+    public class PaperDataLoader
     {
-        private string PATH;
+        private static string PATH;
 
-        private void Awake()
+        public static void SetupData()
         {
             CheckLanguage();
             LoadData();
         }
 
-        private void CheckLanguage()
+        private static void CheckLanguage()
         {
             switch (StaticSettingsData._languageIndex)
             {
@@ -30,7 +30,7 @@ namespace NHD.DataController.Loaders
             }
         }
 
-        public void LoadData()
+        private static void LoadData()
         {
             FileStream fs = new FileStream(PATH, FileMode.Open);
             StreamReader sr = new StreamReader(fs, Encoding.UTF8);
