@@ -9,8 +9,6 @@ namespace NHD.UI.titleScene.settingsPopup
 {
     public class SettingsPopup : MonoBehaviour, IPopup
     {
-        private const int POPUP_LAYER = 1;
-
         [SerializeField] private GameObject _autoSaveAskingPopup;
         [SerializeField] private GameObject _dataResetAskingPopup;
         [SerializeField] private Dropdown _resolution;
@@ -48,28 +46,9 @@ namespace NHD.UI.titleScene.settingsPopup
             }
         }
 
-        private void Update()
-        {
-            CheckKeyInput();
-        }
-
-        public void CheckKeyInput()
-        {
-            OnInputEscKey();
-        }
-
-        private void OnInputEscKey()
-        {
-            if (Input.GetKeyUp(KeyCode.Escape) && PopupContainer._popupCount == POPUP_LAYER)
-            {
-                ClosePopup();
-            }
-        }
-
         public void ClosePopup()
         {
             SaveSettingsData();
-            PopupContainer.PopPopup();
             this.gameObject.SetActive(false);
         }
 

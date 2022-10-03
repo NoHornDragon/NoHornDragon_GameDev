@@ -19,9 +19,16 @@ namespace NHD.UI.titleScene
 
         private void OnInputEscKey()
         {
-            if (Input.GetKeyUp(KeyCode.Escape) && PopupContainer._popupCount == 0)
+            if (Input.GetKeyUp(KeyCode.Escape))
             {
-                OpenExitAskingPopup();
+                if (PopupContainer._popupContainer.Count == 0)
+                {
+                    OpenExitAskingPopup();
+                }
+                else
+                {
+                    PopupContainer.PopPopup();
+                }
             }
         }
 

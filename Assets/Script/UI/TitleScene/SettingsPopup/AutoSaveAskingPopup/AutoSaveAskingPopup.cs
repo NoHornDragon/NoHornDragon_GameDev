@@ -6,47 +6,35 @@ namespace NHD.UI.titleScene.settingsPopup.autoSaveAskingPopup
 {
     public class AutoSaveAskingPopup : MonoBehaviour, IPopup
     {
-        private const int POPUP_LAYER = 2;
+        private bool _isAgree;
 
         public void Setup()
         {
             this.gameObject.SetActive(true);
+            _isAgree = false;
         }
 
-        private void Update()
+        public void SetIsAgree(bool isAgree)
         {
-            CheckKeyInput();
+            _isAgree = isAgree;
         }
 
-        public void CheckKeyInput()
+        public void SetAutoSave()
         {
-            OnInputEscKey();
-        }
-
-        private void OnInputEscKey()
-        {
-            if(Input.GetKeyUp(KeyCode.Escape) && PopupContainer._popupCount == POPUP_LAYER)
+            if (_isAgree)
             {
-                SetAutoSaveFalse();
+                StaticSettingsData._isAutoSave = true;
             }
-        }
-
-        public void SetAutoSaveTrue()
-        {
-            StaticSettingsData._isAutoSave = true;
-            ClosePopup();
-        }
-
-        public void SetAutoSaveFalse()
-        {
-            SettingsPopup parentPopup = transform.GetComponentInParent<SettingsPopup>();
-            parentPopup._autoSave.isOn = false;
-            ClosePopup();
+            else
+            {
+                SettingsPopup parentPopup = transform.GetComponentInParent<SettingsPopup>();
+                parentPopup._autoSave.isOn = false;
+            }
         }
 
         public void ClosePopup()
         {
-            PopupContainer.PopPopup();
+            SetAutoSave();
             this.gameObject.SetActive(false);
         }
     }

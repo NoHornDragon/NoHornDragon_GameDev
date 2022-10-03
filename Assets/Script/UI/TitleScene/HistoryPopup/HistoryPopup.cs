@@ -9,7 +9,6 @@ namespace NHD.UI.titleScene.historyPopup
 {
     public class HistoryPopup : MonoBehaviour, IPopup
     {
-        private const int POPUP_LAYER = 1;
         private const int MAX_PAPER_SCROLLVIEW_PAGE = 2;
         private const int NODE_WIDTH = 280;
         private const int MOVE_VAL = 5;
@@ -69,22 +68,8 @@ namespace NHD.UI.titleScene.historyPopup
             _paperCount.text = $"{totalGetPaper} / {ENTIRE_PAPER_COUNT}";
         }
 
-        private void Update()
-        {
-            CheckKeyInput();
-        }
-
-        public void CheckKeyInput()
-        {
-            if (Input.GetKeyUp(KeyCode.Escape) && PopupContainer._popupCount == POPUP_LAYER)
-            {
-                ClosePopup();
-            }
-        }
-
         public void ClosePopup()
         {
-            PopupContainer.PopPopup();
             this.gameObject.SetActive(false);
         }
 

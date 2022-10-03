@@ -8,7 +8,6 @@ namespace NHD.UI.titleScene.historyPopup.descriptionPopup
 {
     public class DescriptionPopup : MonoBehaviour, IPopup
     {
-        private const int POPUP_LAYER = 2;
         private const float CLOSED_DESCRIPTION_POS_Y = -850;
         private const float OPEND_DESCRIPTION_POS_Y = 0;
 
@@ -90,22 +89,8 @@ namespace NHD.UI.titleScene.historyPopup.descriptionPopup
             return destPosY;
         }
 
-        private void Update()
-        {
-            CheckKeyInput();
-        }
-
-        public void CheckKeyInput()
-        {
-            if (Input.GetKeyUp(KeyCode.Escape) && PopupContainer._popupCount == POPUP_LAYER)
-            {
-                ClosePopup();
-            }
-        }
-
         public void ClosePopup()
         {
-            PopupContainer.PopPopup();
             StartCoroutine(PopupMovingCoroutine(false));
         }
     }
