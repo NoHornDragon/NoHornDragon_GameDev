@@ -88,7 +88,7 @@ namespace NHD.UI.titleScene.settingsPopup
 
         public void TurnOnAutoSave()
         {
-            if(_autoSave == true && StaticSettingsData._isAutoSave == false)
+            if(_autoSave == true && !StaticSettingsData._isAutoSave)
             {
                 PopupContainer.PushPopup(_autoSaveAskingPopup.GetComponent<IPopup>());
             }

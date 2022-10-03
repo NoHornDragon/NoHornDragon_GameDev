@@ -1,4 +1,5 @@
 ﻿using NHD.UI.Common;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,6 +10,7 @@ namespace NHD.UI.inGameScene
     {
 		[SerializeField] private GameObject _pausePopup;
 		public bool _isSceneLoading;
+		public event Action<bool> TimerSetEvent;
 
 		private void OnEnable()
 		{
@@ -34,11 +36,16 @@ namespace NHD.UI.inGameScene
 			{
 				if(PopupContainer._popupContainer.Count == 0)
 				{
+					TimerSetEvent?.Invoke(false);
 					OpenPausePopup();
 				}
 				else
 				{
 					PopupContainer.PopPopup();
+					if(PopupContainer._popupContainer.Count == 0)
+                    {
+						TimerSetEvent?.Invoke(true);
+					}
 				}
 			}
 		}

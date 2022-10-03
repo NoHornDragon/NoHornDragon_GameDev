@@ -7,7 +7,7 @@ using UnityEngine.UI;
 
 namespace NHD.UI.inGameScene.pausePopup
 {
-	public class PausePopup : MonoBehaviour, IPopup
+    public class PausePopup : MonoBehaviour, IPopup
     {
 		private const string TITLE_SCENE_PATH = "LobbyScene";
 
@@ -20,6 +20,7 @@ namespace NHD.UI.inGameScene.pausePopup
 
 		public void Setup()
 		{
+			this.gameObject.SetActive(true);
 			_isSceneLoading = transform.GetComponentInParent<InGameScene>()._isSceneLoading;
 			_bgmVolume.value = StaticSettingsData._bgmVolume;
 			_effectVolume.value = StaticSettingsData._effectVolume;
@@ -51,7 +52,7 @@ namespace NHD.UI.inGameScene.pausePopup
 
 		public void TurnOnAutoSave()
 		{
-			if (_autoSave == true && StaticSettingsData._isAutoSave == false)
+			if (_autoSave == true && !StaticSettingsData._isAutoSave)
 			{
 				PopupContainer.PushPopup(_autoSaveAskingPopup.GetComponent<IPopup>());
 			}
@@ -70,6 +71,7 @@ namespace NHD.UI.inGameScene.pausePopup
 
 		public void GoToTitleScene()
 		{
+			SaveSettingsData();
 			Time.timeScale = 1.0f;
 			_isSceneLoading = true;
 			SceneChangerSingleton._instance.ChangeSceneWithFadeOut(TITLE_SCENE_PATH);
