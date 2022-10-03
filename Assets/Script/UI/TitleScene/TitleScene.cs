@@ -11,11 +11,24 @@ namespace NHD.UI.titleScene
         [SerializeField] private GameObject _historyPopup;
         [SerializeField] private GameObject _settingsPopup;
         [SerializeField] private GameObject _exitAskingPopup;
+        private bool _isSceneLoading;
 
-        private void Update()
+		private void OnEnable()
+		{
+            _isSceneLoading = false;
+		}
+		private void Update()
         {
-            OnInputEscKey();
+            if (!_isSceneLoading)
+            {
+                CheckInputKey();
+            }
         }
+
+        private void CheckInputKey()
+		{
+            OnInputEscKey();
+		}
 
         private void OnInputEscKey()
         {
@@ -34,6 +47,7 @@ namespace NHD.UI.titleScene
 
         public void GameStart()
         {
+            _isSceneLoading = true;
             SceneChangerSingleton._instance.ChangeSceneWithFadeOut(GAME_SCENE_NAME);
         }
 
