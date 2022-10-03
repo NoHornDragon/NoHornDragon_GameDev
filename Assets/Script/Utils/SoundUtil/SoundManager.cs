@@ -1,4 +1,4 @@
-﻿using NHD.Utils.SettingUtil;
+﻿using NHD.StaticData.Settings;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.Audio;
@@ -49,12 +49,12 @@ namespace NHD.Utils.SoundUtil
 
         public void SetBGMVol()
         {
-            audioMixer.SetFloat("BGMVolume", Mathf.Log10(SettingsManager.instance.bgmSlider.value) * 20);
+            audioMixer.SetFloat("BGMVolume", Mathf.Log10(StaticSettingsData._bgmVolume) * 20);
         }
 
         public void SetEffectVol()
         {
-            audioMixer.SetFloat("SFXVolume", Mathf.Log10(SettingsManager.instance.effectSlider.value) * 20);
+            audioMixer.SetFloat("SFXVolume", Mathf.Log10(StaticSettingsData._bgmVolume) * 20);
         }
 
         public void PlayBGM(int _index, bool _isFade = true)
@@ -108,7 +108,7 @@ namespace NHD.Utils.SoundUtil
                     yield return new WaitForSeconds(0.1f);
                 }
                 audioSourceBGM.Stop();
-                audioSourceBGM.volume = SettingsManager.instance.effectSlider.value;
+                audioSourceBGM.volume = StaticSettingsData._effectVolume;
             }
 
             audioSourceBGM.volume = 0.0f;
@@ -116,10 +116,10 @@ namespace NHD.Utils.SoundUtil
             audioSourceBGM.Play();
             for (int i = 0; i < 20; i++)
             {
-                audioSourceBGM.volume = Mathf.Lerp(audioSourceBGM.volume, SettingsManager.instance.effectSlider.value, 0.1f);
+                audioSourceBGM.volume = Mathf.Lerp(audioSourceBGM.volume, StaticSettingsData._effectVolume, 0.1f);
                 yield return new WaitForSeconds(0.1f);
             }
-            audioSourceBGM.volume = SettingsManager.instance.effectSlider.value;
+            audioSourceBGM.volume = StaticSettingsData._effectVolume;
 
         }
 
@@ -131,7 +131,7 @@ namespace NHD.Utils.SoundUtil
                 yield return new WaitForSeconds(0.1f);
             }
             audioSourceBGM.Stop();
-            audioSourceBGM.volume = SettingsManager.instance.effectSlider.value;
+            audioSourceBGM.volume = StaticSettingsData._effectVolume;
         }
 
         /// <summary>
