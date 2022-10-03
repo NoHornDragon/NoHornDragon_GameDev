@@ -34,7 +34,7 @@ namespace NHD.UI.titleScene
 
         public void GameStart()
         {
-            SceneChanger._instance.ChangeScene(GAME_SCENE_NAME);
+            SceneChangerSingleton._instance.ChangeSceneWithFadeOut(GAME_SCENE_NAME);
         }
 
         public void OpenHistoryPopup()

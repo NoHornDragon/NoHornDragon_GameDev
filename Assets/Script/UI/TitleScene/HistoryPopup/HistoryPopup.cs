@@ -1,18 +1,20 @@
-﻿using NHD.StaticData.History;
+﻿
+using DG.Tweening;
+using NHD.StaticData.History;
 using NHD.UI.Common;
 using NHD.UI.titleScene.historyPopup.descriptionPopup;
-using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
 namespace NHD.UI.titleScene.historyPopup
 {
-    public class HistoryPopup : MonoBehaviour, IPopup
+	public class HistoryPopup : MonoBehaviour, IPopup
     {
         private const int MAX_PAPER_SCROLLVIEW_PAGE = 2;
         private const int NODE_WIDTH = 280;
         private const int MOVE_VAL = 5;
         private const int ENTIRE_PAPER_COUNT = 20;
+        private const float SCROLL_DURATION = 0.3f;
 
         [SerializeField] private Button[] _paperButtons;
         [SerializeField] private Text _paperCount;
@@ -21,11 +23,9 @@ namespace NHD.UI.titleScene.historyPopup
         [SerializeField] private Text _restartCount;
         [SerializeField] RectTransform _paperContents;
         [SerializeField] GameObject _desriptionPopup;
-        private Vector2 _destPos = new Vector2();
         private int _currentPage;
         private float _pos;
         private float _movePos;
-        private bool _isContentScrolling;
 
         public void Setup()
         {
@@ -38,10 +38,7 @@ namespace NHD.UI.titleScene.historyPopup
         private void SetDefaultValues()
         {
             _currentPage = 1;
-            _isContentScrolling = false;
-            _destPos.x = 0;
-            _destPos.y = _paperContents.localPosition.y;
-            _paperContents.localPosition = _destPos;
+            _paperContents.localPosition = Vector2.zero;
             _pos = 0;
         }
 
@@ -75,43 +72,28 @@ namespace NHD.UI.titleScene.historyPopup
 
         public void ContentMoveToLeft()
         {
-            if(_currentPage > 1 && !_isContentScrolling)
+            if(_currentPage > 1)
             {
-                _isContentScrolling = true;
-                _movePos = _pos + NODE_WIDTH * MOVE_VAL;
-                _pos = _movePos;
-                StartCoroutine(ScrollingMoveCoroutine());
+                SetDirection(false);
+                _paperContents.DOAnchorPosX(_movePos, SCROLL_DURATION);
                 --_currentPage;
             }
         }
 
         public void ContentMoveToRight()
         {
-            if(_currentPage < MAX_PAPER_SCROLLVIEW_PAGE && !_isContentScrolling)
+            if(_currentPage < MAX_PAPER_SCROLLVIEW_PAGE)
             {
-                _isContentScrolling = true;
-                _movePos = _pos - NODE_WIDTH * MOVE_VAL;
-                _pos = _movePos;
-                StartCoroutine(ScrollingMoveCoroutine());
+                SetDirection(true);
+                _paperContents.DOAnchorPosX(_movePos, SCROLL_DURATION);
                 ++_currentPage;
             }
         }
 
-        IEnumerator ScrollingMoveCoroutine()
-        {
-            float currentPositionX = _paperContents.localPosition.x;
-
-            for(int i = 0; i < 100; ++i)
-            {
-                _destPos.x = Mathf.Lerp(_paperContents.localPosition.x, _movePos, 0.1f);
-                _destPos.y = _paperContents.localPosition.y;
-                _paperContents.localPosition = _destPos;
-                yield return null;
-            }
-            _destPos.x = _movePos;
-            _destPos.y = _paperContents.localPosition.y;
-            _paperContents.localPosition = _destPos;
-            _isContentScrolling = false;
+        private void SetDirection(bool isRight)
+		{
+            _movePos = (isRight) ? _pos - NODE_WIDTH * MOVE_VAL : _pos + NODE_WIDTH * MOVE_VAL;
+            _pos = _movePos;
         }
 
         public void OpenDescriptionPopup(int paperIndex)

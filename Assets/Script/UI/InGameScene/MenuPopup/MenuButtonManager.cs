@@ -54,7 +54,7 @@ namespace NHD.UI.InGameScene.MenuPopup
         {
             Time.timeScale = 1.0f;
             PlayHistoryDataSaver.SaveData();
-            SceneChanger._instance.ChangeScene("LobbyScene");
+            SceneChangerSingleton._instance.ChangeSceneWithFadeOut("LobbyScene");
 
         }
     }
