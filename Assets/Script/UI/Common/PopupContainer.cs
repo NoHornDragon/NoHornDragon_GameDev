@@ -17,5 +17,13 @@ namespace NHD.UI.Common
         {
             _popupContainer.Pop().ClosePopup();
         }
+
+        public static void ClearStack()
+        {
+            while(!(_popupContainer.Count == 0))
+            {
+                _popupContainer.Pop();
+            }
+        }
     }
 }

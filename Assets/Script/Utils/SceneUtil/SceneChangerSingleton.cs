@@ -1,4 +1,5 @@
 ﻿using DG.Tweening;
+using NHD.UI.Common;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -52,6 +53,7 @@ namespace NHD.Utils.SceneUtil
 
         private void LoadScene()
 		{
+            PopupContainer.ClearStack();
             StartCoroutine(LoadSceneCoroutine());
 		}
 

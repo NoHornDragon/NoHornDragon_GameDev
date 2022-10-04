@@ -1,6 +1,8 @@
 ﻿using NHD.StaticData.Settings;
 using NHD.UI.Common;
+using NHD.UI.inGameScene.pausePopup;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace NHD.UI.titleScene.settingsPopup.autoSaveAskingPopup
 {
@@ -27,8 +29,16 @@ namespace NHD.UI.titleScene.settingsPopup.autoSaveAskingPopup
             }
             else
             {
-                SettingsPopup parentPopup = transform.GetComponentInParent<SettingsPopup>();
-                parentPopup._autoSave.isOn = false;
+                if(SceneManager.GetActiveScene().name == "LobbyScene")
+                {
+                    var parentPopup = transform.GetComponentInParent<SettingsPopup>();
+                    parentPopup._autoSave.isOn = false;
+                }
+                else
+                {
+                    var parentPopup = transform.GetComponentInParent<PausePopup>();
+                    parentPopup._autoSave.isOn = false;
+                }
             }
         }
 

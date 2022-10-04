@@ -1,5 +1,5 @@
 ﻿using NHD.GamePlay.BackGroundEffect;
-using NHD.UI.InGameScene.MenuPopup;
+using NHD.UI.inGameScene;
 using UnityEngine;
 
 namespace NHD.GamePlay.GameManager
@@ -14,7 +14,7 @@ namespace NHD.GamePlay.GameManager
 
         private void Start()
         {
-            FindObjectOfType<MenuButtonManager>().menuButtonEvent += SetTimerStatue;
+            FindObjectOfType<InGameScene>().TimerSetEvent += SetTimerStatue;
 
             seasonMaterial = FindObjectOfType<ParallaxSprite>().GetComponent<SpriteRenderer>().sharedMaterial;
         }

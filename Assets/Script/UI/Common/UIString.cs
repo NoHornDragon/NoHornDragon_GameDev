@@ -3,29 +3,37 @@ using NHD.StaticData.UIString;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class UIString : MonoBehaviour
+namespace NHD.UI.Common
 {
-    [SerializeField] private string _stringKey;
-    private Text _uiText;
-    
-    // Start is called before the first frame update
-    private void Awake()
+    public class UIString : MonoBehaviour
     {
-        _uiText = GetComponent<Text>();
-    }
+        [SerializeField] private string _stringKey;
+        private Text _uiText;
 
-    private void Start()
-    {
-        SetText();
-    }
+        // Start is called before the first frame update
+        private void Awake()
+        {
+            _uiText = GetComponent<Text>();
+        }
 
-    private void OnEnable()
-    {
-        UIStringLoader.LanguageChangeAction += SetText;
-    }
+        private void Start()
+        {
+            SetText();
+        }
 
-    public void SetText()
-    {
-        _uiText.text = StaticUIString._staticUIString[_stringKey];
+        private void OnEnable()
+        {
+            UIStringLoader.LanguageChangeAction += SetText;
+        }
+
+        private void OnDestroy()
+        {
+            UIStringLoader.LanguageChangeAction -= SetText;
+        }
+
+        public void SetText()
+        {
+            _uiText.text = StaticUIString._staticUIString[_stringKey];
+        }
     }
 }
