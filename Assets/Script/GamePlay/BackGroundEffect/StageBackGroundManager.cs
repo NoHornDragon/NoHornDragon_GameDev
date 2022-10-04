@@ -6,7 +6,7 @@ namespace NHD.GamePlay.BackGroundEffect
     public class StageBackGroundManager : MonoBehaviour
     {
         [SerializeField] private uint _stageIndex;
-        private bool _nowActive = true;
+        [SerializeField] private bool _nowActive = true;
         [SerializeField] private Transform[] _bgImages;
 
         private void Start()

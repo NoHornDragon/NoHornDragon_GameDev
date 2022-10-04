@@ -29,8 +29,6 @@ namespace NHD.GamePlay.BackGroundEffect
 
         public void ChangeCameraPos(int d, bool input)
         {
-            // if(!input)  return;
-
             _initialPos = _player.position;
         }
     }

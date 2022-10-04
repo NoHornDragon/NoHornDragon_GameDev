@@ -21,8 +21,6 @@ namespace NHD.GamePlay.Camera
         /// <param name="isIn">플레이어가 들어오면 true, 아니면 false</param>
         public void StageChange(int inputStageNumber, bool isIn)
         {
-            Debug.Log($"stage : {inputStageNumber}, is {isIn}");
-
             int index = inputStageNumber - 1;
 
             if (isIn)
