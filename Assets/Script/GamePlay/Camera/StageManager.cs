@@ -5,7 +5,6 @@ namespace NHD.GamePlay.Camera
     public class StageManager : MonoBehaviour
     {
         [SerializeField] private GameObject[] _stageList;
-        [SerializeField] private int _prevStageNumber;
 
         private void Awake()
         {
@@ -13,7 +12,6 @@ namespace NHD.GamePlay.Camera
             {
                _stageList[i].SetActive(false);
             }
-            _prevStageNumber = 1;
         }
 
 
