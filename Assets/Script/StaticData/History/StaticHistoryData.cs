@@ -6,7 +6,8 @@ namespace NHD.StaticData.History
     public class StaticHistoryData : MonoBehaviour
     {
         public static PaperNode[] _nodes;
-        public static int _totlaPlayTime;
+        public static bool[] _isGetPapers;
+        public static int _totalPlayTime;
         public static int _restartCount;
         public static int _stunCount;
     }

@@ -6,11 +6,11 @@ using UnityEngine;
 
 namespace NHD.DataController.Loaders
 {
-    public class SettingsDataLoader : MonoBehaviour, IDataLoader
+    public class SettingsDataLoader : IDataLoader
     {
-        private string PATH;
+        private static string PATH;
 
-        private void Awake()
+        public void SetupData()
         {
             PATH = $"{Application.persistentDataPath}/SettingsData.json";
             LoadData();
@@ -29,22 +29,26 @@ namespace NHD.DataController.Loaders
             string jsonData = Encoding.UTF8.GetString(data);
             SettingsJsonConstruct settingsJsonData = JsonUtility.FromJson<SettingsJsonConstruct>(jsonData);
 
-            SetupData(settingsJsonData);
+            ApplyStaticData(settingsJsonData);
         }
 
         private void FileCheck()
         {
             if (!File.Exists(PATH))
             {
-                FileStream fs = new FileStream(PATH, FileMode.Create);
-                byte[] data = ReturnByteCodeInitialData();
-                fs.Write(data, 0, data.Length);
-                fs.Close();
-
+                InitializeData();
                 return;
             }
 
             return;
+        }
+
+        public void InitializeData()
+        {
+            FileStream fs = new FileStream(PATH, FileMode.Create);
+            byte[] data = ReturnByteCodeInitialData();
+            fs.Write(data, 0, data.Length);
+            fs.Close();
         }
 
         private byte[] ReturnByteCodeInitialData()
@@ -57,14 +61,14 @@ namespace NHD.DataController.Loaders
             return data;
         }
 
-        private void SetupData(SettingsJsonConstruct settingsJsonData)
+        private void ApplyStaticData(SettingsJsonConstruct settingsJsonData)
         {
             StaticSettingsData._languageIndex = settingsJsonData.language_index;
             StaticSettingsData._resolutionIndex = settingsJsonData.resolution_index;
             StaticSettingsData._bgmVolume = settingsJsonData.bgm_volume;
             StaticSettingsData._effectVolume = settingsJsonData.effect_volume;
             StaticSettingsData._isAutoSave = settingsJsonData.is_auto_save;
-            StaticSettingsData._isEasyMode = settingsJsonData.is_easy_mode;
+            StaticSettingsData._isHardMode = settingsJsonData.is_hard_mode;
         }
     }
 }
