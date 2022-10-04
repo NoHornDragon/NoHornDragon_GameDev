@@ -6,7 +6,7 @@ namespace NHD.GamePlay.BackGroundEffect
     public class StageBackGroundManager : MonoBehaviour
     {
         [SerializeField] private uint _stageIndex;
-        private bool _nowActive = true;
+        [SerializeField] private bool _nowActive = true;
         [SerializeField] private Transform[] _bgImages;
 
         private void Start()
@@ -25,7 +25,7 @@ namespace NHD.GamePlay.BackGroundEffect
         /// <summary>
         /// 활성화된 스테이지와 플레이어의 현재 스테이지가 맞지 않는 경우 배경 처리를 합니다.
         /// </summary>
-        private void StageEvent(uint playerStage, bool isIn)
+        private void StageEvent(int playerStage, bool isIn)
         {
             if (playerStage != _stageIndex) return;
 
