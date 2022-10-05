@@ -20,6 +20,7 @@ namespace NHD.Utils.SoundUtil
         [SerializeField] private AudioClip[] _efxSoundsData;
         private Dictionary<string, AudioClip> _bgmSounds = new Dictionary<string, AudioClip>();
         private Dictionary<string, AudioClip> _efxSounds = new Dictionary<string, AudioClip>();
+        private List<string> _bgmNames = new List<string>();
 
         private void Awake()
         {
@@ -49,6 +50,7 @@ namespace NHD.Utils.SoundUtil
             foreach(var bgmSound in _bgmSoundsData)
 			{
                 _bgmSounds[bgmSound.name] = bgmSound;
+                _bgmNames.Add(bgmSound.name);
 			}
             foreach(var efxSound in _efxSoundsData)
 			{
@@ -79,6 +81,17 @@ namespace NHD.Utils.SoundUtil
             _audioSourceBGM.Play();
         }
 
+        public void PlayRandomBGM()
+        {
+            int bgmIndex = Random.Range(0, _bgmNames.Count);
+            _audioSourceBGM.clip = _bgmSounds[_bgmNames[bgmIndex]];
+            _audioSourceBGM.DOFade(0.0f, 0.5f)
+            .OnComplete(delegate () { 
+                _audioSourceBGM.Play(); 
+                _audioSourceBGM.DOFade(1.0f, 0.5f).SetEase(Ease.Linear); 
+            }).SetEase(Ease.Linear);
+        }
+
         /// <summary>
         /// 현재 실행중인 BGM 중지
         /// </summary>
@@ -87,7 +100,11 @@ namespace NHD.Utils.SoundUtil
         {
             if (isFade)
             {
-                _audioSourceBGM.DOFade(0.0f, 0.5f).OnComplete(delegate () { _audioSourceBGM.volume = 1.0f; _audioSourceBGM.Stop(); });
+                _audioSourceBGM.DOFade(0.0f, 0.5f)
+                .OnComplete(delegate () { 
+                    _audioSourceBGM.volume = 1.0f; 
+                    _audioSourceBGM.Stop(); 
+                });
             }
             else
             {
