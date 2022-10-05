@@ -6,20 +6,19 @@ using UnityEngine;
 
 namespace NHD.DataController.Loaders
 {
-    public class PlayHistoryLoader : MonoBehaviour, IDataLoader
+    public class PlayHistoryLoader : IDataLoader
     {
-        private string PATH;
+        private static string PATH;
 
-        private void Awake()
+        public void SetupData()
         {
             PATH = $"{Application.persistentDataPath}/PlayHistoryData.json";
+            FileCheck();
             LoadData();
         }
 
         public void LoadData()
         {
-            FileCheck();
-
             FileStream fs = new FileStream(PATH, FileMode.Open);
             byte[] data = new byte[fs.Length];
 
@@ -29,22 +28,26 @@ namespace NHD.DataController.Loaders
             string jsonData = Encoding.UTF8.GetString(data);
             PlayHistoryJsonConstruct playHistoryJsonData = JsonUtility.FromJson<PlayHistoryJsonConstruct>(jsonData);
 
-            SetupData(playHistoryJsonData);
+            ApplyStaticData(playHistoryJsonData);
         }
 
         private void FileCheck()
         {
             if (!File.Exists(PATH))
             {
-                FileStream fs = new FileStream(PATH, FileMode.Create);
-                byte[] data = ReturnByteCodeInitialData();
-                fs.Write(data, 0, data.Length);
-                fs.Close();
-
+                InitializeData();
                 return;
             }
 
             return;
+        }
+
+        public void InitializeData()
+        {
+            FileStream fs = new FileStream(PATH, FileMode.Create);
+            byte[] data = ReturnByteCodeInitialData();
+            fs.Write(data, 0, data.Length);
+            fs.Close();
         }
 
         private byte[] ReturnByteCodeInitialData()
@@ -57,9 +60,10 @@ namespace NHD.DataController.Loaders
             return data;
         }
 
-        private void SetupData(PlayHistoryJsonConstruct playHistoryJsonData)
+        private void ApplyStaticData(PlayHistoryJsonConstruct playHistoryJsonData)
         {
-            StaticHistoryData._totlaPlayTime = playHistoryJsonData.total_play_time;
+            StaticHistoryData._isGetPapers = playHistoryJsonData.is_get_papers;
+            StaticHistoryData._totalPlayTime = playHistoryJsonData.total_play_time;
             StaticHistoryData._restartCount = playHistoryJsonData.restart_count;
             StaticHistoryData._stunCount = playHistoryJsonData.stun_count;
         }

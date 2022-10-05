@@ -6,6 +6,7 @@ namespace NHD.StaticData.History
 {
     public class PlayHistoryJsonConstruct
     {
+        public bool[] is_get_papers;
         public int total_play_time;
         public int restart_count;
         public int stun_count;

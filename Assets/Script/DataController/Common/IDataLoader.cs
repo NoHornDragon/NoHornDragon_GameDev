@@ -3,5 +3,6 @@
     interface IDataLoader
     {
         void LoadData();
+        void SetupData();
     }
 }
