@@ -1,5 +1,5 @@
 ﻿using NHD.Entity.Player;
-using NHD.Utils.SettingUtil;
+using NHD.StaticData.Settings;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
@@ -74,7 +74,7 @@ namespace NHD.UI.InGameScene
             // And will disappear automatically
             if (!isActive) return;
 
-            wiseSayingText.text = wiseSayingTexts.texts[Random.Range(0, wiseSayingTexts.texts.Count)].wiseSay[SettingsManager.instance.languageDropdown.value];
+            wiseSayingText.text = wiseSayingTexts.texts[Random.Range(0, wiseSayingTexts.texts.Count)].wiseSay[StaticSettingsData._languageIndex];
             wiseSayingUI.SetActive(true);
 
         }

@@ -8,123 +8,52 @@ namespace NHD.GamePlay.BackGroundEffect
         [Header("스크롤링 되는 정도")]
         [SerializeField]
         [Tooltip("최대 0.5 까지 움직이는 정도를 설정할 수 있습니다. 0이면 움직임 X.")]
-        [Range(0, 0.5f)] private float moveAmount;
+        [Range(0, 0.5f)] private float _moveAmount;
 
         [Header("상하좌우 이동 잠그는 여부")]
         [Tooltip("체크하면 좌우 이동을 하지 않습니다.")]
-        [SerializeField] private bool lockHorizontal;
+        [SerializeField] private bool _lockHorizontal;
         [Tooltip("체크하면 상하 이동을 하지 않습니다.")]
-        [SerializeField] private bool lockVertical;
-        bool canMove = true;
-        [SerializeField] private SavePos initialPos;
-        [SerializeField] Vector3 newPos;
-
+        [SerializeField] private bool _lockVertical;
+        private Vector2 _initialPos;
+        private Vector2 _newPos;
+        private BackGroundScroller _bgScroller;
+        
         private void Awake()
         {
-            initialPos = new SavePos(this.transform.position);
+            _initialPos = transform.localPosition;
+            _bgScroller = FindObjectOfType<BackGroundScroller>();
         }
 
         private void OnEnable()
         {
-            FindObjectOfType<BackGroundScroller>().playerMoveEvent += MoveLayer;
-            // Debug.Log($"구독 onenable");
+            transform.localPosition = _initialPos;
+            _bgScroller._playerMoveEvent += MoveLayer;
         }
 
         private void OnDisable()
         {
-            initialPos = new SavePos(this.transform.position);
-            FindObjectOfType<BackGroundScroller>().playerMoveEvent -= MoveLayer;
-            // Debug.Log($"구독 취소 ondisable");
-        }
-
-        private void OnDestroy()
-        {
-            FindObjectOfType<BackGroundScroller>().playerMoveEvent -= MoveLayer;
-            Debug.Log($"구독 취소 ondestroy");
+            _initialPos = transform.localPosition;
+            _bgScroller._playerMoveEvent -= MoveLayer;
         }
 
         void MoveLayer(float inputX, float inputY)
         {
-            if (!canMove) return;
+            if (!_lockHorizontal)   _newPos.x = _initialPos.x - (inputX * _moveAmount);
+            if (!_lockVertical)     _newPos.y = _initialPos.y - (inputY * _moveAmount);
 
-            if (!lockHorizontal) newPos.x = initialPos.pos.x - (inputX * moveAmount);
-            if (!lockVertical) newPos.y = initialPos.pos.y - (inputY * moveAmount);
-
-            transform.localPosition = newPos;
+            transform.localPosition = _newPos;
         }
     }
-
-
-    /*
-    public class ParallaxSprite : MonoBehaviour
-    {
-
-        [Header("스크롤링 되는 정도")]
-        [SerializeField] 
-        [Tooltip("최대 0.5 까지 움직이는 정도를 설정할 수 있습니다. 0이면 움직임 X.")]
-        [Range(0, 0.5f)]private float moveAmount;
-
-        [Header("상하좌우 이동 잠그는 여부")]
-        [Tooltip("체크하면 좌우 이동을 하지 않습니다.")]
-        [SerializeField] private bool lockHorizontal;
-        [Tooltip("체크하면 상하 이동을 하지 않습니다.")]
-        [SerializeField] private bool lockVertical;
-        private Vector3 newPosition;
-
-        [SerializeField] private Vector3 savePos;
-        bool canMove = true;
-
-        // 2. SavePositions
-        bool prevSaved, forwardSaved;
-        SavePos prevPos;
-        SavePos forwardPos;
-        // 1.
-        SavePos InitPos;
-
-        private void Awake()
-        {
-            savePos = transform.position;
-            if (moveAmount == 0)
-                Destroy(GetComponent<ParallaxSprite>());
-
-            InitPos = new SavePos(GameObject.FindWithTag("Player").transform.position);
-        }
-
-        private void OnEnable()
-        {
-            FindObjectOfType<BackGroundScroller>().playerMoveEvent += MoveLayer;
-            transform.position = savePos;
-
-            StartCoroutine(Delay());
-        }
-
-        private void OnDisable()
-        {
-            FindObjectOfType<BackGroundScroller>().playerMoveEvent -= MoveLayer;
-
-            savePos = transform.position;
-            canMove = false;
-        }
-
-        IEnumerator Delay()
-        {
-            yield return null;
-
-            canMove = true;
-        }
-
-        void MoveLayer(float x, float y)
-        {
-            if (!canMove) return;
-
-            newPosition = transform.localPosition;
-            if(!lockHorizontal)   newPosition.x -= x * moveAmount;
-            if(!lockVertical)     newPosition.y -= y * moveAmount;
-
-            transform.localPosition = newPosition;
-        }
-    }
-
-
-    */
 }
+/*
+현재 문제
+- 새 스테이지 진입
+- 카메라의 initial position이 달라짐
+- 아직 기존 배경은 구독중임
+- 구독으로 인해서 새 카메라의 initial position으로 계산이 되기 시작함
+- 그래서 confiner를 한번에 움직이는게 아니면 힘들어 지는 것
+
+해결법
+- confiner를 인게임에서 떨어뜨려 놓는다
+*/

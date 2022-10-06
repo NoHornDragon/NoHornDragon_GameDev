@@ -5,60 +5,45 @@ namespace NHD.GamePlay.Camera
 {
     public class PlayerMoveCamera : MonoBehaviour
     {
-        private PlayerMovement player;
-        private Vector3 originPos = new Vector3(0, 0, 0);
-        [SerializeField] private float cameraMoveAmount;
-
-        [SerializeField]
-        [Range(0, 0.3f)]
-        private float cameraMoveSpeed;
-        private Vector3 nowInput = new Vector3(0, 0, 0);
-        private bool initialized;
+        private PlayerMovement _player;
+        [SerializeField] private float _cameraMoveAmount;
+        [SerializeField] [Range(0, 0.3f)]
+        private float _cameraMoveSpeed;
+        [SerializeField] private Vector3 _nowInput = new Vector3(0, 0, 0);
 
         private void Start()
         {
-            player = transform.parent.GetComponent<PlayerMovement>();
+            _player = transform.parent.GetComponent<PlayerMovement>();
         }
 
         private void Update()
         {
-            if (!player.onGround || player.nowJoint)
+            if (!_player.onGround || _player.nowJoint)
             {
-                SetInitialState();
+                CameraReturnToPlayer();
                 return;
             }
 
-            nowInput.x = Input.GetAxis("Horizontal");
-            nowInput.y = Input.GetAxis("Vertical");
+            _nowInput.x = Input.GetAxis("Horizontal");
+            _nowInput.y = Input.GetAxis("Vertical");
 
-            if (nowInput.x == 0 && nowInput.y == 0)
+            if (_nowInput.x == 0 && _nowInput.y == 0)
             {
-                SetInitialState();
+                CameraReturnToPlayer();
                 return;
             }
 
-            initialized = false;
-
-            if (Mathf.Abs(transform.localPosition.x) > cameraMoveAmount)
-                nowInput.x = 0;
-            if (Mathf.Abs(transform.localPosition.y) > cameraMoveAmount)
-                nowInput.y = 0;
-
-            this.transform.localPosition += nowInput * cameraMoveSpeed;
+            if (Mathf.Abs(transform.localPosition.x) > _cameraMoveAmount)
+                _nowInput.x = 0;
+            if (Mathf.Abs(transform.localPosition.y) > _cameraMoveAmount)
+                _nowInput.y = 0;
+                
+            this.transform.localPosition += _nowInput * _cameraMoveSpeed;
         }
 
-        private void SetInitialState()
+        private void CameraReturnToPlayer()
         {
-            if (initialized) return;
-
-            transform.localPosition = Vector3.zero;
-            nowInput = Vector3.zero;
-            initialized = true;
+            transform.localPosition = Vector2.MoveTowards(transform.localPosition, Vector2.zero, _cameraMoveSpeed);
         }
     }
-
-    /*
-    - 입력이 있는가 -> 움직일 수 있는가? -> 벗어나진 않았는가 -> 움직인다!
-    - 입력이 없으면 -> 초기화
-    */
 }

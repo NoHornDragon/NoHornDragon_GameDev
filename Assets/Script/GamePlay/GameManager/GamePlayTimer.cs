@@ -1,5 +1,5 @@
 ﻿using NHD.GamePlay.BackGroundEffect;
-using NHD.UI.InGameScene.MenuPopup;
+using NHD.UI.inGameScene;
 using UnityEngine;
 
 namespace NHD.GamePlay.GameManager
@@ -7,37 +7,37 @@ namespace NHD.GamePlay.GameManager
     public class GamePlayTimer : MonoBehaviour
     {
         [SerializeField]
-        private float playTime = 0.0f;
-        private bool timerActive = true;
+        private float _playTime = 0.0f;
+        private bool _timerActive = true;
         [SerializeField]
-        private Material seasonMaterial;
+        private Material _seasonMaterial;
 
         private void Start()
         {
-            FindObjectOfType<MenuButtonManager>().menuButtonEvent += SetTimerStatue;
+            FindObjectOfType<InGameScene>().TimerSetEvent += SetTimerStatue;
 
-            seasonMaterial = FindObjectOfType<ParallaxSprite>().GetComponent<SpriteRenderer>().sharedMaterial;
+            _seasonMaterial = FindObjectOfType<ParallaxSprite>().GetComponent<SpriteRenderer>().sharedMaterial;
         }
 
         public void SetTimerStatue(bool isActive)
         {
-            timerActive = isActive;
+            _timerActive = isActive;
         }
 
         public float GetPlayTime()
         {
-            return playTime;
+            return _playTime;
         }
 
         private void Update()
         {
-            if (!timerActive) return;
+            if (!_timerActive) return;
 
-            playTime += Time.deltaTime;
+            _playTime += Time.deltaTime;
 
-            // float materialValue = Mathf.Sin(playTime * 0.003f);
+            // float materialValue = Mathf.Sin(_playTime * 0.003f);
             // materialValue = Mathf.Abs(materialValue);
-            seasonMaterial.SetFloat("_SeasonValue", playTime);
+            _seasonMaterial.SetFloat("_SeasonValue", _playTime);
         }
 
     }
