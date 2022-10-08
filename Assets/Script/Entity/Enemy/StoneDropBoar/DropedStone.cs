@@ -5,7 +5,7 @@ namespace NHD.Entity.Enemy.stoneDropBoar
 {
     public class DropedStone : PoolableObjectBase
     {
-        private void Start()
+        private void OnEnable()
         {
             Invoke("DestroyStone", 10f);
         }
