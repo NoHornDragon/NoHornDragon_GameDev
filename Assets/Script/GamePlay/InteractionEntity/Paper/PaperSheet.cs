@@ -1,4 +1,6 @@
 ﻿using DG.Tweening;
+using NHD.DataController.Savers;
+using NHD.StaticData.History;
 using NHD.UI.InGameScene;
 using System;
 using UnityEngine;
@@ -57,6 +59,10 @@ namespace NHD.GamePlay.InteractionEntity.Paper
             playerGetThis = true;
             paperGetEvent?.Invoke();
 
+
+            // TODO : 이렇게 수정
+            StaticHistoryData._isGetPapers[paperIndex] = true;
+            PlayHistoryDataSaver.SaveData();
             // TODO : 플레이어 이후 수정
             // HistoryDataManager.instance.SetPaperTrue(paperIndex);
 
