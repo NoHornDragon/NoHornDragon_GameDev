@@ -6,7 +6,7 @@ namespace NHD.UI.titleScene
 {
     public class TitleScene : MonoBehaviour
     {
-        private const string GAME_SCENE_NAME = "Dev_husk";
+        private const string GAME_SCENE_NAME = "SingleGamePlay";
 
         [SerializeField] private GameObject _historyPopup;
         [SerializeField] private GameObject _settingsPopup;

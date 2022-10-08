@@ -2,6 +2,7 @@
 using NHD.StaticData.Settings;
 using NHD.UI.Common;
 using NHD.Utils.SceneUtil;
+using NHD.Utils.SoundUtil;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -43,11 +44,13 @@ namespace NHD.UI.inGameScene.pausePopup
 		public void ChangeBGMVolume()
 		{
 			StaticSettingsData._bgmVolume = _bgmVolume.value;
+			SoundManager._instance.SetBGMVolume(_bgmVolume.value);
 		}
 
 		public void ChangeEffectVolume()
 		{
 			StaticSettingsData._effectVolume = _effectVolume.value;
+			SoundManager._instance.SetEFXVolume(_effectVolume.value);
 		}
 
 		public void TurnOnAutoSave()
