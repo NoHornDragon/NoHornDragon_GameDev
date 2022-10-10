@@ -18,9 +18,6 @@ namespace NHD.Utils.SoundUtil
         [SerializeField] private AudioMixer _audioMixer;
         [SerializeField] private AudioClip[] _bgmSoundsData;
         [SerializeField] private AudioClip[] _efxSoundsData;
-        private Dictionary<string, AudioClip> _bgmSounds = new Dictionary<string, AudioClip>();
-        private Dictionary<string, AudioClip> _efxSounds = new Dictionary<string, AudioClip>();
-        private List<string> _bgmNames = new List<string>();
 
         private void Awake()
         {
@@ -42,21 +39,7 @@ namespace NHD.Utils.SoundUtil
         {
             SetBGMVolume(StaticSettingsData._bgmVolume);
             SetEFXVolume(StaticSettingsData._effectVolume);
-            SetDictionary();
         }
-
-        private void SetDictionary()
-		{
-            foreach(var bgmSound in _bgmSoundsData)
-			{
-                _bgmSounds[bgmSound.name] = bgmSound;
-                _bgmNames.Add(bgmSound.name);
-			}
-            foreach(var efxSound in _efxSoundsData)
-			{
-                _efxSounds[efxSound.name] = efxSound;
-			}
-		}
 
         public void SetBGMVolume(float volume)
 		{
@@ -68,9 +51,9 @@ namespace NHD.Utils.SoundUtil
             _audioMixer.SetFloat("SFXVolume", Mathf.Log10(volume) * 20);
 		}
 
-        public void PlayBGM(string name, bool isFade = true)
+        public void PlayBGM(AudioClip audioClip, bool isFade = true)
         {
-            _audioSourceBGM.clip = _bgmSounds[name];
+            _audioSourceBGM.clip = audioClip;
             if (isFade) // Fade와 함께 bgm 실행
             {
                 _audioSourceBGM.volume = 0.0f;
@@ -81,10 +64,10 @@ namespace NHD.Utils.SoundUtil
             _audioSourceBGM.Play();
         }
 
-        public void PlayRandomBGM()
+        public void PlayRandomBGM(List<AudioClip> audioClips)
         {
-            int bgmIndex = Random.Range(0, _bgmNames.Count);
-            _audioSourceBGM.clip = _bgmSounds[_bgmNames[bgmIndex]];
+            int bgmIndex = Random.Range(0, audioClips.Count);
+            _audioSourceBGM.clip = audioClips[bgmIndex];
             _audioSourceBGM.DOFade(0.0f, 0.5f)
             .OnComplete(delegate () { 
                 _audioSourceBGM.Play(); 
@@ -116,13 +99,13 @@ namespace NHD.Utils.SoundUtil
         /// 효과음을 재생
         /// </summary>
         /// <param name="name"></param>
-        public void PlayEFX(string name, Vector3 position)
+        public void PlayEFX(AudioClip audioClip, Vector3 position)
         {
             foreach(var audioSourceEFX in _audioSourcesEFX)
 			{
 				if (!audioSourceEFX.isPlaying)
 				{
-                    audioSourceEFX.clip = _efxSounds[name];
+                    audioSourceEFX.clip = audioClip;
                     AudioSource.PlayClipAtPoint(audioSourceEFX.clip, position);
 				}
 			}
