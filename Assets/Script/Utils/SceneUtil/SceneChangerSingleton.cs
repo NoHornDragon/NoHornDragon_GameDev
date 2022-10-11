@@ -32,7 +32,7 @@ namespace NHD.Utils.SceneUtil
             FadeIn();
         }
 
-        public void FadeIn()
+        private void FadeIn()
         {
             _fadeImage.gameObject.SetActive(true);
             _fadeImage.DOFade(0.0f, FADE_DURATION).OnComplete(TurnOffFadeImage);
