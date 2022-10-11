@@ -9,6 +9,9 @@ EditorBuildSettings:
     path: Assets/Scenes/LobbyScene.unity
     guid: bad6ad6caa72f7d4782e198174c7be85
   - enabled: 1
+    path: Assets/Scenes/OpeningScene.unity
+    guid: eca0f357b920f6745adf10ac2d3a7ffc
+  - enabled: 1
     path: Assets/Scenes/SingleGamePlay.unity
     guid: 4fa7feecfe7cf95498c1d04c47adfb52
   - enabled: 1
