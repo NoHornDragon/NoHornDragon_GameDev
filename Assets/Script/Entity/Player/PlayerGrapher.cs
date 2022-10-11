@@ -33,7 +33,7 @@ namespace NHD.Entity.Player
         {
             lineRenderer = GetComponent<LineRenderer>();
             joint = GetComponent<DistanceJoint2D>();
-            // TODO : multiplayer mode
+            
             easyMode = !StaticSettingsData._isHardMode;
 
             SetHUDInitial();
