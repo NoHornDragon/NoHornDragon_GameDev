@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using NHD.Utils.SceneUtil;
 
 namespace NHD.GamePlay.InteractionEntity.Teleport
 {
@@ -21,7 +22,7 @@ namespace NHD.GamePlay.InteractionEntity.Teleport
 
         IEnumerator TeleportCourtine(GameObject player)
         {
-            // TODO : 여기서 페이드 인아웃
+            SceneChangerSingleton._instance.FadeOutAndIn();
             yield return _delayTime;
 
             player.transform.position = _outPosition.position;
