@@ -1,4 +1,6 @@
-﻿using NHD.StaticData.Settings;
+﻿using NHD.StaticData.NPCComment;
+using DG.Tweening;
+using NHD.StaticData.Settings;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
@@ -11,64 +13,31 @@ namespace NHD.Entity.NPC.TalkingNPC
     [System.Serializable]
     public class NPCTalks
     {
-        [Header("방문 횟수")]
-        public int count;
-        [Header("talk[0] = kor, talk[1] = eng")]
-        [TextArea]
-        public string[] talk;
+        public int _count;
+        public string _key;
     }
-    [System.Serializable]
-    public class NPCTalksData
-    {
-        public List<NPCTalks> npcTalksList;
-    }
+
     public class NPC : MonoBehaviour
     {
-        [Header("대사 파일 이름")]
-        public string filePath;
-
-        private Coroutine crtPtr;
-
+        private Coroutine _crtPtr;
+        private StringBuilder _textBuilder = new StringBuilder("");
+        private BoxCollider2D _npcCol;
         [Header("플레이어 인식 거리")]
-        public float catchDistance;
+        public float _catchDistance;
         [Header("플레이어 멀리갔음을 인식하는 거리")]
-        public float farDistance;
-
+        public float _farDistance;
         [Header("그 외")]
-        [SerializeField]
-        private GameObject visitText; // NPC를 방문하면 출력되는 텍스트
-        [SerializeField]
-        private GameObject textBox; // 텍스트 박스
-
-        [Header("방문 횟수가 이상일 경우 출력하는 텍스트")]
-        //public NPCTalks[] npcTalks;
-        //[Header("Test")]
-        public NPCTalksData npcTalks;
-        private BoxCollider2D npcCol;
-
-        public int visitCount; // NPC를 방문한 횟수
-
-        public BoxCollider2D farCheckCol; // NPC에게서 멀어짐을 체크하는 함수
+        [SerializeField] private GameObject _visitText; // NPC를 방문하면 출력되는 텍스트
+        [SerializeField] private GameObject _textBox; // 텍스트 박스
+        [SerializeField] private NPCTalks[] _npcTalks;
+        public int _visitCount; // NPC를 방문한 횟수
+        public BoxCollider2D _farCheckCol; // NPC에게서 멀어짐을 체크하는 함수
+        
         private void Awake()
         {
-            npcCol = this.GetComponent<BoxCollider2D>();
-            farCheckCol = this.transform.GetChild(0).GetComponentInChildren<BoxCollider2D>();
-
-            if (!File.Exists(Application.dataPath + "/Resources/NpcTexts/" + filePath + ".json"))
-            {
-                Debug.Log(filePath + " load failed");
-            }
-            else
-            {
-                FileStream fs = new FileStream(string.Format("{0}/Resources/NpcTexts/{1}.json", Application.dataPath, filePath), FileMode.Open);
-                byte[] data = new byte[fs.Length];
-                fs.Read(data, 0, data.Length);
-                fs.Close();
-                string jsonData = Encoding.UTF8.GetString(data);
-                npcTalks = JsonUtility.FromJson<NPCTalksData>(jsonData);
-                Debug.Log(jsonData);
-            }
+            _npcCol = this.GetComponent<BoxCollider2D>();
         }
+
         private void Start()
         {
             SetColSize();
@@ -77,20 +46,21 @@ namespace NHD.Entity.NPC.TalkingNPC
 
         private void SetColSize()
         {
-            npcCol.size = new Vector2(catchDistance, catchDistance);
+            _npcCol.size = new Vector2(_catchDistance, _catchDistance);
         }
+
         private void SetFarColSize()
         {
-            farCheckCol.size = new Vector2(farDistance, farDistance);
+            _farCheckCol.size = new Vector2(_farDistance, _farDistance);
         }
 
         private void OnTriggerEnter2D(Collider2D collision)
         {
             if (collision.tag == "Player")
             {
-                textBox.SetActive(true);
-                visitText.SetActive(true);
-                crtPtr = StartCoroutine(TalkCoroutine());
+                _textBox.SetActive(true);
+                _visitText.SetActive(true);
+                _crtPtr = StartCoroutine(TalkCoroutine());
             }
         }
 
@@ -98,30 +68,32 @@ namespace NHD.Entity.NPC.TalkingNPC
         {
             if (collision.tag == "Player")
             {
-                if (crtPtr != null)
-                    StopCoroutine(crtPtr);
-                visitText.GetComponent<TextMeshPro>().text = "";
-                visitText.SetActive(false);
-                textBox.SetActive(false);
+                if (_crtPtr != null)
+                    StopCoroutine(_crtPtr);
+                _visitText.SetActive(false);
+                _textBox.SetActive(false);
             }
         }
 
         IEnumerator TalkCoroutine()
         {
-            for (int i = npcTalks.npcTalksList.Count - 1; i >= 0; i--)
+            _textBuilder.Clear();
+            int npcTalksLength = _npcTalks.Length;
+            for (int i = npcTalksLength - 1; i >= 0; --i)
             {
-                if (visitCount >= npcTalks.npcTalksList[i].count)
+                if (_visitCount >= _npcTalks[i]._count)
                 {
-                    for (int j = 0; j < npcTalks.npcTalksList[i].talk[StaticSettingsData._languageIndex].Length; j++)
-                    {
-                        visitText.GetComponent<TextMeshPro>().text = npcTalks.npcTalksList[i].talk[StaticSettingsData._languageIndex].Substring(0, j);
+                    int npcTextLength = StaticNPCCommentsData._staticNPCCommentsData[_npcTalks[i]._key].Length;
+                    for (int j = 0; j < npcTextLength; ++j)
+					{
+                        _textBuilder.Append(StaticNPCCommentsData._staticNPCCommentsData[_npcTalks[i]._key][j]);
+                        _visitText.GetComponent<TextMeshPro>().text = _textBuilder.ToString();
                         yield return new WaitForSeconds(0.05f);
                     }
-                    visitText.GetComponent<TextMeshPro>().text = npcTalks.npcTalksList[i].talk[StaticSettingsData._languageIndex];
+                    _visitText.GetComponent<TextMeshPro>().text = StaticNPCCommentsData._staticNPCCommentsData[_npcTalks[i]._key];
                     break;
                 }
             }
         }
-
     }
 }
