@@ -1,4 +1,5 @@
 ﻿using NHD.Entity.Player;
+using NHD.StaticData.Settings;
 using System;
 using System.Collections;
 using UnityEngine;
@@ -23,9 +24,8 @@ namespace NHD.Entity.Yeouiju
             predictionLayerMask = (1 << LayerMask.NameToLayer("Ground"));
 
             canLaunch = true;
-            // usingEasyMode = SaveData.instance.userData.UseEasyMode;
-            // TODO : multiplayer mode
-            // usingEasyMode = SettingsManager.instance.UseEasyMode;
+
+            usingEasyMode = !StaticSettingsData._isHardMode;
 
             yeouiju = FindObjectOfType<YeouijuReflection>();
             predictionLine = GetComponent<LineRenderer>();
@@ -43,8 +43,6 @@ namespace NHD.Entity.Yeouiju
 
             FindObjectOfType<YeouijuReflection>().yeouijuReturnEvent += ReturnYeouiju;
             FindObjectOfType<PlayerGrapher>().deleteJointEvent += ReturnYeouiju;
-            // TODO : multiplayer
-            // FindObjectOfType<MenuButtonManager>().menuButtonEvent += SetLaunchStatus;
         }
 
         private void Update()

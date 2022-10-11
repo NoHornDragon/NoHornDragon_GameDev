@@ -1,4 +1,6 @@
 ﻿using NHD.Entity.Yeouiju;
+using NHD.StaticData.Settings;
+using NHD.Utils.SoundUtil;
 using System;
 using System.Collections;
 using UnityEngine;
@@ -58,14 +60,7 @@ namespace NHD.Entity.Player
             coll.playerChangeEvent += PlayerBecomeOrigin;
             FindObjectOfType<YeouijuLaunch>().disJointEvent += DeleteJoint;
 
-            // usingEasyMode = SaveData.instance.userData.UseEasyMode;
-            // TODO : multiplayer
-            // usingEasyMode = SettingsManager.instance.UseEasyMode;
-            // if(usingEasyMode)
-            // {
-            //     this.transform.position = SaveData.instance.userData.PlayerPos;
-            //     StartCoroutine(SavePlayerPosition());
-            // }
+            usingEasyMode = !StaticSettingsData._isHardMode;
         }
 
         void Update()
@@ -125,14 +120,6 @@ namespace NHD.Entity.Player
             // if now anothermovement, change to original
             playerResetEvent?.Invoke();
 
-            // if(usingEasyMode)
-            // {
-            //     // if using easymode, respawn at savepoint
-            //     this.gameObject.transform.position = SaveData.instance.userData.PlayerPos;
-            //     SaveData.instance.userData.resetCount++;
-            //     return;
-            // }
-
             // if hardmode, respawn at start point
             this.gameObject.transform.position = Vector3.zero;
             // SaveData.instance.userData.resetCount++;
@@ -156,7 +143,6 @@ namespace NHD.Entity.Player
             throwed = false;
         }
 
-        // TODO : For debug
         void OnDrawGizmos()
         {
             Gizmos.color = Color.red;
@@ -169,27 +155,13 @@ namespace NHD.Entity.Player
             return rigid.velocity.x > 0;
         }
 
-        // Now using easy mode, save player's position in 10s
-        // WaitForSeconds saveCycle = new WaitForSeconds(10f);
-        // IEnumerator SavePlayerPosition()
-        // {
-        //     yield return saveCycle;
-
-        //     if(onGround)
-        //     {
-        //         SaveData.instance.userData.PlayerPos = this.transform.position;
-        //         SaveData.instance.SaveGame();
-        //     }
-
-        //     StartCoroutine(SavePlayerPosition());
-        // }
-
         public void PlayerStuned(bool isStuned)
         {
             canMove = !isStuned;
             stuned = isStuned;
-            // TODO : multiplayer
-            // SoundManager.instance.PlayRandomBGM();
+
+            if(UnityEngine.Random.Range(0.0f, 1.0f) < 0.2f)
+                SoundManager._instance.PlayRandomBGM();
 
             StartCoroutine(PlayerRecoverFromStun());
         }

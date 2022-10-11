@@ -27,10 +27,10 @@ namespace NHD.GamePlay.InteractionEntity.Paper
         {
             paperGetEvent += FindObjectOfType<PaperGetUI>().PaperGet;
 
-            // if(HistoryDataManager.instance.GetPaperTrue(paperIndex))
-            // {
-            //     Destroy(this.gameObject);
-            // }
+            if(StaticHistoryData._isGetPapers[paperIndex])
+            {
+                Destroy(this.gameObject);
+            }
 
             originPos = this.transform.position;
 
@@ -59,12 +59,8 @@ namespace NHD.GamePlay.InteractionEntity.Paper
             playerGetThis = true;
             paperGetEvent?.Invoke();
 
-
-            // TODO : 이렇게 수정
             StaticHistoryData._isGetPapers[paperIndex] = true;
             PlayHistoryDataSaver.SaveData();
-            // TODO : 플레이어 이후 수정
-            // HistoryDataManager.instance.SetPaperTrue(paperIndex);
 
             // 사라지는 애니메이션
             paperSequence.Kill();

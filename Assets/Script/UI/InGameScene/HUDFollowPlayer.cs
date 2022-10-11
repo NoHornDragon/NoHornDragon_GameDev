@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using NHD.StaticData.Settings;
+using UnityEngine;
 
 namespace NHD.UI.InGameScene
 {
@@ -10,8 +11,8 @@ namespace NHD.UI.InGameScene
         void Start()
         {
             // if using easy mode, game don't need this hud
-            // TODO : multiplayer mode
-            // if(SettingsManager.instance.UseEasyMode)    Destroy(gameObject);
+            if(!StaticSettingsData._isHardMode)    Destroy(gameObject);
+            
 
             playerPos = transform.parent.parent;
             cam = Camera.main;

@@ -1,4 +1,5 @@
 ﻿using NHD.Entity.Yeouiju;
+using NHD.StaticData.Settings;
 using System;
 using UnityEngine;
 using UnityEngine.UI;
@@ -32,9 +33,8 @@ namespace NHD.Entity.Player
         {
             lineRenderer = GetComponent<LineRenderer>();
             joint = GetComponent<DistanceJoint2D>();
-            // easyMode = SaveData.instance.userData.UseEasyMode; 
             // TODO : multiplayer mode
-            // easyMode = SettingsManager.instance.UseEasyMode;
+            easyMode = !StaticSettingsData._isHardMode;
 
             SetHUDInitial();
             lineModifySpeed *= -1;
