@@ -57,7 +57,7 @@ namespace NHD.Entity.NPC.AttackingNPC
 
 
                 var len = _player.position - transform.position;
-                // TODO : sprite.splitx
+                
                 if ((len.x > 0) != _lookAtRight)
                 {
                     _lookAtRight = (len.x > 0);

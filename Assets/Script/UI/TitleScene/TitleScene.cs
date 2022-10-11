@@ -7,7 +7,7 @@ namespace NHD.UI.titleScene
     public class TitleScene : MonoBehaviour
     {
         //testing
-        private const string GAME_SCENE_NAME = "SoundTest";
+        private const string GAME_SCENE_NAME = "OpeningScene";
 
         [SerializeField] private GameObject _historyPopup;
         [SerializeField] private GameObject _settingsPopup;

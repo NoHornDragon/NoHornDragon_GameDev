@@ -7,21 +7,22 @@ namespace NHD.Utils.TimeLineUtil
     public class OpeningCutScene : MonoBehaviour
     {
         [SerializeField]
-        private PlayableDirector playableDirector;
-
-        private bool skipped = false;
+        private PlayableDirector _playableDirector;
+        private bool _skipped = false;
+        [SerializeField]
+        private string _GameSceneName;
 
         public void SkipButtonPressed(float skipTime)
         {
-            if (skipped) return;
+            if (_skipped) return;
 
-            playableDirector.time = skipTime;
-            skipped = true;
+            _playableDirector.time = skipTime;
+            _skipped = true;
         }
 
         public void AfterTimeline()
         {
-            SceneManager.LoadSceneAsync("Dev_husk");
+            SceneManager.LoadSceneAsync(_GameSceneName);
         }
     }
 }
