@@ -17,7 +17,6 @@ namespace NHD.Utils.SoundUtil
         [Header("게임에 사용되는 사운드")]
         [SerializeField] private AudioMixer _audioMixer;
         [SerializeField] private AudioClip[] _bgmSoundsData;
-        [SerializeField] private AudioClip[] _efxSoundsData;
 
         private void Awake()
         {
@@ -51,9 +50,9 @@ namespace NHD.Utils.SoundUtil
             _audioMixer.SetFloat("SFXVolume", Mathf.Log10(volume) * 20);
 		}
 
-        public void PlayBGM(AudioClip audioClip, bool isFade = true)
+        public void PlayBGM(int index, bool isFade = true)
         {
-            _audioSourceBGM.clip = audioClip;
+            _audioSourceBGM.clip = _bgmSoundsData[index];
             if (isFade) // Fade와 함께 bgm 실행
             {
                 _audioSourceBGM.volume = 0.0f;
@@ -64,10 +63,10 @@ namespace NHD.Utils.SoundUtil
             _audioSourceBGM.Play();
         }
 
-        public void PlayRandomBGM(List<AudioClip> audioClips)
+        public void PlayRandomBGM()
         {
-            int bgmIndex = Random.Range(0, audioClips.Count);
-            _audioSourceBGM.clip = audioClips[bgmIndex];
+            int bgmIndex = Random.Range(0, _bgmSoundsData.Length);
+            _audioSourceBGM.clip = _bgmSoundsData[bgmIndex];
             _audioSourceBGM.DOFade(0.0f, 0.5f)
             .OnComplete(delegate () { 
                 _audioSourceBGM.Play(); 
