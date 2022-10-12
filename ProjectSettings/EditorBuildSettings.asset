@@ -17,4 +17,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/SoinDosa/SoundTest.unity
     guid: 2c332477d09ca6049bdb51d863b8445a
+  - enabled: 1
+    path: Assets/Scenes/EndingScene.unity
+    guid: 6726ba2a32127d745913246261a76919
   m_configObjects: {}
