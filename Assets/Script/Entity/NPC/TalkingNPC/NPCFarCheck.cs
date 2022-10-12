@@ -15,7 +15,7 @@ namespace NHD.Entity.NPC.TalkingNPC
         {
             if (collision.tag == "Player")
             {
-                currentNPC.visitCount++;
+                currentNPC._visitCount++;
             }
         }
     }

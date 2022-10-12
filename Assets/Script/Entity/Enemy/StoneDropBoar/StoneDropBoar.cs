@@ -1,10 +1,12 @@
 ﻿using NHD.Entity.Enemy.Common;
+using NHD.Sound.Common;
+using NHD.Utils.SoundUtil;
 using System.Collections;
 using UnityEngine;
 
 namespace NHD.Entity.Enemy.stoneDropBoar
 {
-    public class StoneDropBoar : MonoBehaviour, IEnemy
+    public class StoneDropBoar : SoundPlayableBase, IEnemy
     {
         private const float WAIT_ATTACK = 0.5f;
         private const float ATTACK_DELAY_SEC = 4.5f;
@@ -53,6 +55,7 @@ namespace NHD.Entity.Enemy.stoneDropBoar
             _stone = CreateStone();
             yield return _waitAttack;
 
+            SoundManager._instance.PlayEFX(_audioClips[0], transform.position);
             _stone.GetComponent<Rigidbody2D>().AddForce(new Vector2(-1000f, 1000f));
             yield return _attackDelay;
 

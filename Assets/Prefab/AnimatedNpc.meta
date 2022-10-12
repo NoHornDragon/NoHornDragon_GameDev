@@ -1,6 +1,15 @@
 fileFormatVersion: 2
+<<<<<<< Updated upstream
 guid: 002e6c15a69e2c7428cdd09dd7f35200
 folderAsset: yes
+=======
+<<<<<<<< HEAD:Assets/Scenes/ForDesign/Su_3rd.unity.meta
+guid: e99b9e928edb6214fa4b2715b92a3186
+========
+guid: 002e6c15a69e2c7428cdd09dd7f35200
+folderAsset: yes
+>>>>>>>> main:Assets/Prefab/AnimatedNpc.meta
+>>>>>>> Stashed changes
 DefaultImporter:
   externalObjects: {}
   userData: 

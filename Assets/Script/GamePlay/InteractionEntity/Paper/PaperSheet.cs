@@ -1,4 +1,6 @@
 ﻿using DG.Tweening;
+using NHD.DataController.Savers;
+using NHD.StaticData.History;
 using NHD.UI.InGameScene;
 using System;
 using UnityEngine;
@@ -25,10 +27,10 @@ namespace NHD.GamePlay.InteractionEntity.Paper
         {
             paperGetEvent += FindObjectOfType<PaperGetUI>().PaperGet;
 
-            // if(HistoryDataManager.instance.GetPaperTrue(paperIndex))
-            // {
-            //     Destroy(this.gameObject);
-            // }
+            if(StaticHistoryData._isGetPapers[paperIndex])
+            {
+                Destroy(this.gameObject);
+            }
 
             originPos = this.transform.position;
 
@@ -57,8 +59,8 @@ namespace NHD.GamePlay.InteractionEntity.Paper
             playerGetThis = true;
             paperGetEvent?.Invoke();
 
-            // TODO : 플레이어 이후 수정
-            // HistoryDataManager.instance.SetPaperTrue(paperIndex);
+            StaticHistoryData._isGetPapers[paperIndex] = true;
+            PlayHistoryDataSaver.SaveData();
 
             // 사라지는 애니메이션
             paperSequence.Kill();

@@ -640,7 +640,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9da5ea3cc8b0b0641a04849e07abd4d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _stonesPool: {fileID: 0}
+  _audioClips:
+  - {fileID: 8300000, guid: 3df16bce00c7c134a938db07fd105216, type: 3}
 --- !u!1 &6059110898154724939
 GameObject:
   m_ObjectHideFlags: 0
