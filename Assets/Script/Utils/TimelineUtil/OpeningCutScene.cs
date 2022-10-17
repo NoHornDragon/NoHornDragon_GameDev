@@ -1,6 +1,6 @@
-﻿using UnityEngine;
+﻿using NHD.Utils.SceneUtil;
+using UnityEngine;
 using UnityEngine.Playables;
-using UnityEngine.SceneManagement;
 
 namespace NHD.Utils.TimeLineUtil
 {
@@ -10,7 +10,7 @@ namespace NHD.Utils.TimeLineUtil
         private PlayableDirector _playableDirector;
         private bool _skipped = false;
         [SerializeField]
-        private string _GameSceneName;
+        private string _gameSceneName;
 
         public void SkipButtonPressed(float skipTime)
         {
@@ -22,7 +22,7 @@ namespace NHD.Utils.TimeLineUtil
 
         public void AfterTimeline()
         {
-            SceneManager.LoadSceneAsync(_GameSceneName);
+            SceneChangerSingleton._instance.ChangeSceneWithFadeOut(_gameSceneName);
         }
     }
 }
