@@ -1,7 +1,7 @@
 ﻿using NHD.Entity.Player;
 using UnityEngine;
 
-namespace NHD.GamePlay.Camera
+namespace NHD.GamePlay.CameraComponent
 {
     public class PlayerMoveCamera : MonoBehaviour
     {

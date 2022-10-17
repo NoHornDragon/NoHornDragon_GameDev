@@ -2,7 +2,7 @@
 using System;
 using UnityEngine;
 
-namespace NHD.GamePlay.Camera
+namespace NHD.GamePlay.CameraComponent
 {
     public class PlayerEnterConfiner : MonoBehaviour
     {

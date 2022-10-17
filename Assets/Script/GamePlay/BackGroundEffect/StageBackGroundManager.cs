@@ -1,4 +1,4 @@
-﻿using NHD.GamePlay.Camera;
+﻿using NHD.GamePlay.CameraComponent;
 using UnityEngine;
 
 namespace NHD.GamePlay.BackGroundEffect

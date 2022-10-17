@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace NHD.GamePlay.Camera
+namespace NHD.GamePlay.CameraComponent
 {
     public class StageManager : MonoBehaviour
     {
