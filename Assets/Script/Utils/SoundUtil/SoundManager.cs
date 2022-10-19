@@ -1,38 +1,28 @@
-﻿using NHD.StaticData.Settings;
-using System.Collections;
+﻿using DG.Tweening;
+using NHD.StaticData.Settings;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
 
 namespace NHD.Utils.SoundUtil
 {
-    [System.Serializable]
-    public class Sound
+	public class SoundManager : MonoBehaviour
     {
-        public string name;
-        public AudioClip clip;
-    }
-
-    public class SoundManager : MonoBehaviour
-    {
-        public static SoundManager instance;
+        public static SoundManager _instance;
 
         [Header("재생가능한 오디오 소스")]
-        public AudioSource audioSourceBGM;
-        public AudioSource[] audioSourceEffects;
+        public AudioSource _audioSourceBGM;
+        public AudioSource[] _audioSourcesEFX;
 
         [Header("게임에 사용되는 사운드")]
-        [SerializeField]
-        private AudioMixer audioMixer;
-        [SerializeField]
-        private Sound[] bgmSounds;
-        [SerializeField]
-        private Sound[] effectSounds;
+        [SerializeField] private AudioMixer _audioMixer;
+        [SerializeField] private AudioClip[] _bgmSoundsData;
 
         private void Awake()
         {
-            if (instance == null)
+            if (_instance == null)
             {
-                instance = this;
+                _instance = this;
                 DontDestroyOnLoad(this.gameObject);
             }
             else
@@ -41,129 +31,92 @@ namespace NHD.Utils.SoundUtil
 
         private void Start()
         {
-            SetBGMVol();
-            SetEffectVol();
-
-            PlayBGM(0);
+            Setup();
         }
 
-        public void SetBGMVol()
+        private void Setup()
         {
-            audioMixer.SetFloat("BGMVolume", Mathf.Log10(StaticSettingsData._bgmVolume) * 20);
+            SetBGMVolume(StaticSettingsData._bgmVolume);
+            SetEFXVolume(StaticSettingsData._effectVolume);
         }
 
-        public void SetEffectVol()
-        {
-            audioMixer.SetFloat("SFXVolume", Mathf.Log10(StaticSettingsData._bgmVolume) * 20);
-        }
+        public void SetBGMVolume(float volume)
+		{
+            _audioMixer.SetFloat("BGMVolume", Mathf.Log10(volume) * 20);
+		}
 
-        public void PlayBGM(int _index, bool _isFade = true)
+        public void SetEFXVolume(float volume)
+		{
+            _audioMixer.SetFloat("SFXVolume", Mathf.Log10(volume) * 20);
+		}
+
+        public void PlayBGM(int index, bool isFade = true)
         {
-            if (_isFade) // Fade와 함께 bgm 실행
+            _audioSourceBGM.clip = _bgmSoundsData[index];
+            if (isFade) // Fade와 함께 bgm 실행
             {
-                StartCoroutine(FadeInCoroutine(_index));
+                _audioSourceBGM.volume = 0.0f;
+                _audioSourceBGM.Play();
+                _audioSourceBGM.DOFade(1.0f, 0.5f).SetEase(Ease.Linear);
                 return;
             }
-
-            audioSourceBGM.clip = bgmSounds[_index].clip;
-            audioSourceBGM.Play();
+            _audioSourceBGM.Play();
         }
 
-        public void PlayRandomBGM(bool _isFade = true)
+        public void PlayRandomBGM()
         {
-            int nextMusic = Random.Range(0, bgmSounds.Length);
-            if (_isFade) // Fade와 함께 bgm 실행
-            {
-                StartCoroutine(FadeInCoroutine(nextMusic));
-                return;
-            }
-
-            audioSourceBGM.clip = bgmSounds[nextMusic].clip;
-            audioSourceBGM.Play();
+            int bgmIndex = Random.Range(0, _bgmSoundsData.Length);
+            _audioSourceBGM.clip = _bgmSoundsData[bgmIndex];
+            _audioSourceBGM.DOFade(0.0f, 0.5f)
+            .OnComplete(delegate () { 
+                _audioSourceBGM.Play(); 
+                _audioSourceBGM.DOFade(1.0f, 0.5f).SetEase(Ease.Linear); 
+            }).SetEase(Ease.Linear);
         }
 
         /// <summary>
         /// 현재 실행중인 BGM 중지
         /// </summary>
-        /// <param name="_isFade"></param>
-        public void StopBGM(bool _isFade) // 즉시 bgm 중지
+        /// <param name="isFade"></param>
+        public void StopBGM(bool isFade = true) // 즉시 bgm 중지
         {
-            if (_isFade)
+            if (isFade)
             {
-                StartCoroutine(FadeOutCoroutine());
+                _audioSourceBGM.DOFade(0.0f, 0.5f)
+                .OnComplete(delegate () { 
+                    _audioSourceBGM.volume = 1.0f; 
+                    _audioSourceBGM.Stop(); 
+                });
             }
             else
             {
-                audioSourceBGM.Stop();
+                _audioSourceBGM.Stop();
             }
-        }
-
-        IEnumerator FadeInCoroutine(int _index)
-        {
-            if (audioSourceBGM.isPlaying)
-            {
-                for (int i = 0; i < 10; i++)
-                {
-                    audioSourceBGM.volume = Mathf.Lerp(audioSourceBGM.volume, 0.0f, 0.2f);
-                    yield return new WaitForSeconds(0.1f);
-                }
-                audioSourceBGM.Stop();
-                audioSourceBGM.volume = StaticSettingsData._effectVolume;
-            }
-
-            audioSourceBGM.volume = 0.0f;
-            audioSourceBGM.clip = bgmSounds[_index].clip;
-            audioSourceBGM.Play();
-            for (int i = 0; i < 20; i++)
-            {
-                audioSourceBGM.volume = Mathf.Lerp(audioSourceBGM.volume, StaticSettingsData._effectVolume, 0.1f);
-                yield return new WaitForSeconds(0.1f);
-            }
-            audioSourceBGM.volume = StaticSettingsData._effectVolume;
-
-        }
-
-        IEnumerator FadeOutCoroutine()
-        {
-            for (int i = 0; i < 10; i++)
-            {
-                audioSourceBGM.volume = Mathf.Lerp(audioSourceBGM.volume, 0.0f, 0.2f);
-                yield return new WaitForSeconds(0.1f);
-            }
-            audioSourceBGM.Stop();
-            audioSourceBGM.volume = StaticSettingsData._effectVolume;
         }
 
         /// <summary>
         /// 효과음을 재생
         /// </summary>
-        /// <param name="_name"></param>
-        public void PlaySE(string _name)
+        /// <param name="name"></param>
+        public void PlayEFX(AudioClip audioClip, Vector3 position)
         {
-            foreach (var effectSound in effectSounds)
-            {
-                if (_name == effectSound.name)
-                {
-                    for (int i = 0; i < audioSourceEffects.Length; i++)
-                    {
-                        if (!audioSourceEffects[i].isPlaying)
-                        {
-                            audioSourceEffects[i].clip = effectSound.clip;
-                            audioSourceEffects[i].Play();
-                            return;
-                        }
-                    }
-                }
-            }
+            foreach(var audioSourceEFX in _audioSourcesEFX)
+			{
+				if (!audioSourceEFX.isPlaying)
+				{
+                    audioSourceEFX.clip = audioClip;
+                    AudioSource.PlayClipAtPoint(audioSourceEFX.clip, position);
+				}
+			}
         }
         /// <summary>
         /// 모든 효과음 중지
         /// </summary>
-        public void StopAllSE()
+        public void StopAllEFX()
         {
-            foreach (var audioSourceEffect in audioSourceEffects)
+            foreach (var audioSourceEFX in _audioSourcesEFX)
             {
-                audioSourceEffect.Stop();
+                audioSourceEFX.Stop();
             }
         }
     }

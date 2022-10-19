@@ -2401,7 +2401,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 94873670731172046bf82194958522f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playableDirector: {fileID: 2426397417492575422}
+  _playableDirector: {fileID: 2426397417492575422}
+  _gameSceneName: SingleGamePlay
 --- !u!114 &1522575818
 MonoBehaviour:
   m_ObjectHideFlags: 0
