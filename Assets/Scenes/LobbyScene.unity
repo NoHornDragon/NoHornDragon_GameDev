@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 0
+  m_UseShadowmask: 1
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -4422,53 +4422,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _stringKey: BACK
---- !u!1 &526164148
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 526164150}
-  - component: {fileID: 526164149}
-  m_Layer: 0
-  m_Name: TitleBGMContainer
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &526164149
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 526164148}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9209a1ded16d0084799915dcf86d33d0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _audioClips:
-  - {fileID: 8300000, guid: 6106b99b38861b54bac1f453569b9f1e, type: 3}
-  - {fileID: 8300000, guid: 296d5088e4b5d3c4e91593f065a685ef, type: 3}
-  - {fileID: 8300000, guid: 258b3bc6ad094a04e884b04935673d39, type: 3}
---- !u!4 &526164150
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 526164148}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 960, y: 540, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 6
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &527439774
 GameObject:
   m_ObjectHideFlags: 0
@@ -19498,12 +19451,11 @@ MonoBehaviour:
   - {fileID: 8332419392421608882}
   _audioMixer: {fileID: 24100000, guid: 8b33f731dc376f243851ac436f2e1e01, type: 2}
   _bgmSoundsData:
-  - {fileID: 8300000, guid: 6106b99b38861b54bac1f453569b9f1e, type: 3}
-  - {fileID: 8300000, guid: 296d5088e4b5d3c4e91593f065a685ef, type: 3}
-  - {fileID: 8300000, guid: 258b3bc6ad094a04e884b04935673d39, type: 3}
-  _efxSoundsData:
-  - {fileID: 8300000, guid: 6d39ab99e69aa1b428f441cfadfc3dd3, type: 3}
-  - {fileID: 8300000, guid: 3df16bce00c7c134a938db07fd105216, type: 3}
+  - {fileID: 8300000, guid: 7e3f2466a647e7e4e8f1d08a69985ab7, type: 3}
+  - {fileID: 8300000, guid: 74f19a2e9ddbb2645a8d585644ea7adc, type: 3}
+  - {fileID: 8300000, guid: c685309dda8640b47865e2c39db3b745, type: 3}
+  - {fileID: 8300000, guid: b821dbc64152d3140a390055193b0c81, type: 3}
+  - {fileID: 8300000, guid: c5e040f999bd45a498ecbe33b389f0ee, type: 3}
 --- !u!82 &8846802690573067589
 AudioSource:
   m_ObjectHideFlags: 0

@@ -53,7 +53,7 @@ namespace NHD.DataController.Loaders
 
         private byte[] ReturnByteCodeInitialData()
         {
-            FileStream fs = new FileStream($"{Application.dataPath}/Resources/StaticData/InitialData/INITIAL_SETTINGS_DATA.json", FileMode.Open);
+            FileStream fs = new FileStream($"{Application.dataPath}/StreamingAssets/StaticData/InitialData/INITIAL_SETTINGS_DATA.json", FileMode.Open);
             byte[] data = new byte[fs.Length];
             fs.Read(data, 0, data.Length);
             fs.Close();

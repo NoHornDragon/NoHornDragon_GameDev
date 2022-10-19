@@ -61,6 +61,7 @@ namespace NHD.UI.titleScene.settingsPopup
         public void ChangeResolution()
         {
             StaticSettingsData._resolutionIndex = _resolution.value;
+            SetResolution();
         }
 
         public void ChangeLanguage()
