@@ -22,10 +22,10 @@ namespace NHD.DataController.Loaders
             switch (StaticSettingsData._languageIndex)
             {
                 case 0:
-                    PATH = $"{Application.dataPath}/Resources/StaticData/PaperData/STATIC_PAPER_DATA_KOR.json";
+                    PATH = $"{Application.dataPath}/StreamingAssets/StaticData/PaperData/STATIC_PAPER_DATA_KOR.json";
                     break;
                 case 1:
-                    PATH = $"{Application.dataPath}/Resources/StaticData/PaperData/STATIC_PAPER_DATA_ENG.json";
+                    PATH = $"{Application.dataPath}/StreamingAssets/StaticData/PaperData/STATIC_PAPER_DATA_ENG.json";
                     break;
             }
         }

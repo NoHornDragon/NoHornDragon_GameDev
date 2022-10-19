@@ -32,6 +32,8 @@ namespace NHD.Utils.SoundUtil
         private void Start()
         {
             Setup();
+
+            PlayRandomBGM();
         }
 
         private void Setup()

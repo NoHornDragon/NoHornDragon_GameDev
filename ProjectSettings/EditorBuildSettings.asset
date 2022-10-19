@@ -14,7 +14,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/SingleGamePlay.unity
     guid: 4fa7feecfe7cf95498c1d04c47adfb52
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/SoinDosa/SoundTest.unity
     guid: 2c332477d09ca6049bdb51d863b8445a
   - enabled: 1
