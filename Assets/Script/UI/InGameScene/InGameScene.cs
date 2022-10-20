@@ -1,4 +1,5 @@
 ﻿using NHD.UI.Common;
+using NHD.Utils.SoundUtil;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -17,7 +18,12 @@ namespace NHD.UI.inGameScene
 			_isSceneLoading = false;
 		}
 
-		private void Update()
+        private void Start()
+        {
+			SoundManager._instance.PlayRandomBGM();
+        }
+
+        private void Update()
 		{
 			if (!_isSceneLoading)
 			{

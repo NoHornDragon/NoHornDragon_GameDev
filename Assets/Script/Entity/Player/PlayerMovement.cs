@@ -160,7 +160,7 @@ namespace NHD.Entity.Player
             canMove = !isStuned;
             stuned = isStuned;
 
-            if(UnityEngine.Random.Range(0.0f, 1.0f) < 0.2f)
+            if(UnityEngine.Random.Range(0.0f, 1.0f) < 0.5f)
                 SoundManager._instance.PlayRandomBGM();
 
             StaticHistoryData._stunCount += 1;

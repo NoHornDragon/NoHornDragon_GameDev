@@ -1,5 +1,6 @@
 ﻿using NHD.UI.Common;
 using NHD.Utils.SceneUtil;
+using NHD.Utils.SoundUtil;
 using UnityEngine;
 
 namespace NHD.UI.titleScene
@@ -18,7 +19,12 @@ namespace NHD.UI.titleScene
 		{
             _isSceneLoading = false;
 		}
-		private void Update()
+
+        private void Start()
+        {
+            SoundManager._instance.PlayRandomBGM();
+        }
+        private void Update()
         {
             if (!_isSceneLoading)
             {

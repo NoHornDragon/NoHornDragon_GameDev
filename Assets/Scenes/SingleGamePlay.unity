@@ -8006,7 +8006,7 @@ PrefabInstance:
     - target: {fileID: 3960251306022774833, guid: 6b8e24873c5884b49b90e6d77b13dcaa,
         type: 3}
       propertyPath: stunedTime
-      value: 2.2
+      value: 2.1
       objectReference: {fileID: 0}
     - target: {fileID: 3960251306022774838, guid: 6b8e24873c5884b49b90e6d77b13dcaa,
         type: 3}
