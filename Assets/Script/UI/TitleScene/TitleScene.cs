@@ -11,6 +11,7 @@ namespace NHD.UI.titleScene
         private const string GAME_SCENE_NAME = "OpeningScene";
 
         [SerializeField] private GameObject _historyPopup;
+        [SerializeField] private GameObject _creditPopup;
         [SerializeField] private GameObject _settingsPopup;
         [SerializeField] private GameObject _exitAskingPopup;
         private bool _isSceneLoading;
@@ -61,6 +62,11 @@ namespace NHD.UI.titleScene
         public void OpenHistoryPopup()
         {
             PopupContainer.PushPopup(_historyPopup.GetComponent<IPopup>());
+        }
+
+        public void OpenCreditPopup()
+        {
+            PopupContainer.PushPopup(_creditPopup.GetComponent<IPopup>());
         }
 
         public void OpenSettingsPopup()
