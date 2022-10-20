@@ -51,13 +51,13 @@ namespace NHD.UI.InGameScene
         [ContextMenu("명언 텍스트 로드")]
         private void ReadWiseFile()
         {
-            if (!File.Exists(Application.dataPath + "/Resources/WiseSayingTexts/" + wiseSayingFileName + ".json"))
+            if (!File.Exists(Application.dataPath + "/StreamingAssets/WiseSayingTexts/" + wiseSayingFileName + ".json"))
             {
                 Debug.Log(wiseSayingFileName + " load failed");
             }
             else
             {
-                FileStream fs = new FileStream(string.Format("{0}/Resources/WiseSayingTexts/{1}.json", Application.dataPath, wiseSayingFileName), FileMode.Open);
+                FileStream fs = new FileStream(string.Format("{0}/StreamingAssets/WiseSayingTexts/{1}.json", Application.dataPath, wiseSayingFileName), FileMode.Open);
                 byte[] data = new byte[fs.Length];
                 fs.Read(data, 0, data.Length);
                 fs.Close();
