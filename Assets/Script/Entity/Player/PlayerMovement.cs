@@ -129,7 +129,7 @@ namespace NHD.Entity.Player
             StaticHistoryData._restartCount += 1;
             PlayHistoryDataSaver.SaveData();
 
-            PlayerResetEvent(true);
+            PlayerResetEvent?.Invoke(true);
         }
 
         private void MakeJoint(Vector2 dummyInput)

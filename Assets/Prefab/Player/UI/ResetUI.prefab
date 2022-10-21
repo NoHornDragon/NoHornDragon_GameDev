@@ -44,8 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 78a0816bf8a5f0a4a92752afe1a150a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  wiseSayingUI: {fileID: 2035418489115214353}
-  wiseSayingText: {fileID: 2840260032758202040}
+  _resetUI: {fileID: 2035418489115214353}
 --- !u!1 &2035418489115214353
 GameObject:
   m_ObjectHideFlags: 0
@@ -135,7 +134,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a00a1c16fd177447b2fe047a8eb9eee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  UIIntervalTime: 0
+  UIIntervalTime: 3
 --- !u!225 &493447109445642670
 CanvasGroup:
   m_ObjectHideFlags: 0

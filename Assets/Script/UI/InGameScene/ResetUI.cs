@@ -7,11 +7,7 @@ namespace NHD.UI.InGameScene
     public class ResetUI : MonoBehaviour
     {
         [SerializeField]
-        private GameObject wiseSayingUI;
-        [SerializeField]
-        private TextMeshProUGUI wiseSayingText;
-        [TextArea]
-        private string[] resetMessage;
+        private GameObject _resetUI;
 
 
         private void Start()
@@ -23,7 +19,7 @@ namespace NHD.UI.InGameScene
         {
             if (!isActive) return;
 
-            wiseSayingUI.SetActive(true);
+            _resetUI.SetActive(true);
         }
     }
 }
