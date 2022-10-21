@@ -14,6 +14,7 @@ namespace NHD.UI.titleScene
         [SerializeField] private GameObject _creditPopup;
         [SerializeField] private GameObject _settingsPopup;
         [SerializeField] private GameObject _exitAskingPopup;
+        [SerializeField] private AudioClip _clickSound;
         private bool _isSceneLoading;
 
 		private void OnEnable()
@@ -55,28 +56,38 @@ namespace NHD.UI.titleScene
 
         public void GameStart()
         {
+            PlayClickSound();
             _isSceneLoading = true;
             SceneChangerSingleton._instance.ChangeSceneWithFadeOut(GAME_SCENE_NAME);
         }
 
         public void OpenHistoryPopup()
         {
+            PlayClickSound();
             PopupContainer.PushPopup(_historyPopup.GetComponent<IPopup>());
         }
 
         public void OpenCreditPopup()
         {
+            PlayClickSound();
             PopupContainer.PushPopup(_creditPopup.GetComponent<IPopup>());
         }
 
         public void OpenSettingsPopup()
         {
+            PlayClickSound();
             PopupContainer.PushPopup(_settingsPopup.GetComponent<IPopup>());
         }
 
         public void OpenExitAskingPopup()
         {
+            PlayClickSound();
             PopupContainer.PushPopup(_exitAskingPopup.GetComponent<IPopup>());
+        }
+
+        public void PlayClickSound()
+        {
+            SoundManager._instance.PlayEFXAmbient(_clickSound);
         }
     }
 }

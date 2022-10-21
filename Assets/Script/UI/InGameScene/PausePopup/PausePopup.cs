@@ -15,6 +15,8 @@ namespace NHD.UI.inGameScene.pausePopup
 		[SerializeField] private GameObject _autoSaveAskingPopup;
 		[SerializeField] private Slider _bgmVolume;
 		[SerializeField] private Slider _effectVolume;
+		[SerializeField] private AudioClip _closedSound;
+		[SerializeField] private AudioClip _popupOpenSound;
 		public Toggle _autoSave;
 
 		private bool _isSceneLoading;
@@ -31,6 +33,7 @@ namespace NHD.UI.inGameScene.pausePopup
 
 		public void ClosePopup()
 		{
+			SoundManager._instance.PlayEFXAmbient(_closedSound);
 			Time.timeScale = 1.0f;
 			SaveSettingsData();
 			this.gameObject.SetActive(false);
@@ -57,6 +60,7 @@ namespace NHD.UI.inGameScene.pausePopup
 		{
 			if (_autoSave == true && !StaticSettingsData._isAutoSave)
 			{
+				SoundManager._instance.PlayEFXAmbient(_popupOpenSound);
 				PopupContainer.PushPopup(_autoSaveAskingPopup.GetComponent<IPopup>());
 			}
 
@@ -74,6 +78,7 @@ namespace NHD.UI.inGameScene.pausePopup
 
 		public void GoToTitleScene()
 		{
+			SoundManager._instance.PlayEFXAmbient(_closedSound);
 			SaveSettingsData();
 			Time.timeScale = 1.0f;
 			_isSceneLoading = true;

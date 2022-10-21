@@ -5668,6 +5668,7 @@ MonoBehaviour:
   _paperTitle: {fileID: 1548146476}
   _paperDescription: {fileID: 1974034794}
   _paperImage: {fileID: 727550199}
+  _closedSound: {fileID: 8300000, guid: 3b4115003306ab44a8d34e65ea6a4f8a, type: 3}
 --- !u!1 &641087186
 GameObject:
   m_ObjectHideFlags: 0
@@ -6403,6 +6404,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e46df66bb9c9de54bad99944079856bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _closedSound: {fileID: 8300000, guid: 3b4115003306ab44a8d34e65ea6a4f8a, type: 3}
 --- !u!114 &717075596
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9391,6 +9393,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 14a6b7a5af83a8645815bb0b5901ba56, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _closedSound: {fileID: 8300000, guid: 3b4115003306ab44a8d34e65ea6a4f8a, type: 3}
 --- !u!1 &1050868069
 GameObject:
   m_ObjectHideFlags: 0
@@ -10908,6 +10911,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 17f459de74b3757428a56caa31570606, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _closeSound: {fileID: 8300000, guid: 3b4115003306ab44a8d34e65ea6a4f8a, type: 3}
 --- !u!1 &1167971758
 GameObject:
   m_ObjectHideFlags: 0
@@ -15103,6 +15107,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a7294f4076faf94ba2391592240837b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _closedSound: {fileID: 8300000, guid: 3b4115003306ab44a8d34e65ea6a4f8a, type: 3}
 --- !u!1 &1495038667
 GameObject:
   m_ObjectHideFlags: 0
@@ -16214,6 +16219,7 @@ MonoBehaviour:
   _creditPopup: {fileID: 717075594}
   _settingsPopup: {fileID: 1700687256}
   _exitAskingPopup: {fileID: 1034542820}
+  _clickSound: {fileID: 8300000, guid: d74cabf03c7bbae48af77cd8f1e8295e, type: 3}
 --- !u!1 &1608677610
 GameObject:
   m_ObjectHideFlags: 0
@@ -17101,6 +17107,8 @@ MonoBehaviour:
   _bgmVolume: {fileID: 2027608241}
   _effectVolume: {fileID: 413752116}
   _difficulty: {fileID: 832282747}
+  _closedSound: {fileID: 8300000, guid: 3b4115003306ab44a8d34e65ea6a4f8a, type: 3}
+  _askingSound: {fileID: 8300000, guid: d74cabf03c7bbae48af77cd8f1e8295e, type: 3}
   _autoSave: {fileID: 1183132245}
 --- !u!1 &1705726011
 GameObject:
@@ -19154,6 +19162,9 @@ MonoBehaviour:
   _restartCount: {fileID: 1070970941}
   _paperContents: {fileID: 589826442}
   _desriptionPopup: {fileID: 605091842}
+  _closedSound: {fileID: 8300000, guid: 3b4115003306ab44a8d34e65ea6a4f8a, type: 3}
+  _descriptionOpenSound: {fileID: 8300000, guid: d74cabf03c7bbae48af77cd8f1e8295e,
+    type: 3}
 --- !u!1 &1901972900
 GameObject:
   m_ObjectHideFlags: 0

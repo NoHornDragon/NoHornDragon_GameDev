@@ -1,6 +1,7 @@
 ﻿using DG.Tweening;
 using NHD.StaticData.History;
 using NHD.UI.Common;
+using NHD.Utils.SoundUtil;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -16,6 +17,7 @@ namespace NHD.UI.titleScene.historyPopup.descriptionPopup
         [SerializeField] private Text _paperTitle;
         [SerializeField] private Text _paperDescription;
         [SerializeField] private Image _paperImage;
+        [SerializeField] private AudioClip _closedSound;
         private Vector2 _destPos = new Vector2();
         private RectTransform _rectTransform;
 
@@ -51,6 +53,7 @@ namespace NHD.UI.titleScene.historyPopup.descriptionPopup
 
         public void ClosePopup()
         {
+            SoundManager._instance.PlayEFXAmbient(_closedSound);
             _rectTransform.DOAnchorPosY(CLOSED_DESCRIPTION_POS_Y, UPDOWN_DURATION).SetEase(Ease.InCirc).OnComplete(TurnOffBackGround);
         }
     }

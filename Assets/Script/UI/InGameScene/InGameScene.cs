@@ -10,6 +10,7 @@ namespace NHD.UI.inGameScene
     public class InGameScene : MonoBehaviour
     {
 		[SerializeField] private GameObject _pausePopup;
+		[SerializeField] private AudioClip _popupOpenSound;
 		public bool _isSceneLoading;
 		public event Action<bool> TimerSetEvent;
 
@@ -58,6 +59,7 @@ namespace NHD.UI.inGameScene
 
 		public void OpenPausePopup()
 		{
+			SoundManager._instance.PlayEFXAmbient(_popupOpenSound);
 			PopupContainer.PushPopup(_pausePopup.GetComponent<IPopup>());
 		}
 	}

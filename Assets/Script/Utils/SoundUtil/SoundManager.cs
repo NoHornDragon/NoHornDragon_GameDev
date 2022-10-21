@@ -98,16 +98,32 @@ namespace NHD.Utils.SoundUtil
         /// 효과음을 재생
         /// </summary>
         /// <param name="name"></param>
-        public void PlayEFX(AudioClip audioClip, Vector3 position)
+        public void PlayEFXAtPoint(AudioClip audioClip, Vector3 position)
         {
             foreach(var audioSourceEFX in _audioSourcesEFX)
 			{
 				if (!audioSourceEFX.isPlaying)
 				{
                     audioSourceEFX.clip = audioClip;
+                    audioSourceEFX.spatialBlend = 1;
                     AudioSource.PlayClipAtPoint(audioSourceEFX.clip, position);
+                    break;
 				}
 			}
+        }
+
+        public void PlayEFXAmbient(AudioClip audioClip)
+        {
+            foreach (var audioSourceEFX in _audioSourcesEFX)
+            {
+                if (!audioSourceEFX.isPlaying)
+                {
+                    audioSourceEFX.clip = audioClip;
+                    audioSourceEFX.spatialBlend = 0;
+                    audioSourceEFX.Play();
+                    break;
+                }
+            }
         }
         /// <summary>
         /// 모든 효과음 중지

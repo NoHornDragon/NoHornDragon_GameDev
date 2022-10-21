@@ -3,6 +3,7 @@ using DG.Tweening;
 using NHD.StaticData.History;
 using NHD.UI.Common;
 using NHD.UI.titleScene.historyPopup.descriptionPopup;
+using NHD.Utils.SoundUtil;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -23,6 +24,8 @@ namespace NHD.UI.titleScene.historyPopup
         [SerializeField] private Text _restartCount;
         [SerializeField] RectTransform _paperContents;
         [SerializeField] GameObject _desriptionPopup;
+        [SerializeField] private AudioClip _closedSound;
+        [SerializeField] private AudioClip _descriptionOpenSound;
         private int _currentPage;
         private float _pos;
         private float _movePos;
@@ -67,6 +70,7 @@ namespace NHD.UI.titleScene.historyPopup
 
         public void ClosePopup()
         {
+            SoundManager._instance.PlayEFXAmbient(_closedSound);
             this.gameObject.SetActive(false);
         }
 
@@ -98,6 +102,7 @@ namespace NHD.UI.titleScene.historyPopup
 
         public void OpenDescriptionPopup(int paperIndex)
         {
+            SoundManager._instance.PlayEFXAmbient(_descriptionOpenSound);
             DescriptionPopup._paperIndex = paperIndex;
             PopupContainer.PushPopup(_desriptionPopup.GetComponent<IPopup>());
         }

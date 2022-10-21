@@ -7,6 +7,8 @@ using System.IO;
 using System.Text;
 using TMPro;
 using UnityEngine;
+using NHD.Sound.Common;
+using NHD.Utils.SoundUtil;
 
 namespace NHD.Entity.NPC.TalkingNPC
 {
@@ -17,7 +19,7 @@ namespace NHD.Entity.NPC.TalkingNPC
         public string _key;
     }
 
-    public class NPC : MonoBehaviour
+    public class NPC : SoundPlayableBase
     {
         private Coroutine _crtPtr;
         private StringBuilder _textBuilder = new StringBuilder("");
@@ -58,6 +60,7 @@ namespace NHD.Entity.NPC.TalkingNPC
         {
             if (collision.tag == "Player")
             {
+                SoundManager._instance.PlayEFXAmbient(_audioClips[0]);
                 _textBox.SetActive(true);
                 _visitText.SetActive(true);
                 _crtPtr = StartCoroutine(TalkCoroutine());
