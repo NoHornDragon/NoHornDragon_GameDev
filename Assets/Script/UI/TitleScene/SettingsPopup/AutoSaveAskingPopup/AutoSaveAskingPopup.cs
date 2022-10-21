@@ -1,6 +1,7 @@
 ﻿using NHD.StaticData.Settings;
 using NHD.UI.Common;
 using NHD.UI.inGameScene.pausePopup;
+using NHD.Utils.SoundUtil;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -8,6 +9,7 @@ namespace NHD.UI.titleScene.settingsPopup.autoSaveAskingPopup
 {
     public class AutoSaveAskingPopup : MonoBehaviour, IPopup
     {
+        [SerializeField] private AudioClip _closedSound;
         private bool _isAgree;
 
         public void Setup()
@@ -44,6 +46,7 @@ namespace NHD.UI.titleScene.settingsPopup.autoSaveAskingPopup
 
         public void ClosePopup()
         {
+            SoundManager._instance.PlayEFXAmbient(_closedSound);
             SetAutoSave();
             this.gameObject.SetActive(false);
         }

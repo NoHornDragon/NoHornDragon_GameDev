@@ -1,12 +1,13 @@
 ﻿using NHD.UI.Common;
-using System.Collections;
-using System.Collections.Generic;
+using NHD.Utils.SoundUtil;
 using UnityEngine;
 
 namespace NHD.UI.titleScene.creditPopup
 {
     public class CreditPopup : MonoBehaviour, IPopup
     {
+        [SerializeField] private AudioClip _closedSound;
+
         public void Setup()
         {
             this.gameObject.SetActive(true);
@@ -14,6 +15,7 @@ namespace NHD.UI.titleScene.creditPopup
 
         public void ClosePopup()
         {
+            SoundManager._instance.PlayEFXAmbient(_closedSound);
             this.gameObject.SetActive(false);
         }
     }

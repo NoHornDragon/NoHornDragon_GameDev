@@ -17,6 +17,8 @@ namespace NHD.UI.titleScene.settingsPopup
         [SerializeField] private Slider _bgmVolume;
         [SerializeField] private Slider _effectVolume;
         [SerializeField] private Toggle _difficulty;
+        [SerializeField] private AudioClip _closedSound;
+        [SerializeField] private AudioClip _askingSound;
         public Toggle _autoSave;
 
         public void Setup()
@@ -49,6 +51,7 @@ namespace NHD.UI.titleScene.settingsPopup
 
         public void ClosePopup()
         {
+            SoundManager._instance.PlayEFXAmbient(_closedSound);
             SaveSettingsData();
             this.gameObject.SetActive(false);
         }
@@ -94,6 +97,7 @@ namespace NHD.UI.titleScene.settingsPopup
         {
             if(_autoSave == true && !StaticSettingsData._isAutoSave)
             {
+                SoundManager._instance.PlayEFXAmbient(_askingSound);
                 PopupContainer.PushPopup(_autoSaveAskingPopup.GetComponent<IPopup>());
             }
 
@@ -102,6 +106,7 @@ namespace NHD.UI.titleScene.settingsPopup
 
         public void OpenResetAskingPopup()
         {
+            SoundManager._instance.PlayEFXAmbient(_askingSound);
             PopupContainer.PushPopup(_dataResetAskingPopup.GetComponent<IPopup>());
         }
     }

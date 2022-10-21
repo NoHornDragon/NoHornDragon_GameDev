@@ -1,5 +1,6 @@
 ﻿using NHD.DataController.Savers;
 using NHD.Entity.Yeouiju;
+using NHD.Sound.Common;
 using NHD.StaticData.History;
 using NHD.StaticData.Settings;
 using NHD.Utils.SoundUtil;
@@ -9,7 +10,7 @@ using UnityEngine;
 
 namespace NHD.Entity.Player
 {
-    public class PlayerMovement : MonoBehaviour
+    public class PlayerMovement : SoundPlayableBase
     {
         public event Action<bool> PlayerRecoverEvent;
         public event Action<bool> PlayerResetEvent;
@@ -102,6 +103,7 @@ namespace NHD.Entity.Player
             }
             if (Input.GetMouseButtonUp(0) && prepareLaunch)
             {
+                SoundManager._instance.PlayEFXAmbient(_audioClips[0]);
                 prepareLaunch = false;
                 throwYeouiju = true;
                 throwed = !throwed;

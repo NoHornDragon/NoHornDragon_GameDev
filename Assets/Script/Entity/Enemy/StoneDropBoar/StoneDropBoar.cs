@@ -55,7 +55,7 @@ namespace NHD.Entity.Enemy.stoneDropBoar
             _stone = CreateStone();
             yield return _waitAttack;
 
-            SoundManager._instance.PlayEFX(_audioClips[0], transform.position);
+            SoundManager._instance.PlayEFXAtPoint(_audioClips[0], transform.position);
             _stone.GetComponent<Rigidbody2D>().AddForce(new Vector2(-1000f, 1000f));
             yield return _attackDelay;
 
