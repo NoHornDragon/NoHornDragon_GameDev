@@ -1,5 +1,6 @@
 ﻿using NHD.Entity.Player;
 using NHD.StaticData.Settings;
+using NHD.StaticData.WiseSaying;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
@@ -24,47 +25,15 @@ namespace NHD.UI.InGameScene
 
     public class WiseSayingTeller : MonoBehaviour
     {
-        [SerializeField]
-        private WiaeSayingData wiseSayingTexts;
-
         [SerializeField] private GameObject wiseSayingUI;
         [SerializeField] private TextMeshProUGUI wiseSayingText;
 
-        [Header("명언 파일 이름")]
-        [SerializeField]
-        private string wiseSayingFileName;
-
-
-
-        private void Awake()
-        {
-            ReadWiseFile();
-        }
+        private string _keyValue = "WISESAYING_";
 
         void Start()
         {
             wiseSayingUI.SetActive(false);
             FindObjectOfType<PlayerCollider>().playerStunEvent += ShowWiseSayingOnScreen;
-        }
-
-
-        [ContextMenu("명언 텍스트 로드")]
-        private void ReadWiseFile()
-        {
-            if (!File.Exists(Application.dataPath + "/StreamingAssets/WiseSayingTexts/" + wiseSayingFileName + ".json"))
-            {
-                Debug.Log(wiseSayingFileName + " load failed");
-            }
-            else
-            {
-                FileStream fs = new FileStream(string.Format("{0}/StreamingAssets/WiseSayingTexts/{1}.json", Application.dataPath, wiseSayingFileName), FileMode.Open);
-                byte[] data = new byte[fs.Length];
-                fs.Read(data, 0, data.Length);
-                fs.Close();
-
-                string jsonData = Encoding.UTF8.GetString(data);
-                wiseSayingTexts = JsonUtility.FromJson<WiaeSayingData>(jsonData);
-            }
         }
 
         [ContextMenu("명언 UI ON")]
@@ -73,10 +42,9 @@ namespace NHD.UI.InGameScene
             // Have a appear tweening wiseSayingUI's OnEnable()
             // And will disappear automatically
             if (!isActive) return;
-
-            wiseSayingText.text = wiseSayingTexts.texts[Random.Range(0, wiseSayingTexts.texts.Count)].wiseSay[StaticSettingsData._languageIndex];
+            string key = $"{_keyValue}{Random.Range(1, StaticWiseSayingData._staticWiseSayingData.Count + 1)}";
+            wiseSayingText.text = StaticWiseSayingData._staticWiseSayingData[key];
             wiseSayingUI.SetActive(true);
-
         }
     }
 }

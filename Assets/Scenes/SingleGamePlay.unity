@@ -131784,6 +131784,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1209527695523609215, guid: 2b0f5889ffb005f4e9062eade4a74120,
+        type: 3}
+      propertyPath: m_text
+      value: "WiseSaying \uC608\uC2DC\nWiseSaying \uC608\uC2DC"
+      objectReference: {fileID: 0}
+    - target: {fileID: 1209527695523609215, guid: 2b0f5889ffb005f4e9062eade4a74120,
+        type: 3}
+      propertyPath: m_margin.x
+      value: 49.16986
+      objectReference: {fileID: 0}
+    - target: {fileID: 1209527695523609215, guid: 2b0f5889ffb005f4e9062eade4a74120,
+        type: 3}
+      propertyPath: m_margin.z
+      value: 46.720215
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2b0f5889ffb005f4e9062eade4a74120, type: 3}
 --- !u!4 &1211426710124275825
