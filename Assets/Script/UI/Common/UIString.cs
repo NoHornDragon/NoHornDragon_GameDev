@@ -1,5 +1,6 @@
 ﻿using NHD.DataController.Loaders;
 using NHD.StaticData.UIString;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -8,12 +9,12 @@ namespace NHD.UI.Common
     public class UIString : MonoBehaviour
     {
         [SerializeField] private string _stringKey;
-        private Text _uiText;
+        private TextMeshProUGUI _uiText;
 
         // Start is called before the first frame update
         private void Awake()
         {
-            _uiText = GetComponent<Text>();
+            _uiText = GetComponent<TextMeshProUGUI>();
         }
 
         private void Start()

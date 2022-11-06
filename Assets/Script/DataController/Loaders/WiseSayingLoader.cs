@@ -1,7 +1,6 @@
 ﻿using Newtonsoft.Json;
 using NHD.StaticData.Settings;
 using NHD.StaticData.WiseSaying;
-using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;

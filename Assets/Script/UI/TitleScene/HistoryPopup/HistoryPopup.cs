@@ -4,6 +4,7 @@ using NHD.StaticData.History;
 using NHD.UI.Common;
 using NHD.UI.titleScene.historyPopup.descriptionPopup;
 using NHD.Utils.SoundUtil;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -18,10 +19,10 @@ namespace NHD.UI.titleScene.historyPopup
         private const float SCROLL_DURATION = 0.3f;
 
         [SerializeField] private Button[] _paperButtons;
-        [SerializeField] private Text _paperCount;
-        [SerializeField] private Text _playTime;
-        [SerializeField] private Text _stunCount;
-        [SerializeField] private Text _restartCount;
+        [SerializeField] private TextMeshProUGUI _paperCount;
+        [SerializeField] private TextMeshProUGUI _playTime;
+        [SerializeField] private TextMeshProUGUI _stunCount;
+        [SerializeField] private TextMeshProUGUI _restartCount;
         [SerializeField] RectTransform _paperContents;
         [SerializeField] GameObject _desriptionPopup;
         [SerializeField] private AudioClip _closedSound;

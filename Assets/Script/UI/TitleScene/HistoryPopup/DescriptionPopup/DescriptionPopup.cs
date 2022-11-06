@@ -2,6 +2,7 @@
 using NHD.StaticData.History;
 using NHD.UI.Common;
 using NHD.Utils.SoundUtil;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -14,8 +15,8 @@ namespace NHD.UI.titleScene.historyPopup.descriptionPopup
         private const float UPDOWN_DURATION = 0.5f;
 
         [SerializeField] private GameObject _popupBackGround;
-        [SerializeField] private Text _paperTitle;
-        [SerializeField] private Text _paperDescription;
+        [SerializeField] private TextMeshProUGUI _paperTitle;
+        [SerializeField] private TextMeshProUGUI _paperDescription;
         [SerializeField] private Image _paperImage;
         [SerializeField] private AudioClip _closedSound;
         private Vector2 _destPos = new Vector2();
