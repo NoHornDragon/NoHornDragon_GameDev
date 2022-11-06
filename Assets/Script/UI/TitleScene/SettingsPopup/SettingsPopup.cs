@@ -73,6 +73,7 @@ namespace NHD.UI.titleScene.settingsPopup
             UIStringLoader.SetupData();
             PaperDataLoader.SetupData();
             NPCCommentsDataLoader.SetupData();
+            WiseSayingLoader.SetupData();
             UIStringLoader.LanguageChangeAction();
         }
 

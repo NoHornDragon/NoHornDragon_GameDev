@@ -15,6 +15,7 @@ namespace NHD.DataController.Common
             UIStringLoader.SetupData();
             PaperDataLoader.SetupData();
             NPCCommentsDataLoader.SetupData();
+            WiseSayingLoader.SetupData();
         }
     }
 }
