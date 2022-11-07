@@ -46,7 +46,6 @@ namespace NHD.GamePlay.InteractionEntity.FiringObject
 
             while (true)
             {
-                Debug.Log($"move to target");
                 if ((Vector2)transform.position == curPos)
                 {
                     _pathIndex++;
@@ -72,8 +71,9 @@ namespace NHD.GamePlay.InteractionEntity.FiringObject
             StopCoroutine("MoveToTarget");
             while (true)
             {
-                Debug.Log($"move to end point");
-                transform.position = Vector2.MoveTowards(transform.position, _moveDir * 100, _speed * Time.deltaTime);
+                transform.position = Vector2.MoveTowards(transform.position, 
+                                                        (Vector2)transform.position + _moveDir * 100, 
+                                                        _speed * Time.deltaTime);
                 yield return null;
             }
         }
