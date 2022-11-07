@@ -13,30 +13,30 @@ namespace NHD.Algorithm.PathFinding
 
     public class Heap<T> where T : IHeapItem<T>
     {
-        private T[] items;
-        private int curCount;
-        public int Count { get { return curCount; } }
+        private T[] _items;
+        private int _curCount;
+        public int Count { get { return _curCount; } }
 
         public Heap(int maxHeapSize)
         {
-            items = new T[maxHeapSize];
+            _items = new T[maxHeapSize];
         }
 
         public void Add(T item)
         {
-            item.HeapIndex = curCount;
-            items[curCount] = item;
+            item.HeapIndex = _curCount;
+            _items[_curCount] = item;
             SortUp(item);
-            curCount++;
+            _curCount++;
         }
 
         public T RemoveFirst()
         {
-            T firstItem = items[0];
-            curCount--;
-            items[0] = items[curCount];
-            items[0].HeapIndex = 0;
-            SortDown(items[0]);
+            T firstItem = _items[0];
+            _curCount--;
+            _items[0] = _items[_curCount];
+            _items[0].HeapIndex = 0;
+            SortDown(_items[0]);
 
             return firstItem;
         }
@@ -48,7 +48,7 @@ namespace NHD.Algorithm.PathFinding
 
         public bool Contains(T item)
         {
-            return Equals(items[item.HeapIndex], item);
+            return Equals(_items[item.HeapIndex], item);
         }
 
         private void SortDown(T item)
@@ -60,21 +60,21 @@ namespace NHD.Algorithm.PathFinding
 
                 int swapIndex = 0;
 
-                if (leftChild < curCount)
+                if (leftChild < _curCount)
                 {
                     swapIndex = leftChild;
 
-                    if (rightChild < curCount)
+                    if (rightChild < _curCount)
                     {
-                        if (items[leftChild].CompareTo(items[rightChild]) < 0)
+                        if (_items[leftChild].CompareTo(_items[rightChild]) < 0)
                         {
                             swapIndex = rightChild;
                         }
                     }
 
-                    if (item.CompareTo(items[swapIndex]) < 0)
+                    if (item.CompareTo(_items[swapIndex]) < 0)
                     {
-                        Swap(item, items[swapIndex]);
+                        Swap(item, _items[swapIndex]);
                     }
                     else
                         return;
@@ -91,7 +91,7 @@ namespace NHD.Algorithm.PathFinding
             int parent = (item.HeapIndex - 1) / 2;
             while (true)
             {
-                T parentItem = items[parent];
+                T parentItem = _items[parent];
                 if (item.CompareTo(parentItem) > 0)
                 {
                     Swap(item, parentItem);
@@ -106,8 +106,8 @@ namespace NHD.Algorithm.PathFinding
 
         private void Swap(T A, T B)
         {
-            items[A.HeapIndex] = B;
-            items[B.HeapIndex] = A;
+            _items[A.HeapIndex] = B;
+            _items[B.HeapIndex] = A;
 
             int aIndex = A.HeapIndex;
             A.HeapIndex = B.HeapIndex;

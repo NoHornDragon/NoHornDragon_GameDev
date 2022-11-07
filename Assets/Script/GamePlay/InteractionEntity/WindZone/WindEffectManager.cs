@@ -5,41 +5,40 @@ namespace NHD.GamePlay.InteractionEntity.WindZone
 {
     public class WindEffectManager : MonoBehaviour
     {
-        [SerializeField] GameObject windZone;
-        [SerializeField] AreaEffector2D effector;
-        [SerializeField] ParticleSystem particle;
+        [SerializeField] GameObject _windZone;
+        [SerializeField] AreaEffector2D _effector;
 
         [Header("타이머 시간")]
-        [SerializeField] private float windTime;
-        [SerializeField] private float idleTime;
-        private float timer;
-        private bool nowWindy;
+        [SerializeField] private float _windTime;
+        [SerializeField] private float _idleTime;
+        private float _timer;
+        private bool _nowWindy;
 
         [Header("이펙터 항목")]
-        [SerializeField] private float windPower;
+        [SerializeField] private float _windPower;
 
         void Start()
         {
-            nowWindy = false;
-            timer = idleTime;
+            _timer = _idleTime;
 
-            windZone = transform.GetChild(1).gameObject;
+            _windZone = transform.GetChild(1).gameObject;
+            _effector = GetComponentInChildren<AreaEffector2D>();
 
-            windZone.transform.localEulerAngles = GetWindAngle(effector.forceAngle);
-            windZone.SetActive(false);
+            _windZone.transform.localEulerAngles = GetWindAngle(_effector.forceAngle);
+            _windZone.SetActive(false);
         }
 
         void Update()
         {
-            if (timer > 0)
+            if (_timer > 0)
             {
-                timer -= Time.deltaTime;
+                _timer -= Time.deltaTime;
                 return;
             }
 
-            timer = nowWindy ? idleTime : windTime;
+            _timer = _nowWindy ? _idleTime : _windTime;
 
-            if (nowWindy)
+            if (_nowWindy)
             {
                 StartCoroutine(StopWind());
             }
@@ -49,41 +48,32 @@ namespace NHD.GamePlay.InteractionEntity.WindZone
             }
         }
 
-        WaitForSeconds waitTime = new WaitForSeconds(1f);
+        WaitForSeconds _waitTime = new WaitForSeconds(1f);
         IEnumerator StartWind()
         {
-            windZone.SetActive(true);
+            _windZone.SetActive(true);
 
-            yield return waitTime;
+            yield return _waitTime;
 
-            effector.forceMagnitude = windPower;
+            _effector.forceMagnitude = _windPower;
 
-            nowWindy = true;
+            _nowWindy = true;
         }
 
         IEnumerator StopWind()
         {
-            windZone.SetActive(false);
+            _windZone.SetActive(false);
 
-            yield return waitTime;
+            yield return _waitTime;
 
-            effector.forceMagnitude = 0;
+            _effector.forceMagnitude = 0;
 
-            nowWindy = false;
+            _nowWindy = false;
         }
 
         Vector3 GetWindAngle(float effectorDir)
         {
-            /*
-                effector의 방향은 0부터 시작해 90도마다 오른쪽, 위, 왼쪽, 아래로 이동합니다. 0, 90, 180, 270
-                파티클 이펙트를 주는 windZone의 경우 오른쪽, 위, 왼쪽, 아래 순으로 벡터(x, y)를 나열해 보면
-
-                - 오른쪽 : 0, 90                => 0
-                - 위 : -90, 0 or 270, 0         => 90
-                - 왼쪽 : 0, 270 or 0, -90       => 180
-                - 아래 : 90, 0                  => 270
-            */
-            Vector3 angle = Vector3.zero;
+            Vector3 angle = new Vector3(0, 0, 0);
 
             switch (effectorDir)
             {

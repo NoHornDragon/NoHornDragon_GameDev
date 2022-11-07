@@ -20,7 +20,7 @@ namespace NHD.GamePlay.InteractionEntity.FiringObject
 
         private void OnEnable()
         {
-            if (RequestAStarPath.instance == null) return;
+            if (RequestAStarPath._instance == null) return;
 
             RequestAStarPath.RequestPath(transform.position, _target.position, AfterFindPath);
         }
@@ -67,9 +67,13 @@ namespace NHD.GamePlay.InteractionEntity.FiringObject
 
         IEnumerator MoveToEndPoint()
         {
+            
+            StopCoroutine("MoveToTarget");
             while (true)
             {
-                transform.position = Vector2.MoveTowards(transform.position, _moveDir * 100, _speed * Time.deltaTime);
+                transform.position = Vector2.MoveTowards(transform.position, 
+                                                        (Vector2)transform.position + _moveDir * 100, 
+                                                        _speed * Time.deltaTime);
                 yield return null;
             }
         }
