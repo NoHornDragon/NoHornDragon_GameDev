@@ -10378,6 +10378,21 @@ PrefabInstance:
       propertyPath: _audioClips.Array.data[0]
       value: 
       objectReference: {fileID: 8300000, guid: 398c3cc8b01da68448add992e955307b, type: 3}
+    - target: {fileID: 7943047442311475858, guid: 013d83cfedbc986428641a40c21a8da9,
+        type: 3}
+      propertyPath: _npcTalks.Array.data[0]._count
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7943047442311475858, guid: 013d83cfedbc986428641a40c21a8da9,
+        type: 3}
+      propertyPath: _npcTalks.Array.data[1]._count
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7943047442311475858, guid: 013d83cfedbc986428641a40c21a8da9,
+        type: 3}
+      propertyPath: _npcTalks.Array.data[2]._count
+      value: 5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 013d83cfedbc986428641a40c21a8da9, type: 3}
 --- !u!4 &1504428908 stripped
@@ -132117,11 +132132,11 @@ MonoBehaviour:
   _textBox: {fileID: 167359554}
   _npcTalks:
   - _count: 0
-    _key: MINER_01
+    _key: SIMMANI_01
+  - _count: 2
+    _key: SIMMANI_02
   - _count: 5
-    _key: MINER_02
-  - _count: 10
-    _key: MINER_03
+    _key: SIMMANI_03
   _visitCount: 0
   _farCheckCol: {fileID: 1031057882}
 --- !u!61 &2356736144566924993
@@ -132416,11 +132431,11 @@ MonoBehaviour:
   _textBox: {fileID: 331721918}
   _npcTalks:
   - _count: 0
-    _key: MINER_01
+    _key: SHAMAN_01
+  - _count: 2
+    _key: SHAMAN_02
   - _count: 5
-    _key: MINER_02
-  - _count: 10
-    _key: MINER_03
+    _key: SHAMAN_03
   _visitCount: 0
   _farCheckCol: {fileID: 220801967}
 --- !u!95 &3030904232675046051
