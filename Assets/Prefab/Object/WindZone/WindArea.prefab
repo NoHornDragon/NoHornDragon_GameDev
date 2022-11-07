@@ -124,12 +124,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5246fffb6df1dc8419f72d43ee443a8a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  windZone: {fileID: 1222321338387057840}
-  effector: {fileID: 1222321336926396214}
-  particle: {fileID: 1222321337852481380}
-  windTime: 5
-  idleTime: 5
-  windPower: 10
+  _windZone: {fileID: 0}
+  _effector: {fileID: 0}
+  _windTime: 5
+  _idleTime: 5
+  _windPower: 10
 --- !u!1 &1222321337852481382
 GameObject:
   m_ObjectHideFlags: 0

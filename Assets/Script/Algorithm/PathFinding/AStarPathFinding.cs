@@ -21,7 +21,7 @@ namespace NHD.Algorithm.PathFinding
             Node startNode = grid.NodeFromWroldPosition(startPos);
             Node targetNode = grid.NodeFromWroldPosition(targetPos);
 
-            if (startNode.canWalk && targetNode.canWalk)
+            if (startNode._canWalk && targetNode._canWalk)
             {
                 Heap<Node> openSet = new Heap<Node>(grid.MaxSize);
                 HashSet<Node> closedSet = new HashSet<Node>();
@@ -41,15 +41,15 @@ namespace NHD.Algorithm.PathFinding
 
                     foreach (Node neighbour in grid.GetNodeNeighbours(curNode))
                     {
-                        if (!neighbour.canWalk || closedSet.Contains(neighbour)) continue;
+                        if (!neighbour._canWalk || closedSet.Contains(neighbour)) continue;
 
-                        int newCost = curNode.gCost + GetDistance(curNode, neighbour);
+                        int newCost = curNode._gCost + GetDistance(curNode, neighbour);
 
-                        if (newCost < neighbour.gCost || !openSet.Contains(neighbour))
+                        if (newCost < neighbour._gCost || !openSet.Contains(neighbour))
                         {
-                            neighbour.gCost = newCost;
-                            neighbour.hCost = GetDistance(neighbour, targetNode);
-                            neighbour.parent = curNode;
+                            neighbour._gCost = newCost;
+                            neighbour._hCost = GetDistance(neighbour, targetNode);
+                            neighbour._parent = curNode;
 
                             if (!openSet.Contains(neighbour))
                             {
@@ -66,7 +66,7 @@ namespace NHD.Algorithm.PathFinding
             {
                 wayPoint = TracePath(startNode, targetNode);
             }
-            RequestAStarPath.instance.FinishPathFinding(wayPoint, success);
+            RequestAStarPath._instance.FinishPathFinding(wayPoint, success);
         }
 
 
@@ -78,7 +78,7 @@ namespace NHD.Algorithm.PathFinding
             while (curNode != start)
             {
                 path.Add(curNode);
-                curNode = curNode.parent;
+                curNode = curNode._parent;
             }
             Vector2[] wayPoints = MakePathSimple(path);
             Array.Reverse(wayPoints);
@@ -90,14 +90,14 @@ namespace NHD.Algorithm.PathFinding
         {
             List<Vector2> way = new List<Vector2>();
             Vector2 prevDir = Vector2.zero;
-            way.Add(path[0].worldPosition);
+            way.Add(path[0]._worldPosition);
 
             for (int i = 1; i < path.Count; i++)
             {
-                Vector2 newDir = new Vector2(path[i - 1].gridX - path[i].gridX, path[i - 1].gridY - path[i].gridY);
+                Vector2 newDir = new Vector2(path[i - 1]._gridX - path[i]._gridX, path[i - 1]._gridY - path[i]._gridY);
                 if (prevDir != newDir)
                 {
-                    way.Add(path[i].worldPosition);
+                    way.Add(path[i]._worldPosition);
                     prevDir = newDir;
                 }
             }
@@ -106,8 +106,8 @@ namespace NHD.Algorithm.PathFinding
 
         public int GetDistance(Node A, Node B)
         {
-            int distX = Mathf.Abs(A.gridX - B.gridX);
-            int distY = Mathf.Abs(A.gridY - B.gridY);
+            int distX = Mathf.Abs(A._gridX - B._gridX);
+            int distY = Mathf.Abs(A._gridY - B._gridY);
 
             if (distX > distY)
                 return 4 * distY + 10 * distX;
