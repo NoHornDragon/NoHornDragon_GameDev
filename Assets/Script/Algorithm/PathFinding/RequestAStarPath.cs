@@ -6,23 +6,23 @@ namespace NHD.Algorithm.PathFinding
 {
     public class RequestAStarPath : MonoBehaviour
     {
-        Queue<PathInfo> pathToProcess = new Queue<PathInfo>();
-        bool isProcessing;
-        PathInfo curPath;
+        private Queue<PathInfo> _pathToProcess = new Queue<PathInfo>();
+        private bool _isProcessing;
+        private PathInfo _curPath;
 
-        public static RequestAStarPath instance;
-        private AStarPathFinding aStarPathFinding;
+        public static RequestAStarPath _instance;
+        private AStarPathFinding _aStarPathFinding;
         [SerializeField]
-        private WorldToGrid grid;
-        public WorldToGrid CurGrid { set { grid = value; } }
+        private WorldToGrid _grid;
+        public WorldToGrid CurGrid { set { _grid = value; } }
 
 
 
         private void Awake()
         {
-            if (instance == null)
+            if (_instance == null)
             {
-                instance = this;
+                _instance = this;
 
             }
             else
@@ -30,30 +30,30 @@ namespace NHD.Algorithm.PathFinding
                 Destroy(this.gameObject);
             }
 
-            aStarPathFinding = GetComponent<AStarPathFinding>();
+            _aStarPathFinding = GetComponent<AStarPathFinding>();
         }
 
         public static void RequestPath(Vector2 startPos, Vector2 endPos, Action<Vector2[], bool> callback)
         {
             PathInfo newPath = new PathInfo(startPos, endPos, callback);
 
-            instance.pathToProcess.Enqueue(newPath);
-            instance.ProcessPathInfo();
+            _instance._pathToProcess.Enqueue(newPath);
+            _instance.ProcessPathInfo();
         }
 
         private void ProcessPathInfo()
         {
-            if (isProcessing || pathToProcess.Count <= 0) return;
+            if (_isProcessing || _pathToProcess.Count <= 0) return;
 
-            isProcessing = true;
-            curPath = pathToProcess.Dequeue();
-            aStarPathFinding.TriggerPathFinding(grid, curPath.startPos, curPath.endPos);
+            _isProcessing = true;
+            _curPath = _pathToProcess.Dequeue();
+            _aStarPathFinding.TriggerPathFinding(_grid, _curPath.startPos, _curPath.endPos);
         }
 
         public void FinishPathFinding(Vector2[] path, bool success)
         {
-            curPath.callback(path, success);
-            isProcessing = false;
+            _curPath.callback(path, success);
+            _isProcessing = false;
             ProcessPathInfo();
         }
 

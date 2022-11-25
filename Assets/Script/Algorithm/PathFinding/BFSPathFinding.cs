@@ -8,9 +8,9 @@ namespace NHD.Algorithm.PathFinding
     public class BFSPathFinding : MonoBehaviour
     {
         [Tooltip("대각선 이동을 할 수 있는지 여부")]
-        [SerializeField] private bool canDiagonalMove;
-        private int[] moveX = { 0, 0, 1, -1, 1, 1, -1, -1 };
-        private int[] moveY = { 1, -1, 0, 0, 1, -1, 1, -1 };
+        [SerializeField] private bool _canDiagonalMove;
+        private int[] _moveX = { 0, 0, 1, -1, 1, 1, -1, -1 };
+        private int[] _moveY = { 1, -1, 0, 0, 1, -1, 1, -1 };
 
         public void TriggerPathFinding(WorldToGrid grid, Vector2 startPos, Vector2 endPos)
         {
@@ -25,7 +25,7 @@ namespace NHD.Algorithm.PathFinding
             Node startNode = grid.NodeFromWroldPosition(startPos);
             Node targetNode = grid.NodeFromWroldPosition(endPos);
 
-            if (startNode.canWalk && targetNode.canWalk)
+            if (startNode._canWalk && targetNode._canWalk)
             {
                 Queue<Node> q = new Queue<Node>();
                 bool[,] visit = new bool[grid.GridSizeX, grid.GridSizeY];
@@ -42,34 +42,34 @@ namespace NHD.Algorithm.PathFinding
 
                     for (int i = 0; i < 4; i++)
                     {
-                        int nextX = curNode.gridX + moveX[i];
-                        int nextY = curNode.gridY + moveY[i];
+                        int nextX = curNode._gridX + _moveX[i];
+                        int nextY = curNode._gridY + _moveY[i];
 
                         if (nextX < 0 || nextY < 0 || nextX >= grid.GridSizeX || nextY >= grid.GridSizeY) continue;
                         if (visit[nextX, nextY]) continue;
                         nextNode = grid.grid[nextX, nextY];
 
-                        if (!nextNode.canWalk) continue;
+                        if (!nextNode._canWalk) continue;
 
                         visit[nextX, nextY] = true;
-                        nextNode.parent = curNode;
+                        nextNode._parent = curNode;
                         q.Enqueue(nextNode);
                     }
 
-                    if (!canDiagonalMove) continue;
+                    if (!_canDiagonalMove) continue;
                     for (int i = 4; i < 8; i++)
                     {
-                        int nextX = curNode.gridX + moveX[i];
-                        int nextY = curNode.gridY + moveY[i];
+                        int nextX = curNode._gridX + _moveX[i];
+                        int nextY = curNode._gridY + _moveY[i];
 
                         if (nextX < 0 || nextY < 0 || nextX >= grid.GridSizeX || nextY >= grid.GridSizeY) continue;
                         if (visit[nextX, nextY]) continue;
                         nextNode = grid.grid[nextX, nextY];
 
-                        if (!nextNode.canWalk) continue;
+                        if (!nextNode._canWalk) continue;
 
                         visit[nextX, nextY] = true;
-                        nextNode.parent = curNode;
+                        nextNode._parent = curNode;
                         q.Enqueue(nextNode);
                     }
 
@@ -80,7 +80,7 @@ namespace NHD.Algorithm.PathFinding
                 {
                     wayPoint = TracePath(startNode, targetNode);
                 }
-                RequestBFSPathfinding.instance.FinishPathFinding(wayPoint, success);
+                RequestBFSPathfinding._instance.FinishPathFinding(wayPoint, success);
             }
         }
 
@@ -92,7 +92,7 @@ namespace NHD.Algorithm.PathFinding
             while (curNode != start)
             {
                 path.Add(curNode);
-                curNode = curNode.parent;
+                curNode = curNode._parent;
             }
             Vector2[] wayPoints = MakePathSimple(path);
             Array.Reverse(wayPoints);
@@ -104,14 +104,14 @@ namespace NHD.Algorithm.PathFinding
         {
             List<Vector2> way = new List<Vector2>();
             Vector2 prevDir = Vector2.zero;
-            way.Add(path[0].worldPosition);
+            way.Add(path[0]._worldPosition);
 
             for (int i = 1; i < path.Count; i++)
             {
-                Vector2 newDir = new Vector2(path[i - 1].gridX - path[i].gridX, path[i - 1].gridY - path[i].gridY);
+                Vector2 newDir = new Vector2(path[i - 1]._gridX - path[i]._gridX, path[i - 1]._gridY - path[i]._gridY);
                 if (prevDir != newDir)
                 {
-                    way.Add(path[i].worldPosition);
+                    way.Add(path[i]._worldPosition);
                     prevDir = newDir;
                 }
             }

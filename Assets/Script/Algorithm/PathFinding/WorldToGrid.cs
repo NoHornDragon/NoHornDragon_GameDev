@@ -45,7 +45,7 @@ namespace NHD.Algorithm.PathFinding
 
         private void OnEnable()
         {
-            RequestAStarPath.instance.CurGrid = this;
+            RequestAStarPath._instance.CurGrid = this;
         }
 
         private void OnDrawGizmos()
@@ -60,11 +60,11 @@ namespace NHD.Algorithm.PathFinding
             Node thisNode = NodeFromWroldPosition(transform.position);
             foreach (Node n in grid)
             {
-                Gizmos.color = (n.canWalk) ? Color.blue : Color.red;
+                Gizmos.color = (n._canWalk) ? Color.blue : Color.red;
                 if (n == targetNode)
                     Gizmos.color = Color.yellow;
 
-                Gizmos.DrawCube(n.worldPosition, Vector3.one * (nodeDiameter - 0.1f));
+                Gizmos.DrawCube(n._worldPosition, Vector3.one * (nodeDiameter - 0.1f));
             }
         }
 
@@ -93,8 +93,8 @@ namespace NHD.Algorithm.PathFinding
                 {
                     if (x == 0 && y == 0) continue;
 
-                    int nodeX = node.gridX + x;
-                    int nodeY = node.gridY + y;
+                    int nodeX = node._gridX + x;
+                    int nodeY = node._gridY + y;
 
                     if (NotNPCRange(nodeX, nodeY)) continue;
 
