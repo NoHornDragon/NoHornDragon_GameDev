@@ -33,7 +33,7 @@ namespace NHD.UI.InGameScene
         void Start()
         {
             wiseSayingUI.SetActive(false);
-            FindObjectOfType<PlayerCollider>().playerStunEvent += ShowWiseSayingOnScreen;
+            FindObjectOfType<PlayerCollider>().PlayerStunEvent += ShowWiseSayingOnScreen;
         }
 
         [ContextMenu("명언 UI ON")]

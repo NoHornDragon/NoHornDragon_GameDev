@@ -5,20 +5,20 @@ namespace NHD.Entity.Player
 {
     public class PlayerCollider : MonoBehaviour
     {
-        public event Action<bool> playerStunEvent;
-        public event Action<bool> playerChangeEvent;
-        private PlayerMovement player;
-        private GameObject playerVisual;
-        private bool isOrigin = true;
-        private AnotherMovement anotherMovement;
+        public event Action<bool> PlayerStunEvent;
+        public event Action<bool> PlayerChangeEvent;
+        private PlayerMovement _player;
+        private GameObject _playerVisual;
+        private bool _isOrigin = true;
+        private AnotherMovement _anotherMovement;
         void Start()
         {
-            player = GetComponent<PlayerMovement>();
-            playerVisual = transform.GetChild(0).gameObject;
+            _player = GetComponent<PlayerMovement>();
+            _playerVisual = transform.GetChild(0).gameObject;
 
-            playerChangeEvent += (bool input) => { playerVisual.SetActive(input); };
+            PlayerChangeEvent += (bool input) => { _playerVisual.SetActive(input); };
 
-            FindObjectOfType<PlayerMovement>().playerResetEvent += SetPlayerOrigin;
+            FindObjectOfType<PlayerMovement>().PlayerResetEvent += SetPlayerOrigin;
         }
 
         private void OnTriggerEnter2D(Collider2D other)
@@ -29,31 +29,31 @@ namespace NHD.Entity.Player
                 // if now not origin movement, first change to origin player
                 PlayerChanged(true, null);
 
-                PlayerStunEvent();
+                TriggerPlayerStunEvent();
             }
             if (other.CompareTag("AnotherMovement"))
             {
                 // change player
-                PlayerChanged(!isOrigin, other.gameObject.GetComponent<AnotherMovement>());
+                PlayerChanged(!_isOrigin, other.gameObject.GetComponent<AnotherMovement>());
             }
         }
 
         private void FixedUpdate()
         {
-            if (isOrigin) return;
-            if (anotherMovement == null) return;
+            if (_isOrigin) return;
+            if (_anotherMovement == null) return;
 
             // if now playing with no originmovement, player's collider will follow anothermovement
-            this.transform.position = anotherMovement.transform.position;
+            this.transform.position = _anotherMovement.transform.position;
         }
 
         private void PlayerChanged(bool isOrigin, AnotherMovement newPlayer = null)
         {
 
-            this.isOrigin = isOrigin;
-            anotherMovement = (isOrigin) ? null : newPlayer;
+            this._isOrigin = isOrigin;
+            _anotherMovement = (isOrigin) ? null : newPlayer;
 
-            playerChangeEvent?.Invoke(isOrigin);
+            PlayerChangeEvent?.Invoke(isOrigin);
 
         }
 
@@ -62,11 +62,15 @@ namespace NHD.Entity.Player
             PlayerChanged(true, null);
         }
 
-        public void PlayerStunEvent()
+        public void TriggerPlayerStunEvent(bool isKnockbacked = false, Vector3 fromPosition = default(Vector3), float knockbackPower = 0.0f)
         {
-            if (player.stuned) return;
+            if (_player._stuned) return;
 
-            playerStunEvent?.Invoke(true);
+            PlayerStunEvent?.Invoke(true);
+            if(isKnockbacked)
+            {
+                _player.PlayerKnockback(fromPosition, knockbackPower);
+            }
         }
     }
 }

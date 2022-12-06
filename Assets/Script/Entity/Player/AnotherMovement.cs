@@ -5,19 +5,19 @@ namespace NHD.Entity.Player
     public class AnotherMovement : MonoBehaviour
     {
 
-        [SerializeField] private Vector3 originPos;
-        private bool isActive;
-        private Rigidbody2D rigid;
+        [SerializeField] private Vector3 _originPos;
+        private bool _isActive;
+        private Rigidbody2D _rigid;
 
         private void Start()
         {
-            originPos = this.transform.position;
-            rigid = GetComponent<Rigidbody2D>();
+            _originPos = this.transform.position;
+            _rigid = GetComponent<Rigidbody2D>();
         }
 
         private void Update()
         {
-            if (!isActive)
+            if (!_isActive)
                 return;
 
             Movement();
@@ -47,9 +47,9 @@ namespace NHD.Entity.Player
         public void BackToOrigin()
         {
             // no input
-            isActive = false;
+            _isActive = false;
 
-            gameObject.transform.position = originPos;
+            gameObject.transform.position = _originPos;
 
             // TODO : player position to here
 
