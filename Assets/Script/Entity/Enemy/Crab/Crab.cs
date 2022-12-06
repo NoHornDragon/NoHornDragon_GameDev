@@ -52,7 +52,7 @@ namespace NHD.Entity.Enemy.crab
             playerRigid.velocity = Vector2.zero;
             playerRigid.AddForce(reflectDir * REFLECT_POWER);
             SoundManager._instance.PlayEFXAtPoint(_audioClips[0], transform.position);
-            _player.GetComponent<PlayerCollider>().PlayerStunEvent();
+            _player.GetComponent<PlayerCollider>().TriggerPlayerStunEvent();
 
             yield return _attackDelay;
 
