@@ -162,6 +162,14 @@ namespace NHD.Entity.Player
             StartCoroutine(PlayerRecoverFromStun());
         }
 
+        public void PlayerKnockback(Vector3 fromPosition, float knockbackPower)
+        {
+            Vector2 reflectDir = transform.position - fromPosition;
+            
+            _rigid.velocity = Vector2.zero;
+            _rigid.AddForce(reflectDir * knockbackPower);
+        }
+
         WaitForSeconds stunRecoverCheck = new WaitForSeconds(2f);
         IEnumerator PlayerRecoverFromStun()
         {

@@ -62,11 +62,15 @@ namespace NHD.Entity.Player
             PlayerChanged(true, null);
         }
 
-        public void TriggerPlayerStunEvent()
+        public void TriggerPlayerStunEvent(bool isKnockbacked = false, Vector3 fromPosition = default(Vector3), float knockbackPower = 0.0f)
         {
             if (_player._stuned) return;
 
             PlayerStunEvent?.Invoke(true);
+            if(isKnockbacked)
+            {
+                _player.PlayerKnockback(fromPosition, knockbackPower);
+            }
         }
     }
 }
