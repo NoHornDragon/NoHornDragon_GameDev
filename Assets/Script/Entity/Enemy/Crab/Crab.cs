@@ -45,14 +45,8 @@ namespace NHD.Entity.Enemy.crab
 
         IEnumerator AttackCoroutine()
         {
-            Rigidbody2D playerRigid = _player.GetComponent<Rigidbody2D>();
-            Vector2 reflectDir = _player.position - _collider.bounds.center;
-
-            reflectDir = reflectDir.normalized;
-            playerRigid.velocity = Vector2.zero;
-            playerRigid.AddForce(reflectDir * REFLECT_POWER);
             SoundManager._instance.PlayEFXAtPoint(_audioClips[0], transform.position);
-            _player.GetComponent<PlayerCollider>().PlayerStunEvent();
+            _player.GetComponent<PlayerCollider>().TriggerPlayerStunEvent(true, _collider.bounds.center, REFLECT_POWER);
 
             yield return _attackDelay;
 

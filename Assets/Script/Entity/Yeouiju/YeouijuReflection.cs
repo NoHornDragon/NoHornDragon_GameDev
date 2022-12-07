@@ -6,101 +6,95 @@ namespace NHD.Entity.Yeouiju
 {
     public class YeouijuReflection : MonoBehaviour
     {
-        public event Action<Vector2> collisionEvent;
-        public event Action yeouijuReturnEvent;
-        private Rigidbody2D rigid;
-        private CircleCollider2D coll;
-        private Transform player;
-        private SpriteRenderer sprite;
-        [SerializeField] private float yeouijuSpeed;
-        private bool yeouijuOn;
-        private Vector3 prevVelocity;
+        public event Action<Vector2> CollisionEvent;
+        public event Action YeouijuReturnEvent;
+        private Rigidbody2D _rigid;
+        private CircleCollider2D _coll;
+        private Transform _player;
+        private SpriteRenderer _sprite;
+        [SerializeField] private float _yeouijuSpeed;
+        private bool _yeouijuOn;
+        private Vector3 _prevVelocity;
 
         [Header("충돌 변수들")]
-        [SerializeField] private int collisionCount;
-        [SerializeField] private float maxDistance;
-        [SerializeField] private int reflectCount;
+        [SerializeField] private int _collisionCount;
+        [SerializeField] private float _maxDistance;
+        [SerializeField] private int _reflectCount;
 
         void Start()
         {
-            player = GameObject.FindGameObjectWithTag("Player").transform;
-            rigid = GetComponent<Rigidbody2D>();
-            coll = GetComponent<CircleCollider2D>();
-            sprite = GetComponent<SpriteRenderer>();
+            _player = GameObject.FindGameObjectWithTag("Player").transform;
+            _rigid = GetComponent<Rigidbody2D>();
+            _coll = GetComponent<CircleCollider2D>();
+            _sprite = GetComponent<SpriteRenderer>();
 
-            FindObjectOfType<YeouijuLaunch>().disJointEvent += YeouijuFollowPlayer;
-            FindObjectOfType<PlayerCollider>().playerChangeEvent += SetYeouijuSprite;
-            coll.enabled = false;
+            FindObjectOfType<YeouijuLaunch>().DisJointEvent += YeouijuFollowPlayer;
+            FindObjectOfType<PlayerCollider>().PlayerChangeEvent += SetYeouijuSprite;
+            _coll.enabled = false;
         }
 
         private void FixedUpdate()
         {
-            if (yeouijuOn)
+            if (_yeouijuOn)
             {
-                prevVelocity = rigid.velocity;
+                _prevVelocity = _rigid.velocity;
                 return;
             }
 
-            transform.position = Vector3.MoveTowards(transform.position, player.position, yeouijuSpeed * 3f * Time.deltaTime);
+            transform.position = Vector3.MoveTowards(transform.position, _player.position, _yeouijuSpeed * 3f * Time.deltaTime);
         }
 
-        // will use in launch time
         public void Launched(Vector3 position, float rotation)
         {
-            reflectCount = 0;
+            _reflectCount = 0;
 
-            yeouijuOn = true;
+            _yeouijuOn = true;
             this.transform.position = position;
             this.transform.rotation = Quaternion.Euler(0, 0, rotation);
 
-            rigid.velocity = transform.right * yeouijuSpeed;
-            coll.enabled = true;
+            _rigid.velocity = transform.right * _yeouijuSpeed;
+            _coll.enabled = true;
         }
 
         public void YeouijuFollowPlayer()
         {
-            yeouijuOn = false;
-            coll.enabled = false;
+            _yeouijuOn = false;
+            _coll.enabled = false;
         }
 
         private void OnCollisionEnter2D(Collision2D other)
         {
-            // still can reflect
-            if (reflectCount < collisionCount)
+            if (_reflectCount < _collisionCount)
             {
-                // Debug.Log("튕기는 여의주");
-                reflectCount++;
+                _reflectCount++;
 
-                float speed = prevVelocity.magnitude;
-                Vector2 Direction = Vector2.Reflect(prevVelocity.normalized, other.contacts[0].normal);
+                float speed = _prevVelocity.magnitude;
+                Vector2 Direction = Vector2.Reflect(_prevVelocity.normalized, other.contacts[0].normal);
 
-                rigid.velocity = Direction * Mathf.Max(speed, 0f);
+                _rigid.velocity = Direction * Mathf.Max(speed, 0f);
                 return;
             }
 
-            // end to collistion but too far
-            if (Vector2.Distance(player.position, this.transform.position) > maxDistance)
+            if (Vector2.Distance(_player.position, this.transform.position) > _maxDistance)
             {
-                // Debug.Log("다 튕겼는데 너무 멀다");
-                reflectCount = 0;
+                _reflectCount = 0;
 
-                yeouijuReturnEvent?.Invoke();
+                YeouijuReturnEvent?.Invoke();
 
                 YeouijuFollowPlayer();
-                rigid.freezeRotation = true;
+                _rigid.freezeRotation = true;
                 return;
             }
 
-            // end collision -> make disjoint2d
-            collisionEvent?.Invoke(this.transform.position);
+            CollisionEvent?.Invoke(this.transform.position);
 
-            rigid.velocity = new Vector3(0, 0, 0);
-            rigid.freezeRotation = true;
+            _rigid.velocity = new Vector3(0, 0, 0);
+            _rigid.freezeRotation = true;
         }
 
         public void SetYeouijuSprite(bool isActive)
         {
-            sprite.enabled = isActive;
+            _sprite.enabled = isActive;
         }
     }
 }
