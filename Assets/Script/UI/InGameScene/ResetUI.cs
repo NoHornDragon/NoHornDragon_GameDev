@@ -12,7 +12,7 @@ namespace NHD.UI.InGameScene
 
         private void Start()
         {
-            FindObjectOfType<PlayerMovement>().PlayerResetEvent += ShowResetUI;
+            FindObjectOfType<PlayerMovement>().PlayerPositionResetEvent += ShowResetUI;
         }
 
         private void ShowResetUI(bool isActive)

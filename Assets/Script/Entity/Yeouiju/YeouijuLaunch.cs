@@ -8,50 +8,50 @@ namespace NHD.Entity.Yeouiju
 {
     public class YeouijuLaunch : MonoBehaviour
     {
-        public event Action disJointEvent;
-        private YeouijuReflection yeouiju;
-        private LineRenderer predictionLine;
-        private int predictionLayerMask;
-        private RaycastHit2D predictionHit;
-        [SerializeField] private bool canLaunch;
-        [SerializeField] private bool prepareYeouiju;
-        private bool isYeouijuOn;
-        private bool usingEasyMode;
-        private Vector2 shouldDrawPoint;
+        public event Action DisJointEvent;
+        private YeouijuReflection _yeouiju;
+        private LineRenderer _predictionLine;
+        private int _predictionLayerMask;
+        private RaycastHit2D _predictionHit;
+        [SerializeField] private bool _canLaunch;
+        [SerializeField] private bool _prepareYeouiju;
+        private bool _isYeouijuOn;
+        private bool _usingEasyMode;
+        private Vector2 _shouldDrawPoint;
 
         private void Start()
         {
-            predictionLayerMask = (1 << LayerMask.NameToLayer("Ground"));
+            _predictionLayerMask = (1 << LayerMask.NameToLayer("Ground"));
 
-            canLaunch = true;
+            _canLaunch = true;
 
-            usingEasyMode = !StaticSettingsData._isHardMode;
+            _usingEasyMode = !StaticSettingsData._isHardMode;
 
-            yeouiju = FindObjectOfType<YeouijuReflection>();
-            predictionLine = GetComponent<LineRenderer>();
-            predictionLine.enabled = false;
+            _yeouiju = FindObjectOfType<YeouijuReflection>();
+            _predictionLine = GetComponent<LineRenderer>();
+            _predictionLine.enabled = false;
 
-            disJointEvent += SetYeouijuFalse;
+            DisJointEvent += SetYeouijuFalse;
 
             PlayerMovement playerMovement = FindObjectOfType<PlayerMovement>();
             playerMovement.PlayerRecoverEvent += SetLaunchStatus;
-            playerMovement.playerResetEvent += ReturnYeouiju;
+            playerMovement.PlayerResetEvent += ReturnYeouiju;
 
             PlayerCollider playerCollider = FindObjectOfType<PlayerCollider>();
-            playerCollider.playerChangeEvent += SetLaunchStatus;
-            playerCollider.playerStunEvent += StunedYeouiju;
+            playerCollider.PlayerChangeEvent += SetLaunchStatus;
+            playerCollider.PlayerStunEvent += StunedYeouiju;
 
-            FindObjectOfType<YeouijuReflection>().yeouijuReturnEvent += ReturnYeouiju;
-            FindObjectOfType<PlayerGrapher>().deleteJointEvent += ReturnYeouiju;
+            FindObjectOfType<YeouijuReflection>().YeouijuReturnEvent += ReturnYeouiju;
+            FindObjectOfType<PlayerGrapher>().DeleteJointEvent += ReturnYeouiju;
         }
 
         private void Update()
         {
-            if (!canLaunch) return;
+            if (!_canLaunch) return;
 
             if (Input.GetMouseButtonDown(0))
             {
-                prepareYeouiju = true;
+                _prepareYeouiju = true;
             }
 
             // calculate angle by mouse pointer
@@ -59,9 +59,7 @@ namespace NHD.Entity.Yeouiju
             var z = Mathf.Atan2(len.y, len.x) * Mathf.Rad2Deg;
             transform.rotation = Quaternion.Euler(0, 0, z);
 
-            // before launch yeouiju, draw prediction line (only in easy mode)
-            // if(!isYeouijuOn && prepareYeouiju && usingEasyMode)
-            if (!isYeouijuOn && prepareYeouiju)
+            if (!_isYeouijuOn && _prepareYeouiju)
             {
                 DrawPredictionLine();
             }
@@ -69,62 +67,54 @@ namespace NHD.Entity.Yeouiju
             if (!Input.GetMouseButtonUp(0)) return;
 
             // By button up, yeouiju will launched or returned
-            if (!isYeouijuOn)
+            if (!_isYeouijuOn)
             {
-                predictionLine.enabled = false;
-                isYeouijuOn = true;
+                _predictionLine.enabled = false;
+                _isYeouijuOn = true;
 
-                yeouiju.Launched(this.transform.position, z);
+                _yeouiju.Launched(this.transform.position, z);
                 return;
             }
 
             ReturnYeouiju();
         }
 
-        /* Draw launch prediction line */
         private void DrawPredictionLine()
         {
-            // Draw Prediction Line
-            predictionLine.SetPosition(0, this.transform.position);
-            predictionHit = Physics2D.Raycast(transform.position, transform.right, Mathf.Infinity, predictionLayerMask);
+            _predictionLine.SetPosition(0, this.transform.position);
+            _predictionHit = Physics2D.Raycast(transform.position, transform.right, Mathf.Infinity, _predictionLayerMask);
 
-            if (predictionHit.collider == null)
+            if (_predictionHit.collider == null)
             {
-                // no collision => don't draw prediction line
-                predictionLine.enabled = false;
+                _predictionLine.enabled = false;
                 return;
             }
 
-            // draw first collision point
-            shouldDrawPoint = predictionHit.point;
-            predictionLine.SetPosition(1, shouldDrawPoint);
+            _shouldDrawPoint = _predictionHit.point;
+            _predictionLine.SetPosition(1, _shouldDrawPoint);
 
-            // calculate second ray by Vector2.Reflect
-            var inDirection = (predictionHit.point - (Vector2)transform.position).normalized;
-            var reflectionDir = Vector2.Reflect(inDirection, predictionHit.normal);
+            var inDirection = (_predictionHit.point - (Vector2)transform.position).normalized;
+            var reflectionDir = Vector2.Reflect(inDirection, _predictionHit.normal);
 
-            // By multiply 0.001, can have detail calculation
-            predictionHit = Physics2D.Raycast(predictionHit.point + (reflectionDir * 0.001f), reflectionDir, Mathf.Infinity, predictionLayerMask);
+            _predictionHit = Physics2D.Raycast(_predictionHit.point + (reflectionDir * 0.001f), reflectionDir, Mathf.Infinity, _predictionLayerMask);
 
-            if (predictionHit.collider == null)
+            if (_predictionHit.collider == null)
             {
-                shouldDrawPoint = (Vector2)predictionLine.GetPosition(1) + (reflectionDir * 15f);
+                _shouldDrawPoint = (Vector2)_predictionLine.GetPosition(1) + (reflectionDir * 15f);
             }
             else
             {
-                shouldDrawPoint = predictionHit.point;
+                _shouldDrawPoint = _predictionHit.point;
             }
 
-            predictionLine.SetPosition(2, shouldDrawPoint);
-
-            // finally render linerenderer
-            predictionLine.enabled = true;
+            _predictionLine.SetPosition(2, _shouldDrawPoint);
+            _predictionLine.enabled = true;
         }
 
         private void SetYeouijuFalse()
         {
-            isYeouijuOn = false;
-            prepareYeouiju = false;
+            _isYeouijuOn = false;
+            _prepareYeouiju = false;
         }
 
         public void SetLaunchStatus(bool isActive)
@@ -134,20 +124,20 @@ namespace NHD.Entity.Yeouiju
 
         public void StunedYeouiju(bool isStuned)
         {
-            canLaunch = !isStuned;
-            predictionLine.enabled = false;
+            _canLaunch = !isStuned;
+            _predictionLine.enabled = false;
             ReturnYeouiju();
         }
 
         private void ReturnYeouiju()
         {
-            disJointEvent?.Invoke();
+            DisJointEvent?.Invoke();
         }
 
         IEnumerator SetYeouijuStatueCourtine(bool isActive)
         {
             yield return null;
-            this.canLaunch = isActive;
+            this._canLaunch = isActive;
         }
 
     }

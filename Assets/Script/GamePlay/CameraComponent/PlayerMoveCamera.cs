@@ -18,7 +18,7 @@ namespace NHD.GamePlay.CameraComponent
 
         private void Update()
         {
-            if (!_player.onGround || _player.nowJoint)
+            if (!_player._onGround || _player._nowJoint)
             {
                 CameraReturnToPlayer();
                 return;

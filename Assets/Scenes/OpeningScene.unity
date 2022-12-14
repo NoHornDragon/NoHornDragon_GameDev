@@ -277,6 +277,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 676190207, guid: 627876c48b608564297925cbff008ae6, type: 3}
+      propertyPath: _gameSceneName
+      value: CrabTestScene
+      objectReference: {fileID: 0}
     - target: {fileID: 2571722715372187015, guid: 627876c48b608564297925cbff008ae6,
         type: 3}
       propertyPath: m_RootOrder
