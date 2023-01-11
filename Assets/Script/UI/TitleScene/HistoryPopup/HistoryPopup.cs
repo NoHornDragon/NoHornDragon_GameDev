@@ -12,38 +12,25 @@ namespace NHD.UI.titleScene.historyPopup
 {
 	public class HistoryPopup : MonoBehaviour, IPopup
     {
-        private const int MAX_PAPER_SCROLLVIEW_PAGE = 2;
-        private const int NODE_WIDTH = 280;
-        private const int MOVE_VAL = 5;
         private const int ENTIRE_PAPER_COUNT = 20;
-        private const float SCROLL_DURATION = 0.3f;
 
         [SerializeField] private Button[] _paperButtons;
         [SerializeField] private TextMeshProUGUI _paperCount;
         [SerializeField] private TextMeshProUGUI _playTime;
         [SerializeField] private TextMeshProUGUI _stunCount;
         [SerializeField] private TextMeshProUGUI _restartCount;
-        [SerializeField] RectTransform _paperContents;
-        [SerializeField] GameObject _desriptionPopup;
         [SerializeField] private AudioClip _closedSound;
         [SerializeField] private AudioClip _descriptionOpenSound;
-        private int _currentPage;
-        private float _pos;
-        private float _movePos;
+        [SerializeField] private TextMeshProUGUI _paperTitle;
+        [SerializeField] private TextMeshProUGUI _paperDescription;
+        [SerializeField] private Image _paperImage;
 
         public void Setup()
         {
             this.gameObject.SetActive(true);
-            SetDefaultValues();
             SetTexts();
             CheckPaperGet();
-        }
-
-        private void SetDefaultValues()
-        {
-            _currentPage = 1;
-            _paperContents.localPosition = Vector2.zero;
-            _pos = 0;
+            ClearDescription();
         }
 
         private void SetTexts()
@@ -72,40 +59,23 @@ namespace NHD.UI.titleScene.historyPopup
         public void ClosePopup()
         {
             SoundManager._instance.PlayEFXAmbient(_closedSound);
+            ClearDescription();
             this.gameObject.SetActive(false);
         }
 
-        public void ContentMoveToLeft()
-        {
-            if(_currentPage > 1)
-            {
-                SetDirection(false);
-                _paperContents.DOAnchorPosX(_movePos, SCROLL_DURATION);
-                --_currentPage;
-            }
-        }
-
-        public void ContentMoveToRight()
-        {
-            if(_currentPage < MAX_PAPER_SCROLLVIEW_PAGE)
-            {
-                SetDirection(true);
-                _paperContents.DOAnchorPosX(_movePos, SCROLL_DURATION);
-                ++_currentPage;
-            }
-        }
-
-        private void SetDirection(bool isRight)
-		{
-            _movePos = (isRight) ? _pos - NODE_WIDTH * MOVE_VAL : _pos + NODE_WIDTH * MOVE_VAL;
-            _pos = _movePos;
-        }
-
-        public void OpenDescriptionPopup(int paperIndex)
+        public void ShowDescription(int paperIndex)
         {
             SoundManager._instance.PlayEFXAmbient(_descriptionOpenSound);
-            DescriptionPopup._paperIndex = paperIndex;
-            PopupContainer.PushPopup(_desriptionPopup.GetComponent<IPopup>());
+            _paperTitle.text = StaticHistoryData._nodes[paperIndex]._title;
+            _paperDescription.text = StaticHistoryData._nodes[paperIndex]._description;
+            _paperImage.sprite = Resources.Load<Sprite>(StaticHistoryData._nodes[paperIndex]._imagePath);
+        }
+
+        private void ClearDescription()
+        {
+            _paperTitle.text = "";
+            _paperDescription.text = "";
+            _paperImage.sprite = null;
         }
     }
 }
