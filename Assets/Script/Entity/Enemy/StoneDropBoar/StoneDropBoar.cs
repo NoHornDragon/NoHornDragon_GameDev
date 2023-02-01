@@ -18,7 +18,6 @@ namespace NHD.Entity.Enemy.stoneDropBoar
         private bool _isAttackAble;
         private WaitForSeconds _waitAttack;
         private WaitForSeconds _attackDelay;
-        private Vector2 _dropPower;
         private Animator _animator;
 
         void Start()
@@ -29,7 +28,6 @@ namespace NHD.Entity.Enemy.stoneDropBoar
             _waitAttack = new WaitForSeconds(WAIT_ATTACK);
             _attackDelay = new WaitForSeconds(ATTACK_DELAY_SEC);
             _instantStonePos = transform.position + new Vector3(-1.75f, 1, 0);
-            _dropPower = new Vector2(1000, 1000);
             _animator = GetComponent<Animator>();
         }
 
@@ -58,7 +56,7 @@ namespace NHD.Entity.Enemy.stoneDropBoar
             yield return _waitAttack;
 
             SoundManager._instance.PlayEFXAtPoint(_audioClips[0], transform.position);
-            _stone.GetComponent<Rigidbody2D>().AddForce(_dropPower);
+            _stone.GetComponent<Rigidbody2D>().AddForce(new Vector2(-1000f, 1000f));
             yield return _attackDelay;
 
             _isAttackAble = true;

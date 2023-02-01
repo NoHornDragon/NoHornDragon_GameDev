@@ -1,5 +1,8 @@
-﻿using NHD.StaticData.History;
+﻿
+using DG.Tweening;
+using NHD.StaticData.History;
 using NHD.UI.Common;
+using NHD.UI.titleScene.historyPopup.descriptionPopup;
 using NHD.Utils.SoundUtil;
 using TMPro;
 using UnityEngine;
@@ -7,7 +10,7 @@ using UnityEngine.UI;
 
 namespace NHD.UI.titleScene.historyPopup
 {
-    public class HistoryPopup : MonoBehaviour, IPopup
+	public class HistoryPopup : MonoBehaviour, IPopup
     {
         private const int ENTIRE_PAPER_COUNT = 20;
 
