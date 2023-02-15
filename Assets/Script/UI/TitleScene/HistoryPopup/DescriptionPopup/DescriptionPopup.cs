@@ -1,4 +1,5 @@
-﻿using DG.Tweening;
+﻿// Deprecated Code
+using DG.Tweening;
 using NHD.StaticData.History;
 using NHD.UI.Common;
 using NHD.Utils.SoundUtil;
@@ -8,7 +9,7 @@ using UnityEngine.UI;
 
 namespace NHD.UI.titleScene.historyPopup.descriptionPopup
 {
-	public class DescriptionPopup : MonoBehaviour, IPopup
+    public class DescriptionPopup : MonoBehaviour, IPopup
     {
         private const float CLOSED_DESCRIPTION_POS_Y = -850;
         private const float OPEND_DESCRIPTION_POS_Y = 0;
