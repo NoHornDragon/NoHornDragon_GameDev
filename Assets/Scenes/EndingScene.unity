@@ -351,8 +351,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\uD50C\uB808\uC774 \uD574\uC8FC\uC154\uC11C \uAC10\uC0AC\uD569\uB2C8\uB2E4!\nThank
-    you for playing!"
+  m_text: "\uB370\uBAA8 \uD50C\uB808\uC774 \uD574\uC8FC\uC154\uC11C \uC815\uB9D0
+    \uAC10\uC0AC\uD569\uB2C8\uB2E4!\nThank you for playing Demo!"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: a49b76c01d80ed845911c628c41d3dd5, type: 2}
   m_sharedMaterial: {fileID: 7295487832508701871, guid: a49b76c01d80ed845911c628c41d3dd5,
