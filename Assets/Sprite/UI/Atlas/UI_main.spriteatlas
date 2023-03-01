@@ -1,0 +1,79 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!687078895 &4343727234628468602
+SpriteAtlas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: UI_main
+  m_EditorData:
+    serializedVersion: 2
+    textureSettings:
+      serializedVersion: 2
+      anisoLevel: 1
+      compressionQuality: 50
+      maxTextureSize: 2048
+      textureCompression: 0
+      filterMode: 1
+      generateMipMaps: 0
+      readable: 0
+      crunchedCompression: 0
+      sRGB: 1
+    platformSettings: []
+    packingSettings:
+      serializedVersion: 2
+      padding: 2
+      blockOffset: 1
+      allowAlphaSplitting: 0
+      enableRotation: 1
+      enableTightPacking: 1
+    variantMultiplier: 1
+    packables:
+    - {fileID: 102900000, guid: 18bf235cb2b77884a8ea600964a2b1f8, type: 3}
+    bindAsDefault: 1
+  m_MasterAtlas: {fileID: 0}
+  m_PackedSprites:
+  - {fileID: 21300000, guid: 04c5f9506ea25474ba987f9ebc3e80f0, type: 3}
+  - {fileID: 21300000, guid: d3c0f7e07187590468621a9054fc53c4, type: 3}
+  - {fileID: 21300000, guid: 4d489272342faf24e96748178a653c94, type: 3}
+  - {fileID: 21300000, guid: 0ed45f034ac30ed4f992400fcac3f42e, type: 3}
+  - {fileID: 21300000, guid: 662c4d331443c7341bb7b78469282ea5, type: 3}
+  - {fileID: 21300000, guid: a15e4c452abe1544ab40e34ae795a6a6, type: 3}
+  - {fileID: 21300000, guid: 5c20465596fbcaf45a394d240db1135e, type: 3}
+  - {fileID: 21300000, guid: decb36d5acf91a54397718013efa173a, type: 3}
+  - {fileID: 21300000, guid: a9fcb616a233546439f553b9aeb5f543, type: 3}
+  - {fileID: 21300000, guid: db086246d669d6a4998886ef25de8162, type: 3}
+  - {fileID: 21300000, guid: 1d652658f476409458ac870e444f028f, type: 3}
+  - {fileID: 21300000, guid: 265658a871e1412418ed5b0c356024e3, type: 3}
+  - {fileID: 21300000, guid: a3157b29ea00fa34db4b5a6cfaedc380, type: 3}
+  - {fileID: 21300000, guid: 5b9c51f9fe8875f4b909cc71edd4fc8f, type: 3}
+  - {fileID: 21300000, guid: beca090bdf0f1a64e96ae701650ca891, type: 3}
+  - {fileID: 21300000, guid: 1ad62e0c8435c6a43b9dbf3c5017099a, type: 3}
+  - {fileID: 21300000, guid: f491dfbdb06a4e44aa6288e89519aa3a, type: 3}
+  - {fileID: 21300000, guid: fd38551f58780924cb38f3a1afd5fcd1, type: 3}
+  - {fileID: 21300000, guid: 710259bff08a64448a71de5ef8a3c1c5, type: 3}
+  - {fileID: 21300000, guid: d79ee7ffcbd8ed44193c5bda3179bc30, type: 3}
+  m_PackedSpriteNamesToIndex:
+  - icon_playtime
+  - bg_handle
+  - box_20
+  - box
+  - bg_shadow_square
+  - icon_stunned
+  - icon_Close
+  - box_18_top
+  - image_deco_edge
+  - box_18
+  - imgae_deco
+  - icon_paper
+  - box_18_bottom
+  - bg_gradient
+  - bg_blur
+  - bg_close
+  - box_8
+  - bg_gradient_vertical
+  - image_new
+  - star
+  m_Tag: UI_main
+  m_IsVariant: 0
