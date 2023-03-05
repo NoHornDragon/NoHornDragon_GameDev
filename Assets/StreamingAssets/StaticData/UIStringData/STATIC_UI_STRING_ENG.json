@@ -28,5 +28,6 @@
 	"RESET_DATA_ASKING":"Are you sure to reset all game data?",
 	"GAME_QUIT":"Quit Game",
 	"EXIT_ASKING":"Do you really want to leave the game with the 100th year test takers?",
-	"MAIN_MENU":"Main menu"
+	"MAIN_MENU":"Main menu",
+	"GET_PAPER":"Got the paper!"
 }
