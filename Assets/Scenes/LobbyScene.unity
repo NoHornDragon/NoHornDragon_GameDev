@@ -78442,11 +78442,11 @@ MonoBehaviour:
   - {fileID: 8846802690573067585}
   _audioMixer: {fileID: 24100000, guid: 8b33f731dc376f243851ac436f2e1e01, type: 2}
   _bgmSoundsData:
-  - {fileID: 8300000, guid: 7e3f2466a647e7e4e8f1d08a69985ab7, type: 3}
-  - {fileID: 8300000, guid: 74f19a2e9ddbb2645a8d585644ea7adc, type: 3}
-  - {fileID: 8300000, guid: c685309dda8640b47865e2c39db3b745, type: 3}
-  - {fileID: 8300000, guid: b821dbc64152d3140a390055193b0c81, type: 3}
-  - {fileID: 8300000, guid: c5e040f999bd45a498ecbe33b389f0ee, type: 3}
+  - {fileID: 8300000, guid: 0437a5861af971b44bdbb59acbb2ba2c, type: 3}
+  - {fileID: 8300000, guid: 1a299d4bb10b9cd4db24613049d7fa71, type: 3}
+  - {fileID: 8300000, guid: dc9ad88c19e293449beddffb938a8cdc, type: 3}
+  - {fileID: 8300000, guid: 677b8a22419843944abc61c600a75d4a, type: 3}
+  - {fileID: 8300000, guid: 41d4703daf710ff4eab75a978d1f4bc0, type: 3}
 --- !u!82 &8846802690573067588
 AudioSource:
   m_ObjectHideFlags: 0
