@@ -42,7 +42,8 @@ namespace NHD.UI.titleScene.settingsPopup.autoSaveAskingPopup
                 {
                     var parentPopup = transform.GetComponentInParent<PausePopup>();
                     StaticSettingsData._isAutoSave = false;
-                    parentPopup._autoSave.isOn = false;
+                    parentPopup._autoSaveYES.isOn = false;
+                    parentPopup._autoSaveNO.isOn = true;
                 }
             }
         }
