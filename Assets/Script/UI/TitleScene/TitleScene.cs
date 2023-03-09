@@ -17,7 +17,13 @@ namespace NHD.UI.titleScene
         [SerializeField] private AudioClip _clickSound;
         private bool _isSceneLoading;
 
-		private void OnEnable()
+        private void Awake()
+        {
+            QualitySettings.vSyncCount = 0;
+            Application.targetFrameRate = 60;
+        }
+
+        private void OnEnable()
 		{
             _isSceneLoading = false;
 		}

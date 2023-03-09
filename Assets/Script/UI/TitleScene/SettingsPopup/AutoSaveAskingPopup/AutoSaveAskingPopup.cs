@@ -34,12 +34,16 @@ namespace NHD.UI.titleScene.settingsPopup.autoSaveAskingPopup
                 if(SceneManager.GetActiveScene().name == "LobbyScene")
                 {
                     var parentPopup = transform.GetComponentInParent<SettingsPopup>();
-                    parentPopup._autoSave.isOn = false;
+                    StaticSettingsData._isAutoSave = false;
+                    parentPopup._autoSaveYES.isOn = false;
+                    parentPopup._autoSaveNO.isOn = true;
                 }
                 else
                 {
                     var parentPopup = transform.GetComponentInParent<PausePopup>();
-                    parentPopup._autoSave.isOn = false;
+                    StaticSettingsData._isAutoSave = false;
+                    parentPopup._autoSaveYES.isOn = false;
+                    parentPopup._autoSaveNO.isOn = true;
                 }
             }
         }

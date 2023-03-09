@@ -8,7 +8,7 @@
 	"SKIP":"건너뛰기",
 	"GAME_START":"게임 시작",
 	"HISTORY":"지금까지의 여정",
-	"CREDIT":"크레딧",
+	"CREDIT":"제작진",
 	"SETTINGS":"설정",
 	"EXIT":"게임 종료",
 	"BACK":"뒤로",
@@ -28,5 +28,6 @@
 	"RESET_DATA_ASKING":"정말 지금까지의 기록을 삭제하시겠습니까?",
 	"GAME_QUIT":"게임 종료",
 	"EXIT_ASKING":"정녕 100년차 공시생을 두고 게임을 떠나시겠습니까?",
-	"MAIN_MENU":"메인 메뉴"
+	"MAIN_MENU":"메인 메뉴",
+	"GET_PAPER":"종이조각 획득!"
 }

@@ -117,7 +117,6 @@ namespace NHD.Entity.Player
 
             this.gameObject.transform.position = Vector3.zero;
 
-            StaticHistoryData._restartCount += 1;
             PlayHistoryDataSaver.SaveData();
 
             PlayerPositionResetEvent?.Invoke(true);

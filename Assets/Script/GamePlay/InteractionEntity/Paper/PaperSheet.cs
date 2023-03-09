@@ -60,6 +60,7 @@ namespace NHD.GamePlay.InteractionEntity.Paper
             paperGetEvent?.Invoke();
 
             StaticHistoryData._isGetPapers[paperIndex] = true;
+            StaticHistoryData._isNewPaper[paperIndex] = true;
             PlayHistoryDataSaver.SaveData();
 
             // 사라지는 애니메이션

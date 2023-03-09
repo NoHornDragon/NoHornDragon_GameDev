@@ -20,7 +20,7 @@ namespace NHD.UI.inGameScene
 		}
 
         private void Start()
-        {
+		{
 			SoundManager._instance.PlayRandomBGM();
         }
 

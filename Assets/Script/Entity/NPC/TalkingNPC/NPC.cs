@@ -29,8 +29,10 @@ namespace NHD.Entity.NPC.TalkingNPC
         [Header("플레이어 멀리갔음을 인식하는 거리")]
         public float _farDistance;
         [Header("그 외")]
+        [SerializeField] private TextMeshPro _npcNameText;
         [SerializeField] private GameObject _visitText; // NPC를 방문하면 출력되는 텍스트
         [SerializeField] private GameObject _textBox; // 텍스트 박스
+        [SerializeField] private string _npcNameKey;
         [SerializeField] private NPCTalks[] _npcTalks;
         public int _visitCount; // NPC를 방문한 횟수
         public BoxCollider2D _farCheckCol; // NPC에게서 멀어짐을 체크하는 함수
@@ -44,6 +46,7 @@ namespace NHD.Entity.NPC.TalkingNPC
         {
             SetColSize();
             SetFarColSize();
+            SetNPCName();
         }
 
         private void SetColSize()
@@ -56,13 +59,17 @@ namespace NHD.Entity.NPC.TalkingNPC
             _farCheckCol.size = new Vector2(_farDistance, _farDistance);
         }
 
+        private void SetNPCName()
+        {
+            _npcNameText.text = StaticNPCCommentsData._staticNPCCommentsData[_npcNameKey];
+        }
+
         private void OnTriggerEnter2D(Collider2D collision)
         {
             if (collision.tag == "Player")
             {
                 SoundManager._instance.PlayEFXAmbient(_audioClips[0]);
                 _textBox.SetActive(true);
-                _visitText.SetActive(true);
                 _crtPtr = StartCoroutine(TalkCoroutine());
             }
         }
@@ -73,8 +80,7 @@ namespace NHD.Entity.NPC.TalkingNPC
             {
                 if (_crtPtr != null)
                     StopCoroutine(_crtPtr);
-                _visitText.SetActive(false);
-                _textBox.SetActive(false);
+               _textBox.SetActive(false);
             }
         }
 

@@ -1,12 +1,11 @@
 ﻿using DG.Tweening;
 using NHD.StaticData.Settings;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
 
 namespace NHD.Utils.SoundUtil
 {
-	public class SoundManager : MonoBehaviour
+    public class SoundManager : MonoBehaviour
     {
         public static SoundManager _instance;
 

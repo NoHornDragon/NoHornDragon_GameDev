@@ -13,8 +13,8 @@ namespace NHD.DataController.Savers
         private static void GetData()
         {
             _playHistoryJsonData.is_get_papers = StaticHistoryData._isGetPapers;
+            _playHistoryJsonData.is_new_paper = StaticHistoryData._isNewPaper;
             _playHistoryJsonData.total_play_time = StaticHistoryData._totalPlayTime;
-            _playHistoryJsonData.restart_count = StaticHistoryData._restartCount;
             _playHistoryJsonData.stun_count = StaticHistoryData._stunCount;
         }
 

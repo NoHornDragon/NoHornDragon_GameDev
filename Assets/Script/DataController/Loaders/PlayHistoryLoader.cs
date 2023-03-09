@@ -63,8 +63,8 @@ namespace NHD.DataController.Loaders
         private void ApplyStaticData(PlayHistoryJsonConstruct playHistoryJsonData)
         {
             StaticHistoryData._isGetPapers = playHistoryJsonData.is_get_papers;
+            StaticHistoryData._isNewPaper = playHistoryJsonData.is_new_paper;
             StaticHistoryData._totalPlayTime = playHistoryJsonData.total_play_time;
-            StaticHistoryData._restartCount = playHistoryJsonData.restart_count;
             StaticHistoryData._stunCount = playHistoryJsonData.stun_count;
         }
     }
