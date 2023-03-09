@@ -129,6 +129,7 @@ namespace NHD.Entity.Player
 
         private void DeleteJoint()
         {
+            SoundManager._instance.PlayEFXAmbient(_audioClips[1]);
             _nowJoint = false;
             _prepareLaunch = false;
             _throwYeouiju = false;
