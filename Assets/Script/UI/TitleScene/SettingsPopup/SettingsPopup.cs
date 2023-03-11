@@ -3,6 +3,7 @@ using NHD.DataController.Savers;
 using NHD.StaticData.Settings;
 using NHD.UI.Common;
 using NHD.Utils.SoundUtil;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -12,8 +13,8 @@ namespace NHD.UI.titleScene.settingsPopup
     {
         [SerializeField] private GameObject _autoSaveAskingPopup;
         [SerializeField] private GameObject _dataResetAskingPopup;
-        [SerializeField] private Dropdown _resolution;
-        [SerializeField] private Dropdown _language;
+        [SerializeField] private TMP_Dropdown _resolution;
+        [SerializeField] private TMP_Dropdown _language;
         [SerializeField] private Slider _bgmVolume;
         [SerializeField] private Slider _effectVolume;
         [SerializeField] private Toggle _difficulty;
