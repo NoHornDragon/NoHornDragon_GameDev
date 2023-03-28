@@ -20,8 +20,8 @@ namespace NHD.UI.titleScene.settingsPopup
         [SerializeField] private Toggle _difficulty;
         [SerializeField] private AudioClip _closedSound;
         [SerializeField] private AudioClip _askingSound;
-        public Toggle _autoSaveYES;
-        public Toggle _autoSaveNO;
+        //public Toggle _autoSaveYES;
+        //public Toggle _autoSaveNO;
 
         public void Setup()
         {
@@ -33,7 +33,7 @@ namespace NHD.UI.titleScene.settingsPopup
             _bgmVolume.value = StaticSettingsData._bgmVolume;
             _effectVolume.value = StaticSettingsData._effectVolume;
             _difficulty.isOn = StaticSettingsData._isHardMode;
-            _autoSaveYES.isOn = StaticSettingsData._isAutoSave;
+            //_autoSaveYES.isOn = StaticSettingsData._isAutoSave;
         }
 
         private void SetResolution()
@@ -96,16 +96,16 @@ namespace NHD.UI.titleScene.settingsPopup
             StaticSettingsData._isHardMode = _difficulty.isOn;
         }
 
-        public void TurnOnAutoSave()
-        {
-            if(_autoSaveYES.isOn == true && !StaticSettingsData._isAutoSave)
-            {
-                SoundManager._instance.PlayEFXAmbient(_askingSound);
-                PopupContainer.PushPopup(_autoSaveAskingPopup.GetComponent<IPopup>());
-            }
+        //public void TurnOnAutoSave()
+        //{
+        //    if(_autoSaveYES.isOn == true && !StaticSettingsData._isAutoSave)
+        //    {
+        //        SoundManager._instance.PlayEFXAmbient(_askingSound);
+        //        PopupContainer.PushPopup(_autoSaveAskingPopup.GetComponent<IPopup>());
+        //    }
 
-            StaticSettingsData._isAutoSave = _autoSaveYES.isOn;
-        }
+        //    StaticSettingsData._isAutoSave = _autoSaveYES.isOn;
+        //}
 
         public void OpenResetAskingPopup()
         {

@@ -50548,7 +50548,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Art
+  m_text: BackGround
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 16ddb6ba32140044cb3c99bf848cfa86, type: 2}
   m_sharedMaterial: {fileID: 8722342991204883481, guid: 16ddb6ba32140044cb3c99bf848cfa86,
@@ -51021,8 +51021,6 @@ MonoBehaviour:
   _difficulty: {fileID: 1468171214482335256}
   _closedSound: {fileID: 8300000, guid: 3b4115003306ab44a8d34e65ea6a4f8a, type: 3}
   _askingSound: {fileID: 8300000, guid: d74cabf03c7bbae48af77cd8f1e8295e, type: 3}
-  _autoSaveYES: {fileID: 8596329658300090196}
-  _autoSaveNO: {fileID: 7903673388152786212}
 --- !u!95 &1081461245910837175
 Animator:
   serializedVersion: 3
@@ -51981,7 +51979,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Art
+  m_text: Character
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 16ddb6ba32140044cb3c99bf848cfa86, type: 2}
   m_sharedMaterial: {fileID: 8722342991204883481, guid: 16ddb6ba32140044cb3c99bf848cfa86,
@@ -56572,7 +56570,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Game Design
+  m_text: Level Design
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 16ddb6ba32140044cb3c99bf848cfa86, type: 2}
   m_sharedMaterial: {fileID: 8722342991204883481, guid: 16ddb6ba32140044cb3c99bf848cfa86,
@@ -59326,7 +59324,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Game Design
+  m_text: Level Design
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 16ddb6ba32140044cb3c99bf848cfa86, type: 2}
   m_sharedMaterial: {fileID: 8722342991204883481, guid: 16ddb6ba32140044cb3c99bf848cfa86,
@@ -61046,7 +61044,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\uAE40\uC218\uD604"
+  m_text: "\uAE40\uC218\uC5F0"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 16ddb6ba32140044cb3c99bf848cfa86, type: 2}
   m_sharedMaterial: {fileID: 8722342991204883481, guid: 16ddb6ba32140044cb3c99bf848cfa86,
@@ -66428,7 +66426,7 @@ GameObject:
   - component: {fileID: 5248638969594377956}
   - component: {fileID: 5248638969594377957}
   m_Layer: 0
-  m_Name: AutoSaveAskPopup
+  m_Name: AutoSaveAskPopup(DEPRECATED)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -67944,7 +67942,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Programming
+  m_text: Programmer
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 16ddb6ba32140044cb3c99bf848cfa86, type: 2}
   m_sharedMaterial: {fileID: 8722342991204883481, guid: 16ddb6ba32140044cb3c99bf848cfa86,
@@ -73565,7 +73563,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: PM / Programming
+  m_text: PM / Programmer
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 16ddb6ba32140044cb3c99bf848cfa86, type: 2}
   m_sharedMaterial: {fileID: 8722342991204883481, guid: 16ddb6ba32140044cb3c99bf848cfa86,
@@ -74155,7 +74153,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 464, y: -612}
+  m_AnchoredPosition: {x: 464, y: -532}
   m_SizeDelta: {x: 848, y: 60}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7401747782845716662
@@ -75349,7 +75347,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: -21}
-  m_SizeDelta: {x: 928, y: 682}
+  m_SizeDelta: {x: 928, y: 602}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &7727183152579494934
 RectTransform:
@@ -78576,12 +78574,12 @@ GameObject:
   - component: {fileID: 1521004686712652211}
   - component: {fileID: 4453604751598487446}
   m_Layer: 0
-  m_Name: List_5
+  m_Name: AutoSaveToggle(DEPRECATED)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!222 &8564359281649781494
 CanvasRenderer:
   m_ObjectHideFlags: 0
