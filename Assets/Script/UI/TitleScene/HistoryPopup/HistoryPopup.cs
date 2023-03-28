@@ -45,6 +45,7 @@ namespace NHD.UI.titleScene.historyPopup
                     //var paperImage = _paperButtons[i].transform.GetChild(0).GetComponent<Image>();
                     var paperImage = _paperButtons[i].transform.GetChild(1).GetChild(1).GetComponent<Image>();
                     paperImage.sprite = Resources.Load<Sprite>(StaticHistoryData._nodes[i]._imagePath);
+                    paperImage.color = new Color(1, 1, 1, 1);
                     ++totalGetPaper;
 
                     if(StaticHistoryData._isNewPaper[i])
@@ -69,6 +70,7 @@ namespace NHD.UI.titleScene.historyPopup
             _paperTitle.text = StaticHistoryData._nodes[paperIndex]._title;
             _paperDescription.text = StaticHistoryData._nodes[paperIndex]._description;
             _paperImage.sprite = Resources.Load<Sprite>(StaticHistoryData._nodes[paperIndex]._imagePath);
+            _paperImage.color = new Color(1, 1, 1, 1);
             RemoveNewMark(paperIndex);
             SelectPaper(paperIndex);
         }
@@ -93,6 +95,7 @@ namespace NHD.UI.titleScene.historyPopup
         {
             _paperTitle.text = "";
             _paperDescription.text = "";
+            _paperImage.color = new Color(1, 1, 1, 0);
             _paperImage.sprite = null;
         }
     }
