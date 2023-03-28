@@ -67,7 +67,7 @@ namespace NHD.DataController.Loaders
             StaticSettingsData._resolutionIndex = settingsJsonData.resolution_index;
             StaticSettingsData._bgmVolume = settingsJsonData.bgm_volume;
             StaticSettingsData._effectVolume = settingsJsonData.effect_volume;
-            StaticSettingsData._isAutoSave = settingsJsonData.is_auto_save;
+            //StaticSettingsData._isAutoSave = settingsJsonData.is_auto_save;
             StaticSettingsData._isHardMode = settingsJsonData.is_hard_mode;
         }
     }

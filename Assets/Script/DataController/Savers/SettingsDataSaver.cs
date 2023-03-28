@@ -16,7 +16,7 @@ namespace NHD.DataController.Savers
             _settingsJsonData.resolution_index = StaticSettingsData._resolutionIndex;
             _settingsJsonData.bgm_volume = StaticSettingsData._bgmVolume;
             _settingsJsonData.effect_volume = StaticSettingsData._effectVolume;
-            _settingsJsonData.is_auto_save = StaticSettingsData._isAutoSave;
+            //_settingsJsonData.is_auto_save = StaticSettingsData._isAutoSave;
             _settingsJsonData.is_hard_mode = StaticSettingsData._isHardMode;
         }
 

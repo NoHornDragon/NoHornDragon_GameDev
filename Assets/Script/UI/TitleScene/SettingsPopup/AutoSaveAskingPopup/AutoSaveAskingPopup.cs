@@ -23,35 +23,35 @@ namespace NHD.UI.titleScene.settingsPopup.autoSaveAskingPopup
             _isAgree = isAgree;
         }
 
-        public void SetAutoSave()
-        {
-            if (_isAgree)
-            {
-                StaticSettingsData._isAutoSave = true;
-            }
-            else
-            {
-                if(SceneManager.GetActiveScene().name == "LobbyScene")
-                {
-                    var parentPopup = transform.GetComponentInParent<SettingsPopup>();
-                    StaticSettingsData._isAutoSave = false;
-                    parentPopup._autoSaveYES.isOn = false;
-                    parentPopup._autoSaveNO.isOn = true;
-                }
-                else
-                {
-                    var parentPopup = transform.GetComponentInParent<PausePopup>();
-                    StaticSettingsData._isAutoSave = false;
-                    parentPopup._autoSaveYES.isOn = false;
-                    parentPopup._autoSaveNO.isOn = true;
-                }
-            }
-        }
+        //public void SetAutoSave()
+        //{
+        //    if (_isAgree)
+        //    {
+        //        StaticSettingsData._isAutoSave = true;
+        //    }
+        //    else
+        //    {
+        //        if(SceneManager.GetActiveScene().name == "LobbyScene")
+        //        {
+        //            var parentPopup = transform.GetComponentInParent<SettingsPopup>();
+        //            StaticSettingsData._isAutoSave = false;
+        //            parentPopup._autoSaveYES.isOn = false;
+        //            parentPopup._autoSaveNO.isOn = true;
+        //        }
+        //        else
+        //        {
+        //            var parentPopup = transform.GetComponentInParent<PausePopup>();
+        //            StaticSettingsData._isAutoSave = false;
+        //            parentPopup._autoSaveYES.isOn = false;
+        //            parentPopup._autoSaveNO.isOn = true;
+        //        }
+        //    }
+        //}
 
         public void ClosePopup()
         {
             SoundManager._instance.PlayEFXAmbient(_closedSound);
-            SetAutoSave();
+            //SetAutoSave();
             this.gameObject.SetActive(false);
         }
     }
