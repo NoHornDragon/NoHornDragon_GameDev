@@ -41,10 +41,10 @@ namespace NHD.UI.titleScene.settingsPopup
             switch (StaticSettingsData._resolutionIndex)
             {
                 case 0:
-                    Screen.SetResolution(1920, 1080, false);
+                    Screen.SetResolution(1920, 1080, Screen.fullScreen);
                     break;
                 case 1:
-                    Screen.SetResolution(1280, 720, false);
+                    Screen.SetResolution(1280, 720, Screen.fullScreen);
                     break;
                 default:
                     break;

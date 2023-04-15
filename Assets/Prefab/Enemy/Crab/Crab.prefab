@@ -538,9 +538,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ae86918cbfb9ac43ad069d7c2061909, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _audioClips: []
-  ATTACK_DELAY_SEC: 3
+  _audioClips:
+  - {fileID: 8300000, guid: dc7402ddf6509ee44b5ed4875f543d5e, type: 3}
   REFLECT_POWER: 300
+  ATTACK_DELAY: 5
 --- !u!58 &2467760383081680985
 CircleCollider2D:
   m_ObjectHideFlags: 0
